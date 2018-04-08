@@ -1,7 +1,5 @@
-"""Test Lambda function to return a GUID
-
-Returns: str
-    UUIDv4 -- returns a stringified UUID-4
+"""
+Test Lambda function to return a GUID
 """
 from uuid import uuid4
 
