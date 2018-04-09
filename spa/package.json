@@ -1,0 +1,20 @@
+{
+  "name": "well-managed-deployments",
+  "version": "0.0.1",
+  "description": "Single page web application for the well-managed deployments UI",
+  "main": "index.html",
+  "scripts": {
+    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "author": "Daniel Furman",
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "bulma": "^0.6.2",
+    "bulmaswatch": "^0.6.2",
+    "laravel-mix": "^2.1.11",
+    "vue": "^2.5.16"
+  }
+}
