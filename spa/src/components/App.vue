@@ -1,22 +1,27 @@
 <template>
 <div class="container">
-    <!-- a nav bar would be good -->
-    <h1 class="title">WMD</h1>
-    <h2 class="subtitle">Well-managed Deployments</h2>
+  <!-- Standard Header -->
+  <app-nav-bar></app-nav-bar>
 
-    <app-footer></app-footer>
+  <!-- SPA content -->
+  <router-view></router-view>
+
+  <!-- Standard Footer -->
+  <app-footer></app-footer>
 </div>
 </template>
 
 <script>
 import AppFooter from './AppFooter';
+import AppNavBar from './AppNavBar';
 export default {
   components: {
-    AppFooter
+    AppFooter,
+    AppNavBar
   },
 
   mounted() {
-    console.log("This thing loaded");
+    console.log("Welcome to WMD Professor Falkin, would you like to play a nice game of chess?");
   }
 };
 </script>
