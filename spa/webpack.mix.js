@@ -5,6 +5,7 @@ mix.js('src/app.js', 'dist')
     .extract([
         'vue',
         'vue-router',
+        'vuex',
         'moment'
     ])
     .setPublicPath('dist');

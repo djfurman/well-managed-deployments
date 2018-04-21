@@ -39,7 +39,10 @@ export default {
 
   methods: {
       login() {
-          console.log('Login was triggered');
+          this.$store.dispatch('login', {
+              username: this.username,
+              password: this.password
+            });
       },
 
       redirectTo(route) {

@@ -18,10 +18,8 @@ const routes = [
 
 import VueRouter from 'vue-router';
 
-const router = new VueRouter({
+export default new VueRouter({
     mode: 'history',
     linkActiveClass: 'is-active',
-    routes,
-})
-
-export default router;
+    routes
+});

@@ -10,7 +10,19 @@
 
       <!-- Stuff to the right -->
       <div class="navbar-end">
-        <router-link :to="'login'" class="navbar-item">Login</router-link>
+        <router-link :to="'login'" class="navbar-item" v-if="!isAuth">Login</router-link>
+        <router-link :to="'logout'" class="navbar-item" v-if="isAuth">Logout</router-link>
       </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isAuth() {
+      return this.$store.getters.isAuth;
+    }
+  }
+}
+</script>
+
