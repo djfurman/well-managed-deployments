@@ -16,4 +16,4 @@ Contributions are welcome! Just open an issue or submit a PR.
 
 ## Credits
 
-- Icon (Valera Zvonko)[https://www.iconfinder.com/happyiconstudio]
+- Icon [Valera Zvonko](https://www.iconfinder.com/happyiconstudio)
