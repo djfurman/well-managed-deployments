@@ -8,16 +8,19 @@
 
   <!-- Standard Footer -->
   <app-footer></app-footer>
+  <loading></loading>
 </div>
 </template>
 
 <script>
 import AppFooter from './AppFooter';
 import AppNavBar from './AppNavBar';
+import Loading from './Loading';
 export default {
   components: {
     AppFooter,
-    AppNavBar
+    AppNavBar,
+    Loading
   },
 
   mounted() {

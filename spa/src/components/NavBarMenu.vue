@@ -11,7 +11,7 @@
       <!-- Stuff to the right -->
       <div class="navbar-end">
         <router-link :to="'login'" class="navbar-item" v-if="!isAuth">Login</router-link>
-        <router-link :to="'logout'" class="navbar-item" v-if="isAuth">Logout</router-link>
+        <span class="navbar-item" @click="logout" v-if="isAuth">Logout</span>
       </div>
   </div>
 </template>
@@ -21,6 +21,13 @@ export default {
   computed: {
     isAuth() {
       return this.$store.getters.isAuth;
+    }
+  },
+
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.push('/');
     }
   }
 }
