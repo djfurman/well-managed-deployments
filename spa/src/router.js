@@ -7,7 +7,11 @@ import Login from './components/Login';
 import NotFound from './components/NotFound';
 
 const routes = [
-    { path: '/home', component: Dashboard },
+    {
+        path: '/home',
+        component: Dashboard,
+        meta: { requiresAuth: true }
+    },
     { path: '/incidents', component: Incidents },
     { path: '/changes', component: Changes },
     { path: '/configuration', component: Config },

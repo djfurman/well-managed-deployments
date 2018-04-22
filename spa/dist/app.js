@@ -271,7 +271,6 @@ var rootVm = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     router: __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */],
     store: __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */]
 }).$mount('#app');
-
 window.wmd = rootVm;
 
 /***/ }),
@@ -305,7 +304,11 @@ window.wmd = rootVm;
 
 
 
-var routes = [{ path: '/home', component: __WEBPACK_IMPORTED_MODULE_2__components_Dashboard___default.a }, { path: '/incidents', component: __WEBPACK_IMPORTED_MODULE_3__components_Incidents___default.a }, { path: '/changes', component: __WEBPACK_IMPORTED_MODULE_0__components_Changes___default.a }, { path: '/configuration', component: __WEBPACK_IMPORTED_MODULE_1__components_Config___default.a }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_5__components_Login___default.a }, { path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_LandingPage___default.a }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_6__components_NotFound___default.a }];
+var routes = [{
+    path: '/home',
+    component: __WEBPACK_IMPORTED_MODULE_2__components_Dashboard___default.a,
+    meta: { requiresAuth: true }
+}, { path: '/incidents', component: __WEBPACK_IMPORTED_MODULE_3__components_Incidents___default.a }, { path: '/changes', component: __WEBPACK_IMPORTED_MODULE_0__components_Changes___default.a }, { path: '/configuration', component: __WEBPACK_IMPORTED_MODULE_1__components_Config___default.a }, { path: '/login', component: __WEBPACK_IMPORTED_MODULE_5__components_Login___default.a }, { path: '/', component: __WEBPACK_IMPORTED_MODULE_4__components_LandingPage___default.a }, { path: '*', component: __WEBPACK_IMPORTED_MODULE_6__components_NotFound___default.a }];
 
 
 
@@ -676,7 +679,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(181)
 /* template */
 var __vue_template__ = __webpack_require__(149)
 /* template functional */
@@ -724,18 +727,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "landing-page" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "columns" },
+      _vm._l(_vm.service_list, function(service) {
+        return _c(
+          "div",
+          { key: service.id, staticClass: "column is-one-third" },
+          [
+            _c("div", { staticClass: "card", attrs: { id: service.id } }, [
+              _c("header", { staticClass: "card-header" }, [
+                _c("p", { staticClass: "card-header-title is-centered" }, [
+                  _vm._v(_vm._s(service.name))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-content" }, [
+                _c("div", { staticClass: "content" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(service.desc) +
+                      "\n                    "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("footer", { staticClass: "card-footer" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "card-footer-item",
+                    on: {
+                      click: function($event) {
+                        _vm.learnMore(service.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Learn More")]
+                )
+              ])
+            ])
+          ]
+        )
+      })
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("h1", { staticClass: "title" }, [_vm._v("WMD")]),
-      _vm._v(" "),
-      _c("h2", { staticClass: "subtitle" }, [
-        _vm._v("Well-managed Deployments")
+    return _c("section", { staticClass: "hero is-primary is-bold" }, [
+      _c("div", { staticClass: "hero-body" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("h1", { staticClass: "title" }, [
+            _vm._v("Well-managed Deployments")
+          ]),
+          _vm._v(" "),
+          _c("h2", { staticClass: "subtitle" }, [
+            _vm._v("A serverless, cloud-first answer to service management")
+          ])
+        ])
       ])
     ])
   }
@@ -1896,6 +1952,68 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            service_list: []
+        };
+    },
+
+
+    methods: {
+        learnMore: function learnMore(id) {
+            this.$router.push('/services/' + id);
+        }
+    },
+
+    mounted: function mounted() {
+        // This will be replaced with a database call to get latest services and descriptions
+        this.service_list = [{ id: '368ced24-a9c8-481f-affb-48b18962adb5', name: 'Infrastructure Management', desc: 'While each team may know their infrastucture well, combining multiple teams into one or more cloud accounts can make management hard. WMD integrates with cloud providers and allows you to map your infrastructure use cases and identifying cost centers throughout your enterprise architecture.' }, { id: '1def41b3-7d0c-45b6-affb-b201561a661f', name: 'Change Management', desc: 'The heart of production beats as well as it is managed. Scheduled releases with appropriate testing conducted and automatic deployments are a must, but what happens when manual tweaks are required? Managing that process correctly can be a nightmare and in many companies results in an hour of paperwork for a two minute change. Automate the headache and protect what matters, your customer experience.' }, { id: '6b352de4-6f85-4a39-ab27-f8cb0420e619', name: 'Incident Management', desc: 'If your product or service is active, incidents are a matter of when, not if. The key to managing these incidents are to quickly identify and coordinate a team to restore service and build a knowledge base of causes. WMD allows this while providing direct API driven integrations with popular monitoring and response systems, managing the data without getting in the way.' }];
+    }
+});
 
 /***/ })
 ],[130]);

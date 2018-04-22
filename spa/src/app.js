@@ -12,5 +12,4 @@ const rootVm = new Vue({
     router,
     store
 }).$mount('#app');
-
 window.wmd = rootVm;
