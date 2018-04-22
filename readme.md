@@ -13,3 +13,7 @@ As a 'serverless' application, WMD's services are provisioned by [Terraform](htt
 ## Contribution
 
 Contributions are welcome! Just open an issue or submit a PR.
+
+## Credits
+
+- Icon (Valera Zvonko)[https://www.iconfinder.com/happyiconstudio]
