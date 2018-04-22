@@ -9,4 +9,5 @@ mix.js('src/app.js', 'dist')
         'vue-router',
         'vuex',
     ])
+    .copy('src/assets/images', 'dist/images')
     .setPublicPath('dist');

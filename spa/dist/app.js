@@ -241,7 +241,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(131);
-module.exports = __webpack_require__(175);
+module.exports = __webpack_require__(176);
 
 
 /***/ }),
@@ -254,8 +254,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__(135);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(155);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_App__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_App__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_App__);
 
 window.eventHub = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
@@ -291,9 +291,9 @@ window.wmd = rootVm;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Incidents___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Incidents__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_LandingPage__ = __webpack_require__(148);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_LandingPage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_LandingPage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Login__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Login__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Login__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NotFound__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NotFound__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_NotFound__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_vue_router__ = __webpack_require__(4);
 
@@ -679,9 +679,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(181)
+var __vue_script__ = __webpack_require__(149)
 /* template */
-var __vue_template__ = __webpack_require__(149)
+var __vue_template__ = __webpack_require__(150)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -721,6 +721,66 @@ module.exports = Component.exports
 
 /***/ }),
 /* 149 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            service_list: []
+        };
+    },
+
+
+    methods: {
+        fetchServices: function fetchServices() {
+            // This will be replaced with a database call to get latest services and descriptions
+            this.service_list = [{ id: '368ced24-a9c8-481f-affb-48b18962adb5', name: 'Infrastructure Management', desc: 'While each team may know their infrastucture well, combining multiple teams into one or more cloud accounts can make management hard. WMD integrates with cloud providers and allows you to map your infrastructure use cases and identifying cost centers throughout your enterprise architecture.' }, { id: '1def41b3-7d0c-45b6-affb-b201561a661f', name: 'Change Management', desc: 'The heart of production beats as well as it is managed. Scheduled releases with appropriate testing conducted and automatic deployments are a must, but what happens when manual tweaks are required? Managing that process correctly can be a nightmare and in many companies results in an hour of paperwork for a two minute change. Automate the headache and protect what matters, your customer experience.' }, { id: '6b352de4-6f85-4a39-ab27-f8cb0420e619', name: 'Incident Management', desc: 'If your product or service is active, incidents are a matter of when, not if. The key to managing these incidents are to quickly identify and coordinate a team to restore service and build a knowledge base of causes. WMD allows this while providing direct API driven integrations with popular monitoring and response systems, managing the data without getting in the way.' }];
+        },
+        learnMore: function learnMore(id) {
+            this.$router.push('/services/' + id);
+        }
+    },
+
+    mounted: function mounted() {
+        this.fetchServices();
+    }
+});
+
+/***/ }),
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -806,15 +866,15 @@ if (false) {
 }
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(151)
+var __vue_script__ = __webpack_require__(152)
 /* template */
-var __vue_template__ = __webpack_require__(152)
+var __vue_template__ = __webpack_require__(153)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -853,7 +913,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -914,7 +974,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1043,7 +1103,7 @@ if (false) {
 }
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -1051,7 +1111,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(154)
+var __vue_template__ = __webpack_require__(155)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1090,7 +1150,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1139,7 +1199,7 @@ if (false) {
 }
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1208,15 +1268,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 }));
 
 /***/ }),
-/* 156 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(157)
+var __vue_script__ = __webpack_require__(158)
 /* template */
-var __vue_template__ = __webpack_require__(174)
+var __vue_template__ = __webpack_require__(175)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1255,16 +1315,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 157 */
+/* 158 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppFooter__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppFooter__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__AppFooter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__AppFooter__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AppNavBar__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AppNavBar__ = __webpack_require__(164);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AppNavBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__AppNavBar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Loading__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Loading__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Loading___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Loading__);
 //
 //
@@ -1297,15 +1357,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 158 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(159)
+var __vue_script__ = __webpack_require__(160)
 /* template */
-var __vue_template__ = __webpack_require__(162)
+var __vue_template__ = __webpack_require__(163)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1344,7 +1404,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1390,9 +1450,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 160 */,
 /* 161 */,
-/* 162 */
+/* 162 */,
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1449,15 +1509,15 @@ if (false) {
 }
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(164)
+var __vue_script__ = __webpack_require__(165)
 /* template */
-var __vue_template__ = __webpack_require__(170)
+var __vue_template__ = __webpack_require__(171)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1496,14 +1556,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__NavBarBurger__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__NavBarBurger__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__NavBarBurger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__NavBarBurger__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NavBarMenu__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NavBarMenu__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NavBarMenu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NavBarMenu__);
 //
 //
@@ -1535,7 +1595,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -1543,7 +1603,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(166)
+var __vue_template__ = __webpack_require__(167)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1582,7 +1642,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1605,15 +1665,15 @@ if (false) {
 }
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(168)
+var __vue_script__ = __webpack_require__(169)
 /* template */
-var __vue_template__ = __webpack_require__(169)
+var __vue_template__ = __webpack_require__(170)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1652,7 +1712,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1692,7 +1752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1766,7 +1826,7 @@ if (false) {
 }
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1787,10 +1847,10 @@ var render = function() {
           _c("a", { staticClass: "navbar-item", on: { click: _vm.goToRoot } }, [
             _c("img", {
               attrs: {
-                src: "https://bulma.io/images/bulma-logo.png",
-                alt: "Bulma: a modern CSS framework based on Flexbox",
-                width: "112",
-                height: "28"
+                src: "images/if_Nuclear_explosion_102997.png",
+                alt: "WMD: A serverless solution to IT service management",
+                width: "64",
+                height: "64"
               }
             })
           ]),
@@ -1815,15 +1875,15 @@ if (false) {
 }
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(172)
+var __vue_script__ = __webpack_require__(173)
 /* template */
-var __vue_template__ = __webpack_require__(173)
+var __vue_template__ = __webpack_require__(174)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -1862,7 +1922,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1895,7 +1955,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1915,7 +1975,7 @@ if (false) {
 }
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1948,72 +2008,10 @@ if (false) {
 }
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            service_list: []
-        };
-    },
-
-
-    methods: {
-        learnMore: function learnMore(id) {
-            this.$router.push('/services/' + id);
-        }
-    },
-
-    mounted: function mounted() {
-        // This will be replaced with a database call to get latest services and descriptions
-        this.service_list = [{ id: '368ced24-a9c8-481f-affb-48b18962adb5', name: 'Infrastructure Management', desc: 'While each team may know their infrastucture well, combining multiple teams into one or more cloud accounts can make management hard. WMD integrates with cloud providers and allows you to map your infrastructure use cases and identifying cost centers throughout your enterprise architecture.' }, { id: '1def41b3-7d0c-45b6-affb-b201561a661f', name: 'Change Management', desc: 'The heart of production beats as well as it is managed. Scheduled releases with appropriate testing conducted and automatic deployments are a must, but what happens when manual tweaks are required? Managing that process correctly can be a nightmare and in many companies results in an hour of paperwork for a two minute change. Automate the headache and protect what matters, your customer experience.' }, { id: '6b352de4-6f85-4a39-ab27-f8cb0420e619', name: 'Incident Management', desc: 'If your product or service is active, incidents are a matter of when, not if. The key to managing these incidents are to quickly identify and coordinate a team to restore service and build a knowledge base of causes. WMD allows this while providing direct API driven integrations with popular monitoring and response systems, managing the data without getting in the way.' }];
-    }
-});
 
 /***/ })
 ],[130]);

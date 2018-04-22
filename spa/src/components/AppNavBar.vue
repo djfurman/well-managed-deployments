@@ -2,7 +2,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a @click="goToRoot" class="navbar-item">
-      <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+      <img src="images/if_Nuclear_explosion_102997.png" alt="WMD: A serverless solution to IT service management" width="64" height="64">
     </a>
 
     <nav-bar-burger></nav-bar-burger>
