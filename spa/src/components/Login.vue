@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { Auth } from 'aws-amplify';
 export default {
   data() {
       return {
@@ -39,10 +40,13 @@ export default {
 
   methods: {
       login() {
-          this.$store.dispatch('login', {
-              username: this.username,
-              password: this.password
-            });
+          Auth.signIn(this.username, this.password)
+          .then(user => {
+                this.$store.dispatch('login', {
+                    username: this.username,
+                    password: this.password
+                });
+          })
 
           this.redirectTo('home');
       },
