@@ -4509,7 +4509,7 @@ webpackJsonp([0],[
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)(module)))
 
 /***/ }),
 /* 1 */
@@ -4545,9 +4545,9 @@ AWS.util.update(AWS, {
    * @api private
    */
   Protocol: {
-    Json: __webpack_require__(65),
+    Json: __webpack_require__(64),
     Query: __webpack_require__(104),
-    Rest: __webpack_require__(44),
+    Rest: __webpack_require__(45),
     RestJson: __webpack_require__(106),
     RestXml: __webpack_require__(107)
   },
@@ -4564,8 +4564,8 @@ AWS.util.update(AWS, {
    * @api private
    */
   JSON: {
-    Builder: __webpack_require__(66),
-    Parser: __webpack_require__(67)
+    Builder: __webpack_require__(65),
+    Parser: __webpack_require__(66)
   },
 
   /**
@@ -4726,7 +4726,7 @@ exports.isNamedType = isNamedType;
 exports.assertNamedType = assertNamedType;
 exports.getNamedType = getNamedType;
 
-var _instanceOf = __webpack_require__(88);
+var _instanceOf = __webpack_require__(87);
 
 var _instanceOf2 = _interopRequireDefault(_instanceOf);
 
@@ -5675,7 +5675,7 @@ var OAuthHelper_1 = __webpack_require__(548);
 exports.FacebookOAuth = OAuthHelper_1.FacebookOAuth;
 exports.GoogleOAuth = OAuthHelper_1.GoogleOAuth;
 __export(__webpack_require__(551));
-var Platform_1 = __webpack_require__(56);
+var Platform_1 = __webpack_require__(57);
 exports.Constants = {
     'userAgent': Platform_1.default.userAgent
 };
@@ -5793,7 +5793,7 @@ var util = {
 
   readFileSync: function readFileSync(path) {
     if (util.isBrowser()) return null;
-    return __webpack_require__(80).readFileSync(path, 'utf-8');
+    return __webpack_require__(79).readFileSync(path, 'utf-8');
   },
 
   base64: {
@@ -5873,7 +5873,7 @@ var util = {
       } else if (typeof string.size === 'number') {
         return string.size;
       } else if (typeof string.path === 'string') {
-        return __webpack_require__(80).lstatSync(string.path).size;
+        return __webpack_require__(79).lstatSync(string.path).size;
       } else {
         throw util.error(new Error('Cannot determine length of ' + string),
           { object: string });
@@ -6401,7 +6401,7 @@ var util = {
   computeSha256: function computeSha256(body, done) {
     if (util.isNode()) {
       var Stream = util.stream.Stream;
-      var fs = __webpack_require__(80);
+      var fs = __webpack_require__(79);
       if (body instanceof Stream) {
         if (typeof body.path === 'string') { // assume file object
           var settings = {};
@@ -6635,7 +6635,7 @@ var util = {
 
 module.exports = util;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27), __webpack_require__(101).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27), __webpack_require__(100).setImmediate))
 
 /***/ }),
 /* 7 */
@@ -6663,7 +6663,7 @@ var _find = __webpack_require__(34);
 
 var _find2 = _interopRequireDefault(_find);
 
-var _instanceOf = __webpack_require__(88);
+var _instanceOf = __webpack_require__(87);
 
 var _instanceOf2 = _interopRequireDefault(_instanceOf);
 
@@ -9253,7 +9253,7 @@ var _definition = __webpack_require__(3);
 
 var _scalars = __webpack_require__(23);
 
-var _instanceOf = __webpack_require__(88);
+var _instanceOf = __webpack_require__(87);
 
 var _instanceOf2 = _interopRequireDefault(_instanceOf);
 
@@ -9400,7 +9400,7 @@ var _objectValues = __webpack_require__(24);
 
 var _objectValues2 = _interopRequireDefault(_objectValues);
 
-var _astFromValue = __webpack_require__(89);
+var _astFromValue = __webpack_require__(88);
 
 var _printer = __webpack_require__(21);
 
@@ -10434,7 +10434,7 @@ exports.GraphQLError = GraphQLError;
 
 var _printError = __webpack_require__(166);
 
-var _location = __webpack_require__(90);
+var _location = __webpack_require__(89);
 
 /**
  * A GraphQLError describes an Error found during the parse, validate, or
@@ -11296,7 +11296,7 @@ if (typeof process === 'undefined') {
 
   isObject = __webpack_require__(13);
 
-  isFunction = __webpack_require__(45);
+  isFunction = __webpack_require__(46);
 
   isEmpty = __webpack_require__(389);
 
@@ -11752,7 +11752,7 @@ var _source = __webpack_require__(168);
 
 var _error = __webpack_require__(2);
 
-var _lexer = __webpack_require__(91);
+var _lexer = __webpack_require__(90);
 
 var _kinds = __webpack_require__(4);
 
@@ -13453,7 +13453,7 @@ module.exports = Shape;
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(46),
+var Symbol = __webpack_require__(47),
     getRawTag = __webpack_require__(363),
     objectToString = __webpack_require__(364);
 
@@ -13487,8 +13487,8 @@ module.exports = baseGetTag;
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(45),
-    isLength = __webpack_require__(69);
+var isFunction = __webpack_require__(46),
+    isLength = __webpack_require__(68);
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -14691,2329 +14691,6 @@ function lexicalDistance(aStr, bStr) {
 
 /***/ }),
 /* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var util = __webpack_require__(6);
-
-function populateMethod(req) {
-  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
-}
-
-function generateURI(endpointPath, operationPath, input, params) {
-  var uri = [endpointPath, operationPath].join('/');
-  uri = uri.replace(/\/+/g, '/');
-
-  var queryString = {}, queryStringSet = false;
-  util.each(input.members, function (name, member) {
-    var paramValue = params[name];
-    if (paramValue === null || paramValue === undefined) return;
-    if (member.location === 'uri') {
-      var regex = new RegExp('\\{' + member.name + '(\\+)?\\}');
-      uri = uri.replace(regex, function(_, plus) {
-        var fn = plus ? util.uriEscapePath : util.uriEscape;
-        return fn(String(paramValue));
-      });
-    } else if (member.location === 'querystring') {
-      queryStringSet = true;
-
-      if (member.type === 'list') {
-        queryString[member.name] = paramValue.map(function(val) {
-          return util.uriEscape(String(val));
-        });
-      } else if (member.type === 'map') {
-        util.each(paramValue, function(key, value) {
-          if (Array.isArray(value)) {
-            queryString[key] = value.map(function(val) {
-              return util.uriEscape(String(val));
-            });
-          } else {
-            queryString[key] = util.uriEscape(String(value));
-          }
-        });
-      } else {
-        queryString[member.name] = util.uriEscape(String(paramValue));
-      }
-    }
-  });
-
-  if (queryStringSet) {
-    uri += (uri.indexOf('?') >= 0 ? '&' : '?');
-    var parts = [];
-    util.arrayEach(Object.keys(queryString).sort(), function(key) {
-      if (!Array.isArray(queryString[key])) {
-        queryString[key] = [queryString[key]];
-      }
-      for (var i = 0; i < queryString[key].length; i++) {
-        parts.push(util.uriEscape(String(key)) + '=' + queryString[key][i]);
-      }
-    });
-    uri += parts.join('&');
-  }
-
-  return uri;
-}
-
-function populateURI(req) {
-  var operation = req.service.api.operations[req.operation];
-  var input = operation.input;
-
-  var uri = generateURI(req.httpRequest.endpoint.path, operation.httpPath, input, req.params);
-  req.httpRequest.path = uri;
-}
-
-function populateHeaders(req) {
-  var operation = req.service.api.operations[req.operation];
-  util.each(operation.input.members, function (name, member) {
-    var value = req.params[name];
-    if (value === null || value === undefined) return;
-
-    if (member.location === 'headers' && member.type === 'map') {
-      util.each(value, function(key, memberValue) {
-        req.httpRequest.headers[member.name + key] = memberValue;
-      });
-    } else if (member.location === 'header') {
-      value = member.toWireFormat(value).toString();
-      if (member.isJsonValue) {
-        value = util.base64.encode(value);
-      }
-      req.httpRequest.headers[member.name] = value;
-    }
-  });
-}
-
-function buildRequest(req) {
-  populateMethod(req);
-  populateURI(req);
-  populateHeaders(req);
-}
-
-function extractError() {
-}
-
-function extractData(resp) {
-  var req = resp.request;
-  var data = {};
-  var r = resp.httpResponse;
-  var operation = req.service.api.operations[req.operation];
-  var output = operation.output;
-
-  // normalize headers names to lower-cased keys for matching
-  var headers = {};
-  util.each(r.headers, function (k, v) {
-    headers[k.toLowerCase()] = v;
-  });
-
-  util.each(output.members, function(name, member) {
-    var header = (member.name || name).toLowerCase();
-    if (member.location === 'headers' && member.type === 'map') {
-      data[name] = {};
-      var location = member.isLocationName ? member.name : '';
-      var pattern = new RegExp('^' + location + '(.+)', 'i');
-      util.each(r.headers, function (k, v) {
-        var result = k.match(pattern);
-        if (result !== null) {
-          data[name][result[1]] = v;
-        }
-      });
-    } else if (member.location === 'header') {
-      if (headers[header] !== undefined) {
-        var value = member.isJsonValue ?
-          util.base64.decode(headers[header]) :
-          headers[header];
-        data[name] = member.toType(value);
-      }
-    } else if (member.location === 'statusCode') {
-      data[name] = parseInt(r.statusCode, 10);
-    }
-  });
-
-  resp.data = data;
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData,
-  generateURI: generateURI
-};
-
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetTag = __webpack_require__(37),
-    isObject = __webpack_require__(13);
-
-/** `Object#toString` result references. */
-var asyncTag = '[object AsyncFunction]',
-    funcTag = '[object Function]',
-    genTag = '[object GeneratorFunction]',
-    proxyTag = '[object Proxy]';
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
- * @example
- *
- * _.isFunction(_);
- * // => true
- *
- * _.isFunction(/abc/);
- * // => false
- */
-function isFunction(value) {
-  if (!isObject(value)) {
-    return false;
-  }
-  // The use of `Object#toString` avoids issues with the `typeof` operator
-  // in Safari 9 which returns 'object' for typed arrays and other constructors.
-  var tag = baseGetTag(value);
-  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
-}
-
-module.exports = isFunction;
-
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var root = __webpack_require__(20);
-
-/** Built-in value references. */
-var Symbol = root.Symbol;
-
-module.exports = Symbol;
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports) {
-
-/**
- * Performs a
- * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * comparison between two values to determine if they are equivalent.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- * @example
- *
- * var object = { 'a': 1 };
- * var other = { 'a': 1 };
- *
- * _.eq(object, object);
- * // => true
- *
- * _.eq(object, other);
- * // => false
- *
- * _.eq('a', 'a');
- * // => true
- *
- * _.eq('a', Object('a'));
- * // => false
- *
- * _.eq(NaN, NaN);
- * // => true
- */
-function eq(value, other) {
-  return value === other || (value !== value && other !== other);
-}
-
-module.exports = eq;
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var listCacheClear = __webpack_require__(405),
-    listCacheDelete = __webpack_require__(406),
-    listCacheGet = __webpack_require__(407),
-    listCacheHas = __webpack_require__(408),
-    listCacheSet = __webpack_require__(409);
-
-/**
- * Creates an list cache object.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function ListCache(entries) {
-  var index = -1,
-      length = entries == null ? 0 : entries.length;
-
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-
-// Add methods to `ListCache`.
-ListCache.prototype.clear = listCacheClear;
-ListCache.prototype['delete'] = listCacheDelete;
-ListCache.prototype.get = listCacheGet;
-ListCache.prototype.has = listCacheHas;
-ListCache.prototype.set = listCacheSet;
-
-module.exports = ListCache;
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var eq = __webpack_require__(47);
-
-/**
- * Gets the index at which the `key` is found in `array` of key-value pairs.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {*} key The key to search for.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function assocIndexOf(array, key) {
-  var length = array.length;
-  while (length--) {
-    if (eq(array[length][0], key)) {
-      return length;
-    }
-  }
-  return -1;
-}
-
-module.exports = assocIndexOf;
-
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(28);
-
-/* Built-in method references that are verified to be native. */
-var nativeCreate = getNative(Object, 'create');
-
-module.exports = nativeCreate;
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isKeyable = __webpack_require__(423);
-
-/**
- * Gets the data for `map`.
- *
- * @private
- * @param {Object} map The map to query.
- * @param {string} key The reference key.
- * @returns {*} Returns the map data.
- */
-function getMapData(map, key) {
-  var data = map.__data__;
-  return isKeyable(key)
-    ? data[typeof key == 'string' ? 'string' : 'hash']
-    : data.map;
-}
-
-module.exports = getMapData;
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isSymbol = __webpack_require__(78);
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0;
-
-/**
- * Converts `value` to a string key if it's not a string or symbol.
- *
- * @private
- * @param {*} value The value to inspect.
- * @returns {string|symbol} Returns the key.
- */
-function toKey(value) {
-  if (typeof value == 'string' || isSymbol(value)) {
-    return value;
-  }
-  var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
-}
-
-module.exports = toKey;
-
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(15).Buffer;
-
-/**
- * This is a polyfill for the static method `isView` of `ArrayBuffer`, which is
- * e.g. missing in IE 10.
- *
- * @api private
- */
-if (
-    typeof ArrayBuffer !== 'undefined' &&
-    typeof ArrayBuffer.isView === 'undefined'
-) {
-    ArrayBuffer.isView = function(arg) {
-        return viewStrings.indexOf(Object.prototype.toString.call(arg)) > -1;
-    };
-}
-
-/**
- * @api private
- */
-var viewStrings = [
-    '[object Int8Array]',
-    '[object Uint8Array]',
-    '[object Uint8ClampedArray]',
-    '[object Int16Array]',
-    '[object Uint16Array]',
-    '[object Int32Array]',
-    '[object Uint32Array]',
-    '[object Float32Array]',
-    '[object Float64Array]',
-    '[object DataView]',
-];
-
-/**
- * @api private
- */
-function isEmptyData(data) {
-    if (typeof data === 'string') {
-        return data.length === 0;
-    }
-    return data.byteLength === 0;
-}
-
-/**
- * @api private
- */
-function convertToBuffer(data) {
-    if (typeof data === 'string') {
-        data = new Buffer(data, 'utf8');
-    }
-
-    if (ArrayBuffer.isView(data)) {
-        return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-    }
-
-    return new Uint8Array(data);
-}
-
-module.exports = exports = {
-    isEmptyData: isEmptyData,
-    convertToBuffer: convertToBuffer,
-}
-
-
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(30);
-var AWS = __webpack_require__(1);
-var Service = AWS.Service;
-var apiLoader = AWS.apiLoader;
-
-apiLoader.services['sts'] = {};
-AWS.STS = Service.defineService('sts', ['2011-06-15']);
-__webpack_require__(503);
-Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
-  get: function get() {
-    var model = __webpack_require__(504);
-    model.paginators = __webpack_require__(505).pagination;
-    return model;
-  },
-  enumerable: true,
-  configurable: true
-});
-
-module.exports = AWS.STS;
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/*
- * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var Platform = {
-    'userAgent': 'aws-amplify/0.1.x js',
-    'product': '',
-    'navigator': null,
-    'isReactNative': false
-};
-if (typeof navigator !== 'undefined' && navigator.product) {
-    Platform.product = navigator.product || '';
-    Platform.navigator = navigator || null;
-    switch (navigator.product) {
-        case 'ReactNative':
-            Platform.userAgent = 'aws-amplify/0.1.x react-native';
-            Platform.isReactNative = true;
-            break;
-        default:
-            Platform.userAgent = 'aws-amplify/0.1.x js';
-            Platform.isReactNative = false;
-            break;
-    }
-}
-exports.default = Platform;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.validateSchema = validateSchema;
-exports.assertValidSchema = assertValidSchema;
-
-var _definition = __webpack_require__(3);
-
-var _directives = __webpack_require__(18);
-
-var _introspection = __webpack_require__(19);
-
-var _schema = __webpack_require__(7);
-
-var _find = __webpack_require__(34);
-
-var _find2 = _interopRequireDefault(_find);
-
-var _invariant = __webpack_require__(10);
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-var _objectValues = __webpack_require__(24);
-
-var _objectValues2 = _interopRequireDefault(_objectValues);
-
-var _GraphQLError = __webpack_require__(25);
-
-var _assertValidName = __webpack_require__(167);
-
-var _typeComparators = __webpack_require__(60);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
-                                                                                                                                                           * Copyright (c) 2015-present, Facebook, Inc.
-                                                                                                                                                           *
-                                                                                                                                                           * This source code is licensed under the MIT license found in the
-                                                                                                                                                           * LICENSE file in the root directory of this source tree.
-                                                                                                                                                           *
-                                                                                                                                                           *  strict
-                                                                                                                                                           */
-
-/**
- * Implements the "Type Validation" sub-sections of the specification's
- * "Type System" section.
- *
- * Validation runs synchronously, returning an array of encountered errors, or
- * an empty array if no errors were encountered and the Schema is valid.
- */
-function validateSchema(schema) {
-  // First check to ensure the provided value is in fact a GraphQLSchema.
-  !(0, _schema.isSchema)(schema) ? (0, _invariant2.default)(0, 'Expected ' + String(schema) + ' to be a GraphQL schema.') : void 0;
-
-  // If this Schema has already been validated, return the previous results.
-  if (schema.__validationErrors) {
-    return schema.__validationErrors;
-  }
-
-  // Validate the schema, producing a list of errors.
-  var context = new SchemaValidationContext(schema);
-  validateRootTypes(context);
-  validateDirectives(context);
-  validateTypes(context);
-
-  // Persist the results of validation before returning to ensure validation
-  // does not run multiple times for this schema.
-  var errors = context.getErrors();
-  schema.__validationErrors = errors;
-  return errors;
-}
-
-/**
- * Utility function which asserts a schema is valid by throwing an error if
- * it is invalid.
- */
-function assertValidSchema(schema) {
-  var errors = validateSchema(schema);
-  if (errors.length !== 0) {
-    throw new Error(errors.map(function (error) {
-      return error.message;
-    }).join('\n\n'));
-  }
-}
-
-var SchemaValidationContext = function () {
-  function SchemaValidationContext(schema) {
-    _classCallCheck(this, SchemaValidationContext);
-
-    this._errors = [];
-    this.schema = schema;
-  }
-
-  SchemaValidationContext.prototype.reportError = function reportError(message, nodes) {
-    var _nodes = (Array.isArray(nodes) ? nodes : [nodes]).filter(Boolean);
-    this.addError(new _GraphQLError.GraphQLError(message, _nodes));
-  };
-
-  SchemaValidationContext.prototype.addError = function addError(error) {
-    this._errors.push(error);
-  };
-
-  SchemaValidationContext.prototype.getErrors = function getErrors() {
-    return this._errors;
-  };
-
-  return SchemaValidationContext;
-}();
-
-function validateRootTypes(context) {
-  var schema = context.schema;
-  var queryType = schema.getQueryType();
-  if (!queryType) {
-    context.reportError('Query root type must be provided.', schema.astNode);
-  } else if (!(0, _definition.isObjectType)(queryType)) {
-    context.reportError('Query root type must be Object type, it cannot be ' + String(queryType) + '.', getOperationTypeNode(schema, queryType, 'query'));
-  }
-
-  var mutationType = schema.getMutationType();
-  if (mutationType && !(0, _definition.isObjectType)(mutationType)) {
-    context.reportError('Mutation root type must be Object type if provided, it cannot be ' + (String(mutationType) + '.'), getOperationTypeNode(schema, mutationType, 'mutation'));
-  }
-
-  var subscriptionType = schema.getSubscriptionType();
-  if (subscriptionType && !(0, _definition.isObjectType)(subscriptionType)) {
-    context.reportError('Subscription root type must be Object type if provided, it cannot be ' + (String(subscriptionType) + '.'), getOperationTypeNode(schema, subscriptionType, 'subscription'));
-  }
-}
-
-function getOperationTypeNode(schema, type, operation) {
-  var astNode = schema.astNode;
-  var operationTypeNode = astNode && astNode.operationTypes.find(function (operationType) {
-    return operationType.operation === operation;
-  });
-  return operationTypeNode ? operationTypeNode.type : type && type.astNode;
-}
-
-function validateDirectives(context) {
-  var directives = context.schema.getDirectives();
-  directives.forEach(function (directive) {
-    // Ensure all directives are in fact GraphQL directives.
-    if (!(0, _directives.isDirective)(directive)) {
-      context.reportError('Expected directive but got: ' + String(directive) + '.', directive && directive.astNode);
-      return;
-    }
-
-    // Ensure they are named correctly.
-    validateName(context, directive);
-
-    // TODO: Ensure proper locations.
-
-    // Ensure the arguments are valid.
-    var argNames = Object.create(null);
-    directive.args.forEach(function (arg) {
-      var argName = arg.name;
-
-      // Ensure they are named correctly.
-      validateName(context, arg);
-
-      // Ensure they are unique per directive.
-      if (argNames[argName]) {
-        context.reportError('Argument @' + directive.name + '(' + argName + ':) can only be defined once.', getAllDirectiveArgNodes(directive, argName));
-        return; // continue loop
-      }
-      argNames[argName] = true;
-
-      // Ensure the type is an input type.
-      if (!(0, _definition.isInputType)(arg.type)) {
-        context.reportError('The type of @' + directive.name + '(' + argName + ':) must be Input Type ' + ('but got: ' + String(arg.type) + '.'), getDirectiveArgTypeNode(directive, argName));
-      }
-    });
-  });
-}
-
-function validateName(context, node) {
-  // If a schema explicitly allows some legacy name which is no longer valid,
-  // allow it to be assumed valid.
-  if (context.schema.__allowedLegacyNames && context.schema.__allowedLegacyNames.indexOf(node.name) !== -1) {
-    return;
-  }
-  // Ensure names are valid, however introspection types opt out.
-  var error = (0, _assertValidName.isValidNameError)(node.name, node.astNode || undefined);
-  if (error) {
-    context.addError(error);
-  }
-}
-
-function validateTypes(context) {
-  var typeMap = context.schema.getTypeMap();
-  (0, _objectValues2.default)(typeMap).forEach(function (type) {
-    // Ensure all provided types are in fact GraphQL type.
-    if (!(0, _definition.isNamedType)(type)) {
-      context.reportError('Expected GraphQL named type but got: ' + String(type) + '.', type && type.astNode);
-      return;
-    }
-
-    // Ensure it is named correctly (excluding introspection types).
-    if (!(0, _introspection.isIntrospectionType)(type)) {
-      validateName(context, type);
-    }
-
-    if ((0, _definition.isObjectType)(type)) {
-      // Ensure fields are valid
-      validateFields(context, type);
-
-      // Ensure objects implement the interfaces they claim to.
-      validateObjectInterfaces(context, type);
-    } else if ((0, _definition.isInterfaceType)(type)) {
-      // Ensure fields are valid.
-      validateFields(context, type);
-    } else if ((0, _definition.isUnionType)(type)) {
-      // Ensure Unions include valid member types.
-      validateUnionMembers(context, type);
-    } else if ((0, _definition.isEnumType)(type)) {
-      // Ensure Enums have valid values.
-      validateEnumValues(context, type);
-    } else if ((0, _definition.isInputObjectType)(type)) {
-      // Ensure Input Object fields are valid.
-      validateInputFields(context, type);
-    }
-  });
-}
-
-function validateFields(context, type) {
-  var fields = (0, _objectValues2.default)(type.getFields());
-
-  // Objects and Interfaces both must define one or more fields.
-  if (fields.length === 0) {
-    context.reportError('Type ' + type.name + ' must define one or more fields.', getAllObjectOrInterfaceNodes(type));
-  }
-
-  fields.forEach(function (field) {
-    // Ensure they are named correctly.
-    validateName(context, field);
-
-    // Ensure they were defined at most once.
-    var fieldNodes = getAllFieldNodes(type, field.name);
-    if (fieldNodes.length > 1) {
-      context.reportError('Field ' + type.name + '.' + field.name + ' can only be defined once.', fieldNodes);
-      return; // continue loop
-    }
-
-    // Ensure the type is an output type
-    if (!(0, _definition.isOutputType)(field.type)) {
-      context.reportError('The type of ' + type.name + '.' + field.name + ' must be Output Type ' + ('but got: ' + String(field.type) + '.'), getFieldTypeNode(type, field.name));
-    }
-
-    // Ensure the arguments are valid
-    var argNames = Object.create(null);
-    field.args.forEach(function (arg) {
-      var argName = arg.name;
-
-      // Ensure they are named correctly.
-      validateName(context, arg);
-
-      // Ensure they are unique per field.
-      if (argNames[argName]) {
-        context.reportError('Field argument ' + type.name + '.' + field.name + '(' + argName + ':) can only ' + 'be defined once.', getAllFieldArgNodes(type, field.name, argName));
-      }
-      argNames[argName] = true;
-
-      // Ensure the type is an input type
-      if (!(0, _definition.isInputType)(arg.type)) {
-        context.reportError('The type of ' + type.name + '.' + field.name + '(' + argName + ':) must be Input ' + ('Type but got: ' + String(arg.type) + '.'), getFieldArgTypeNode(type, field.name, argName));
-      }
-    });
-  });
-}
-
-function validateObjectInterfaces(context, object) {
-  var implementedTypeNames = Object.create(null);
-  object.getInterfaces().forEach(function (iface) {
-    if (!(0, _definition.isInterfaceType)(iface)) {
-      context.reportError('Type ' + String(object) + ' must only implement Interface types, ' + ('it cannot implement ' + String(iface) + '.'), getImplementsInterfaceNode(object, iface));
-      return;
-    }
-
-    if (implementedTypeNames[iface.name]) {
-      context.reportError('Type ' + object.name + ' can only implement ' + iface.name + ' once.', getAllImplementsInterfaceNodes(object, iface));
-      return; // continue loop
-    }
-    implementedTypeNames[iface.name] = true;
-    validateObjectImplementsInterface(context, object, iface);
-  });
-}
-
-function validateObjectImplementsInterface(context, object, iface) {
-  var objectFieldMap = object.getFields();
-  var ifaceFieldMap = iface.getFields();
-
-  // Assert each interface field is implemented.
-  Object.keys(ifaceFieldMap).forEach(function (fieldName) {
-    var objectField = objectFieldMap[fieldName];
-    var ifaceField = ifaceFieldMap[fieldName];
-
-    // Assert interface field exists on object.
-    if (!objectField) {
-      context.reportError('Interface field ' + iface.name + '.' + fieldName + ' expected but ' + (object.name + ' does not provide it.'), [getFieldNode(iface, fieldName), object.astNode]);
-      // Continue loop over fields.
-      return;
-    }
-
-    // Assert interface field type is satisfied by object field type, by being
-    // a valid subtype. (covariant)
-    if (!(0, _typeComparators.isTypeSubTypeOf)(context.schema, objectField.type, ifaceField.type)) {
-      context.reportError('Interface field ' + iface.name + '.' + fieldName + ' expects type ' + (String(ifaceField.type) + ' but ' + object.name + '.' + fieldName + ' ') + ('is type ' + String(objectField.type) + '.'), [getFieldTypeNode(iface, fieldName), getFieldTypeNode(object, fieldName)]);
-    }
-
-    // Assert each interface field arg is implemented.
-    ifaceField.args.forEach(function (ifaceArg) {
-      var argName = ifaceArg.name;
-      var objectArg = (0, _find2.default)(objectField.args, function (arg) {
-        return arg.name === argName;
-      });
-
-      // Assert interface field arg exists on object field.
-      if (!objectArg) {
-        context.reportError('Interface field argument ' + iface.name + '.' + fieldName + '(' + argName + ':) ' + ('expected but ' + object.name + '.' + fieldName + ' does not provide it.'), [getFieldArgNode(iface, fieldName, argName), getFieldNode(object, fieldName)]);
-        // Continue loop over arguments.
-        return;
-      }
-
-      // Assert interface field arg type matches object field arg type.
-      // (invariant)
-      // TODO: change to contravariant?
-      if (!(0, _typeComparators.isEqualType)(ifaceArg.type, objectArg.type)) {
-        context.reportError('Interface field argument ' + iface.name + '.' + fieldName + '(' + argName + ':) ' + ('expects type ' + String(ifaceArg.type) + ' but ') + (object.name + '.' + fieldName + '(' + argName + ':) is type ') + (String(objectArg.type) + '.'), [getFieldArgTypeNode(iface, fieldName, argName), getFieldArgTypeNode(object, fieldName, argName)]);
-      }
-
-      // TODO: validate default values?
-    });
-
-    // Assert additional arguments must not be required.
-    objectField.args.forEach(function (objectArg) {
-      var argName = objectArg.name;
-      var ifaceArg = (0, _find2.default)(ifaceField.args, function (arg) {
-        return arg.name === argName;
-      });
-      if (!ifaceArg && (0, _definition.isNonNullType)(objectArg.type)) {
-        context.reportError('Object field argument ' + object.name + '.' + fieldName + '(' + argName + ':) ' + ('is of required type ' + String(objectArg.type) + ' but is not also ') + ('provided by the Interface field ' + iface.name + '.' + fieldName + '.'), [getFieldArgTypeNode(object, fieldName, argName), getFieldNode(iface, fieldName)]);
-      }
-    });
-  });
-}
-
-function validateUnionMembers(context, union) {
-  var memberTypes = union.getTypes();
-
-  if (memberTypes.length === 0) {
-    context.reportError('Union type ' + union.name + ' must define one or more member types.', union.astNode);
-  }
-
-  var includedTypeNames = Object.create(null);
-  memberTypes.forEach(function (memberType) {
-    if (includedTypeNames[memberType.name]) {
-      context.reportError('Union type ' + union.name + ' can only include type ' + (memberType.name + ' once.'), getUnionMemberTypeNodes(union, memberType.name));
-      return; // continue loop
-    }
-    includedTypeNames[memberType.name] = true;
-    if (!(0, _definition.isObjectType)(memberType)) {
-      context.reportError('Union type ' + union.name + ' can only include Object types, ' + ('it cannot include ' + String(memberType) + '.'), getUnionMemberTypeNodes(union, String(memberType)));
-    }
-  });
-}
-
-function validateEnumValues(context, enumType) {
-  var enumValues = enumType.getValues();
-
-  if (enumValues.length === 0) {
-    context.reportError('Enum type ' + enumType.name + ' must define one or more values.', enumType.astNode);
-  }
-
-  enumValues.forEach(function (enumValue) {
-    var valueName = enumValue.name;
-
-    // Ensure no duplicates.
-    var allNodes = getEnumValueNodes(enumType, valueName);
-    if (allNodes && allNodes.length > 1) {
-      context.reportError('Enum type ' + enumType.name + ' can include value ' + valueName + ' only once.', allNodes);
-    }
-
-    // Ensure valid name.
-    validateName(context, enumValue);
-    if (valueName === 'true' || valueName === 'false' || valueName === 'null') {
-      context.reportError('Enum type ' + enumType.name + ' cannot include value: ' + valueName + '.', enumValue.astNode);
-    }
-  });
-}
-
-function validateInputFields(context, inputObj) {
-  var fields = (0, _objectValues2.default)(inputObj.getFields());
-
-  if (fields.length === 0) {
-    context.reportError('Input Object type ' + inputObj.name + ' must define one or more fields.', inputObj.astNode);
-  }
-
-  // Ensure the arguments are valid
-  fields.forEach(function (field) {
-    // Ensure they are named correctly.
-    validateName(context, field);
-
-    // TODO: Ensure they are unique per field.
-
-    // Ensure the type is an input type
-    if (!(0, _definition.isInputType)(field.type)) {
-      context.reportError('The type of ' + inputObj.name + '.' + field.name + ' must be Input Type ' + ('but got: ' + String(field.type) + '.'), field.astNode && field.astNode.type);
-    }
-  });
-}
-
-function getAllObjectNodes(type) {
-  return type.astNode ? type.extensionASTNodes ? [type.astNode].concat(type.extensionASTNodes) : [type.astNode] : type.extensionASTNodes || [];
-}
-
-function getAllObjectOrInterfaceNodes(type) {
-  return type.astNode ? type.extensionASTNodes ? [type.astNode].concat(type.extensionASTNodes) : [type.astNode] : type.extensionASTNodes || [];
-}
-
-function getImplementsInterfaceNode(type, iface) {
-  return getAllImplementsInterfaceNodes(type, iface)[0];
-}
-
-function getAllImplementsInterfaceNodes(type, iface) {
-  var implementsNodes = [];
-  var astNodes = getAllObjectNodes(type);
-  for (var i = 0; i < astNodes.length; i++) {
-    var _astNode = astNodes[i];
-    if (_astNode && _astNode.interfaces) {
-      _astNode.interfaces.forEach(function (node) {
-        if (node.name.value === iface.name) {
-          implementsNodes.push(node);
-        }
-      });
-    }
-  }
-  return implementsNodes;
-}
-
-function getFieldNode(type, fieldName) {
-  return getAllFieldNodes(type, fieldName)[0];
-}
-
-function getAllFieldNodes(type, fieldName) {
-  var fieldNodes = [];
-  var astNodes = getAllObjectOrInterfaceNodes(type);
-  for (var i = 0; i < astNodes.length; i++) {
-    var _astNode2 = astNodes[i];
-    if (_astNode2 && _astNode2.fields) {
-      _astNode2.fields.forEach(function (node) {
-        if (node.name.value === fieldName) {
-          fieldNodes.push(node);
-        }
-      });
-    }
-  }
-  return fieldNodes;
-}
-
-function getFieldTypeNode(type, fieldName) {
-  var fieldNode = getFieldNode(type, fieldName);
-  return fieldNode && fieldNode.type;
-}
-
-function getFieldArgNode(type, fieldName, argName) {
-  return getAllFieldArgNodes(type, fieldName, argName)[0];
-}
-
-function getAllFieldArgNodes(type, fieldName, argName) {
-  var argNodes = [];
-  var fieldNode = getFieldNode(type, fieldName);
-  if (fieldNode && fieldNode.arguments) {
-    fieldNode.arguments.forEach(function (node) {
-      if (node.name.value === argName) {
-        argNodes.push(node);
-      }
-    });
-  }
-  return argNodes;
-}
-
-function getFieldArgTypeNode(type, fieldName, argName) {
-  var fieldArgNode = getFieldArgNode(type, fieldName, argName);
-  return fieldArgNode && fieldArgNode.type;
-}
-
-function getAllDirectiveArgNodes(directive, argName) {
-  var argNodes = [];
-  var directiveNode = directive.astNode;
-  if (directiveNode && directiveNode.arguments) {
-    directiveNode.arguments.forEach(function (node) {
-      if (node.name.value === argName) {
-        argNodes.push(node);
-      }
-    });
-  }
-  return argNodes;
-}
-
-function getDirectiveArgTypeNode(directive, argName) {
-  var argNode = getAllDirectiveArgNodes(directive, argName)[0];
-  return argNode && argNode.type;
-}
-
-function getUnionMemberTypeNodes(union, typeName) {
-  return union.astNode && union.astNode.types && union.astNode.types.filter(function (type) {
-    return type.name.value === typeName;
-  });
-}
-
-function getEnumValueNodes(enumType, valueName) {
-  return enumType.astNode && enumType.astNode.values && enumType.astNode.values.filter(function (value) {
-    return value.name.value === valueName;
-  });
-}
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = keyValMap;
-
-
-/**
- * Creates a keyed JS object from an array, given a function to produce the keys
- * and a function to produce the values from each item in the array.
- *
- *     const phoneBook = [
- *       { name: 'Jon', num: '555-1234' },
- *       { name: 'Jenny', num: '867-5309' }
- *     ]
- *
- *     // { Jon: '555-1234', Jenny: '867-5309' }
- *     const phonesByName = keyValMap(
- *       phoneBook,
- *       entry => entry.name,
- *       entry => entry.num
- *     )
- *
- */
-function keyValMap(list, keyFn, valFn) {
-  return list.reduce(function (map, item) {
-    return map[keyFn(item)] = valFn(item), map;
-  }, Object.create(null));
-} /**
-   * Copyright (c) 2015-present, Facebook, Inc.
-   *
-   * This source code is licensed under the MIT license found in the
-   * LICENSE file in the root directory of this source tree.
-   *
-   *  strict
-   */
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = isNullish;
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-/**
- * Returns true if a value is null, undefined, or NaN.
- */
-function isNullish(value) {
-  return value === null || value === undefined || value !== value;
-}
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.isEqualType = isEqualType;
-exports.isTypeSubTypeOf = isTypeSubTypeOf;
-exports.doTypesOverlap = doTypesOverlap;
-
-var _definition = __webpack_require__(3);
-
-/**
- * Provided two types, return true if the types are equal (invariant).
- */
-function isEqualType(typeA, typeB) {
-  // Equivalent types are equal.
-  if (typeA === typeB) {
-    return true;
-  }
-
-  // If either type is non-null, the other must also be non-null.
-  if ((0, _definition.isNonNullType)(typeA) && (0, _definition.isNonNullType)(typeB)) {
-    return isEqualType(typeA.ofType, typeB.ofType);
-  }
-
-  // If either type is a list, the other must also be a list.
-  if ((0, _definition.isListType)(typeA) && (0, _definition.isListType)(typeB)) {
-    return isEqualType(typeA.ofType, typeB.ofType);
-  }
-
-  // Otherwise the types are not equal.
-  return false;
-}
-
-/**
- * Provided a type and a super type, return true if the first type is either
- * equal or a subset of the second super type (covariant).
- */
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-function isTypeSubTypeOf(schema, maybeSubType, superType) {
-  // Equivalent type is a valid subtype
-  if (maybeSubType === superType) {
-    return true;
-  }
-
-  // If superType is non-null, maybeSubType must also be non-null.
-  if ((0, _definition.isNonNullType)(superType)) {
-    if ((0, _definition.isNonNullType)(maybeSubType)) {
-      return isTypeSubTypeOf(schema, maybeSubType.ofType, superType.ofType);
-    }
-    return false;
-  }
-  if ((0, _definition.isNonNullType)(maybeSubType)) {
-    // If superType is nullable, maybeSubType may be non-null or nullable.
-    return isTypeSubTypeOf(schema, maybeSubType.ofType, superType);
-  }
-
-  // If superType type is a list, maybeSubType type must also be a list.
-  if ((0, _definition.isListType)(superType)) {
-    if ((0, _definition.isListType)(maybeSubType)) {
-      return isTypeSubTypeOf(schema, maybeSubType.ofType, superType.ofType);
-    }
-    return false;
-  }
-  if ((0, _definition.isListType)(maybeSubType)) {
-    // If superType is not a list, maybeSubType must also be not a list.
-    return false;
-  }
-
-  // If superType type is an abstract type, maybeSubType type may be a currently
-  // possible object type.
-  if ((0, _definition.isAbstractType)(superType) && (0, _definition.isObjectType)(maybeSubType) && schema.isPossibleType(superType, maybeSubType)) {
-    return true;
-  }
-
-  // Otherwise, the child type is not a valid subtype of the parent type.
-  return false;
-}
-
-/**
- * Provided two composite types, determine if they "overlap". Two composite
- * types overlap when the Sets of possible concrete types for each intersect.
- *
- * This is often used to determine if a fragment of a given type could possibly
- * be visited in a context of another type.
- *
- * This function is commutative.
- */
-function doTypesOverlap(schema, typeA, typeB) {
-  // Equivalent types overlap
-  if (typeA === typeB) {
-    return true;
-  }
-
-  if ((0, _definition.isAbstractType)(typeA)) {
-    if ((0, _definition.isAbstractType)(typeB)) {
-      // If both types are abstract, then determine if there is any intersection
-      // between possible concrete types of each.
-      return schema.getPossibleTypes(typeA).some(function (type) {
-        return schema.isPossibleType(typeB, type);
-      });
-    }
-    // Determine if the latter type is a possible concrete type of the former.
-    return schema.isPossibleType(typeA, typeB);
-  }
-
-  if ((0, _definition.isAbstractType)(typeB)) {
-    // Determine if the former type is a possible concrete type of the latter.
-    return schema.isPossibleType(typeB, typeA);
-  }
-
-  // Otherwise the types do not overlap.
-  return false;
-}
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultFieldResolver = undefined;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                                               * Copyright (c) 2015-present, Facebook, Inc.
-                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                               * This source code is licensed under the MIT license found in the
-                                                                                                                                                                                                                                                                               * LICENSE file in the root directory of this source tree.
-                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                               *  strict
-                                                                                                                                                                                                                                                                               */
-
-exports.execute = execute;
-exports.responsePathAsArray = responsePathAsArray;
-exports.addPath = addPath;
-exports.assertValidExecutionArguments = assertValidExecutionArguments;
-exports.buildExecutionContext = buildExecutionContext;
-exports.getOperationRootType = getOperationRootType;
-exports.collectFields = collectFields;
-exports.buildResolveInfo = buildResolveInfo;
-exports.resolveFieldValueOrError = resolveFieldValueOrError;
-exports.getFieldDef = getFieldDef;
-
-var _iterall = __webpack_require__(41);
-
-var _error = __webpack_require__(2);
-
-var _invariant = __webpack_require__(10);
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-var _isInvalid = __webpack_require__(17);
-
-var _isInvalid2 = _interopRequireDefault(_isInvalid);
-
-var _isNullish = __webpack_require__(59);
-
-var _isNullish2 = _interopRequireDefault(_isNullish);
-
-var _isPromise = __webpack_require__(198);
-
-var _isPromise2 = _interopRequireDefault(_isPromise);
-
-var _memoize = __webpack_require__(568);
-
-var _memoize2 = _interopRequireDefault(_memoize);
-
-var _promiseForObject = __webpack_require__(569);
-
-var _promiseForObject2 = _interopRequireDefault(_promiseForObject);
-
-var _promiseReduce = __webpack_require__(570);
-
-var _promiseReduce2 = _interopRequireDefault(_promiseReduce);
-
-var _typeFromAST = __webpack_require__(22);
-
-var _kinds = __webpack_require__(4);
-
-var _values = __webpack_require__(96);
-
-var _definition = __webpack_require__(3);
-
-var _schema = __webpack_require__(7);
-
-var _introspection = __webpack_require__(19);
-
-var _directives = __webpack_require__(18);
-
-var _validate = __webpack_require__(57);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Terminology
- *
- * "Definitions" are the generic name for top-level statements in the document.
- * Examples of this include:
- * 1) Operations (such as a query)
- * 2) Fragments
- *
- * "Operations" are a generic name for requests in the document.
- * Examples of this include:
- * 1) query,
- * 2) mutation
- *
- * "Selections" are the definitions that can appear legally and at
- * single level of the query. These include:
- * 1) field references e.g "a"
- * 2) fragment "spreads" e.g. "...c"
- * 3) inline fragment "spreads" e.g. "...on Type { a }"
- */
-
-/**
- * Data that must be available at all points during query execution.
- *
- * Namely, schema of the type system that is currently executing,
- * and the fragments defined in the query document
- */
-
-
-/**
- * The result of GraphQL execution.
- *
- *   - `errors` is included when any errors occurred as a non-empty array.
- *   - `data` is the result of a successful execution of the query.
- */
-
-
-/**
- * Implements the "Evaluating requests" section of the GraphQL specification.
- *
- * Returns either a synchronous ExecutionResult (if all encountered resolvers
- * are synchronous), or a Promise of an ExecutionResult that will eventually be
- * resolved and never rejected.
- *
- * If the arguments to this function do not result in a legal execution context,
- * a GraphQLError will be thrown immediately explaining the invalid input.
- *
- * Accepts either an object with named arguments, or individual arguments.
- */
-
-/* eslint-disable no-redeclare */
-function execute(argsOrSchema, document, rootValue, contextValue, variableValues, operationName, fieldResolver) {
-  /* eslint-enable no-redeclare */
-  // Extract arguments from object args if provided.
-  return arguments.length === 1 ? executeImpl(argsOrSchema.schema, argsOrSchema.document, argsOrSchema.rootValue, argsOrSchema.contextValue, argsOrSchema.variableValues, argsOrSchema.operationName, argsOrSchema.fieldResolver) : executeImpl(argsOrSchema, document, rootValue, contextValue, variableValues, operationName, fieldResolver);
-}
-
-function executeImpl(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver) {
-  // If arguments are missing or incorrect, throw an error.
-  assertValidExecutionArguments(schema, document, variableValues);
-
-  // If a valid context cannot be created due to incorrect arguments,
-  // a "Response" with only errors is returned.
-  var context = buildExecutionContext(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver);
-
-  // Return early errors if execution context failed.
-  if (Array.isArray(context)) {
-    return { errors: context };
-  }
-
-  // Return a Promise that will eventually resolve to the data described by
-  // The "Response" section of the GraphQL specification.
-  //
-  // If errors are encountered while executing a GraphQL field, only that
-  // field and its descendants will be omitted, and sibling fields will still
-  // be executed. An execution which encounters errors will still result in a
-  // resolved Promise.
-  var data = executeOperation(context, context.operation, rootValue);
-  return buildResponse(context, data);
-}
-
-/**
- * Given a completed execution context and data, build the { errors, data }
- * response defined by the "Response" section of the GraphQL specification.
- */
-function buildResponse(context, data) {
-  if ((0, _isPromise2.default)(data)) {
-    return data.then(function (resolved) {
-      return buildResponse(context, resolved);
-    });
-  }
-  return context.errors.length === 0 ? { data: data } : { errors: context.errors, data: data };
-}
-
-/**
- * Given a ResponsePath (found in the `path` entry in the information provided
- * as the last argument to a field resolver), return an Array of the path keys.
- */
-function responsePathAsArray(path) {
-  var flattened = [];
-  var curr = path;
-  while (curr) {
-    flattened.push(curr.key);
-    curr = curr.prev;
-  }
-  return flattened.reverse();
-}
-
-/**
- * Given a ResponsePath and a key, return a new ResponsePath containing the
- * new key.
- */
-function addPath(prev, key) {
-  return { prev: prev, key: key };
-}
-
-/**
- * Essential assertions before executing to provide developer feedback for
- * improper use of the GraphQL library.
- */
-function assertValidExecutionArguments(schema, document, rawVariableValues) {
-  !document ? (0, _invariant2.default)(0, 'Must provide document') : void 0;
-
-  // If the schema used for execution is invalid, throw an error.
-  (0, _validate.assertValidSchema)(schema);
-
-  // Variables, if provided, must be an object.
-  !(!rawVariableValues || (typeof rawVariableValues === 'undefined' ? 'undefined' : _typeof(rawVariableValues)) === 'object') ? (0, _invariant2.default)(0, 'Variables must be provided as an Object where each property is a ' + 'variable value. Perhaps look to see if an unparsed JSON string ' + 'was provided.') : void 0;
-}
-
-/**
- * Constructs a ExecutionContext object from the arguments passed to
- * execute, which we will pass throughout the other execution methods.
- *
- * Throws a GraphQLError if a valid execution context cannot be created.
- */
-function buildExecutionContext(schema, document, rootValue, contextValue, rawVariableValues, operationName, fieldResolver) {
-  var errors = [];
-  var operation = void 0;
-  var hasMultipleAssumedOperations = false;
-  var fragments = Object.create(null);
-  for (var i = 0; i < document.definitions.length; i++) {
-    var definition = document.definitions[i];
-    switch (definition.kind) {
-      case _kinds.Kind.OPERATION_DEFINITION:
-        if (!operationName && operation) {
-          hasMultipleAssumedOperations = true;
-        } else if (!operationName || definition.name && definition.name.value === operationName) {
-          operation = definition;
-        }
-        break;
-      case _kinds.Kind.FRAGMENT_DEFINITION:
-        fragments[definition.name.value] = definition;
-        break;
-    }
-  }
-
-  if (!operation) {
-    if (operationName) {
-      errors.push(new _error.GraphQLError('Unknown operation named "' + operationName + '".'));
-    } else {
-      errors.push(new _error.GraphQLError('Must provide an operation.'));
-    }
-  } else if (hasMultipleAssumedOperations) {
-    errors.push(new _error.GraphQLError('Must provide operation name if query contains ' + 'multiple operations.'));
-  }
-
-  var variableValues = void 0;
-  if (operation) {
-    var coercedVariableValues = (0, _values.getVariableValues)(schema, operation.variableDefinitions || [], rawVariableValues || {});
-
-    if (coercedVariableValues.errors) {
-      errors.push.apply(errors, coercedVariableValues.errors);
-    } else {
-      variableValues = coercedVariableValues.coerced;
-    }
-  }
-
-  if (errors.length !== 0) {
-    return errors;
-  }
-
-  !operation ? (0, _invariant2.default)(0, 'Has operation if no errors.') : void 0;
-  !variableValues ? (0, _invariant2.default)(0, 'Has variables if no errors.') : void 0;
-
-  return {
-    schema: schema,
-    fragments: fragments,
-    rootValue: rootValue,
-    contextValue: contextValue,
-    operation: operation,
-    variableValues: variableValues,
-    fieldResolver: fieldResolver || defaultFieldResolver,
-    errors: errors
-  };
-}
-
-/**
- * Implements the "Evaluating operations" section of the spec.
- */
-function executeOperation(exeContext, operation, rootValue) {
-  var type = getOperationRootType(exeContext.schema, operation);
-  var fields = collectFields(exeContext, type, operation.selectionSet, Object.create(null), Object.create(null));
-
-  var path = undefined;
-
-  // Errors from sub-fields of a NonNull type may propagate to the top level,
-  // at which point we still log the error and null the parent field, which
-  // in this case is the entire response.
-  //
-  // Similar to completeValueCatchingError.
-  try {
-    var result = operation.operation === 'mutation' ? executeFieldsSerially(exeContext, type, rootValue, path, fields) : executeFields(exeContext, type, rootValue, path, fields);
-    if ((0, _isPromise2.default)(result)) {
-      return result.then(undefined, function (error) {
-        exeContext.errors.push(error);
-        return Promise.resolve(null);
-      });
-    }
-    return result;
-  } catch (error) {
-    exeContext.errors.push(error);
-    return null;
-  }
-}
-
-/**
- * Extracts the root type of the operation from the schema.
- */
-function getOperationRootType(schema, operation) {
-  switch (operation.operation) {
-    case 'query':
-      var queryType = schema.getQueryType();
-      if (!queryType) {
-        throw new _error.GraphQLError('Schema does not define the required query root type.', [operation]);
-      }
-      return queryType;
-    case 'mutation':
-      var mutationType = schema.getMutationType();
-      if (!mutationType) {
-        throw new _error.GraphQLError('Schema is not configured for mutations.', [operation]);
-      }
-      return mutationType;
-    case 'subscription':
-      var subscriptionType = schema.getSubscriptionType();
-      if (!subscriptionType) {
-        throw new _error.GraphQLError('Schema is not configured for subscriptions.', [operation]);
-      }
-      return subscriptionType;
-    default:
-      throw new _error.GraphQLError('Can only execute queries, mutations and subscriptions.', [operation]);
-  }
-}
-
-/**
- * Implements the "Evaluating selection sets" section of the spec
- * for "write" mode.
- */
-function executeFieldsSerially(exeContext, parentType, sourceValue, path, fields) {
-  return (0, _promiseReduce2.default)(Object.keys(fields), function (results, responseName) {
-    var fieldNodes = fields[responseName];
-    var fieldPath = addPath(path, responseName);
-    var result = resolveField(exeContext, parentType, sourceValue, fieldNodes, fieldPath);
-    if (result === undefined) {
-      return results;
-    }
-    if ((0, _isPromise2.default)(result)) {
-      return result.then(function (resolvedResult) {
-        results[responseName] = resolvedResult;
-        return results;
-      });
-    }
-    results[responseName] = result;
-    return results;
-  }, Object.create(null));
-}
-
-/**
- * Implements the "Evaluating selection sets" section of the spec
- * for "read" mode.
- */
-function executeFields(exeContext, parentType, sourceValue, path, fields) {
-  var containsPromise = false;
-
-  var finalResults = Object.keys(fields).reduce(function (results, responseName) {
-    var fieldNodes = fields[responseName];
-    var fieldPath = addPath(path, responseName);
-    var result = resolveField(exeContext, parentType, sourceValue, fieldNodes, fieldPath);
-    if (result === undefined) {
-      return results;
-    }
-    results[responseName] = result;
-    if (!containsPromise && (0, _isPromise2.default)(result)) {
-      containsPromise = true;
-    }
-    return results;
-  }, Object.create(null));
-
-  // If there are no promises, we can just return the object
-  if (!containsPromise) {
-    return finalResults;
-  }
-
-  // Otherwise, results is a map from field name to the result
-  // of resolving that field, which is possibly a promise. Return
-  // a promise that will return this same map, but with any
-  // promises replaced with the values they resolved to.
-  return (0, _promiseForObject2.default)(finalResults);
-}
-
-/**
- * Given a selectionSet, adds all of the fields in that selection to
- * the passed in map of fields, and returns it at the end.
- *
- * CollectFields requires the "runtime type" of an object. For a field which
- * returns an Interface or Union type, the "runtime type" will be the actual
- * Object type returned by that field.
- */
-function collectFields(exeContext, runtimeType, selectionSet, fields, visitedFragmentNames) {
-  for (var i = 0; i < selectionSet.selections.length; i++) {
-    var selection = selectionSet.selections[i];
-    switch (selection.kind) {
-      case _kinds.Kind.FIELD:
-        if (!shouldIncludeNode(exeContext, selection)) {
-          continue;
-        }
-        var name = getFieldEntryKey(selection);
-        if (!fields[name]) {
-          fields[name] = [];
-        }
-        fields[name].push(selection);
-        break;
-      case _kinds.Kind.INLINE_FRAGMENT:
-        if (!shouldIncludeNode(exeContext, selection) || !doesFragmentConditionMatch(exeContext, selection, runtimeType)) {
-          continue;
-        }
-        collectFields(exeContext, runtimeType, selection.selectionSet, fields, visitedFragmentNames);
-        break;
-      case _kinds.Kind.FRAGMENT_SPREAD:
-        var fragName = selection.name.value;
-        if (visitedFragmentNames[fragName] || !shouldIncludeNode(exeContext, selection)) {
-          continue;
-        }
-        visitedFragmentNames[fragName] = true;
-        var fragment = exeContext.fragments[fragName];
-        if (!fragment || !doesFragmentConditionMatch(exeContext, fragment, runtimeType)) {
-          continue;
-        }
-        collectFields(exeContext, runtimeType, fragment.selectionSet, fields, visitedFragmentNames);
-        break;
-    }
-  }
-  return fields;
-}
-
-/**
- * Determines if a field should be included based on the @include and @skip
- * directives, where @skip has higher precidence than @include.
- */
-function shouldIncludeNode(exeContext, node) {
-  var skip = (0, _values.getDirectiveValues)(_directives.GraphQLSkipDirective, node, exeContext.variableValues);
-  if (skip && skip.if === true) {
-    return false;
-  }
-
-  var include = (0, _values.getDirectiveValues)(_directives.GraphQLIncludeDirective, node, exeContext.variableValues);
-  if (include && include.if === false) {
-    return false;
-  }
-  return true;
-}
-
-/**
- * Determines if a fragment is applicable to the given type.
- */
-function doesFragmentConditionMatch(exeContext, fragment, type) {
-  var typeConditionNode = fragment.typeCondition;
-  if (!typeConditionNode) {
-    return true;
-  }
-  var conditionalType = (0, _typeFromAST.typeFromAST)(exeContext.schema, typeConditionNode);
-  if (conditionalType === type) {
-    return true;
-  }
-  if ((0, _definition.isAbstractType)(conditionalType)) {
-    return exeContext.schema.isPossibleType(conditionalType, type);
-  }
-  return false;
-}
-
-/**
- * Implements the logic to compute the key of a given field's entry
- */
-function getFieldEntryKey(node) {
-  return node.alias ? node.alias.value : node.name.value;
-}
-
-/**
- * Resolves the field on the given source object. In particular, this
- * figures out the value that the field returns by calling its resolve function,
- * then calls completeValue to complete promises, serialize scalars, or execute
- * the sub-selection-set for objects.
- */
-function resolveField(exeContext, parentType, source, fieldNodes, path) {
-  var fieldNode = fieldNodes[0];
-  var fieldName = fieldNode.name.value;
-
-  var fieldDef = getFieldDef(exeContext.schema, parentType, fieldName);
-  if (!fieldDef) {
-    return;
-  }
-
-  var resolveFn = fieldDef.resolve || exeContext.fieldResolver;
-
-  var info = buildResolveInfo(exeContext, fieldDef, fieldNodes, parentType, path);
-
-  // Get the resolve function, regardless of if its result is normal
-  // or abrupt (error).
-  var result = resolveFieldValueOrError(exeContext, fieldDef, fieldNodes, resolveFn, source, info);
-
-  return completeValueCatchingError(exeContext, fieldDef.type, fieldNodes, info, path, result);
-}
-
-function buildResolveInfo(exeContext, fieldDef, fieldNodes, parentType, path) {
-  // The resolve function's optional fourth argument is a collection of
-  // information about the current execution state.
-  return {
-    fieldName: fieldNodes[0].name.value,
-    fieldNodes: fieldNodes,
-    returnType: fieldDef.type,
-    parentType: parentType,
-    path: path,
-    schema: exeContext.schema,
-    fragments: exeContext.fragments,
-    rootValue: exeContext.rootValue,
-    operation: exeContext.operation,
-    variableValues: exeContext.variableValues
-  };
-}
-
-// Isolates the "ReturnOrAbrupt" behavior to not de-opt the `resolveField`
-// function. Returns the result of resolveFn or the abrupt-return Error object.
-function resolveFieldValueOrError(exeContext, fieldDef, fieldNodes, resolveFn, source, info) {
-  try {
-    // Build a JS object of arguments from the field.arguments AST, using the
-    // variables scope to fulfill any variable references.
-    // TODO: find a way to memoize, in case this field is within a List type.
-    var args = (0, _values.getArgumentValues)(fieldDef, fieldNodes[0], exeContext.variableValues);
-
-    // The resolve function's optional third argument is a context value that
-    // is provided to every resolve function within an execution. It is commonly
-    // used to represent an authenticated user, or request-specific caches.
-    var context = exeContext.contextValue;
-
-    var result = resolveFn(source, args, context, info);
-    return (0, _isPromise2.default)(result) ? result.then(undefined, asErrorInstance) : result;
-  } catch (error) {
-    return asErrorInstance(error);
-  }
-}
-
-// Sometimes a non-error is thrown, wrap it as an Error instance to ensure a
-// consistent Error interface.
-function asErrorInstance(error) {
-  return error instanceof Error ? error : new Error(error || undefined);
-}
-
-// This is a small wrapper around completeValue which detects and logs errors
-// in the execution context.
-function completeValueCatchingError(exeContext, returnType, fieldNodes, info, path, result) {
-  // If the field type is non-nullable, then it is resolved without any
-  // protection from errors, however it still properly locates the error.
-  if ((0, _definition.isNonNullType)(returnType)) {
-    return completeValueWithLocatedError(exeContext, returnType, fieldNodes, info, path, result);
-  }
-
-  // Otherwise, error protection is applied, logging the error and resolving
-  // a null value for this field if one is encountered.
-  try {
-    var completed = completeValueWithLocatedError(exeContext, returnType, fieldNodes, info, path, result);
-    if ((0, _isPromise2.default)(completed)) {
-      // If `completeValueWithLocatedError` returned a rejected promise, log
-      // the rejection error and resolve to null.
-      // Note: we don't rely on a `catch` method, but we do expect "thenable"
-      // to take a second callback for the error case.
-      return completed.then(undefined, function (error) {
-        exeContext.errors.push(error);
-        return Promise.resolve(null);
-      });
-    }
-    return completed;
-  } catch (error) {
-    // If `completeValueWithLocatedError` returned abruptly (threw an error),
-    // log the error and return null.
-    exeContext.errors.push(error);
-    return null;
-  }
-}
-
-// This is a small wrapper around completeValue which annotates errors with
-// location information.
-function completeValueWithLocatedError(exeContext, returnType, fieldNodes, info, path, result) {
-  try {
-    var completed = completeValue(exeContext, returnType, fieldNodes, info, path, result);
-    if ((0, _isPromise2.default)(completed)) {
-      return completed.then(undefined, function (error) {
-        return Promise.reject((0, _error.locatedError)(asErrorInstance(error), fieldNodes, responsePathAsArray(path)));
-      });
-    }
-    return completed;
-  } catch (error) {
-    throw (0, _error.locatedError)(asErrorInstance(error), fieldNodes, responsePathAsArray(path));
-  }
-}
-
-/**
- * Implements the instructions for completeValue as defined in the
- * "Field entries" section of the spec.
- *
- * If the field type is Non-Null, then this recursively completes the value
- * for the inner type. It throws a field error if that completion returns null,
- * as per the "Nullability" section of the spec.
- *
- * If the field type is a List, then this recursively completes the value
- * for the inner type on each item in the list.
- *
- * If the field type is a Scalar or Enum, ensures the completed value is a legal
- * value of the type by calling the `serialize` method of GraphQL type
- * definition.
- *
- * If the field is an abstract type, determine the runtime type of the value
- * and then complete based on that type
- *
- * Otherwise, the field type expects a sub-selection set, and will complete the
- * value by evaluating all sub-selections.
- */
-function completeValue(exeContext, returnType, fieldNodes, info, path, result) {
-  // If result is a Promise, apply-lift over completeValue.
-  if ((0, _isPromise2.default)(result)) {
-    return result.then(function (resolved) {
-      return completeValue(exeContext, returnType, fieldNodes, info, path, resolved);
-    });
-  }
-
-  // If result is an Error, throw a located error.
-  if (result instanceof Error) {
-    throw result;
-  }
-
-  // If field type is NonNull, complete for inner type, and throw field error
-  // if result is null.
-  if ((0, _definition.isNonNullType)(returnType)) {
-    var completed = completeValue(exeContext, returnType.ofType, fieldNodes, info, path, result);
-    if (completed === null) {
-      throw new Error('Cannot return null for non-nullable field ' + info.parentType.name + '.' + info.fieldName + '.');
-    }
-    return completed;
-  }
-
-  // If result value is null-ish (null, undefined, or NaN) then return null.
-  if ((0, _isNullish2.default)(result)) {
-    return null;
-  }
-
-  // If field type is List, complete each item in the list with the inner type
-  if ((0, _definition.isListType)(returnType)) {
-    return completeListValue(exeContext, returnType, fieldNodes, info, path, result);
-  }
-
-  // If field type is a leaf type, Scalar or Enum, serialize to a valid value,
-  // returning null if serialization is not possible.
-  if ((0, _definition.isLeafType)(returnType)) {
-    return completeLeafValue(returnType, result);
-  }
-
-  // If field type is an abstract type, Interface or Union, determine the
-  // runtime Object type and complete for that type.
-  if ((0, _definition.isAbstractType)(returnType)) {
-    return completeAbstractValue(exeContext, returnType, fieldNodes, info, path, result);
-  }
-
-  // If field type is Object, execute and complete all sub-selections.
-  if ((0, _definition.isObjectType)(returnType)) {
-    return completeObjectValue(exeContext, returnType, fieldNodes, info, path, result);
-  }
-
-  // Not reachable. All possible output types have been considered.
-  /* istanbul ignore next */
-  throw new Error('Cannot complete value of unexpected type "' + String(returnType) + '".');
-}
-
-/**
- * Complete a list value by completing each item in the list with the
- * inner type
- */
-function completeListValue(exeContext, returnType, fieldNodes, info, path, result) {
-  !(0, _iterall.isCollection)(result) ? (0, _invariant2.default)(0, 'Expected Iterable, but did not find one for field ' + info.parentType.name + '.' + info.fieldName + '.') : void 0;
-
-  // This is specified as a simple map, however we're optimizing the path
-  // where the list contains no Promises by avoiding creating another Promise.
-  var itemType = returnType.ofType;
-  var containsPromise = false;
-  var completedResults = [];
-  (0, _iterall.forEach)(result, function (item, index) {
-    // No need to modify the info object containing the path,
-    // since from here on it is not ever accessed by resolver functions.
-    var fieldPath = addPath(path, index);
-    var completedItem = completeValueCatchingError(exeContext, itemType, fieldNodes, info, fieldPath, item);
-
-    if (!containsPromise && (0, _isPromise2.default)(completedItem)) {
-      containsPromise = true;
-    }
-    completedResults.push(completedItem);
-  });
-
-  return containsPromise ? Promise.all(completedResults) : completedResults;
-}
-
-/**
- * Complete a Scalar or Enum by serializing to a valid value, returning
- * null if serialization is not possible.
- */
-function completeLeafValue(returnType, result) {
-  !returnType.serialize ? (0, _invariant2.default)(0, 'Missing serialize method on type') : void 0;
-  var serializedResult = returnType.serialize(result);
-  if ((0, _isInvalid2.default)(serializedResult)) {
-    throw new Error('Expected a value of type "' + String(returnType) + '" but ' + ('received: ' + String(result)));
-  }
-  return serializedResult;
-}
-
-/**
- * Complete a value of an abstract type by determining the runtime object type
- * of that value, then complete the value for that type.
- */
-function completeAbstractValue(exeContext, returnType, fieldNodes, info, path, result) {
-  var runtimeType = returnType.resolveType ? returnType.resolveType(result, exeContext.contextValue, info) : defaultResolveTypeFn(result, exeContext.contextValue, info, returnType);
-
-  if ((0, _isPromise2.default)(runtimeType)) {
-    return runtimeType.then(function (resolvedRuntimeType) {
-      return completeObjectValue(exeContext, ensureValidRuntimeType(resolvedRuntimeType, exeContext, returnType, fieldNodes, info, result), fieldNodes, info, path, result);
-    });
-  }
-
-  return completeObjectValue(exeContext, ensureValidRuntimeType(runtimeType, exeContext, returnType, fieldNodes, info, result), fieldNodes, info, path, result);
-}
-
-function ensureValidRuntimeType(runtimeTypeOrName, exeContext, returnType, fieldNodes, info, result) {
-  var runtimeType = typeof runtimeTypeOrName === 'string' ? exeContext.schema.getType(runtimeTypeOrName) : runtimeTypeOrName;
-
-  if (!(0, _definition.isObjectType)(runtimeType)) {
-    throw new _error.GraphQLError('Abstract type ' + returnType.name + ' must resolve to an Object type at ' + ('runtime for field ' + info.parentType.name + '.' + info.fieldName + ' with ') + ('value "' + String(result) + '", received "' + String(runtimeType) + '". ') + ('Either the ' + returnType.name + ' type should provide a "resolveType" ') + 'function or each possible types should provide an ' + '"isTypeOf" function.', fieldNodes);
-  }
-
-  if (!exeContext.schema.isPossibleType(returnType, runtimeType)) {
-    throw new _error.GraphQLError('Runtime Object type "' + runtimeType.name + '" is not a possible type ' + ('for "' + returnType.name + '".'), fieldNodes);
-  }
-
-  return runtimeType;
-}
-
-/**
- * Complete an Object value by executing all sub-selections.
- */
-function completeObjectValue(exeContext, returnType, fieldNodes, info, path, result) {
-  // If there is an isTypeOf predicate function, call it with the
-  // current result. If isTypeOf returns false, then raise an error rather
-  // than continuing execution.
-  if (returnType.isTypeOf) {
-    var isTypeOf = returnType.isTypeOf(result, exeContext.contextValue, info);
-
-    if ((0, _isPromise2.default)(isTypeOf)) {
-      return isTypeOf.then(function (resolvedIsTypeOf) {
-        if (!resolvedIsTypeOf) {
-          throw invalidReturnTypeError(returnType, result, fieldNodes);
-        }
-        return collectAndExecuteSubfields(exeContext, returnType, fieldNodes, info, path, result);
-      });
-    }
-
-    if (!isTypeOf) {
-      throw invalidReturnTypeError(returnType, result, fieldNodes);
-    }
-  }
-
-  return collectAndExecuteSubfields(exeContext, returnType, fieldNodes, info, path, result);
-}
-
-function invalidReturnTypeError(returnType, result, fieldNodes) {
-  return new _error.GraphQLError('Expected value of type "' + returnType.name + '" but got: ' + String(result) + '.', fieldNodes);
-}
-
-function collectAndExecuteSubfields(exeContext, returnType, fieldNodes, info, path, result) {
-  // Collect sub-fields to execute to complete this value.
-  var subFieldNodes = collectSubfields(exeContext, returnType, fieldNodes);
-  return executeFields(exeContext, returnType, result, path, subFieldNodes);
-}
-
-/**
- * A memoized collection of relevant subfields in the context of the return
- * type. Memoizing ensures the subfields are not repeatedly calculated, which
- * saves overhead when resolving lists of values.
- */
-var collectSubfields = (0, _memoize2.default)(_collectSubfields);
-function _collectSubfields(exeContext, returnType, fieldNodes) {
-  var subFieldNodes = Object.create(null);
-  var visitedFragmentNames = Object.create(null);
-  for (var i = 0; i < fieldNodes.length; i++) {
-    var selectionSet = fieldNodes[i].selectionSet;
-    if (selectionSet) {
-      subFieldNodes = collectFields(exeContext, returnType, selectionSet, subFieldNodes, visitedFragmentNames);
-    }
-  }
-  return subFieldNodes;
-}
-
-/**
- * If a resolveType function is not given, then a default resolve behavior is
- * used which attempts two strategies:
- *
- * First, See if the provided value has a `__typename` field defined, if so, use
- * that value as name of the resolved type.
- *
- * Otherwise, test each possible type for the abstract type by calling
- * isTypeOf for the object being coerced, returning the first type that matches.
- */
-function defaultResolveTypeFn(value, context, info, abstractType) {
-  // First, look for `__typename`.
-  if (value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && typeof value.__typename === 'string') {
-    return value.__typename;
-  }
-
-  // Otherwise, test each possible type.
-  var possibleTypes = info.schema.getPossibleTypes(abstractType);
-  var promisedIsTypeOfResults = [];
-
-  for (var i = 0; i < possibleTypes.length; i++) {
-    var type = possibleTypes[i];
-
-    if (type.isTypeOf) {
-      var isTypeOfResult = type.isTypeOf(value, context, info);
-
-      if ((0, _isPromise2.default)(isTypeOfResult)) {
-        promisedIsTypeOfResults[i] = isTypeOfResult;
-      } else if (isTypeOfResult) {
-        return type;
-      }
-    }
-  }
-
-  if (promisedIsTypeOfResults.length) {
-    return Promise.all(promisedIsTypeOfResults).then(function (isTypeOfResults) {
-      for (var _i = 0; _i < isTypeOfResults.length; _i++) {
-        if (isTypeOfResults[_i]) {
-          return possibleTypes[_i];
-        }
-      }
-    });
-  }
-}
-
-/**
- * If a resolve function is not given, then a default resolve behavior is used
- * which takes the property of the source object of the same name as the field
- * and returns it as the result, or if it's a function, returns the result
- * of calling that function while passing along args and context.
- */
-var defaultFieldResolver = exports.defaultFieldResolver = function defaultFieldResolver(source, args, context, info) {
-  // ensure source is a value for which property access is acceptable.
-  if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) === 'object' || typeof source === 'function') {
-    var property = source[info.fieldName];
-    if (typeof property === 'function') {
-      return source[info.fieldName](args, context, info);
-    }
-    return property;
-  }
-};
-
-/**
- * This method looks up the field on the given type defintion.
- * It has special casing for the two introspection fields, __schema
- * and __typename. __typename is special because it can always be
- * queried as a field, even in situations where no other fields
- * are allowed, like on a Union. __schema could get automatically
- * added to the query type, but that would require mutating type
- * definitions, which would cause issues.
- */
-function getFieldDef(schema, parentType, fieldName) {
-  if (fieldName === _introspection.SchemaMetaFieldDef.name && schema.getQueryType() === parentType) {
-    return _introspection.SchemaMetaFieldDef;
-  } else if (fieldName === _introspection.TypeMetaFieldDef.name && schema.getQueryType() === parentType) {
-    return _introspection.TypeMetaFieldDef;
-  } else if (fieldName === _introspection.TypeNameMetaFieldDef.name) {
-    return _introspection.TypeNameMetaFieldDef;
-  }
-  return parentType.getFields()[fieldName];
-}
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.valueFromAST = valueFromAST;
-
-var _keyMap = __webpack_require__(26);
-
-var _keyMap2 = _interopRequireDefault(_keyMap);
-
-var _isInvalid = __webpack_require__(17);
-
-var _isInvalid2 = _interopRequireDefault(_isInvalid);
-
-var _objectValues = __webpack_require__(24);
-
-var _objectValues2 = _interopRequireDefault(_objectValues);
-
-var _kinds = __webpack_require__(4);
-
-var _definition = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Produces a JavaScript value given a GraphQL Value AST.
- *
- * A GraphQL type must be provided, which will be used to interpret different
- * GraphQL Value literals.
- *
- * Returns `undefined` when the value could not be validly coerced according to
- * the provided type.
- *
- * | GraphQL Value        | JSON Value    |
- * | -------------------- | ------------- |
- * | Input Object         | Object        |
- * | List                 | Array         |
- * | Boolean              | Boolean       |
- * | String               | String        |
- * | Int / Float          | Number        |
- * | Enum Value           | Mixed         |
- * | NullValue            | null          |
- *
- */
-function valueFromAST(valueNode, type, variables) {
-  if (!valueNode) {
-    // When there is no node, then there is also no value.
-    // Importantly, this is different from returning the value null.
-    return;
-  }
-
-  if ((0, _definition.isNonNullType)(type)) {
-    if (valueNode.kind === _kinds.Kind.NULL) {
-      return; // Invalid: intentionally return no value.
-    }
-    return valueFromAST(valueNode, type.ofType, variables);
-  }
-
-  if (valueNode.kind === _kinds.Kind.NULL) {
-    // This is explicitly returning the value null.
-    return null;
-  }
-
-  if (valueNode.kind === _kinds.Kind.VARIABLE) {
-    var variableName = valueNode.name.value;
-    if (!variables || (0, _isInvalid2.default)(variables[variableName])) {
-      // No valid return value.
-      return;
-    }
-    // Note: we're not doing any checking that this variable is correct. We're
-    // assuming that this query has been validated and the variable usage here
-    // is of the correct type.
-    return variables[variableName];
-  }
-
-  if ((0, _definition.isListType)(type)) {
-    var itemType = type.ofType;
-    if (valueNode.kind === _kinds.Kind.LIST) {
-      var coercedValues = [];
-      var itemNodes = valueNode.values;
-      for (var i = 0; i < itemNodes.length; i++) {
-        if (isMissingVariable(itemNodes[i], variables)) {
-          // If an array contains a missing variable, it is either coerced to
-          // null or if the item type is non-null, it considered invalid.
-          if ((0, _definition.isNonNullType)(itemType)) {
-            return; // Invalid: intentionally return no value.
-          }
-          coercedValues.push(null);
-        } else {
-          var itemValue = valueFromAST(itemNodes[i], itemType, variables);
-          if ((0, _isInvalid2.default)(itemValue)) {
-            return; // Invalid: intentionally return no value.
-          }
-          coercedValues.push(itemValue);
-        }
-      }
-      return coercedValues;
-    }
-    var coercedValue = valueFromAST(valueNode, itemType, variables);
-    if ((0, _isInvalid2.default)(coercedValue)) {
-      return; // Invalid: intentionally return no value.
-    }
-    return [coercedValue];
-  }
-
-  if ((0, _definition.isInputObjectType)(type)) {
-    if (valueNode.kind !== _kinds.Kind.OBJECT) {
-      return; // Invalid: intentionally return no value.
-    }
-    var coercedObj = Object.create(null);
-    var fieldNodes = (0, _keyMap2.default)(valueNode.fields, function (field) {
-      return field.name.value;
-    });
-    var fields = (0, _objectValues2.default)(type.getFields());
-    for (var _i = 0; _i < fields.length; _i++) {
-      var field = fields[_i];
-      var fieldNode = fieldNodes[field.name];
-      if (!fieldNode || isMissingVariable(fieldNode.value, variables)) {
-        if (!(0, _isInvalid2.default)(field.defaultValue)) {
-          coercedObj[field.name] = field.defaultValue;
-        } else if ((0, _definition.isNonNullType)(field.type)) {
-          return; // Invalid: intentionally return no value.
-        }
-        continue;
-      }
-      var fieldValue = valueFromAST(fieldNode.value, field.type, variables);
-      if ((0, _isInvalid2.default)(fieldValue)) {
-        return; // Invalid: intentionally return no value.
-      }
-      coercedObj[field.name] = fieldValue;
-    }
-    return coercedObj;
-  }
-
-  if ((0, _definition.isEnumType)(type)) {
-    if (valueNode.kind !== _kinds.Kind.ENUM) {
-      return; // Invalid: intentionally return no value.
-    }
-    var enumValue = type.getValue(valueNode.value);
-    if (!enumValue) {
-      return; // Invalid: intentionally return no value.
-    }
-    return enumValue.value;
-  }
-
-  if ((0, _definition.isScalarType)(type)) {
-    // Scalars fulfill parsing a literal value via parseLiteral().
-    // Invalid values represent a failure to parse correctly, in which case
-    // no value is returned.
-    var result = void 0;
-    try {
-      result = type.parseLiteral(valueNode, variables);
-    } catch (_error) {
-      return; // Invalid: intentionally return no value.
-    }
-    if ((0, _isInvalid2.default)(result)) {
-      return; // Invalid: intentionally return no value.
-    }
-    return result;
-  }
-
-  /* istanbul ignore next */
-  throw new Error('Unknown type: ' + type + '.');
-}
-
-// Returns true if the provided valueNode is a variable which is not defined
-// in the set of variables.
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-function isMissingVariable(valueNode, variables) {
-  return valueNode.kind === _kinds.Kind.VARIABLE && (!variables || (0, _isInvalid2.default)(variables[valueNode.name.value]));
-}
-
-/***/ }),
-/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27976,10 +25653,7104 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(101).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(100).setImmediate))
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var util = __webpack_require__(6);
+
+function populateMethod(req) {
+  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
+}
+
+function generateURI(endpointPath, operationPath, input, params) {
+  var uri = [endpointPath, operationPath].join('/');
+  uri = uri.replace(/\/+/g, '/');
+
+  var queryString = {}, queryStringSet = false;
+  util.each(input.members, function (name, member) {
+    var paramValue = params[name];
+    if (paramValue === null || paramValue === undefined) return;
+    if (member.location === 'uri') {
+      var regex = new RegExp('\\{' + member.name + '(\\+)?\\}');
+      uri = uri.replace(regex, function(_, plus) {
+        var fn = plus ? util.uriEscapePath : util.uriEscape;
+        return fn(String(paramValue));
+      });
+    } else if (member.location === 'querystring') {
+      queryStringSet = true;
+
+      if (member.type === 'list') {
+        queryString[member.name] = paramValue.map(function(val) {
+          return util.uriEscape(String(val));
+        });
+      } else if (member.type === 'map') {
+        util.each(paramValue, function(key, value) {
+          if (Array.isArray(value)) {
+            queryString[key] = value.map(function(val) {
+              return util.uriEscape(String(val));
+            });
+          } else {
+            queryString[key] = util.uriEscape(String(value));
+          }
+        });
+      } else {
+        queryString[member.name] = util.uriEscape(String(paramValue));
+      }
+    }
+  });
+
+  if (queryStringSet) {
+    uri += (uri.indexOf('?') >= 0 ? '&' : '?');
+    var parts = [];
+    util.arrayEach(Object.keys(queryString).sort(), function(key) {
+      if (!Array.isArray(queryString[key])) {
+        queryString[key] = [queryString[key]];
+      }
+      for (var i = 0; i < queryString[key].length; i++) {
+        parts.push(util.uriEscape(String(key)) + '=' + queryString[key][i]);
+      }
+    });
+    uri += parts.join('&');
+  }
+
+  return uri;
+}
+
+function populateURI(req) {
+  var operation = req.service.api.operations[req.operation];
+  var input = operation.input;
+
+  var uri = generateURI(req.httpRequest.endpoint.path, operation.httpPath, input, req.params);
+  req.httpRequest.path = uri;
+}
+
+function populateHeaders(req) {
+  var operation = req.service.api.operations[req.operation];
+  util.each(operation.input.members, function (name, member) {
+    var value = req.params[name];
+    if (value === null || value === undefined) return;
+
+    if (member.location === 'headers' && member.type === 'map') {
+      util.each(value, function(key, memberValue) {
+        req.httpRequest.headers[member.name + key] = memberValue;
+      });
+    } else if (member.location === 'header') {
+      value = member.toWireFormat(value).toString();
+      if (member.isJsonValue) {
+        value = util.base64.encode(value);
+      }
+      req.httpRequest.headers[member.name] = value;
+    }
+  });
+}
+
+function buildRequest(req) {
+  populateMethod(req);
+  populateURI(req);
+  populateHeaders(req);
+}
+
+function extractError() {
+}
+
+function extractData(resp) {
+  var req = resp.request;
+  var data = {};
+  var r = resp.httpResponse;
+  var operation = req.service.api.operations[req.operation];
+  var output = operation.output;
+
+  // normalize headers names to lower-cased keys for matching
+  var headers = {};
+  util.each(r.headers, function (k, v) {
+    headers[k.toLowerCase()] = v;
+  });
+
+  util.each(output.members, function(name, member) {
+    var header = (member.name || name).toLowerCase();
+    if (member.location === 'headers' && member.type === 'map') {
+      data[name] = {};
+      var location = member.isLocationName ? member.name : '';
+      var pattern = new RegExp('^' + location + '(.+)', 'i');
+      util.each(r.headers, function (k, v) {
+        var result = k.match(pattern);
+        if (result !== null) {
+          data[name][result[1]] = v;
+        }
+      });
+    } else if (member.location === 'header') {
+      if (headers[header] !== undefined) {
+        var value = member.isJsonValue ?
+          util.base64.decode(headers[header]) :
+          headers[header];
+        data[name] = member.toType(value);
+      }
+    } else if (member.location === 'statusCode') {
+      data[name] = parseInt(r.statusCode, 10);
+    }
+  });
+
+  resp.data = data;
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData,
+  generateURI: generateURI
+};
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(37),
+    isObject = __webpack_require__(13);
+
+/** `Object#toString` result references. */
+var asyncTag = '[object AsyncFunction]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    proxyTag = '[object Proxy]';
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+  var tag = baseGetTag(value);
+  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+
+module.exports = isFunction;
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(20);
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || (value !== value && other !== other);
+}
+
+module.exports = eq;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var listCacheClear = __webpack_require__(405),
+    listCacheDelete = __webpack_require__(406),
+    listCacheGet = __webpack_require__(407),
+    listCacheHas = __webpack_require__(408),
+    listCacheSet = __webpack_require__(409);
+
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function ListCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `ListCache`.
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+
+module.exports = ListCache;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var eq = __webpack_require__(48);
+
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+
+module.exports = assocIndexOf;
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(28);
+
+/* Built-in method references that are verified to be native. */
+var nativeCreate = getNative(Object, 'create');
+
+module.exports = nativeCreate;
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isKeyable = __webpack_require__(423);
+
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key)
+    ? data[typeof key == 'string' ? 'string' : 'hash']
+    : data.map;
+}
+
+module.exports = getMapData;
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isSymbol = __webpack_require__(77);
+
+/** Used as references for various `Number` constants. */
+var INFINITY = 1 / 0;
+
+/**
+ * Converts `value` to a string key if it's not a string or symbol.
+ *
+ * @private
+ * @param {*} value The value to inspect.
+ * @returns {string|symbol} Returns the key.
+ */
+function toKey(value) {
+  if (typeof value == 'string' || isSymbol(value)) {
+    return value;
+  }
+  var result = (value + '');
+  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+}
+
+module.exports = toKey;
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(15).Buffer;
+
+/**
+ * This is a polyfill for the static method `isView` of `ArrayBuffer`, which is
+ * e.g. missing in IE 10.
+ *
+ * @api private
+ */
+if (
+    typeof ArrayBuffer !== 'undefined' &&
+    typeof ArrayBuffer.isView === 'undefined'
+) {
+    ArrayBuffer.isView = function(arg) {
+        return viewStrings.indexOf(Object.prototype.toString.call(arg)) > -1;
+    };
+}
+
+/**
+ * @api private
+ */
+var viewStrings = [
+    '[object Int8Array]',
+    '[object Uint8Array]',
+    '[object Uint8ClampedArray]',
+    '[object Int16Array]',
+    '[object Uint16Array]',
+    '[object Int32Array]',
+    '[object Uint32Array]',
+    '[object Float32Array]',
+    '[object Float64Array]',
+    '[object DataView]',
+];
+
+/**
+ * @api private
+ */
+function isEmptyData(data) {
+    if (typeof data === 'string') {
+        return data.length === 0;
+    }
+    return data.byteLength === 0;
+}
+
+/**
+ * @api private
+ */
+function convertToBuffer(data) {
+    if (typeof data === 'string') {
+        data = new Buffer(data, 'utf8');
+    }
+
+    if (ArrayBuffer.isView(data)) {
+        return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+    }
+
+    return new Uint8Array(data);
+}
+
+module.exports = exports = {
+    isEmptyData: isEmptyData,
+    convertToBuffer: convertToBuffer,
+}
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(30);
+var AWS = __webpack_require__(1);
+var Service = AWS.Service;
+var apiLoader = AWS.apiLoader;
+
+apiLoader.services['sts'] = {};
+AWS.STS = Service.defineService('sts', ['2011-06-15']);
+__webpack_require__(503);
+Object.defineProperty(apiLoader.services['sts'], '2011-06-15', {
+  get: function get() {
+    var model = __webpack_require__(504);
+    model.paginators = __webpack_require__(505).pagination;
+    return model;
+  },
+  enumerable: true,
+  configurable: true
+});
+
+module.exports = AWS.STS;
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/*
+ * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * the License. A copy of the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var Platform = {
+    'userAgent': 'aws-amplify/0.1.x js',
+    'product': '',
+    'navigator': null,
+    'isReactNative': false
+};
+if (typeof navigator !== 'undefined' && navigator.product) {
+    Platform.product = navigator.product || '';
+    Platform.navigator = navigator || null;
+    switch (navigator.product) {
+        case 'ReactNative':
+            Platform.userAgent = 'aws-amplify/0.1.x react-native';
+            Platform.isReactNative = true;
+            break;
+        default:
+            Platform.userAgent = 'aws-amplify/0.1.x js';
+            Platform.isReactNative = false;
+            break;
+    }
+}
+exports.default = Platform;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.validateSchema = validateSchema;
+exports.assertValidSchema = assertValidSchema;
+
+var _definition = __webpack_require__(3);
+
+var _directives = __webpack_require__(18);
+
+var _introspection = __webpack_require__(19);
+
+var _schema = __webpack_require__(7);
+
+var _find = __webpack_require__(34);
+
+var _find2 = _interopRequireDefault(_find);
+
+var _invariant = __webpack_require__(10);
+
+var _invariant2 = _interopRequireDefault(_invariant);
+
+var _objectValues = __webpack_require__(24);
+
+var _objectValues2 = _interopRequireDefault(_objectValues);
+
+var _GraphQLError = __webpack_require__(25);
+
+var _assertValidName = __webpack_require__(167);
+
+var _typeComparators = __webpack_require__(61);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
+                                                                                                                                                           * Copyright (c) 2015-present, Facebook, Inc.
+                                                                                                                                                           *
+                                                                                                                                                           * This source code is licensed under the MIT license found in the
+                                                                                                                                                           * LICENSE file in the root directory of this source tree.
+                                                                                                                                                           *
+                                                                                                                                                           *  strict
+                                                                                                                                                           */
+
+/**
+ * Implements the "Type Validation" sub-sections of the specification's
+ * "Type System" section.
+ *
+ * Validation runs synchronously, returning an array of encountered errors, or
+ * an empty array if no errors were encountered and the Schema is valid.
+ */
+function validateSchema(schema) {
+  // First check to ensure the provided value is in fact a GraphQLSchema.
+  !(0, _schema.isSchema)(schema) ? (0, _invariant2.default)(0, 'Expected ' + String(schema) + ' to be a GraphQL schema.') : void 0;
+
+  // If this Schema has already been validated, return the previous results.
+  if (schema.__validationErrors) {
+    return schema.__validationErrors;
+  }
+
+  // Validate the schema, producing a list of errors.
+  var context = new SchemaValidationContext(schema);
+  validateRootTypes(context);
+  validateDirectives(context);
+  validateTypes(context);
+
+  // Persist the results of validation before returning to ensure validation
+  // does not run multiple times for this schema.
+  var errors = context.getErrors();
+  schema.__validationErrors = errors;
+  return errors;
+}
+
+/**
+ * Utility function which asserts a schema is valid by throwing an error if
+ * it is invalid.
+ */
+function assertValidSchema(schema) {
+  var errors = validateSchema(schema);
+  if (errors.length !== 0) {
+    throw new Error(errors.map(function (error) {
+      return error.message;
+    }).join('\n\n'));
+  }
+}
+
+var SchemaValidationContext = function () {
+  function SchemaValidationContext(schema) {
+    _classCallCheck(this, SchemaValidationContext);
+
+    this._errors = [];
+    this.schema = schema;
+  }
+
+  SchemaValidationContext.prototype.reportError = function reportError(message, nodes) {
+    var _nodes = (Array.isArray(nodes) ? nodes : [nodes]).filter(Boolean);
+    this.addError(new _GraphQLError.GraphQLError(message, _nodes));
+  };
+
+  SchemaValidationContext.prototype.addError = function addError(error) {
+    this._errors.push(error);
+  };
+
+  SchemaValidationContext.prototype.getErrors = function getErrors() {
+    return this._errors;
+  };
+
+  return SchemaValidationContext;
+}();
+
+function validateRootTypes(context) {
+  var schema = context.schema;
+  var queryType = schema.getQueryType();
+  if (!queryType) {
+    context.reportError('Query root type must be provided.', schema.astNode);
+  } else if (!(0, _definition.isObjectType)(queryType)) {
+    context.reportError('Query root type must be Object type, it cannot be ' + String(queryType) + '.', getOperationTypeNode(schema, queryType, 'query'));
+  }
+
+  var mutationType = schema.getMutationType();
+  if (mutationType && !(0, _definition.isObjectType)(mutationType)) {
+    context.reportError('Mutation root type must be Object type if provided, it cannot be ' + (String(mutationType) + '.'), getOperationTypeNode(schema, mutationType, 'mutation'));
+  }
+
+  var subscriptionType = schema.getSubscriptionType();
+  if (subscriptionType && !(0, _definition.isObjectType)(subscriptionType)) {
+    context.reportError('Subscription root type must be Object type if provided, it cannot be ' + (String(subscriptionType) + '.'), getOperationTypeNode(schema, subscriptionType, 'subscription'));
+  }
+}
+
+function getOperationTypeNode(schema, type, operation) {
+  var astNode = schema.astNode;
+  var operationTypeNode = astNode && astNode.operationTypes.find(function (operationType) {
+    return operationType.operation === operation;
+  });
+  return operationTypeNode ? operationTypeNode.type : type && type.astNode;
+}
+
+function validateDirectives(context) {
+  var directives = context.schema.getDirectives();
+  directives.forEach(function (directive) {
+    // Ensure all directives are in fact GraphQL directives.
+    if (!(0, _directives.isDirective)(directive)) {
+      context.reportError('Expected directive but got: ' + String(directive) + '.', directive && directive.astNode);
+      return;
+    }
+
+    // Ensure they are named correctly.
+    validateName(context, directive);
+
+    // TODO: Ensure proper locations.
+
+    // Ensure the arguments are valid.
+    var argNames = Object.create(null);
+    directive.args.forEach(function (arg) {
+      var argName = arg.name;
+
+      // Ensure they are named correctly.
+      validateName(context, arg);
+
+      // Ensure they are unique per directive.
+      if (argNames[argName]) {
+        context.reportError('Argument @' + directive.name + '(' + argName + ':) can only be defined once.', getAllDirectiveArgNodes(directive, argName));
+        return; // continue loop
+      }
+      argNames[argName] = true;
+
+      // Ensure the type is an input type.
+      if (!(0, _definition.isInputType)(arg.type)) {
+        context.reportError('The type of @' + directive.name + '(' + argName + ':) must be Input Type ' + ('but got: ' + String(arg.type) + '.'), getDirectiveArgTypeNode(directive, argName));
+      }
+    });
+  });
+}
+
+function validateName(context, node) {
+  // If a schema explicitly allows some legacy name which is no longer valid,
+  // allow it to be assumed valid.
+  if (context.schema.__allowedLegacyNames && context.schema.__allowedLegacyNames.indexOf(node.name) !== -1) {
+    return;
+  }
+  // Ensure names are valid, however introspection types opt out.
+  var error = (0, _assertValidName.isValidNameError)(node.name, node.astNode || undefined);
+  if (error) {
+    context.addError(error);
+  }
+}
+
+function validateTypes(context) {
+  var typeMap = context.schema.getTypeMap();
+  (0, _objectValues2.default)(typeMap).forEach(function (type) {
+    // Ensure all provided types are in fact GraphQL type.
+    if (!(0, _definition.isNamedType)(type)) {
+      context.reportError('Expected GraphQL named type but got: ' + String(type) + '.', type && type.astNode);
+      return;
+    }
+
+    // Ensure it is named correctly (excluding introspection types).
+    if (!(0, _introspection.isIntrospectionType)(type)) {
+      validateName(context, type);
+    }
+
+    if ((0, _definition.isObjectType)(type)) {
+      // Ensure fields are valid
+      validateFields(context, type);
+
+      // Ensure objects implement the interfaces they claim to.
+      validateObjectInterfaces(context, type);
+    } else if ((0, _definition.isInterfaceType)(type)) {
+      // Ensure fields are valid.
+      validateFields(context, type);
+    } else if ((0, _definition.isUnionType)(type)) {
+      // Ensure Unions include valid member types.
+      validateUnionMembers(context, type);
+    } else if ((0, _definition.isEnumType)(type)) {
+      // Ensure Enums have valid values.
+      validateEnumValues(context, type);
+    } else if ((0, _definition.isInputObjectType)(type)) {
+      // Ensure Input Object fields are valid.
+      validateInputFields(context, type);
+    }
+  });
+}
+
+function validateFields(context, type) {
+  var fields = (0, _objectValues2.default)(type.getFields());
+
+  // Objects and Interfaces both must define one or more fields.
+  if (fields.length === 0) {
+    context.reportError('Type ' + type.name + ' must define one or more fields.', getAllObjectOrInterfaceNodes(type));
+  }
+
+  fields.forEach(function (field) {
+    // Ensure they are named correctly.
+    validateName(context, field);
+
+    // Ensure they were defined at most once.
+    var fieldNodes = getAllFieldNodes(type, field.name);
+    if (fieldNodes.length > 1) {
+      context.reportError('Field ' + type.name + '.' + field.name + ' can only be defined once.', fieldNodes);
+      return; // continue loop
+    }
+
+    // Ensure the type is an output type
+    if (!(0, _definition.isOutputType)(field.type)) {
+      context.reportError('The type of ' + type.name + '.' + field.name + ' must be Output Type ' + ('but got: ' + String(field.type) + '.'), getFieldTypeNode(type, field.name));
+    }
+
+    // Ensure the arguments are valid
+    var argNames = Object.create(null);
+    field.args.forEach(function (arg) {
+      var argName = arg.name;
+
+      // Ensure they are named correctly.
+      validateName(context, arg);
+
+      // Ensure they are unique per field.
+      if (argNames[argName]) {
+        context.reportError('Field argument ' + type.name + '.' + field.name + '(' + argName + ':) can only ' + 'be defined once.', getAllFieldArgNodes(type, field.name, argName));
+      }
+      argNames[argName] = true;
+
+      // Ensure the type is an input type
+      if (!(0, _definition.isInputType)(arg.type)) {
+        context.reportError('The type of ' + type.name + '.' + field.name + '(' + argName + ':) must be Input ' + ('Type but got: ' + String(arg.type) + '.'), getFieldArgTypeNode(type, field.name, argName));
+      }
+    });
+  });
+}
+
+function validateObjectInterfaces(context, object) {
+  var implementedTypeNames = Object.create(null);
+  object.getInterfaces().forEach(function (iface) {
+    if (!(0, _definition.isInterfaceType)(iface)) {
+      context.reportError('Type ' + String(object) + ' must only implement Interface types, ' + ('it cannot implement ' + String(iface) + '.'), getImplementsInterfaceNode(object, iface));
+      return;
+    }
+
+    if (implementedTypeNames[iface.name]) {
+      context.reportError('Type ' + object.name + ' can only implement ' + iface.name + ' once.', getAllImplementsInterfaceNodes(object, iface));
+      return; // continue loop
+    }
+    implementedTypeNames[iface.name] = true;
+    validateObjectImplementsInterface(context, object, iface);
+  });
+}
+
+function validateObjectImplementsInterface(context, object, iface) {
+  var objectFieldMap = object.getFields();
+  var ifaceFieldMap = iface.getFields();
+
+  // Assert each interface field is implemented.
+  Object.keys(ifaceFieldMap).forEach(function (fieldName) {
+    var objectField = objectFieldMap[fieldName];
+    var ifaceField = ifaceFieldMap[fieldName];
+
+    // Assert interface field exists on object.
+    if (!objectField) {
+      context.reportError('Interface field ' + iface.name + '.' + fieldName + ' expected but ' + (object.name + ' does not provide it.'), [getFieldNode(iface, fieldName), object.astNode]);
+      // Continue loop over fields.
+      return;
+    }
+
+    // Assert interface field type is satisfied by object field type, by being
+    // a valid subtype. (covariant)
+    if (!(0, _typeComparators.isTypeSubTypeOf)(context.schema, objectField.type, ifaceField.type)) {
+      context.reportError('Interface field ' + iface.name + '.' + fieldName + ' expects type ' + (String(ifaceField.type) + ' but ' + object.name + '.' + fieldName + ' ') + ('is type ' + String(objectField.type) + '.'), [getFieldTypeNode(iface, fieldName), getFieldTypeNode(object, fieldName)]);
+    }
+
+    // Assert each interface field arg is implemented.
+    ifaceField.args.forEach(function (ifaceArg) {
+      var argName = ifaceArg.name;
+      var objectArg = (0, _find2.default)(objectField.args, function (arg) {
+        return arg.name === argName;
+      });
+
+      // Assert interface field arg exists on object field.
+      if (!objectArg) {
+        context.reportError('Interface field argument ' + iface.name + '.' + fieldName + '(' + argName + ':) ' + ('expected but ' + object.name + '.' + fieldName + ' does not provide it.'), [getFieldArgNode(iface, fieldName, argName), getFieldNode(object, fieldName)]);
+        // Continue loop over arguments.
+        return;
+      }
+
+      // Assert interface field arg type matches object field arg type.
+      // (invariant)
+      // TODO: change to contravariant?
+      if (!(0, _typeComparators.isEqualType)(ifaceArg.type, objectArg.type)) {
+        context.reportError('Interface field argument ' + iface.name + '.' + fieldName + '(' + argName + ':) ' + ('expects type ' + String(ifaceArg.type) + ' but ') + (object.name + '.' + fieldName + '(' + argName + ':) is type ') + (String(objectArg.type) + '.'), [getFieldArgTypeNode(iface, fieldName, argName), getFieldArgTypeNode(object, fieldName, argName)]);
+      }
+
+      // TODO: validate default values?
+    });
+
+    // Assert additional arguments must not be required.
+    objectField.args.forEach(function (objectArg) {
+      var argName = objectArg.name;
+      var ifaceArg = (0, _find2.default)(ifaceField.args, function (arg) {
+        return arg.name === argName;
+      });
+      if (!ifaceArg && (0, _definition.isNonNullType)(objectArg.type)) {
+        context.reportError('Object field argument ' + object.name + '.' + fieldName + '(' + argName + ':) ' + ('is of required type ' + String(objectArg.type) + ' but is not also ') + ('provided by the Interface field ' + iface.name + '.' + fieldName + '.'), [getFieldArgTypeNode(object, fieldName, argName), getFieldNode(iface, fieldName)]);
+      }
+    });
+  });
+}
+
+function validateUnionMembers(context, union) {
+  var memberTypes = union.getTypes();
+
+  if (memberTypes.length === 0) {
+    context.reportError('Union type ' + union.name + ' must define one or more member types.', union.astNode);
+  }
+
+  var includedTypeNames = Object.create(null);
+  memberTypes.forEach(function (memberType) {
+    if (includedTypeNames[memberType.name]) {
+      context.reportError('Union type ' + union.name + ' can only include type ' + (memberType.name + ' once.'), getUnionMemberTypeNodes(union, memberType.name));
+      return; // continue loop
+    }
+    includedTypeNames[memberType.name] = true;
+    if (!(0, _definition.isObjectType)(memberType)) {
+      context.reportError('Union type ' + union.name + ' can only include Object types, ' + ('it cannot include ' + String(memberType) + '.'), getUnionMemberTypeNodes(union, String(memberType)));
+    }
+  });
+}
+
+function validateEnumValues(context, enumType) {
+  var enumValues = enumType.getValues();
+
+  if (enumValues.length === 0) {
+    context.reportError('Enum type ' + enumType.name + ' must define one or more values.', enumType.astNode);
+  }
+
+  enumValues.forEach(function (enumValue) {
+    var valueName = enumValue.name;
+
+    // Ensure no duplicates.
+    var allNodes = getEnumValueNodes(enumType, valueName);
+    if (allNodes && allNodes.length > 1) {
+      context.reportError('Enum type ' + enumType.name + ' can include value ' + valueName + ' only once.', allNodes);
+    }
+
+    // Ensure valid name.
+    validateName(context, enumValue);
+    if (valueName === 'true' || valueName === 'false' || valueName === 'null') {
+      context.reportError('Enum type ' + enumType.name + ' cannot include value: ' + valueName + '.', enumValue.astNode);
+    }
+  });
+}
+
+function validateInputFields(context, inputObj) {
+  var fields = (0, _objectValues2.default)(inputObj.getFields());
+
+  if (fields.length === 0) {
+    context.reportError('Input Object type ' + inputObj.name + ' must define one or more fields.', inputObj.astNode);
+  }
+
+  // Ensure the arguments are valid
+  fields.forEach(function (field) {
+    // Ensure they are named correctly.
+    validateName(context, field);
+
+    // TODO: Ensure they are unique per field.
+
+    // Ensure the type is an input type
+    if (!(0, _definition.isInputType)(field.type)) {
+      context.reportError('The type of ' + inputObj.name + '.' + field.name + ' must be Input Type ' + ('but got: ' + String(field.type) + '.'), field.astNode && field.astNode.type);
+    }
+  });
+}
+
+function getAllObjectNodes(type) {
+  return type.astNode ? type.extensionASTNodes ? [type.astNode].concat(type.extensionASTNodes) : [type.astNode] : type.extensionASTNodes || [];
+}
+
+function getAllObjectOrInterfaceNodes(type) {
+  return type.astNode ? type.extensionASTNodes ? [type.astNode].concat(type.extensionASTNodes) : [type.astNode] : type.extensionASTNodes || [];
+}
+
+function getImplementsInterfaceNode(type, iface) {
+  return getAllImplementsInterfaceNodes(type, iface)[0];
+}
+
+function getAllImplementsInterfaceNodes(type, iface) {
+  var implementsNodes = [];
+  var astNodes = getAllObjectNodes(type);
+  for (var i = 0; i < astNodes.length; i++) {
+    var _astNode = astNodes[i];
+    if (_astNode && _astNode.interfaces) {
+      _astNode.interfaces.forEach(function (node) {
+        if (node.name.value === iface.name) {
+          implementsNodes.push(node);
+        }
+      });
+    }
+  }
+  return implementsNodes;
+}
+
+function getFieldNode(type, fieldName) {
+  return getAllFieldNodes(type, fieldName)[0];
+}
+
+function getAllFieldNodes(type, fieldName) {
+  var fieldNodes = [];
+  var astNodes = getAllObjectOrInterfaceNodes(type);
+  for (var i = 0; i < astNodes.length; i++) {
+    var _astNode2 = astNodes[i];
+    if (_astNode2 && _astNode2.fields) {
+      _astNode2.fields.forEach(function (node) {
+        if (node.name.value === fieldName) {
+          fieldNodes.push(node);
+        }
+      });
+    }
+  }
+  return fieldNodes;
+}
+
+function getFieldTypeNode(type, fieldName) {
+  var fieldNode = getFieldNode(type, fieldName);
+  return fieldNode && fieldNode.type;
+}
+
+function getFieldArgNode(type, fieldName, argName) {
+  return getAllFieldArgNodes(type, fieldName, argName)[0];
+}
+
+function getAllFieldArgNodes(type, fieldName, argName) {
+  var argNodes = [];
+  var fieldNode = getFieldNode(type, fieldName);
+  if (fieldNode && fieldNode.arguments) {
+    fieldNode.arguments.forEach(function (node) {
+      if (node.name.value === argName) {
+        argNodes.push(node);
+      }
+    });
+  }
+  return argNodes;
+}
+
+function getFieldArgTypeNode(type, fieldName, argName) {
+  var fieldArgNode = getFieldArgNode(type, fieldName, argName);
+  return fieldArgNode && fieldArgNode.type;
+}
+
+function getAllDirectiveArgNodes(directive, argName) {
+  var argNodes = [];
+  var directiveNode = directive.astNode;
+  if (directiveNode && directiveNode.arguments) {
+    directiveNode.arguments.forEach(function (node) {
+      if (node.name.value === argName) {
+        argNodes.push(node);
+      }
+    });
+  }
+  return argNodes;
+}
+
+function getDirectiveArgTypeNode(directive, argName) {
+  var argNode = getAllDirectiveArgNodes(directive, argName)[0];
+  return argNode && argNode.type;
+}
+
+function getUnionMemberTypeNodes(union, typeName) {
+  return union.astNode && union.astNode.types && union.astNode.types.filter(function (type) {
+    return type.name.value === typeName;
+  });
+}
+
+function getEnumValueNodes(enumType, valueName) {
+  return enumType.astNode && enumType.astNode.values && enumType.astNode.values.filter(function (value) {
+    return value.name.value === valueName;
+  });
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = keyValMap;
+
+
+/**
+ * Creates a keyed JS object from an array, given a function to produce the keys
+ * and a function to produce the values from each item in the array.
+ *
+ *     const phoneBook = [
+ *       { name: 'Jon', num: '555-1234' },
+ *       { name: 'Jenny', num: '867-5309' }
+ *     ]
+ *
+ *     // { Jon: '555-1234', Jenny: '867-5309' }
+ *     const phonesByName = keyValMap(
+ *       phoneBook,
+ *       entry => entry.name,
+ *       entry => entry.num
+ *     )
+ *
+ */
+function keyValMap(list, keyFn, valFn) {
+  return list.reduce(function (map, item) {
+    return map[keyFn(item)] = valFn(item), map;
+  }, Object.create(null));
+} /**
+   * Copyright (c) 2015-present, Facebook, Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   *
+   *  strict
+   */
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isNullish;
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+/**
+ * Returns true if a value is null, undefined, or NaN.
+ */
+function isNullish(value) {
+  return value === null || value === undefined || value !== value;
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isEqualType = isEqualType;
+exports.isTypeSubTypeOf = isTypeSubTypeOf;
+exports.doTypesOverlap = doTypesOverlap;
+
+var _definition = __webpack_require__(3);
+
+/**
+ * Provided two types, return true if the types are equal (invariant).
+ */
+function isEqualType(typeA, typeB) {
+  // Equivalent types are equal.
+  if (typeA === typeB) {
+    return true;
+  }
+
+  // If either type is non-null, the other must also be non-null.
+  if ((0, _definition.isNonNullType)(typeA) && (0, _definition.isNonNullType)(typeB)) {
+    return isEqualType(typeA.ofType, typeB.ofType);
+  }
+
+  // If either type is a list, the other must also be a list.
+  if ((0, _definition.isListType)(typeA) && (0, _definition.isListType)(typeB)) {
+    return isEqualType(typeA.ofType, typeB.ofType);
+  }
+
+  // Otherwise the types are not equal.
+  return false;
+}
+
+/**
+ * Provided a type and a super type, return true if the first type is either
+ * equal or a subset of the second super type (covariant).
+ */
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+function isTypeSubTypeOf(schema, maybeSubType, superType) {
+  // Equivalent type is a valid subtype
+  if (maybeSubType === superType) {
+    return true;
+  }
+
+  // If superType is non-null, maybeSubType must also be non-null.
+  if ((0, _definition.isNonNullType)(superType)) {
+    if ((0, _definition.isNonNullType)(maybeSubType)) {
+      return isTypeSubTypeOf(schema, maybeSubType.ofType, superType.ofType);
+    }
+    return false;
+  }
+  if ((0, _definition.isNonNullType)(maybeSubType)) {
+    // If superType is nullable, maybeSubType may be non-null or nullable.
+    return isTypeSubTypeOf(schema, maybeSubType.ofType, superType);
+  }
+
+  // If superType type is a list, maybeSubType type must also be a list.
+  if ((0, _definition.isListType)(superType)) {
+    if ((0, _definition.isListType)(maybeSubType)) {
+      return isTypeSubTypeOf(schema, maybeSubType.ofType, superType.ofType);
+    }
+    return false;
+  }
+  if ((0, _definition.isListType)(maybeSubType)) {
+    // If superType is not a list, maybeSubType must also be not a list.
+    return false;
+  }
+
+  // If superType type is an abstract type, maybeSubType type may be a currently
+  // possible object type.
+  if ((0, _definition.isAbstractType)(superType) && (0, _definition.isObjectType)(maybeSubType) && schema.isPossibleType(superType, maybeSubType)) {
+    return true;
+  }
+
+  // Otherwise, the child type is not a valid subtype of the parent type.
+  return false;
+}
+
+/**
+ * Provided two composite types, determine if they "overlap". Two composite
+ * types overlap when the Sets of possible concrete types for each intersect.
+ *
+ * This is often used to determine if a fragment of a given type could possibly
+ * be visited in a context of another type.
+ *
+ * This function is commutative.
+ */
+function doTypesOverlap(schema, typeA, typeB) {
+  // Equivalent types overlap
+  if (typeA === typeB) {
+    return true;
+  }
+
+  if ((0, _definition.isAbstractType)(typeA)) {
+    if ((0, _definition.isAbstractType)(typeB)) {
+      // If both types are abstract, then determine if there is any intersection
+      // between possible concrete types of each.
+      return schema.getPossibleTypes(typeA).some(function (type) {
+        return schema.isPossibleType(typeB, type);
+      });
+    }
+    // Determine if the latter type is a possible concrete type of the former.
+    return schema.isPossibleType(typeA, typeB);
+  }
+
+  if ((0, _definition.isAbstractType)(typeB)) {
+    // Determine if the former type is a possible concrete type of the latter.
+    return schema.isPossibleType(typeB, typeA);
+  }
+
+  // Otherwise the types do not overlap.
+  return false;
+}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.defaultFieldResolver = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
+                                                                                                                                                                                                                                                                               * Copyright (c) 2015-present, Facebook, Inc.
+                                                                                                                                                                                                                                                                               *
+                                                                                                                                                                                                                                                                               * This source code is licensed under the MIT license found in the
+                                                                                                                                                                                                                                                                               * LICENSE file in the root directory of this source tree.
+                                                                                                                                                                                                                                                                               *
+                                                                                                                                                                                                                                                                               *  strict
+                                                                                                                                                                                                                                                                               */
+
+exports.execute = execute;
+exports.responsePathAsArray = responsePathAsArray;
+exports.addPath = addPath;
+exports.assertValidExecutionArguments = assertValidExecutionArguments;
+exports.buildExecutionContext = buildExecutionContext;
+exports.getOperationRootType = getOperationRootType;
+exports.collectFields = collectFields;
+exports.buildResolveInfo = buildResolveInfo;
+exports.resolveFieldValueOrError = resolveFieldValueOrError;
+exports.getFieldDef = getFieldDef;
+
+var _iterall = __webpack_require__(41);
+
+var _error = __webpack_require__(2);
+
+var _invariant = __webpack_require__(10);
+
+var _invariant2 = _interopRequireDefault(_invariant);
+
+var _isInvalid = __webpack_require__(17);
+
+var _isInvalid2 = _interopRequireDefault(_isInvalid);
+
+var _isNullish = __webpack_require__(60);
+
+var _isNullish2 = _interopRequireDefault(_isNullish);
+
+var _isPromise = __webpack_require__(198);
+
+var _isPromise2 = _interopRequireDefault(_isPromise);
+
+var _memoize = __webpack_require__(568);
+
+var _memoize2 = _interopRequireDefault(_memoize);
+
+var _promiseForObject = __webpack_require__(569);
+
+var _promiseForObject2 = _interopRequireDefault(_promiseForObject);
+
+var _promiseReduce = __webpack_require__(570);
+
+var _promiseReduce2 = _interopRequireDefault(_promiseReduce);
+
+var _typeFromAST = __webpack_require__(22);
+
+var _kinds = __webpack_require__(4);
+
+var _values = __webpack_require__(95);
+
+var _definition = __webpack_require__(3);
+
+var _schema = __webpack_require__(7);
+
+var _introspection = __webpack_require__(19);
+
+var _directives = __webpack_require__(18);
+
+var _validate = __webpack_require__(58);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Terminology
+ *
+ * "Definitions" are the generic name for top-level statements in the document.
+ * Examples of this include:
+ * 1) Operations (such as a query)
+ * 2) Fragments
+ *
+ * "Operations" are a generic name for requests in the document.
+ * Examples of this include:
+ * 1) query,
+ * 2) mutation
+ *
+ * "Selections" are the definitions that can appear legally and at
+ * single level of the query. These include:
+ * 1) field references e.g "a"
+ * 2) fragment "spreads" e.g. "...c"
+ * 3) inline fragment "spreads" e.g. "...on Type { a }"
+ */
+
+/**
+ * Data that must be available at all points during query execution.
+ *
+ * Namely, schema of the type system that is currently executing,
+ * and the fragments defined in the query document
+ */
+
+
+/**
+ * The result of GraphQL execution.
+ *
+ *   - `errors` is included when any errors occurred as a non-empty array.
+ *   - `data` is the result of a successful execution of the query.
+ */
+
+
+/**
+ * Implements the "Evaluating requests" section of the GraphQL specification.
+ *
+ * Returns either a synchronous ExecutionResult (if all encountered resolvers
+ * are synchronous), or a Promise of an ExecutionResult that will eventually be
+ * resolved and never rejected.
+ *
+ * If the arguments to this function do not result in a legal execution context,
+ * a GraphQLError will be thrown immediately explaining the invalid input.
+ *
+ * Accepts either an object with named arguments, or individual arguments.
+ */
+
+/* eslint-disable no-redeclare */
+function execute(argsOrSchema, document, rootValue, contextValue, variableValues, operationName, fieldResolver) {
+  /* eslint-enable no-redeclare */
+  // Extract arguments from object args if provided.
+  return arguments.length === 1 ? executeImpl(argsOrSchema.schema, argsOrSchema.document, argsOrSchema.rootValue, argsOrSchema.contextValue, argsOrSchema.variableValues, argsOrSchema.operationName, argsOrSchema.fieldResolver) : executeImpl(argsOrSchema, document, rootValue, contextValue, variableValues, operationName, fieldResolver);
+}
+
+function executeImpl(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver) {
+  // If arguments are missing or incorrect, throw an error.
+  assertValidExecutionArguments(schema, document, variableValues);
+
+  // If a valid context cannot be created due to incorrect arguments,
+  // a "Response" with only errors is returned.
+  var context = buildExecutionContext(schema, document, rootValue, contextValue, variableValues, operationName, fieldResolver);
+
+  // Return early errors if execution context failed.
+  if (Array.isArray(context)) {
+    return { errors: context };
+  }
+
+  // Return a Promise that will eventually resolve to the data described by
+  // The "Response" section of the GraphQL specification.
+  //
+  // If errors are encountered while executing a GraphQL field, only that
+  // field and its descendants will be omitted, and sibling fields will still
+  // be executed. An execution which encounters errors will still result in a
+  // resolved Promise.
+  var data = executeOperation(context, context.operation, rootValue);
+  return buildResponse(context, data);
+}
+
+/**
+ * Given a completed execution context and data, build the { errors, data }
+ * response defined by the "Response" section of the GraphQL specification.
+ */
+function buildResponse(context, data) {
+  if ((0, _isPromise2.default)(data)) {
+    return data.then(function (resolved) {
+      return buildResponse(context, resolved);
+    });
+  }
+  return context.errors.length === 0 ? { data: data } : { errors: context.errors, data: data };
+}
+
+/**
+ * Given a ResponsePath (found in the `path` entry in the information provided
+ * as the last argument to a field resolver), return an Array of the path keys.
+ */
+function responsePathAsArray(path) {
+  var flattened = [];
+  var curr = path;
+  while (curr) {
+    flattened.push(curr.key);
+    curr = curr.prev;
+  }
+  return flattened.reverse();
+}
+
+/**
+ * Given a ResponsePath and a key, return a new ResponsePath containing the
+ * new key.
+ */
+function addPath(prev, key) {
+  return { prev: prev, key: key };
+}
+
+/**
+ * Essential assertions before executing to provide developer feedback for
+ * improper use of the GraphQL library.
+ */
+function assertValidExecutionArguments(schema, document, rawVariableValues) {
+  !document ? (0, _invariant2.default)(0, 'Must provide document') : void 0;
+
+  // If the schema used for execution is invalid, throw an error.
+  (0, _validate.assertValidSchema)(schema);
+
+  // Variables, if provided, must be an object.
+  !(!rawVariableValues || (typeof rawVariableValues === 'undefined' ? 'undefined' : _typeof(rawVariableValues)) === 'object') ? (0, _invariant2.default)(0, 'Variables must be provided as an Object where each property is a ' + 'variable value. Perhaps look to see if an unparsed JSON string ' + 'was provided.') : void 0;
+}
+
+/**
+ * Constructs a ExecutionContext object from the arguments passed to
+ * execute, which we will pass throughout the other execution methods.
+ *
+ * Throws a GraphQLError if a valid execution context cannot be created.
+ */
+function buildExecutionContext(schema, document, rootValue, contextValue, rawVariableValues, operationName, fieldResolver) {
+  var errors = [];
+  var operation = void 0;
+  var hasMultipleAssumedOperations = false;
+  var fragments = Object.create(null);
+  for (var i = 0; i < document.definitions.length; i++) {
+    var definition = document.definitions[i];
+    switch (definition.kind) {
+      case _kinds.Kind.OPERATION_DEFINITION:
+        if (!operationName && operation) {
+          hasMultipleAssumedOperations = true;
+        } else if (!operationName || definition.name && definition.name.value === operationName) {
+          operation = definition;
+        }
+        break;
+      case _kinds.Kind.FRAGMENT_DEFINITION:
+        fragments[definition.name.value] = definition;
+        break;
+    }
+  }
+
+  if (!operation) {
+    if (operationName) {
+      errors.push(new _error.GraphQLError('Unknown operation named "' + operationName + '".'));
+    } else {
+      errors.push(new _error.GraphQLError('Must provide an operation.'));
+    }
+  } else if (hasMultipleAssumedOperations) {
+    errors.push(new _error.GraphQLError('Must provide operation name if query contains ' + 'multiple operations.'));
+  }
+
+  var variableValues = void 0;
+  if (operation) {
+    var coercedVariableValues = (0, _values.getVariableValues)(schema, operation.variableDefinitions || [], rawVariableValues || {});
+
+    if (coercedVariableValues.errors) {
+      errors.push.apply(errors, coercedVariableValues.errors);
+    } else {
+      variableValues = coercedVariableValues.coerced;
+    }
+  }
+
+  if (errors.length !== 0) {
+    return errors;
+  }
+
+  !operation ? (0, _invariant2.default)(0, 'Has operation if no errors.') : void 0;
+  !variableValues ? (0, _invariant2.default)(0, 'Has variables if no errors.') : void 0;
+
+  return {
+    schema: schema,
+    fragments: fragments,
+    rootValue: rootValue,
+    contextValue: contextValue,
+    operation: operation,
+    variableValues: variableValues,
+    fieldResolver: fieldResolver || defaultFieldResolver,
+    errors: errors
+  };
+}
+
+/**
+ * Implements the "Evaluating operations" section of the spec.
+ */
+function executeOperation(exeContext, operation, rootValue) {
+  var type = getOperationRootType(exeContext.schema, operation);
+  var fields = collectFields(exeContext, type, operation.selectionSet, Object.create(null), Object.create(null));
+
+  var path = undefined;
+
+  // Errors from sub-fields of a NonNull type may propagate to the top level,
+  // at which point we still log the error and null the parent field, which
+  // in this case is the entire response.
+  //
+  // Similar to completeValueCatchingError.
+  try {
+    var result = operation.operation === 'mutation' ? executeFieldsSerially(exeContext, type, rootValue, path, fields) : executeFields(exeContext, type, rootValue, path, fields);
+    if ((0, _isPromise2.default)(result)) {
+      return result.then(undefined, function (error) {
+        exeContext.errors.push(error);
+        return Promise.resolve(null);
+      });
+    }
+    return result;
+  } catch (error) {
+    exeContext.errors.push(error);
+    return null;
+  }
+}
+
+/**
+ * Extracts the root type of the operation from the schema.
+ */
+function getOperationRootType(schema, operation) {
+  switch (operation.operation) {
+    case 'query':
+      var queryType = schema.getQueryType();
+      if (!queryType) {
+        throw new _error.GraphQLError('Schema does not define the required query root type.', [operation]);
+      }
+      return queryType;
+    case 'mutation':
+      var mutationType = schema.getMutationType();
+      if (!mutationType) {
+        throw new _error.GraphQLError('Schema is not configured for mutations.', [operation]);
+      }
+      return mutationType;
+    case 'subscription':
+      var subscriptionType = schema.getSubscriptionType();
+      if (!subscriptionType) {
+        throw new _error.GraphQLError('Schema is not configured for subscriptions.', [operation]);
+      }
+      return subscriptionType;
+    default:
+      throw new _error.GraphQLError('Can only execute queries, mutations and subscriptions.', [operation]);
+  }
+}
+
+/**
+ * Implements the "Evaluating selection sets" section of the spec
+ * for "write" mode.
+ */
+function executeFieldsSerially(exeContext, parentType, sourceValue, path, fields) {
+  return (0, _promiseReduce2.default)(Object.keys(fields), function (results, responseName) {
+    var fieldNodes = fields[responseName];
+    var fieldPath = addPath(path, responseName);
+    var result = resolveField(exeContext, parentType, sourceValue, fieldNodes, fieldPath);
+    if (result === undefined) {
+      return results;
+    }
+    if ((0, _isPromise2.default)(result)) {
+      return result.then(function (resolvedResult) {
+        results[responseName] = resolvedResult;
+        return results;
+      });
+    }
+    results[responseName] = result;
+    return results;
+  }, Object.create(null));
+}
+
+/**
+ * Implements the "Evaluating selection sets" section of the spec
+ * for "read" mode.
+ */
+function executeFields(exeContext, parentType, sourceValue, path, fields) {
+  var containsPromise = false;
+
+  var finalResults = Object.keys(fields).reduce(function (results, responseName) {
+    var fieldNodes = fields[responseName];
+    var fieldPath = addPath(path, responseName);
+    var result = resolveField(exeContext, parentType, sourceValue, fieldNodes, fieldPath);
+    if (result === undefined) {
+      return results;
+    }
+    results[responseName] = result;
+    if (!containsPromise && (0, _isPromise2.default)(result)) {
+      containsPromise = true;
+    }
+    return results;
+  }, Object.create(null));
+
+  // If there are no promises, we can just return the object
+  if (!containsPromise) {
+    return finalResults;
+  }
+
+  // Otherwise, results is a map from field name to the result
+  // of resolving that field, which is possibly a promise. Return
+  // a promise that will return this same map, but with any
+  // promises replaced with the values they resolved to.
+  return (0, _promiseForObject2.default)(finalResults);
+}
+
+/**
+ * Given a selectionSet, adds all of the fields in that selection to
+ * the passed in map of fields, and returns it at the end.
+ *
+ * CollectFields requires the "runtime type" of an object. For a field which
+ * returns an Interface or Union type, the "runtime type" will be the actual
+ * Object type returned by that field.
+ */
+function collectFields(exeContext, runtimeType, selectionSet, fields, visitedFragmentNames) {
+  for (var i = 0; i < selectionSet.selections.length; i++) {
+    var selection = selectionSet.selections[i];
+    switch (selection.kind) {
+      case _kinds.Kind.FIELD:
+        if (!shouldIncludeNode(exeContext, selection)) {
+          continue;
+        }
+        var name = getFieldEntryKey(selection);
+        if (!fields[name]) {
+          fields[name] = [];
+        }
+        fields[name].push(selection);
+        break;
+      case _kinds.Kind.INLINE_FRAGMENT:
+        if (!shouldIncludeNode(exeContext, selection) || !doesFragmentConditionMatch(exeContext, selection, runtimeType)) {
+          continue;
+        }
+        collectFields(exeContext, runtimeType, selection.selectionSet, fields, visitedFragmentNames);
+        break;
+      case _kinds.Kind.FRAGMENT_SPREAD:
+        var fragName = selection.name.value;
+        if (visitedFragmentNames[fragName] || !shouldIncludeNode(exeContext, selection)) {
+          continue;
+        }
+        visitedFragmentNames[fragName] = true;
+        var fragment = exeContext.fragments[fragName];
+        if (!fragment || !doesFragmentConditionMatch(exeContext, fragment, runtimeType)) {
+          continue;
+        }
+        collectFields(exeContext, runtimeType, fragment.selectionSet, fields, visitedFragmentNames);
+        break;
+    }
+  }
+  return fields;
+}
+
+/**
+ * Determines if a field should be included based on the @include and @skip
+ * directives, where @skip has higher precidence than @include.
+ */
+function shouldIncludeNode(exeContext, node) {
+  var skip = (0, _values.getDirectiveValues)(_directives.GraphQLSkipDirective, node, exeContext.variableValues);
+  if (skip && skip.if === true) {
+    return false;
+  }
+
+  var include = (0, _values.getDirectiveValues)(_directives.GraphQLIncludeDirective, node, exeContext.variableValues);
+  if (include && include.if === false) {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Determines if a fragment is applicable to the given type.
+ */
+function doesFragmentConditionMatch(exeContext, fragment, type) {
+  var typeConditionNode = fragment.typeCondition;
+  if (!typeConditionNode) {
+    return true;
+  }
+  var conditionalType = (0, _typeFromAST.typeFromAST)(exeContext.schema, typeConditionNode);
+  if (conditionalType === type) {
+    return true;
+  }
+  if ((0, _definition.isAbstractType)(conditionalType)) {
+    return exeContext.schema.isPossibleType(conditionalType, type);
+  }
+  return false;
+}
+
+/**
+ * Implements the logic to compute the key of a given field's entry
+ */
+function getFieldEntryKey(node) {
+  return node.alias ? node.alias.value : node.name.value;
+}
+
+/**
+ * Resolves the field on the given source object. In particular, this
+ * figures out the value that the field returns by calling its resolve function,
+ * then calls completeValue to complete promises, serialize scalars, or execute
+ * the sub-selection-set for objects.
+ */
+function resolveField(exeContext, parentType, source, fieldNodes, path) {
+  var fieldNode = fieldNodes[0];
+  var fieldName = fieldNode.name.value;
+
+  var fieldDef = getFieldDef(exeContext.schema, parentType, fieldName);
+  if (!fieldDef) {
+    return;
+  }
+
+  var resolveFn = fieldDef.resolve || exeContext.fieldResolver;
+
+  var info = buildResolveInfo(exeContext, fieldDef, fieldNodes, parentType, path);
+
+  // Get the resolve function, regardless of if its result is normal
+  // or abrupt (error).
+  var result = resolveFieldValueOrError(exeContext, fieldDef, fieldNodes, resolveFn, source, info);
+
+  return completeValueCatchingError(exeContext, fieldDef.type, fieldNodes, info, path, result);
+}
+
+function buildResolveInfo(exeContext, fieldDef, fieldNodes, parentType, path) {
+  // The resolve function's optional fourth argument is a collection of
+  // information about the current execution state.
+  return {
+    fieldName: fieldNodes[0].name.value,
+    fieldNodes: fieldNodes,
+    returnType: fieldDef.type,
+    parentType: parentType,
+    path: path,
+    schema: exeContext.schema,
+    fragments: exeContext.fragments,
+    rootValue: exeContext.rootValue,
+    operation: exeContext.operation,
+    variableValues: exeContext.variableValues
+  };
+}
+
+// Isolates the "ReturnOrAbrupt" behavior to not de-opt the `resolveField`
+// function. Returns the result of resolveFn or the abrupt-return Error object.
+function resolveFieldValueOrError(exeContext, fieldDef, fieldNodes, resolveFn, source, info) {
+  try {
+    // Build a JS object of arguments from the field.arguments AST, using the
+    // variables scope to fulfill any variable references.
+    // TODO: find a way to memoize, in case this field is within a List type.
+    var args = (0, _values.getArgumentValues)(fieldDef, fieldNodes[0], exeContext.variableValues);
+
+    // The resolve function's optional third argument is a context value that
+    // is provided to every resolve function within an execution. It is commonly
+    // used to represent an authenticated user, or request-specific caches.
+    var context = exeContext.contextValue;
+
+    var result = resolveFn(source, args, context, info);
+    return (0, _isPromise2.default)(result) ? result.then(undefined, asErrorInstance) : result;
+  } catch (error) {
+    return asErrorInstance(error);
+  }
+}
+
+// Sometimes a non-error is thrown, wrap it as an Error instance to ensure a
+// consistent Error interface.
+function asErrorInstance(error) {
+  return error instanceof Error ? error : new Error(error || undefined);
+}
+
+// This is a small wrapper around completeValue which detects and logs errors
+// in the execution context.
+function completeValueCatchingError(exeContext, returnType, fieldNodes, info, path, result) {
+  // If the field type is non-nullable, then it is resolved without any
+  // protection from errors, however it still properly locates the error.
+  if ((0, _definition.isNonNullType)(returnType)) {
+    return completeValueWithLocatedError(exeContext, returnType, fieldNodes, info, path, result);
+  }
+
+  // Otherwise, error protection is applied, logging the error and resolving
+  // a null value for this field if one is encountered.
+  try {
+    var completed = completeValueWithLocatedError(exeContext, returnType, fieldNodes, info, path, result);
+    if ((0, _isPromise2.default)(completed)) {
+      // If `completeValueWithLocatedError` returned a rejected promise, log
+      // the rejection error and resolve to null.
+      // Note: we don't rely on a `catch` method, but we do expect "thenable"
+      // to take a second callback for the error case.
+      return completed.then(undefined, function (error) {
+        exeContext.errors.push(error);
+        return Promise.resolve(null);
+      });
+    }
+    return completed;
+  } catch (error) {
+    // If `completeValueWithLocatedError` returned abruptly (threw an error),
+    // log the error and return null.
+    exeContext.errors.push(error);
+    return null;
+  }
+}
+
+// This is a small wrapper around completeValue which annotates errors with
+// location information.
+function completeValueWithLocatedError(exeContext, returnType, fieldNodes, info, path, result) {
+  try {
+    var completed = completeValue(exeContext, returnType, fieldNodes, info, path, result);
+    if ((0, _isPromise2.default)(completed)) {
+      return completed.then(undefined, function (error) {
+        return Promise.reject((0, _error.locatedError)(asErrorInstance(error), fieldNodes, responsePathAsArray(path)));
+      });
+    }
+    return completed;
+  } catch (error) {
+    throw (0, _error.locatedError)(asErrorInstance(error), fieldNodes, responsePathAsArray(path));
+  }
+}
+
+/**
+ * Implements the instructions for completeValue as defined in the
+ * "Field entries" section of the spec.
+ *
+ * If the field type is Non-Null, then this recursively completes the value
+ * for the inner type. It throws a field error if that completion returns null,
+ * as per the "Nullability" section of the spec.
+ *
+ * If the field type is a List, then this recursively completes the value
+ * for the inner type on each item in the list.
+ *
+ * If the field type is a Scalar or Enum, ensures the completed value is a legal
+ * value of the type by calling the `serialize` method of GraphQL type
+ * definition.
+ *
+ * If the field is an abstract type, determine the runtime type of the value
+ * and then complete based on that type
+ *
+ * Otherwise, the field type expects a sub-selection set, and will complete the
+ * value by evaluating all sub-selections.
+ */
+function completeValue(exeContext, returnType, fieldNodes, info, path, result) {
+  // If result is a Promise, apply-lift over completeValue.
+  if ((0, _isPromise2.default)(result)) {
+    return result.then(function (resolved) {
+      return completeValue(exeContext, returnType, fieldNodes, info, path, resolved);
+    });
+  }
+
+  // If result is an Error, throw a located error.
+  if (result instanceof Error) {
+    throw result;
+  }
+
+  // If field type is NonNull, complete for inner type, and throw field error
+  // if result is null.
+  if ((0, _definition.isNonNullType)(returnType)) {
+    var completed = completeValue(exeContext, returnType.ofType, fieldNodes, info, path, result);
+    if (completed === null) {
+      throw new Error('Cannot return null for non-nullable field ' + info.parentType.name + '.' + info.fieldName + '.');
+    }
+    return completed;
+  }
+
+  // If result value is null-ish (null, undefined, or NaN) then return null.
+  if ((0, _isNullish2.default)(result)) {
+    return null;
+  }
+
+  // If field type is List, complete each item in the list with the inner type
+  if ((0, _definition.isListType)(returnType)) {
+    return completeListValue(exeContext, returnType, fieldNodes, info, path, result);
+  }
+
+  // If field type is a leaf type, Scalar or Enum, serialize to a valid value,
+  // returning null if serialization is not possible.
+  if ((0, _definition.isLeafType)(returnType)) {
+    return completeLeafValue(returnType, result);
+  }
+
+  // If field type is an abstract type, Interface or Union, determine the
+  // runtime Object type and complete for that type.
+  if ((0, _definition.isAbstractType)(returnType)) {
+    return completeAbstractValue(exeContext, returnType, fieldNodes, info, path, result);
+  }
+
+  // If field type is Object, execute and complete all sub-selections.
+  if ((0, _definition.isObjectType)(returnType)) {
+    return completeObjectValue(exeContext, returnType, fieldNodes, info, path, result);
+  }
+
+  // Not reachable. All possible output types have been considered.
+  /* istanbul ignore next */
+  throw new Error('Cannot complete value of unexpected type "' + String(returnType) + '".');
+}
+
+/**
+ * Complete a list value by completing each item in the list with the
+ * inner type
+ */
+function completeListValue(exeContext, returnType, fieldNodes, info, path, result) {
+  !(0, _iterall.isCollection)(result) ? (0, _invariant2.default)(0, 'Expected Iterable, but did not find one for field ' + info.parentType.name + '.' + info.fieldName + '.') : void 0;
+
+  // This is specified as a simple map, however we're optimizing the path
+  // where the list contains no Promises by avoiding creating another Promise.
+  var itemType = returnType.ofType;
+  var containsPromise = false;
+  var completedResults = [];
+  (0, _iterall.forEach)(result, function (item, index) {
+    // No need to modify the info object containing the path,
+    // since from here on it is not ever accessed by resolver functions.
+    var fieldPath = addPath(path, index);
+    var completedItem = completeValueCatchingError(exeContext, itemType, fieldNodes, info, fieldPath, item);
+
+    if (!containsPromise && (0, _isPromise2.default)(completedItem)) {
+      containsPromise = true;
+    }
+    completedResults.push(completedItem);
+  });
+
+  return containsPromise ? Promise.all(completedResults) : completedResults;
+}
+
+/**
+ * Complete a Scalar or Enum by serializing to a valid value, returning
+ * null if serialization is not possible.
+ */
+function completeLeafValue(returnType, result) {
+  !returnType.serialize ? (0, _invariant2.default)(0, 'Missing serialize method on type') : void 0;
+  var serializedResult = returnType.serialize(result);
+  if ((0, _isInvalid2.default)(serializedResult)) {
+    throw new Error('Expected a value of type "' + String(returnType) + '" but ' + ('received: ' + String(result)));
+  }
+  return serializedResult;
+}
+
+/**
+ * Complete a value of an abstract type by determining the runtime object type
+ * of that value, then complete the value for that type.
+ */
+function completeAbstractValue(exeContext, returnType, fieldNodes, info, path, result) {
+  var runtimeType = returnType.resolveType ? returnType.resolveType(result, exeContext.contextValue, info) : defaultResolveTypeFn(result, exeContext.contextValue, info, returnType);
+
+  if ((0, _isPromise2.default)(runtimeType)) {
+    return runtimeType.then(function (resolvedRuntimeType) {
+      return completeObjectValue(exeContext, ensureValidRuntimeType(resolvedRuntimeType, exeContext, returnType, fieldNodes, info, result), fieldNodes, info, path, result);
+    });
+  }
+
+  return completeObjectValue(exeContext, ensureValidRuntimeType(runtimeType, exeContext, returnType, fieldNodes, info, result), fieldNodes, info, path, result);
+}
+
+function ensureValidRuntimeType(runtimeTypeOrName, exeContext, returnType, fieldNodes, info, result) {
+  var runtimeType = typeof runtimeTypeOrName === 'string' ? exeContext.schema.getType(runtimeTypeOrName) : runtimeTypeOrName;
+
+  if (!(0, _definition.isObjectType)(runtimeType)) {
+    throw new _error.GraphQLError('Abstract type ' + returnType.name + ' must resolve to an Object type at ' + ('runtime for field ' + info.parentType.name + '.' + info.fieldName + ' with ') + ('value "' + String(result) + '", received "' + String(runtimeType) + '". ') + ('Either the ' + returnType.name + ' type should provide a "resolveType" ') + 'function or each possible types should provide an ' + '"isTypeOf" function.', fieldNodes);
+  }
+
+  if (!exeContext.schema.isPossibleType(returnType, runtimeType)) {
+    throw new _error.GraphQLError('Runtime Object type "' + runtimeType.name + '" is not a possible type ' + ('for "' + returnType.name + '".'), fieldNodes);
+  }
+
+  return runtimeType;
+}
+
+/**
+ * Complete an Object value by executing all sub-selections.
+ */
+function completeObjectValue(exeContext, returnType, fieldNodes, info, path, result) {
+  // If there is an isTypeOf predicate function, call it with the
+  // current result. If isTypeOf returns false, then raise an error rather
+  // than continuing execution.
+  if (returnType.isTypeOf) {
+    var isTypeOf = returnType.isTypeOf(result, exeContext.contextValue, info);
+
+    if ((0, _isPromise2.default)(isTypeOf)) {
+      return isTypeOf.then(function (resolvedIsTypeOf) {
+        if (!resolvedIsTypeOf) {
+          throw invalidReturnTypeError(returnType, result, fieldNodes);
+        }
+        return collectAndExecuteSubfields(exeContext, returnType, fieldNodes, info, path, result);
+      });
+    }
+
+    if (!isTypeOf) {
+      throw invalidReturnTypeError(returnType, result, fieldNodes);
+    }
+  }
+
+  return collectAndExecuteSubfields(exeContext, returnType, fieldNodes, info, path, result);
+}
+
+function invalidReturnTypeError(returnType, result, fieldNodes) {
+  return new _error.GraphQLError('Expected value of type "' + returnType.name + '" but got: ' + String(result) + '.', fieldNodes);
+}
+
+function collectAndExecuteSubfields(exeContext, returnType, fieldNodes, info, path, result) {
+  // Collect sub-fields to execute to complete this value.
+  var subFieldNodes = collectSubfields(exeContext, returnType, fieldNodes);
+  return executeFields(exeContext, returnType, result, path, subFieldNodes);
+}
+
+/**
+ * A memoized collection of relevant subfields in the context of the return
+ * type. Memoizing ensures the subfields are not repeatedly calculated, which
+ * saves overhead when resolving lists of values.
+ */
+var collectSubfields = (0, _memoize2.default)(_collectSubfields);
+function _collectSubfields(exeContext, returnType, fieldNodes) {
+  var subFieldNodes = Object.create(null);
+  var visitedFragmentNames = Object.create(null);
+  for (var i = 0; i < fieldNodes.length; i++) {
+    var selectionSet = fieldNodes[i].selectionSet;
+    if (selectionSet) {
+      subFieldNodes = collectFields(exeContext, returnType, selectionSet, subFieldNodes, visitedFragmentNames);
+    }
+  }
+  return subFieldNodes;
+}
+
+/**
+ * If a resolveType function is not given, then a default resolve behavior is
+ * used which attempts two strategies:
+ *
+ * First, See if the provided value has a `__typename` field defined, if so, use
+ * that value as name of the resolved type.
+ *
+ * Otherwise, test each possible type for the abstract type by calling
+ * isTypeOf for the object being coerced, returning the first type that matches.
+ */
+function defaultResolveTypeFn(value, context, info, abstractType) {
+  // First, look for `__typename`.
+  if (value !== null && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && typeof value.__typename === 'string') {
+    return value.__typename;
+  }
+
+  // Otherwise, test each possible type.
+  var possibleTypes = info.schema.getPossibleTypes(abstractType);
+  var promisedIsTypeOfResults = [];
+
+  for (var i = 0; i < possibleTypes.length; i++) {
+    var type = possibleTypes[i];
+
+    if (type.isTypeOf) {
+      var isTypeOfResult = type.isTypeOf(value, context, info);
+
+      if ((0, _isPromise2.default)(isTypeOfResult)) {
+        promisedIsTypeOfResults[i] = isTypeOfResult;
+      } else if (isTypeOfResult) {
+        return type;
+      }
+    }
+  }
+
+  if (promisedIsTypeOfResults.length) {
+    return Promise.all(promisedIsTypeOfResults).then(function (isTypeOfResults) {
+      for (var _i = 0; _i < isTypeOfResults.length; _i++) {
+        if (isTypeOfResults[_i]) {
+          return possibleTypes[_i];
+        }
+      }
+    });
+  }
+}
+
+/**
+ * If a resolve function is not given, then a default resolve behavior is used
+ * which takes the property of the source object of the same name as the field
+ * and returns it as the result, or if it's a function, returns the result
+ * of calling that function while passing along args and context.
+ */
+var defaultFieldResolver = exports.defaultFieldResolver = function defaultFieldResolver(source, args, context, info) {
+  // ensure source is a value for which property access is acceptable.
+  if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) === 'object' || typeof source === 'function') {
+    var property = source[info.fieldName];
+    if (typeof property === 'function') {
+      return source[info.fieldName](args, context, info);
+    }
+    return property;
+  }
+};
+
+/**
+ * This method looks up the field on the given type defintion.
+ * It has special casing for the two introspection fields, __schema
+ * and __typename. __typename is special because it can always be
+ * queried as a field, even in situations where no other fields
+ * are allowed, like on a Union. __schema could get automatically
+ * added to the query type, but that would require mutating type
+ * definitions, which would cause issues.
+ */
+function getFieldDef(schema, parentType, fieldName) {
+  if (fieldName === _introspection.SchemaMetaFieldDef.name && schema.getQueryType() === parentType) {
+    return _introspection.SchemaMetaFieldDef;
+  } else if (fieldName === _introspection.TypeMetaFieldDef.name && schema.getQueryType() === parentType) {
+    return _introspection.TypeMetaFieldDef;
+  } else if (fieldName === _introspection.TypeNameMetaFieldDef.name) {
+    return _introspection.TypeNameMetaFieldDef;
+  }
+  return parentType.getFields()[fieldName];
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.valueFromAST = valueFromAST;
+
+var _keyMap = __webpack_require__(26);
+
+var _keyMap2 = _interopRequireDefault(_keyMap);
+
+var _isInvalid = __webpack_require__(17);
+
+var _isInvalid2 = _interopRequireDefault(_isInvalid);
+
+var _objectValues = __webpack_require__(24);
+
+var _objectValues2 = _interopRequireDefault(_objectValues);
+
+var _kinds = __webpack_require__(4);
+
+var _definition = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Produces a JavaScript value given a GraphQL Value AST.
+ *
+ * A GraphQL type must be provided, which will be used to interpret different
+ * GraphQL Value literals.
+ *
+ * Returns `undefined` when the value could not be validly coerced according to
+ * the provided type.
+ *
+ * | GraphQL Value        | JSON Value    |
+ * | -------------------- | ------------- |
+ * | Input Object         | Object        |
+ * | List                 | Array         |
+ * | Boolean              | Boolean       |
+ * | String               | String        |
+ * | Int / Float          | Number        |
+ * | Enum Value           | Mixed         |
+ * | NullValue            | null          |
+ *
+ */
+function valueFromAST(valueNode, type, variables) {
+  if (!valueNode) {
+    // When there is no node, then there is also no value.
+    // Importantly, this is different from returning the value null.
+    return;
+  }
+
+  if ((0, _definition.isNonNullType)(type)) {
+    if (valueNode.kind === _kinds.Kind.NULL) {
+      return; // Invalid: intentionally return no value.
+    }
+    return valueFromAST(valueNode, type.ofType, variables);
+  }
+
+  if (valueNode.kind === _kinds.Kind.NULL) {
+    // This is explicitly returning the value null.
+    return null;
+  }
+
+  if (valueNode.kind === _kinds.Kind.VARIABLE) {
+    var variableName = valueNode.name.value;
+    if (!variables || (0, _isInvalid2.default)(variables[variableName])) {
+      // No valid return value.
+      return;
+    }
+    // Note: we're not doing any checking that this variable is correct. We're
+    // assuming that this query has been validated and the variable usage here
+    // is of the correct type.
+    return variables[variableName];
+  }
+
+  if ((0, _definition.isListType)(type)) {
+    var itemType = type.ofType;
+    if (valueNode.kind === _kinds.Kind.LIST) {
+      var coercedValues = [];
+      var itemNodes = valueNode.values;
+      for (var i = 0; i < itemNodes.length; i++) {
+        if (isMissingVariable(itemNodes[i], variables)) {
+          // If an array contains a missing variable, it is either coerced to
+          // null or if the item type is non-null, it considered invalid.
+          if ((0, _definition.isNonNullType)(itemType)) {
+            return; // Invalid: intentionally return no value.
+          }
+          coercedValues.push(null);
+        } else {
+          var itemValue = valueFromAST(itemNodes[i], itemType, variables);
+          if ((0, _isInvalid2.default)(itemValue)) {
+            return; // Invalid: intentionally return no value.
+          }
+          coercedValues.push(itemValue);
+        }
+      }
+      return coercedValues;
+    }
+    var coercedValue = valueFromAST(valueNode, itemType, variables);
+    if ((0, _isInvalid2.default)(coercedValue)) {
+      return; // Invalid: intentionally return no value.
+    }
+    return [coercedValue];
+  }
+
+  if ((0, _definition.isInputObjectType)(type)) {
+    if (valueNode.kind !== _kinds.Kind.OBJECT) {
+      return; // Invalid: intentionally return no value.
+    }
+    var coercedObj = Object.create(null);
+    var fieldNodes = (0, _keyMap2.default)(valueNode.fields, function (field) {
+      return field.name.value;
+    });
+    var fields = (0, _objectValues2.default)(type.getFields());
+    for (var _i = 0; _i < fields.length; _i++) {
+      var field = fields[_i];
+      var fieldNode = fieldNodes[field.name];
+      if (!fieldNode || isMissingVariable(fieldNode.value, variables)) {
+        if (!(0, _isInvalid2.default)(field.defaultValue)) {
+          coercedObj[field.name] = field.defaultValue;
+        } else if ((0, _definition.isNonNullType)(field.type)) {
+          return; // Invalid: intentionally return no value.
+        }
+        continue;
+      }
+      var fieldValue = valueFromAST(fieldNode.value, field.type, variables);
+      if ((0, _isInvalid2.default)(fieldValue)) {
+        return; // Invalid: intentionally return no value.
+      }
+      coercedObj[field.name] = fieldValue;
+    }
+    return coercedObj;
+  }
+
+  if ((0, _definition.isEnumType)(type)) {
+    if (valueNode.kind !== _kinds.Kind.ENUM) {
+      return; // Invalid: intentionally return no value.
+    }
+    var enumValue = type.getValue(valueNode.value);
+    if (!enumValue) {
+      return; // Invalid: intentionally return no value.
+    }
+    return enumValue.value;
+  }
+
+  if ((0, _definition.isScalarType)(type)) {
+    // Scalars fulfill parsing a literal value via parseLiteral().
+    // Invalid values represent a failure to parse correctly, in which case
+    // no value is returned.
+    var result = void 0;
+    try {
+      result = type.parseLiteral(valueNode, variables);
+    } catch (_error) {
+      return; // Invalid: intentionally return no value.
+    }
+    if ((0, _isInvalid2.default)(result)) {
+      return; // Invalid: intentionally return no value.
+    }
+    return result;
+  }
+
+  /* istanbul ignore next */
+  throw new Error('Unknown type: ' + type + '.');
+}
+
+// Returns true if the provided valueNode is a variable which is not defined
+// in the set of variables.
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+function isMissingVariable(valueNode, variables) {
+  return valueNode.kind === _kinds.Kind.VARIABLE && (!variables || (0, _isInvalid2.default)(variables[valueNode.name.value]));
+}
 
 /***/ }),
 /* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var util = __webpack_require__(6);
+var JsonBuilder = __webpack_require__(65);
+var JsonParser = __webpack_require__(66);
+
+function buildRequest(req) {
+  var httpRequest = req.httpRequest;
+  var api = req.service.api;
+  var target = api.targetPrefix + '.' + api.operations[req.operation].name;
+  var version = api.jsonVersion || '1.0';
+  var input = api.operations[req.operation].input;
+  var builder = new JsonBuilder();
+
+  if (version === 1) version = '1.0';
+  httpRequest.body = builder.build(req.params || {}, input);
+  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
+  httpRequest.headers['X-Amz-Target'] = target;
+}
+
+function extractError(resp) {
+  var error = {};
+  var httpResponse = resp.httpResponse;
+
+  error.code = httpResponse.headers['x-amzn-errortype'] || 'UnknownError';
+  if (typeof error.code === 'string') {
+    error.code = error.code.split(':')[0];
+  }
+
+  if (httpResponse.body.length > 0) {
+    try {
+      var e = JSON.parse(httpResponse.body.toString());
+      if (e.__type || e.code) {
+        error.code = (e.__type || e.code).split('#').pop();
+      }
+      if (error.code === 'RequestEntityTooLarge') {
+        error.message = 'Request body must be less than 1 MB';
+      } else {
+        error.message = (e.message || e.Message || null);
+      }
+    } catch (e) {
+      error.statusCode = httpResponse.statusCode;
+      error.message = httpResponse.statusMessage;
+    }
+  } else {
+    error.statusCode = httpResponse.statusCode;
+    error.message = httpResponse.statusCode.toString();
+  }
+
+  resp.error = util.error(new Error(), error);
+}
+
+function extractData(resp) {
+  var body = resp.httpResponse.body.toString() || '{}';
+  if (resp.request.service.config.convertResponseTypes === false) {
+    resp.data = JSON.parse(body);
+  } else {
+    var operation = resp.request.service.api.operations[resp.request.operation];
+    var shape = operation.output || {};
+    var parser = new JsonParser();
+    resp.data = parser.parse(body, shape);
+  }
+}
+
+module.exports = {
+  buildRequest: buildRequest,
+  extractError: extractError,
+  extractData: extractData
+};
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var util = __webpack_require__(6);
+
+function JsonBuilder() { }
+
+JsonBuilder.prototype.build = function(value, shape) {
+  return JSON.stringify(translate(value, shape));
+};
+
+function translate(value, shape) {
+  if (!shape || value === undefined || value === null) return undefined;
+
+  switch (shape.type) {
+    case 'structure': return translateStructure(value, shape);
+    case 'map': return translateMap(value, shape);
+    case 'list': return translateList(value, shape);
+    default: return translateScalar(value, shape);
+  }
+}
+
+function translateStructure(structure, shape) {
+  var struct = {};
+  util.each(structure, function(name, value) {
+    var memberShape = shape.members[name];
+    if (memberShape) {
+      if (memberShape.location !== 'body') return;
+      var locationName = memberShape.isLocationName ? memberShape.name : name;
+      var result = translate(value, memberShape);
+      if (result !== undefined) struct[locationName] = result;
+    }
+  });
+  return struct;
+}
+
+function translateList(list, shape) {
+  var out = [];
+  util.arrayEach(list, function(value) {
+    var result = translate(value, shape.member);
+    if (result !== undefined) out.push(result);
+  });
+  return out;
+}
+
+function translateMap(map, shape) {
+  var out = {};
+  util.each(map, function(key, value) {
+    var result = translate(value, shape.value);
+    if (result !== undefined) out[key] = result;
+  });
+  return out;
+}
+
+function translateScalar(value, shape) {
+  return shape.toWireFormat(value);
+}
+
+module.exports = JsonBuilder;
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var util = __webpack_require__(6);
+
+function JsonParser() { }
+
+JsonParser.prototype.parse = function(value, shape) {
+  return translate(JSON.parse(value), shape);
+};
+
+function translate(value, shape) {
+  if (!shape || value === undefined) return undefined;
+
+  switch (shape.type) {
+    case 'structure': return translateStructure(value, shape);
+    case 'map': return translateMap(value, shape);
+    case 'list': return translateList(value, shape);
+    default: return translateScalar(value, shape);
+  }
+}
+
+function translateStructure(structure, shape) {
+  if (structure == null) return undefined;
+
+  var struct = {};
+  var shapeMembers = shape.members;
+  util.each(shapeMembers, function(name, memberShape) {
+    var locationName = memberShape.isLocationName ? memberShape.name : name;
+    if (Object.prototype.hasOwnProperty.call(structure, locationName)) {
+      var value = structure[locationName];
+      var result = translate(value, memberShape);
+      if (result !== undefined) struct[name] = result;
+    }
+  });
+  return struct;
+}
+
+function translateList(list, shape) {
+  if (list == null) return undefined;
+
+  var out = [];
+  util.arrayEach(list, function(value) {
+    var result = translate(value, shape.member);
+    if (result === undefined) out.push(null);
+    else out.push(result);
+  });
+  return out;
+}
+
+function translateMap(map, shape) {
+  if (map == null) return undefined;
+
+  var out = {};
+  util.each(map, function(key, value) {
+    var result = translate(value, shape.value);
+    if (result === undefined) out[key] = null;
+    else out[key] = result;
+  });
+  return out;
+}
+
+function translateScalar(value, shape) {
+  return shape.toType(value);
+}
+
+module.exports = JsonParser;
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports) {
+
+/**
+ * This method returns the first argument it receives.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Util
+ * @param {*} value Any value.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ *
+ * console.log(_.identity(object) === object);
+ * // => true
+ */
+function identity(value) {
+  return value;
+}
+
+module.exports = identity;
+
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports) {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+module.exports = isLength;
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports) {
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  var type = typeof value;
+  length = length == null ? MAX_SAFE_INTEGER : length;
+
+  return !!length &&
+    (type == 'number' ||
+      (type != 'symbol' && reIsUint.test(value))) &&
+        (value > -1 && value % 1 == 0 && value < length);
+}
+
+module.exports = isIndex;
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+module.exports = isPrototype;
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsArguments = __webpack_require__(378),
+    isObjectLike = __webpack_require__(40);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+    !propertyIsEnumerable.call(value, 'callee');
+};
+
+module.exports = isArguments;
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(20),
+    stubFalse = __webpack_require__(379);
+
+/** Detect free variable `exports`. */
+var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/** Built-in value references. */
+var Buffer = moduleExports ? root.Buffer : undefined;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
+var isBuffer = nativeIsBuffer || stubFalse;
+
+module.exports = isBuffer;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)(module)))
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsTypedArray = __webpack_require__(380),
+    baseUnary = __webpack_require__(381),
+    nodeUtil = __webpack_require__(382);
+
+/* Node.js helper references. */
+var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
+
+/**
+ * Checks if `value` is classified as a typed array.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
+ * @example
+ *
+ * _.isTypedArray(new Uint8Array);
+ * // => true
+ *
+ * _.isTypedArray([]);
+ * // => false
+ */
+var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
+
+module.exports = isTypedArray;
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(28),
+    root = __webpack_require__(20);
+
+/* Built-in method references that are verified to be native. */
+var Map = getNative(root, 'Map');
+
+module.exports = Map;
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mapCacheClear = __webpack_require__(415),
+    mapCacheDelete = __webpack_require__(422),
+    mapCacheGet = __webpack_require__(424),
+    mapCacheHas = __webpack_require__(425),
+    mapCacheSet = __webpack_require__(426);
+
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function MapCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `MapCache`.
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+
+module.exports = MapCache;
+
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArray = __webpack_require__(14),
+    isSymbol = __webpack_require__(77);
+
+/** Used to match property names within property paths. */
+var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
+    reIsPlainProp = /^\w*$/;
+
+/**
+ * Checks if `value` is a property name and not a property path.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {Object} [object] The object to query keys on.
+ * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
+ */
+function isKey(value, object) {
+  if (isArray(value)) {
+    return false;
+  }
+  var type = typeof value;
+  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
+      value == null || isSymbol(value)) {
+    return true;
+  }
+  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
+    (object != null && value in Object(object));
+}
+
+module.exports = isKey;
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(37),
+    isObjectLike = __webpack_require__(40);
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+}
+
+module.exports = isSymbol;
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(exports) {
+  "use strict";
+
+  function isArray(obj) {
+    if (obj !== null) {
+      return Object.prototype.toString.call(obj) === "[object Array]";
+    } else {
+      return false;
+    }
+  }
+
+  function isObject(obj) {
+    if (obj !== null) {
+      return Object.prototype.toString.call(obj) === "[object Object]";
+    } else {
+      return false;
+    }
+  }
+
+  function strictDeepEqual(first, second) {
+    // Check the scalar case first.
+    if (first === second) {
+      return true;
+    }
+
+    // Check if they are the same type.
+    var firstType = Object.prototype.toString.call(first);
+    if (firstType !== Object.prototype.toString.call(second)) {
+      return false;
+    }
+    // We know that first and second have the same type so we can just check the
+    // first type from now on.
+    if (isArray(first) === true) {
+      // Short circuit if they're not the same length;
+      if (first.length !== second.length) {
+        return false;
+      }
+      for (var i = 0; i < first.length; i++) {
+        if (strictDeepEqual(first[i], second[i]) === false) {
+          return false;
+        }
+      }
+      return true;
+    }
+    if (isObject(first) === true) {
+      // An object is equal if it has the same key/value pairs.
+      var keysSeen = {};
+      for (var key in first) {
+        if (hasOwnProperty.call(first, key)) {
+          if (strictDeepEqual(first[key], second[key]) === false) {
+            return false;
+          }
+          keysSeen[key] = true;
+        }
+      }
+      // Now check that there aren't any keys in second that weren't
+      // in first.
+      for (var key2 in second) {
+        if (hasOwnProperty.call(second, key2)) {
+          if (keysSeen[key2] !== true) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function isFalse(obj) {
+    // From the spec:
+    // A false value corresponds to the following values:
+    // Empty list
+    // Empty object
+    // Empty string
+    // False boolean
+    // null value
+
+    // First check the scalar values.
+    if (obj === "" || obj === false || obj === null) {
+        return true;
+    } else if (isArray(obj) && obj.length === 0) {
+        // Check for an empty array.
+        return true;
+    } else if (isObject(obj)) {
+        // Check for an empty object.
+        for (var key in obj) {
+            // If there are any keys, then
+            // the object is not empty so the object
+            // is not false.
+            if (obj.hasOwnProperty(key)) {
+              return false;
+            }
+        }
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  function objValues(obj) {
+    var keys = Object.keys(obj);
+    var values = [];
+    for (var i = 0; i < keys.length; i++) {
+      values.push(obj[keys[i]]);
+    }
+    return values;
+  }
+
+  function merge(a, b) {
+      var merged = {};
+      for (var key in a) {
+          merged[key] = a[key];
+      }
+      for (var key2 in b) {
+          merged[key2] = b[key2];
+      }
+      return merged;
+  }
+
+  var trimLeft;
+  if (typeof String.prototype.trimLeft === "function") {
+    trimLeft = function(str) {
+      return str.trimLeft();
+    };
+  } else {
+    trimLeft = function(str) {
+      return str.match(/^\s*(.*)/)[1];
+    };
+  }
+
+  // Type constants used to define functions.
+  var TYPE_NUMBER = 0;
+  var TYPE_ANY = 1;
+  var TYPE_STRING = 2;
+  var TYPE_ARRAY = 3;
+  var TYPE_OBJECT = 4;
+  var TYPE_BOOLEAN = 5;
+  var TYPE_EXPREF = 6;
+  var TYPE_NULL = 7;
+  var TYPE_ARRAY_NUMBER = 8;
+  var TYPE_ARRAY_STRING = 9;
+
+  var TOK_EOF = "EOF";
+  var TOK_UNQUOTEDIDENTIFIER = "UnquotedIdentifier";
+  var TOK_QUOTEDIDENTIFIER = "QuotedIdentifier";
+  var TOK_RBRACKET = "Rbracket";
+  var TOK_RPAREN = "Rparen";
+  var TOK_COMMA = "Comma";
+  var TOK_COLON = "Colon";
+  var TOK_RBRACE = "Rbrace";
+  var TOK_NUMBER = "Number";
+  var TOK_CURRENT = "Current";
+  var TOK_EXPREF = "Expref";
+  var TOK_PIPE = "Pipe";
+  var TOK_OR = "Or";
+  var TOK_AND = "And";
+  var TOK_EQ = "EQ";
+  var TOK_GT = "GT";
+  var TOK_LT = "LT";
+  var TOK_GTE = "GTE";
+  var TOK_LTE = "LTE";
+  var TOK_NE = "NE";
+  var TOK_FLATTEN = "Flatten";
+  var TOK_STAR = "Star";
+  var TOK_FILTER = "Filter";
+  var TOK_DOT = "Dot";
+  var TOK_NOT = "Not";
+  var TOK_LBRACE = "Lbrace";
+  var TOK_LBRACKET = "Lbracket";
+  var TOK_LPAREN= "Lparen";
+  var TOK_LITERAL= "Literal";
+
+  // The "&", "[", "<", ">" tokens
+  // are not in basicToken because
+  // there are two token variants
+  // ("&&", "[?", "<=", ">=").  This is specially handled
+  // below.
+
+  var basicTokens = {
+    ".": TOK_DOT,
+    "*": TOK_STAR,
+    ",": TOK_COMMA,
+    ":": TOK_COLON,
+    "{": TOK_LBRACE,
+    "}": TOK_RBRACE,
+    "]": TOK_RBRACKET,
+    "(": TOK_LPAREN,
+    ")": TOK_RPAREN,
+    "@": TOK_CURRENT
+  };
+
+  var operatorStartToken = {
+      "<": true,
+      ">": true,
+      "=": true,
+      "!": true
+  };
+
+  var skipChars = {
+      " ": true,
+      "\t": true,
+      "\n": true
+  };
+
+
+  function isAlpha(ch) {
+      return (ch >= "a" && ch <= "z") ||
+             (ch >= "A" && ch <= "Z") ||
+             ch === "_";
+  }
+
+  function isNum(ch) {
+      return (ch >= "0" && ch <= "9") ||
+             ch === "-";
+  }
+  function isAlphaNum(ch) {
+      return (ch >= "a" && ch <= "z") ||
+             (ch >= "A" && ch <= "Z") ||
+             (ch >= "0" && ch <= "9") ||
+             ch === "_";
+  }
+
+  function Lexer() {
+  }
+  Lexer.prototype = {
+      tokenize: function(stream) {
+          var tokens = [];
+          this._current = 0;
+          var start;
+          var identifier;
+          var token;
+          while (this._current < stream.length) {
+              if (isAlpha(stream[this._current])) {
+                  start = this._current;
+                  identifier = this._consumeUnquotedIdentifier(stream);
+                  tokens.push({type: TOK_UNQUOTEDIDENTIFIER,
+                               value: identifier,
+                               start: start});
+              } else if (basicTokens[stream[this._current]] !== undefined) {
+                  tokens.push({type: basicTokens[stream[this._current]],
+                              value: stream[this._current],
+                              start: this._current});
+                  this._current++;
+              } else if (isNum(stream[this._current])) {
+                  token = this._consumeNumber(stream);
+                  tokens.push(token);
+              } else if (stream[this._current] === "[") {
+                  // No need to increment this._current.  This happens
+                  // in _consumeLBracket
+                  token = this._consumeLBracket(stream);
+                  tokens.push(token);
+              } else if (stream[this._current] === "\"") {
+                  start = this._current;
+                  identifier = this._consumeQuotedIdentifier(stream);
+                  tokens.push({type: TOK_QUOTEDIDENTIFIER,
+                               value: identifier,
+                               start: start});
+              } else if (stream[this._current] === "'") {
+                  start = this._current;
+                  identifier = this._consumeRawStringLiteral(stream);
+                  tokens.push({type: TOK_LITERAL,
+                               value: identifier,
+                               start: start});
+              } else if (stream[this._current] === "`") {
+                  start = this._current;
+                  var literal = this._consumeLiteral(stream);
+                  tokens.push({type: TOK_LITERAL,
+                               value: literal,
+                               start: start});
+              } else if (operatorStartToken[stream[this._current]] !== undefined) {
+                  tokens.push(this._consumeOperator(stream));
+              } else if (skipChars[stream[this._current]] !== undefined) {
+                  // Ignore whitespace.
+                  this._current++;
+              } else if (stream[this._current] === "&") {
+                  start = this._current;
+                  this._current++;
+                  if (stream[this._current] === "&") {
+                      this._current++;
+                      tokens.push({type: TOK_AND, value: "&&", start: start});
+                  } else {
+                      tokens.push({type: TOK_EXPREF, value: "&", start: start});
+                  }
+              } else if (stream[this._current] === "|") {
+                  start = this._current;
+                  this._current++;
+                  if (stream[this._current] === "|") {
+                      this._current++;
+                      tokens.push({type: TOK_OR, value: "||", start: start});
+                  } else {
+                      tokens.push({type: TOK_PIPE, value: "|", start: start});
+                  }
+              } else {
+                  var error = new Error("Unknown character:" + stream[this._current]);
+                  error.name = "LexerError";
+                  throw error;
+              }
+          }
+          return tokens;
+      },
+
+      _consumeUnquotedIdentifier: function(stream) {
+          var start = this._current;
+          this._current++;
+          while (this._current < stream.length && isAlphaNum(stream[this._current])) {
+              this._current++;
+          }
+          return stream.slice(start, this._current);
+      },
+
+      _consumeQuotedIdentifier: function(stream) {
+          var start = this._current;
+          this._current++;
+          var maxLength = stream.length;
+          while (stream[this._current] !== "\"" && this._current < maxLength) {
+              // You can escape a double quote and you can escape an escape.
+              var current = this._current;
+              if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
+                                               stream[current + 1] === "\"")) {
+                  current += 2;
+              } else {
+                  current++;
+              }
+              this._current = current;
+          }
+          this._current++;
+          return JSON.parse(stream.slice(start, this._current));
+      },
+
+      _consumeRawStringLiteral: function(stream) {
+          var start = this._current;
+          this._current++;
+          var maxLength = stream.length;
+          while (stream[this._current] !== "'" && this._current < maxLength) {
+              // You can escape a single quote and you can escape an escape.
+              var current = this._current;
+              if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
+                                               stream[current + 1] === "'")) {
+                  current += 2;
+              } else {
+                  current++;
+              }
+              this._current = current;
+          }
+          this._current++;
+          var literal = stream.slice(start + 1, this._current - 1);
+          return literal.replace("\\'", "'");
+      },
+
+      _consumeNumber: function(stream) {
+          var start = this._current;
+          this._current++;
+          var maxLength = stream.length;
+          while (isNum(stream[this._current]) && this._current < maxLength) {
+              this._current++;
+          }
+          var value = parseInt(stream.slice(start, this._current));
+          return {type: TOK_NUMBER, value: value, start: start};
+      },
+
+      _consumeLBracket: function(stream) {
+          var start = this._current;
+          this._current++;
+          if (stream[this._current] === "?") {
+              this._current++;
+              return {type: TOK_FILTER, value: "[?", start: start};
+          } else if (stream[this._current] === "]") {
+              this._current++;
+              return {type: TOK_FLATTEN, value: "[]", start: start};
+          } else {
+              return {type: TOK_LBRACKET, value: "[", start: start};
+          }
+      },
+
+      _consumeOperator: function(stream) {
+          var start = this._current;
+          var startingChar = stream[start];
+          this._current++;
+          if (startingChar === "!") {
+              if (stream[this._current] === "=") {
+                  this._current++;
+                  return {type: TOK_NE, value: "!=", start: start};
+              } else {
+                return {type: TOK_NOT, value: "!", start: start};
+              }
+          } else if (startingChar === "<") {
+              if (stream[this._current] === "=") {
+                  this._current++;
+                  return {type: TOK_LTE, value: "<=", start: start};
+              } else {
+                  return {type: TOK_LT, value: "<", start: start};
+              }
+          } else if (startingChar === ">") {
+              if (stream[this._current] === "=") {
+                  this._current++;
+                  return {type: TOK_GTE, value: ">=", start: start};
+              } else {
+                  return {type: TOK_GT, value: ">", start: start};
+              }
+          } else if (startingChar === "=") {
+              if (stream[this._current] === "=") {
+                  this._current++;
+                  return {type: TOK_EQ, value: "==", start: start};
+              }
+          }
+      },
+
+      _consumeLiteral: function(stream) {
+          this._current++;
+          var start = this._current;
+          var maxLength = stream.length;
+          var literal;
+          while(stream[this._current] !== "`" && this._current < maxLength) {
+              // You can escape a literal char or you can escape the escape.
+              var current = this._current;
+              if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
+                                               stream[current + 1] === "`")) {
+                  current += 2;
+              } else {
+                  current++;
+              }
+              this._current = current;
+          }
+          var literalString = trimLeft(stream.slice(start, this._current));
+          literalString = literalString.replace("\\`", "`");
+          if (this._looksLikeJSON(literalString)) {
+              literal = JSON.parse(literalString);
+          } else {
+              // Try to JSON parse it as "<literal>"
+              literal = JSON.parse("\"" + literalString + "\"");
+          }
+          // +1 gets us to the ending "`", +1 to move on to the next char.
+          this._current++;
+          return literal;
+      },
+
+      _looksLikeJSON: function(literalString) {
+          var startingChars = "[{\"";
+          var jsonLiterals = ["true", "false", "null"];
+          var numberLooking = "-0123456789";
+
+          if (literalString === "") {
+              return false;
+          } else if (startingChars.indexOf(literalString[0]) >= 0) {
+              return true;
+          } else if (jsonLiterals.indexOf(literalString) >= 0) {
+              return true;
+          } else if (numberLooking.indexOf(literalString[0]) >= 0) {
+              try {
+                  JSON.parse(literalString);
+                  return true;
+              } catch (ex) {
+                  return false;
+              }
+          } else {
+              return false;
+          }
+      }
+  };
+
+      var bindingPower = {};
+      bindingPower[TOK_EOF] = 0;
+      bindingPower[TOK_UNQUOTEDIDENTIFIER] = 0;
+      bindingPower[TOK_QUOTEDIDENTIFIER] = 0;
+      bindingPower[TOK_RBRACKET] = 0;
+      bindingPower[TOK_RPAREN] = 0;
+      bindingPower[TOK_COMMA] = 0;
+      bindingPower[TOK_RBRACE] = 0;
+      bindingPower[TOK_NUMBER] = 0;
+      bindingPower[TOK_CURRENT] = 0;
+      bindingPower[TOK_EXPREF] = 0;
+      bindingPower[TOK_PIPE] = 1;
+      bindingPower[TOK_OR] = 2;
+      bindingPower[TOK_AND] = 3;
+      bindingPower[TOK_EQ] = 5;
+      bindingPower[TOK_GT] = 5;
+      bindingPower[TOK_LT] = 5;
+      bindingPower[TOK_GTE] = 5;
+      bindingPower[TOK_LTE] = 5;
+      bindingPower[TOK_NE] = 5;
+      bindingPower[TOK_FLATTEN] = 9;
+      bindingPower[TOK_STAR] = 20;
+      bindingPower[TOK_FILTER] = 21;
+      bindingPower[TOK_DOT] = 40;
+      bindingPower[TOK_NOT] = 45;
+      bindingPower[TOK_LBRACE] = 50;
+      bindingPower[TOK_LBRACKET] = 55;
+      bindingPower[TOK_LPAREN] = 60;
+
+  function Parser() {
+  }
+
+  Parser.prototype = {
+      parse: function(expression) {
+          this._loadTokens(expression);
+          this.index = 0;
+          var ast = this.expression(0);
+          if (this._lookahead(0) !== TOK_EOF) {
+              var t = this._lookaheadToken(0);
+              var error = new Error(
+                  "Unexpected token type: " + t.type + ", value: " + t.value);
+              error.name = "ParserError";
+              throw error;
+          }
+          return ast;
+      },
+
+      _loadTokens: function(expression) {
+          var lexer = new Lexer();
+          var tokens = lexer.tokenize(expression);
+          tokens.push({type: TOK_EOF, value: "", start: expression.length});
+          this.tokens = tokens;
+      },
+
+      expression: function(rbp) {
+          var leftToken = this._lookaheadToken(0);
+          this._advance();
+          var left = this.nud(leftToken);
+          var currentToken = this._lookahead(0);
+          while (rbp < bindingPower[currentToken]) {
+              this._advance();
+              left = this.led(currentToken, left);
+              currentToken = this._lookahead(0);
+          }
+          return left;
+      },
+
+      _lookahead: function(number) {
+          return this.tokens[this.index + number].type;
+      },
+
+      _lookaheadToken: function(number) {
+          return this.tokens[this.index + number];
+      },
+
+      _advance: function() {
+          this.index++;
+      },
+
+      nud: function(token) {
+        var left;
+        var right;
+        var expression;
+        switch (token.type) {
+          case TOK_LITERAL:
+            return {type: "Literal", value: token.value};
+          case TOK_UNQUOTEDIDENTIFIER:
+            return {type: "Field", name: token.value};
+          case TOK_QUOTEDIDENTIFIER:
+            var node = {type: "Field", name: token.value};
+            if (this._lookahead(0) === TOK_LPAREN) {
+                throw new Error("Quoted identifier not allowed for function names.");
+            } else {
+                return node;
+            }
+            break;
+          case TOK_NOT:
+            right = this.expression(bindingPower.Not);
+            return {type: "NotExpression", children: [right]};
+          case TOK_STAR:
+            left = {type: "Identity"};
+            right = null;
+            if (this._lookahead(0) === TOK_RBRACKET) {
+                // This can happen in a multiselect,
+                // [a, b, *]
+                right = {type: "Identity"};
+            } else {
+                right = this._parseProjectionRHS(bindingPower.Star);
+            }
+            return {type: "ValueProjection", children: [left, right]};
+          case TOK_FILTER:
+            return this.led(token.type, {type: "Identity"});
+          case TOK_LBRACE:
+            return this._parseMultiselectHash();
+          case TOK_FLATTEN:
+            left = {type: TOK_FLATTEN, children: [{type: "Identity"}]};
+            right = this._parseProjectionRHS(bindingPower.Flatten);
+            return {type: "Projection", children: [left, right]};
+          case TOK_LBRACKET:
+            if (this._lookahead(0) === TOK_NUMBER || this._lookahead(0) === TOK_COLON) {
+                right = this._parseIndexExpression();
+                return this._projectIfSlice({type: "Identity"}, right);
+            } else if (this._lookahead(0) === TOK_STAR &&
+                       this._lookahead(1) === TOK_RBRACKET) {
+                this._advance();
+                this._advance();
+                right = this._parseProjectionRHS(bindingPower.Star);
+                return {type: "Projection",
+                        children: [{type: "Identity"}, right]};
+            } else {
+                return this._parseMultiselectList();
+            }
+            break;
+          case TOK_CURRENT:
+            return {type: TOK_CURRENT};
+          case TOK_EXPREF:
+            expression = this.expression(bindingPower.Expref);
+            return {type: "ExpressionReference", children: [expression]};
+          case TOK_LPAREN:
+            var args = [];
+            while (this._lookahead(0) !== TOK_RPAREN) {
+              if (this._lookahead(0) === TOK_CURRENT) {
+                expression = {type: TOK_CURRENT};
+                this._advance();
+              } else {
+                expression = this.expression(0);
+              }
+              args.push(expression);
+            }
+            this._match(TOK_RPAREN);
+            return args[0];
+          default:
+            this._errorToken(token);
+        }
+      },
+
+      led: function(tokenName, left) {
+        var right;
+        switch(tokenName) {
+          case TOK_DOT:
+            var rbp = bindingPower.Dot;
+            if (this._lookahead(0) !== TOK_STAR) {
+                right = this._parseDotRHS(rbp);
+                return {type: "Subexpression", children: [left, right]};
+            } else {
+                // Creating a projection.
+                this._advance();
+                right = this._parseProjectionRHS(rbp);
+                return {type: "ValueProjection", children: [left, right]};
+            }
+            break;
+          case TOK_PIPE:
+            right = this.expression(bindingPower.Pipe);
+            return {type: TOK_PIPE, children: [left, right]};
+          case TOK_OR:
+            right = this.expression(bindingPower.Or);
+            return {type: "OrExpression", children: [left, right]};
+          case TOK_AND:
+            right = this.expression(bindingPower.And);
+            return {type: "AndExpression", children: [left, right]};
+          case TOK_LPAREN:
+            var name = left.name;
+            var args = [];
+            var expression, node;
+            while (this._lookahead(0) !== TOK_RPAREN) {
+              if (this._lookahead(0) === TOK_CURRENT) {
+                expression = {type: TOK_CURRENT};
+                this._advance();
+              } else {
+                expression = this.expression(0);
+              }
+              if (this._lookahead(0) === TOK_COMMA) {
+                this._match(TOK_COMMA);
+              }
+              args.push(expression);
+            }
+            this._match(TOK_RPAREN);
+            node = {type: "Function", name: name, children: args};
+            return node;
+          case TOK_FILTER:
+            var condition = this.expression(0);
+            this._match(TOK_RBRACKET);
+            if (this._lookahead(0) === TOK_FLATTEN) {
+              right = {type: "Identity"};
+            } else {
+              right = this._parseProjectionRHS(bindingPower.Filter);
+            }
+            return {type: "FilterProjection", children: [left, right, condition]};
+          case TOK_FLATTEN:
+            var leftNode = {type: TOK_FLATTEN, children: [left]};
+            var rightNode = this._parseProjectionRHS(bindingPower.Flatten);
+            return {type: "Projection", children: [leftNode, rightNode]};
+          case TOK_EQ:
+          case TOK_NE:
+          case TOK_GT:
+          case TOK_GTE:
+          case TOK_LT:
+          case TOK_LTE:
+            return this._parseComparator(left, tokenName);
+          case TOK_LBRACKET:
+            var token = this._lookaheadToken(0);
+            if (token.type === TOK_NUMBER || token.type === TOK_COLON) {
+                right = this._parseIndexExpression();
+                return this._projectIfSlice(left, right);
+            } else {
+                this._match(TOK_STAR);
+                this._match(TOK_RBRACKET);
+                right = this._parseProjectionRHS(bindingPower.Star);
+                return {type: "Projection", children: [left, right]};
+            }
+            break;
+          default:
+            this._errorToken(this._lookaheadToken(0));
+        }
+      },
+
+      _match: function(tokenType) {
+          if (this._lookahead(0) === tokenType) {
+              this._advance();
+          } else {
+              var t = this._lookaheadToken(0);
+              var error = new Error("Expected " + tokenType + ", got: " + t.type);
+              error.name = "ParserError";
+              throw error;
+          }
+      },
+
+      _errorToken: function(token) {
+          var error = new Error("Invalid token (" +
+                                token.type + "): \"" +
+                                token.value + "\"");
+          error.name = "ParserError";
+          throw error;
+      },
+
+
+      _parseIndexExpression: function() {
+          if (this._lookahead(0) === TOK_COLON || this._lookahead(1) === TOK_COLON) {
+              return this._parseSliceExpression();
+          } else {
+              var node = {
+                  type: "Index",
+                  value: this._lookaheadToken(0).value};
+              this._advance();
+              this._match(TOK_RBRACKET);
+              return node;
+          }
+      },
+
+      _projectIfSlice: function(left, right) {
+          var indexExpr = {type: "IndexExpression", children: [left, right]};
+          if (right.type === "Slice") {
+              return {
+                  type: "Projection",
+                  children: [indexExpr, this._parseProjectionRHS(bindingPower.Star)]
+              };
+          } else {
+              return indexExpr;
+          }
+      },
+
+      _parseSliceExpression: function() {
+          // [start:end:step] where each part is optional, as well as the last
+          // colon.
+          var parts = [null, null, null];
+          var index = 0;
+          var currentToken = this._lookahead(0);
+          while (currentToken !== TOK_RBRACKET && index < 3) {
+              if (currentToken === TOK_COLON) {
+                  index++;
+                  this._advance();
+              } else if (currentToken === TOK_NUMBER) {
+                  parts[index] = this._lookaheadToken(0).value;
+                  this._advance();
+              } else {
+                  var t = this._lookahead(0);
+                  var error = new Error("Syntax error, unexpected token: " +
+                                        t.value + "(" + t.type + ")");
+                  error.name = "Parsererror";
+                  throw error;
+              }
+              currentToken = this._lookahead(0);
+          }
+          this._match(TOK_RBRACKET);
+          return {
+              type: "Slice",
+              children: parts
+          };
+      },
+
+      _parseComparator: function(left, comparator) {
+        var right = this.expression(bindingPower[comparator]);
+        return {type: "Comparator", name: comparator, children: [left, right]};
+      },
+
+      _parseDotRHS: function(rbp) {
+          var lookahead = this._lookahead(0);
+          var exprTokens = [TOK_UNQUOTEDIDENTIFIER, TOK_QUOTEDIDENTIFIER, TOK_STAR];
+          if (exprTokens.indexOf(lookahead) >= 0) {
+              return this.expression(rbp);
+          } else if (lookahead === TOK_LBRACKET) {
+              this._match(TOK_LBRACKET);
+              return this._parseMultiselectList();
+          } else if (lookahead === TOK_LBRACE) {
+              this._match(TOK_LBRACE);
+              return this._parseMultiselectHash();
+          }
+      },
+
+      _parseProjectionRHS: function(rbp) {
+          var right;
+          if (bindingPower[this._lookahead(0)] < 10) {
+              right = {type: "Identity"};
+          } else if (this._lookahead(0) === TOK_LBRACKET) {
+              right = this.expression(rbp);
+          } else if (this._lookahead(0) === TOK_FILTER) {
+              right = this.expression(rbp);
+          } else if (this._lookahead(0) === TOK_DOT) {
+              this._match(TOK_DOT);
+              right = this._parseDotRHS(rbp);
+          } else {
+              var t = this._lookaheadToken(0);
+              var error = new Error("Sytanx error, unexpected token: " +
+                                    t.value + "(" + t.type + ")");
+              error.name = "ParserError";
+              throw error;
+          }
+          return right;
+      },
+
+      _parseMultiselectList: function() {
+          var expressions = [];
+          while (this._lookahead(0) !== TOK_RBRACKET) {
+              var expression = this.expression(0);
+              expressions.push(expression);
+              if (this._lookahead(0) === TOK_COMMA) {
+                  this._match(TOK_COMMA);
+                  if (this._lookahead(0) === TOK_RBRACKET) {
+                    throw new Error("Unexpected token Rbracket");
+                  }
+              }
+          }
+          this._match(TOK_RBRACKET);
+          return {type: "MultiSelectList", children: expressions};
+      },
+
+      _parseMultiselectHash: function() {
+        var pairs = [];
+        var identifierTypes = [TOK_UNQUOTEDIDENTIFIER, TOK_QUOTEDIDENTIFIER];
+        var keyToken, keyName, value, node;
+        for (;;) {
+          keyToken = this._lookaheadToken(0);
+          if (identifierTypes.indexOf(keyToken.type) < 0) {
+            throw new Error("Expecting an identifier token, got: " +
+                            keyToken.type);
+          }
+          keyName = keyToken.value;
+          this._advance();
+          this._match(TOK_COLON);
+          value = this.expression(0);
+          node = {type: "KeyValuePair", name: keyName, value: value};
+          pairs.push(node);
+          if (this._lookahead(0) === TOK_COMMA) {
+            this._match(TOK_COMMA);
+          } else if (this._lookahead(0) === TOK_RBRACE) {
+            this._match(TOK_RBRACE);
+            break;
+          }
+        }
+        return {type: "MultiSelectHash", children: pairs};
+      }
+  };
+
+
+  function TreeInterpreter(runtime) {
+    this.runtime = runtime;
+  }
+
+  TreeInterpreter.prototype = {
+      search: function(node, value) {
+          return this.visit(node, value);
+      },
+
+      visit: function(node, value) {
+          var matched, current, result, first, second, field, left, right, collected, i;
+          switch (node.type) {
+            case "Field":
+              if (value === null ) {
+                  return null;
+              } else if (isObject(value)) {
+                  field = value[node.name];
+                  if (field === undefined) {
+                      return null;
+                  } else {
+                      return field;
+                  }
+              } else {
+                return null;
+              }
+              break;
+            case "Subexpression":
+              result = this.visit(node.children[0], value);
+              for (i = 1; i < node.children.length; i++) {
+                  result = this.visit(node.children[1], result);
+                  if (result === null) {
+                      return null;
+                  }
+              }
+              return result;
+            case "IndexExpression":
+              left = this.visit(node.children[0], value);
+              right = this.visit(node.children[1], left);
+              return right;
+            case "Index":
+              if (!isArray(value)) {
+                return null;
+              }
+              var index = node.value;
+              if (index < 0) {
+                index = value.length + index;
+              }
+              result = value[index];
+              if (result === undefined) {
+                result = null;
+              }
+              return result;
+            case "Slice":
+              if (!isArray(value)) {
+                return null;
+              }
+              var sliceParams = node.children.slice(0);
+              var computed = this.computeSliceParams(value.length, sliceParams);
+              var start = computed[0];
+              var stop = computed[1];
+              var step = computed[2];
+              result = [];
+              if (step > 0) {
+                  for (i = start; i < stop; i += step) {
+                      result.push(value[i]);
+                  }
+              } else {
+                  for (i = start; i > stop; i += step) {
+                      result.push(value[i]);
+                  }
+              }
+              return result;
+            case "Projection":
+              // Evaluate left child.
+              var base = this.visit(node.children[0], value);
+              if (!isArray(base)) {
+                return null;
+              }
+              collected = [];
+              for (i = 0; i < base.length; i++) {
+                current = this.visit(node.children[1], base[i]);
+                if (current !== null) {
+                  collected.push(current);
+                }
+              }
+              return collected;
+            case "ValueProjection":
+              // Evaluate left child.
+              base = this.visit(node.children[0], value);
+              if (!isObject(base)) {
+                return null;
+              }
+              collected = [];
+              var values = objValues(base);
+              for (i = 0; i < values.length; i++) {
+                current = this.visit(node.children[1], values[i]);
+                if (current !== null) {
+                  collected.push(current);
+                }
+              }
+              return collected;
+            case "FilterProjection":
+              base = this.visit(node.children[0], value);
+              if (!isArray(base)) {
+                return null;
+              }
+              var filtered = [];
+              var finalResults = [];
+              for (i = 0; i < base.length; i++) {
+                matched = this.visit(node.children[2], base[i]);
+                if (!isFalse(matched)) {
+                  filtered.push(base[i]);
+                }
+              }
+              for (var j = 0; j < filtered.length; j++) {
+                current = this.visit(node.children[1], filtered[j]);
+                if (current !== null) {
+                  finalResults.push(current);
+                }
+              }
+              return finalResults;
+            case "Comparator":
+              first = this.visit(node.children[0], value);
+              second = this.visit(node.children[1], value);
+              switch(node.name) {
+                case TOK_EQ:
+                  result = strictDeepEqual(first, second);
+                  break;
+                case TOK_NE:
+                  result = !strictDeepEqual(first, second);
+                  break;
+                case TOK_GT:
+                  result = first > second;
+                  break;
+                case TOK_GTE:
+                  result = first >= second;
+                  break;
+                case TOK_LT:
+                  result = first < second;
+                  break;
+                case TOK_LTE:
+                  result = first <= second;
+                  break;
+                default:
+                  throw new Error("Unknown comparator: " + node.name);
+              }
+              return result;
+            case TOK_FLATTEN:
+              var original = this.visit(node.children[0], value);
+              if (!isArray(original)) {
+                return null;
+              }
+              var merged = [];
+              for (i = 0; i < original.length; i++) {
+                current = original[i];
+                if (isArray(current)) {
+                  merged.push.apply(merged, current);
+                } else {
+                  merged.push(current);
+                }
+              }
+              return merged;
+            case "Identity":
+              return value;
+            case "MultiSelectList":
+              if (value === null) {
+                return null;
+              }
+              collected = [];
+              for (i = 0; i < node.children.length; i++) {
+                  collected.push(this.visit(node.children[i], value));
+              }
+              return collected;
+            case "MultiSelectHash":
+              if (value === null) {
+                return null;
+              }
+              collected = {};
+              var child;
+              for (i = 0; i < node.children.length; i++) {
+                child = node.children[i];
+                collected[child.name] = this.visit(child.value, value);
+              }
+              return collected;
+            case "OrExpression":
+              matched = this.visit(node.children[0], value);
+              if (isFalse(matched)) {
+                  matched = this.visit(node.children[1], value);
+              }
+              return matched;
+            case "AndExpression":
+              first = this.visit(node.children[0], value);
+
+              if (isFalse(first) === true) {
+                return first;
+              }
+              return this.visit(node.children[1], value);
+            case "NotExpression":
+              first = this.visit(node.children[0], value);
+              return isFalse(first);
+            case "Literal":
+              return node.value;
+            case TOK_PIPE:
+              left = this.visit(node.children[0], value);
+              return this.visit(node.children[1], left);
+            case TOK_CURRENT:
+              return value;
+            case "Function":
+              var resolvedArgs = [];
+              for (i = 0; i < node.children.length; i++) {
+                  resolvedArgs.push(this.visit(node.children[i], value));
+              }
+              return this.runtime.callFunction(node.name, resolvedArgs);
+            case "ExpressionReference":
+              var refNode = node.children[0];
+              // Tag the node with a specific attribute so the type
+              // checker verify the type.
+              refNode.jmespathType = TOK_EXPREF;
+              return refNode;
+            default:
+              throw new Error("Unknown node type: " + node.type);
+          }
+      },
+
+      computeSliceParams: function(arrayLength, sliceParams) {
+        var start = sliceParams[0];
+        var stop = sliceParams[1];
+        var step = sliceParams[2];
+        var computed = [null, null, null];
+        if (step === null) {
+          step = 1;
+        } else if (step === 0) {
+          var error = new Error("Invalid slice, step cannot be 0");
+          error.name = "RuntimeError";
+          throw error;
+        }
+        var stepValueNegative = step < 0 ? true : false;
+
+        if (start === null) {
+            start = stepValueNegative ? arrayLength - 1 : 0;
+        } else {
+            start = this.capSliceRange(arrayLength, start, step);
+        }
+
+        if (stop === null) {
+            stop = stepValueNegative ? -1 : arrayLength;
+        } else {
+            stop = this.capSliceRange(arrayLength, stop, step);
+        }
+        computed[0] = start;
+        computed[1] = stop;
+        computed[2] = step;
+        return computed;
+      },
+
+      capSliceRange: function(arrayLength, actualValue, step) {
+          if (actualValue < 0) {
+              actualValue += arrayLength;
+              if (actualValue < 0) {
+                  actualValue = step < 0 ? -1 : 0;
+              }
+          } else if (actualValue >= arrayLength) {
+              actualValue = step < 0 ? arrayLength - 1 : arrayLength;
+          }
+          return actualValue;
+      }
+
+  };
+
+  function Runtime(interpreter) {
+    this._interpreter = interpreter;
+    this.functionTable = {
+        // name: [function, <signature>]
+        // The <signature> can be:
+        //
+        // {
+        //   args: [[type1, type2], [type1, type2]],
+        //   variadic: true|false
+        // }
+        //
+        // Each arg in the arg list is a list of valid types
+        // (if the function is overloaded and supports multiple
+        // types.  If the type is "any" then no type checking
+        // occurs on the argument.  Variadic is optional
+        // and if not provided is assumed to be false.
+        abs: {_func: this._functionAbs, _signature: [{types: [TYPE_NUMBER]}]},
+        avg: {_func: this._functionAvg, _signature: [{types: [TYPE_ARRAY_NUMBER]}]},
+        ceil: {_func: this._functionCeil, _signature: [{types: [TYPE_NUMBER]}]},
+        contains: {
+            _func: this._functionContains,
+            _signature: [{types: [TYPE_STRING, TYPE_ARRAY]},
+                        {types: [TYPE_ANY]}]},
+        "ends_with": {
+            _func: this._functionEndsWith,
+            _signature: [{types: [TYPE_STRING]}, {types: [TYPE_STRING]}]},
+        floor: {_func: this._functionFloor, _signature: [{types: [TYPE_NUMBER]}]},
+        length: {
+            _func: this._functionLength,
+            _signature: [{types: [TYPE_STRING, TYPE_ARRAY, TYPE_OBJECT]}]},
+        map: {
+            _func: this._functionMap,
+            _signature: [{types: [TYPE_EXPREF]}, {types: [TYPE_ARRAY]}]},
+        max: {
+            _func: this._functionMax,
+            _signature: [{types: [TYPE_ARRAY_NUMBER, TYPE_ARRAY_STRING]}]},
+        "merge": {
+            _func: this._functionMerge,
+            _signature: [{types: [TYPE_OBJECT], variadic: true}]
+        },
+        "max_by": {
+          _func: this._functionMaxBy,
+          _signature: [{types: [TYPE_ARRAY]}, {types: [TYPE_EXPREF]}]
+        },
+        sum: {_func: this._functionSum, _signature: [{types: [TYPE_ARRAY_NUMBER]}]},
+        "starts_with": {
+            _func: this._functionStartsWith,
+            _signature: [{types: [TYPE_STRING]}, {types: [TYPE_STRING]}]},
+        min: {
+            _func: this._functionMin,
+            _signature: [{types: [TYPE_ARRAY_NUMBER, TYPE_ARRAY_STRING]}]},
+        "min_by": {
+          _func: this._functionMinBy,
+          _signature: [{types: [TYPE_ARRAY]}, {types: [TYPE_EXPREF]}]
+        },
+        type: {_func: this._functionType, _signature: [{types: [TYPE_ANY]}]},
+        keys: {_func: this._functionKeys, _signature: [{types: [TYPE_OBJECT]}]},
+        values: {_func: this._functionValues, _signature: [{types: [TYPE_OBJECT]}]},
+        sort: {_func: this._functionSort, _signature: [{types: [TYPE_ARRAY_STRING, TYPE_ARRAY_NUMBER]}]},
+        "sort_by": {
+          _func: this._functionSortBy,
+          _signature: [{types: [TYPE_ARRAY]}, {types: [TYPE_EXPREF]}]
+        },
+        join: {
+            _func: this._functionJoin,
+            _signature: [
+                {types: [TYPE_STRING]},
+                {types: [TYPE_ARRAY_STRING]}
+            ]
+        },
+        reverse: {
+            _func: this._functionReverse,
+            _signature: [{types: [TYPE_STRING, TYPE_ARRAY]}]},
+        "to_array": {_func: this._functionToArray, _signature: [{types: [TYPE_ANY]}]},
+        "to_string": {_func: this._functionToString, _signature: [{types: [TYPE_ANY]}]},
+        "to_number": {_func: this._functionToNumber, _signature: [{types: [TYPE_ANY]}]},
+        "not_null": {
+            _func: this._functionNotNull,
+            _signature: [{types: [TYPE_ANY], variadic: true}]
+        }
+    };
+  }
+
+  Runtime.prototype = {
+    callFunction: function(name, resolvedArgs) {
+      var functionEntry = this.functionTable[name];
+      if (functionEntry === undefined) {
+          throw new Error("Unknown function: " + name + "()");
+      }
+      this._validateArgs(name, resolvedArgs, functionEntry._signature);
+      return functionEntry._func.call(this, resolvedArgs);
+    },
+
+    _validateArgs: function(name, args, signature) {
+        // Validating the args requires validating
+        // the correct arity and the correct type of each arg.
+        // If the last argument is declared as variadic, then we need
+        // a minimum number of args to be required.  Otherwise it has to
+        // be an exact amount.
+        var pluralized;
+        if (signature[signature.length - 1].variadic) {
+            if (args.length < signature.length) {
+                pluralized = signature.length === 1 ? " argument" : " arguments";
+                throw new Error("ArgumentError: " + name + "() " +
+                                "takes at least" + signature.length + pluralized +
+                                " but received " + args.length);
+            }
+        } else if (args.length !== signature.length) {
+            pluralized = signature.length === 1 ? " argument" : " arguments";
+            throw new Error("ArgumentError: " + name + "() " +
+                            "takes " + signature.length + pluralized +
+                            " but received " + args.length);
+        }
+        var currentSpec;
+        var actualType;
+        var typeMatched;
+        for (var i = 0; i < signature.length; i++) {
+            typeMatched = false;
+            currentSpec = signature[i].types;
+            actualType = this._getTypeName(args[i]);
+            for (var j = 0; j < currentSpec.length; j++) {
+                if (this._typeMatches(actualType, currentSpec[j], args[i])) {
+                    typeMatched = true;
+                    break;
+                }
+            }
+            if (!typeMatched) {
+                throw new Error("TypeError: " + name + "() " +
+                                "expected argument " + (i + 1) +
+                                " to be type " + currentSpec +
+                                " but received type " + actualType +
+                                " instead.");
+            }
+        }
+    },
+
+    _typeMatches: function(actual, expected, argValue) {
+        if (expected === TYPE_ANY) {
+            return true;
+        }
+        if (expected === TYPE_ARRAY_STRING ||
+            expected === TYPE_ARRAY_NUMBER ||
+            expected === TYPE_ARRAY) {
+            // The expected type can either just be array,
+            // or it can require a specific subtype (array of numbers).
+            //
+            // The simplest case is if "array" with no subtype is specified.
+            if (expected === TYPE_ARRAY) {
+                return actual === TYPE_ARRAY;
+            } else if (actual === TYPE_ARRAY) {
+                // Otherwise we need to check subtypes.
+                // I think this has potential to be improved.
+                var subtype;
+                if (expected === TYPE_ARRAY_NUMBER) {
+                  subtype = TYPE_NUMBER;
+                } else if (expected === TYPE_ARRAY_STRING) {
+                  subtype = TYPE_STRING;
+                }
+                for (var i = 0; i < argValue.length; i++) {
+                    if (!this._typeMatches(
+                            this._getTypeName(argValue[i]), subtype,
+                                             argValue[i])) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        } else {
+            return actual === expected;
+        }
+    },
+    _getTypeName: function(obj) {
+        switch (Object.prototype.toString.call(obj)) {
+            case "[object String]":
+              return TYPE_STRING;
+            case "[object Number]":
+              return TYPE_NUMBER;
+            case "[object Array]":
+              return TYPE_ARRAY;
+            case "[object Boolean]":
+              return TYPE_BOOLEAN;
+            case "[object Null]":
+              return TYPE_NULL;
+            case "[object Object]":
+              // Check if it's an expref.  If it has, it's been
+              // tagged with a jmespathType attr of 'Expref';
+              if (obj.jmespathType === TOK_EXPREF) {
+                return TYPE_EXPREF;
+              } else {
+                return TYPE_OBJECT;
+              }
+        }
+    },
+
+    _functionStartsWith: function(resolvedArgs) {
+        return resolvedArgs[0].lastIndexOf(resolvedArgs[1]) === 0;
+    },
+
+    _functionEndsWith: function(resolvedArgs) {
+        var searchStr = resolvedArgs[0];
+        var suffix = resolvedArgs[1];
+        return searchStr.indexOf(suffix, searchStr.length - suffix.length) !== -1;
+    },
+
+    _functionReverse: function(resolvedArgs) {
+        var typeName = this._getTypeName(resolvedArgs[0]);
+        if (typeName === TYPE_STRING) {
+          var originalStr = resolvedArgs[0];
+          var reversedStr = "";
+          for (var i = originalStr.length - 1; i >= 0; i--) {
+              reversedStr += originalStr[i];
+          }
+          return reversedStr;
+        } else {
+          var reversedArray = resolvedArgs[0].slice(0);
+          reversedArray.reverse();
+          return reversedArray;
+        }
+    },
+
+    _functionAbs: function(resolvedArgs) {
+      return Math.abs(resolvedArgs[0]);
+    },
+
+    _functionCeil: function(resolvedArgs) {
+        return Math.ceil(resolvedArgs[0]);
+    },
+
+    _functionAvg: function(resolvedArgs) {
+        var sum = 0;
+        var inputArray = resolvedArgs[0];
+        for (var i = 0; i < inputArray.length; i++) {
+            sum += inputArray[i];
+        }
+        return sum / inputArray.length;
+    },
+
+    _functionContains: function(resolvedArgs) {
+        return resolvedArgs[0].indexOf(resolvedArgs[1]) >= 0;
+    },
+
+    _functionFloor: function(resolvedArgs) {
+        return Math.floor(resolvedArgs[0]);
+    },
+
+    _functionLength: function(resolvedArgs) {
+       if (!isObject(resolvedArgs[0])) {
+         return resolvedArgs[0].length;
+       } else {
+         // As far as I can tell, there's no way to get the length
+         // of an object without O(n) iteration through the object.
+         return Object.keys(resolvedArgs[0]).length;
+       }
+    },
+
+    _functionMap: function(resolvedArgs) {
+      var mapped = [];
+      var interpreter = this._interpreter;
+      var exprefNode = resolvedArgs[0];
+      var elements = resolvedArgs[1];
+      for (var i = 0; i < elements.length; i++) {
+          mapped.push(interpreter.visit(exprefNode, elements[i]));
+      }
+      return mapped;
+    },
+
+    _functionMerge: function(resolvedArgs) {
+      var merged = {};
+      for (var i = 0; i < resolvedArgs.length; i++) {
+        var current = resolvedArgs[i];
+        for (var key in current) {
+          merged[key] = current[key];
+        }
+      }
+      return merged;
+    },
+
+    _functionMax: function(resolvedArgs) {
+      if (resolvedArgs[0].length > 0) {
+        var typeName = this._getTypeName(resolvedArgs[0][0]);
+        if (typeName === TYPE_NUMBER) {
+          return Math.max.apply(Math, resolvedArgs[0]);
+        } else {
+          var elements = resolvedArgs[0];
+          var maxElement = elements[0];
+          for (var i = 1; i < elements.length; i++) {
+              if (maxElement.localeCompare(elements[i]) < 0) {
+                  maxElement = elements[i];
+              }
+          }
+          return maxElement;
+        }
+      } else {
+          return null;
+      }
+    },
+
+    _functionMin: function(resolvedArgs) {
+      if (resolvedArgs[0].length > 0) {
+        var typeName = this._getTypeName(resolvedArgs[0][0]);
+        if (typeName === TYPE_NUMBER) {
+          return Math.min.apply(Math, resolvedArgs[0]);
+        } else {
+          var elements = resolvedArgs[0];
+          var minElement = elements[0];
+          for (var i = 1; i < elements.length; i++) {
+              if (elements[i].localeCompare(minElement) < 0) {
+                  minElement = elements[i];
+              }
+          }
+          return minElement;
+        }
+      } else {
+        return null;
+      }
+    },
+
+    _functionSum: function(resolvedArgs) {
+      var sum = 0;
+      var listToSum = resolvedArgs[0];
+      for (var i = 0; i < listToSum.length; i++) {
+        sum += listToSum[i];
+      }
+      return sum;
+    },
+
+    _functionType: function(resolvedArgs) {
+        switch (this._getTypeName(resolvedArgs[0])) {
+          case TYPE_NUMBER:
+            return "number";
+          case TYPE_STRING:
+            return "string";
+          case TYPE_ARRAY:
+            return "array";
+          case TYPE_OBJECT:
+            return "object";
+          case TYPE_BOOLEAN:
+            return "boolean";
+          case TYPE_EXPREF:
+            return "expref";
+          case TYPE_NULL:
+            return "null";
+        }
+    },
+
+    _functionKeys: function(resolvedArgs) {
+        return Object.keys(resolvedArgs[0]);
+    },
+
+    _functionValues: function(resolvedArgs) {
+        var obj = resolvedArgs[0];
+        var keys = Object.keys(obj);
+        var values = [];
+        for (var i = 0; i < keys.length; i++) {
+            values.push(obj[keys[i]]);
+        }
+        return values;
+    },
+
+    _functionJoin: function(resolvedArgs) {
+        var joinChar = resolvedArgs[0];
+        var listJoin = resolvedArgs[1];
+        return listJoin.join(joinChar);
+    },
+
+    _functionToArray: function(resolvedArgs) {
+        if (this._getTypeName(resolvedArgs[0]) === TYPE_ARRAY) {
+            return resolvedArgs[0];
+        } else {
+            return [resolvedArgs[0]];
+        }
+    },
+
+    _functionToString: function(resolvedArgs) {
+        if (this._getTypeName(resolvedArgs[0]) === TYPE_STRING) {
+            return resolvedArgs[0];
+        } else {
+            return JSON.stringify(resolvedArgs[0]);
+        }
+    },
+
+    _functionToNumber: function(resolvedArgs) {
+        var typeName = this._getTypeName(resolvedArgs[0]);
+        var convertedValue;
+        if (typeName === TYPE_NUMBER) {
+            return resolvedArgs[0];
+        } else if (typeName === TYPE_STRING) {
+            convertedValue = +resolvedArgs[0];
+            if (!isNaN(convertedValue)) {
+                return convertedValue;
+            }
+        }
+        return null;
+    },
+
+    _functionNotNull: function(resolvedArgs) {
+        for (var i = 0; i < resolvedArgs.length; i++) {
+            if (this._getTypeName(resolvedArgs[i]) !== TYPE_NULL) {
+                return resolvedArgs[i];
+            }
+        }
+        return null;
+    },
+
+    _functionSort: function(resolvedArgs) {
+        var sortedArray = resolvedArgs[0].slice(0);
+        sortedArray.sort();
+        return sortedArray;
+    },
+
+    _functionSortBy: function(resolvedArgs) {
+        var sortedArray = resolvedArgs[0].slice(0);
+        if (sortedArray.length === 0) {
+            return sortedArray;
+        }
+        var interpreter = this._interpreter;
+        var exprefNode = resolvedArgs[1];
+        var requiredType = this._getTypeName(
+            interpreter.visit(exprefNode, sortedArray[0]));
+        if ([TYPE_NUMBER, TYPE_STRING].indexOf(requiredType) < 0) {
+            throw new Error("TypeError");
+        }
+        var that = this;
+        // In order to get a stable sort out of an unstable
+        // sort algorithm, we decorate/sort/undecorate (DSU)
+        // by creating a new list of [index, element] pairs.
+        // In the cmp function, if the evaluated elements are
+        // equal, then the index will be used as the tiebreaker.
+        // After the decorated list has been sorted, it will be
+        // undecorated to extract the original elements.
+        var decorated = [];
+        for (var i = 0; i < sortedArray.length; i++) {
+          decorated.push([i, sortedArray[i]]);
+        }
+        decorated.sort(function(a, b) {
+          var exprA = interpreter.visit(exprefNode, a[1]);
+          var exprB = interpreter.visit(exprefNode, b[1]);
+          if (that._getTypeName(exprA) !== requiredType) {
+              throw new Error(
+                  "TypeError: expected " + requiredType + ", received " +
+                  that._getTypeName(exprA));
+          } else if (that._getTypeName(exprB) !== requiredType) {
+              throw new Error(
+                  "TypeError: expected " + requiredType + ", received " +
+                  that._getTypeName(exprB));
+          }
+          if (exprA > exprB) {
+            return 1;
+          } else if (exprA < exprB) {
+            return -1;
+          } else {
+            // If they're equal compare the items by their
+            // order to maintain relative order of equal keys
+            // (i.e. to get a stable sort).
+            return a[0] - b[0];
+          }
+        });
+        // Undecorate: extract out the original list elements.
+        for (var j = 0; j < decorated.length; j++) {
+          sortedArray[j] = decorated[j][1];
+        }
+        return sortedArray;
+    },
+
+    _functionMaxBy: function(resolvedArgs) {
+      var exprefNode = resolvedArgs[1];
+      var resolvedArray = resolvedArgs[0];
+      var keyFunction = this.createKeyFunction(exprefNode, [TYPE_NUMBER, TYPE_STRING]);
+      var maxNumber = -Infinity;
+      var maxRecord;
+      var current;
+      for (var i = 0; i < resolvedArray.length; i++) {
+        current = keyFunction(resolvedArray[i]);
+        if (current > maxNumber) {
+          maxNumber = current;
+          maxRecord = resolvedArray[i];
+        }
+      }
+      return maxRecord;
+    },
+
+    _functionMinBy: function(resolvedArgs) {
+      var exprefNode = resolvedArgs[1];
+      var resolvedArray = resolvedArgs[0];
+      var keyFunction = this.createKeyFunction(exprefNode, [TYPE_NUMBER, TYPE_STRING]);
+      var minNumber = Infinity;
+      var minRecord;
+      var current;
+      for (var i = 0; i < resolvedArray.length; i++) {
+        current = keyFunction(resolvedArray[i]);
+        if (current < minNumber) {
+          minNumber = current;
+          minRecord = resolvedArray[i];
+        }
+      }
+      return minRecord;
+    },
+
+    createKeyFunction: function(exprefNode, allowedTypes) {
+      var that = this;
+      var interpreter = this._interpreter;
+      var keyFunc = function(x) {
+        var current = interpreter.visit(exprefNode, x);
+        if (allowedTypes.indexOf(that._getTypeName(current)) < 0) {
+          var msg = "TypeError: expected one of " + allowedTypes +
+                    ", received " + that._getTypeName(current);
+          throw new Error(msg);
+        }
+        return current;
+      };
+      return keyFunc;
+    }
+
+  };
+
+  function compile(stream) {
+    var parser = new Parser();
+    var ast = parser.parse(stream);
+    return ast;
+  }
+
+  function tokenize(stream) {
+      var lexer = new Lexer();
+      return lexer.tokenize(stream);
+  }
+
+  function search(data, expression) {
+      var parser = new Parser();
+      // This needs to be improved.  Both the interpreter and runtime depend on
+      // each other.  The runtime needs the interpreter to support exprefs.
+      // There's likely a clean way to avoid the cyclic dependency.
+      var runtime = new Runtime();
+      var interpreter = new TreeInterpreter(runtime);
+      runtime._interpreter = interpreter;
+      var node = parser.parse(expression);
+      return interpreter.search(node, data);
+  }
+
+  exports.tokenize = tokenize;
+  exports.compile = compile;
+  exports.search = search;
+  exports.strictDeepEqual = strictDeepEqual;
+})( false ? this.jmespath = {} : exports);
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(15).Buffer;
+var intSize = 4;
+var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
+var chrsz = 8;
+
+function toArray(buf, bigEndian) {
+  if ((buf.length % intSize) !== 0) {
+    var len = buf.length + (intSize - (buf.length % intSize));
+    buf = Buffer.concat([buf, zeroBuffer], len);
+  }
+
+  var arr = [];
+  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
+  for (var i = 0; i < buf.length; i += intSize) {
+    arr.push(fn.call(buf, i));
+  }
+  return arr;
+}
+
+function toBuffer(arr, size, bigEndian) {
+  var buf = new Buffer(size);
+  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
+  for (var i = 0; i < arr.length; i++) {
+    fn.call(buf, arr[i], i * 4, true);
+  }
+  return buf;
+}
+
+function hash(buf, fn, hashSize, bigEndian) {
+  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
+  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
+  return toBuffer(arr, hashSize, bigEndian);
+}
+
+module.exports = { hash: hash };
+
+
+/***/ }),
+/* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*!
+ * Amazon Cognito Auth SDK for JavaScript
+ * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *         http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file.
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+ * OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions
+ * and limitations under the License.
+ */
+
+/** @class */
+var CognitoAccessToken = function () {
+  /**
+   * Constructs a new CognitoAccessToken object
+   * @param {string=} AccessToken The JWT access token.
+   */
+  function CognitoAccessToken(AccessToken) {
+    _classCallCheck(this, CognitoAccessToken);
+
+    // Assign object
+    this.jwtToken = AccessToken || '';
+    this.payload = this.decodePayload();
+  }
+
+  /**
+   * @returns {string} the record's token.
+   */
+
+
+  CognitoAccessToken.prototype.getJwtToken = function getJwtToken() {
+    return this.jwtToken;
+  };
+
+  /**
+   * Sets new value for access token.
+   * @param {string=} accessToken The JWT access token.
+   * @returns {void}
+   */
+
+
+  CognitoAccessToken.prototype.setJwtToken = function setJwtToken(accessToken) {
+    this.jwtToken = accessToken;
+  };
+
+  /**
+   * @returns {int} the token's expiration (exp member).
+   */
+
+
+  CognitoAccessToken.prototype.getExpiration = function getExpiration() {
+    if (this.jwtToken === null) {
+      return undefined;
+    }
+    var jwtPayload = this.jwtToken.split('.')[1];
+    return JSON.parse(atob(jwtPayload)).exp;
+  };
+
+  /**
+   * @returns {string} the username from payload.
+   */
+
+
+  CognitoAccessToken.prototype.getUsername = function getUsername() {
+    if (this.jwtToken === null) {
+      return undefined;
+    }
+    var jwtPayload = this.jwtToken.split('.')[1];
+    return JSON.parse(atob(jwtPayload)).username;
+  };
+
+  /**
+   * @returns {object} the token's payload.
+   */
+
+
+  CognitoAccessToken.prototype.decodePayload = function decodePayload() {
+    var jwtPayload = this.jwtToken.split('.')[1];
+    try {
+      return JSON.parse(atob(jwtPayload));
+    } catch (err) {
+      return {};
+    }
+  };
+
+  return CognitoAccessToken;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (CognitoAccessToken);
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*!
+ * Amazon Cognito Auth SDK for JavaScript
+ * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *         http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file.
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+ * OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions
+ * and limitations under the License.
+ */
+
+/** @class */
+var CognitoIdToken = function () {
+  /**
+   * Constructs a new CognitoIdToken object
+   * @param {string=} IdToken The JWT Id token
+   */
+  function CognitoIdToken(IdToken) {
+    _classCallCheck(this, CognitoIdToken);
+
+    // Assign object
+    this.jwtToken = IdToken || '';
+    this.payload = this.decodePayload();
+  }
+
+  /**
+   * @returns {string} the record's token.
+   */
+
+
+  CognitoIdToken.prototype.getJwtToken = function getJwtToken() {
+    return this.jwtToken;
+  };
+
+  /**
+   * Sets new value for id token.
+   * @param {string=} idToken The JWT Id token
+   * @returns {void}
+   */
+
+
+  CognitoIdToken.prototype.setJwtToken = function setJwtToken(idToken) {
+    this.jwtToken = idToken;
+  };
+
+  /**
+   * @returns {int} the token's expiration (exp member).
+   */
+
+
+  CognitoIdToken.prototype.getExpiration = function getExpiration() {
+    if (this.jwtToken === null) {
+      return undefined;
+    }
+    var jwtPayload = this.jwtToken.split('.')[1];
+    return JSON.parse(atob(jwtPayload)).exp;
+  };
+
+  /**
+   * @returns {object} the token's payload.
+   */
+
+
+  CognitoIdToken.prototype.decodePayload = function decodePayload() {
+    var jwtPayload = this.jwtToken.split('.')[1];
+    try {
+      return JSON.parse(atob(jwtPayload));
+    } catch (err) {
+      return {};
+    }
+  };
+
+  return CognitoIdToken;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (CognitoIdToken);
+
+/***/ }),
+/* 83 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*!
+ * Amazon Cognito Auth SDK for JavaScript
+ * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *         http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file.
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+ * OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions
+ * and limitations under the License.
+ */
+
+/** @class */
+var CognitoRefreshToken = function () {
+  /**
+   * Constructs a new CognitoRefreshToken object
+   * @param {string=} RefreshToken The JWT refresh token.
+   */
+  function CognitoRefreshToken(RefreshToken) {
+    _classCallCheck(this, CognitoRefreshToken);
+
+    // Assign object
+    this.refreshToken = RefreshToken || '';
+  }
+
+  /**
+   * @returns {string} the record's token.
+   */
+
+
+  CognitoRefreshToken.prototype.getToken = function getToken() {
+    return this.refreshToken;
+  };
+
+  /**
+   * Sets new value for refresh token.
+   * @param {string=} refreshToken The JWT refresh token.
+   * @returns {void}
+   */
+
+
+  CognitoRefreshToken.prototype.setToken = function setToken(refreshToken) {
+    this.refreshToken = refreshToken;
+  };
+
+  return CognitoRefreshToken;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (CognitoRefreshToken);
+
+/***/ }),
+/* 84 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*!
+ * Amazon Cognito Auth SDK for JavaScript
+ * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *         http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file.
+ * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+ * OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions
+ * and limitations under the License.
+ */
+
+/** @class */
+var CognitoTokenScopes = function () {
+  /**
+   * Constructs a new CognitoTokenScopes object
+   * @param {array=} TokenScopesArray The token scopes
+   */
+  function CognitoTokenScopes(TokenScopesArray) {
+    _classCallCheck(this, CognitoTokenScopes);
+
+    // Assign object
+    this.tokenScopes = TokenScopesArray || [];
+  }
+
+  /**
+   * @returns {Array} the token scopes.
+   */
+
+
+  CognitoTokenScopes.prototype.getScopes = function getScopes() {
+    return this.tokenScopes;
+  };
+
+  /**
+   * Sets new value for token scopes.
+   * @param {array=} tokenScopes The token scopes
+   * @returns {void}
+   */
+
+
+  CognitoTokenScopes.prototype.setTokenScopes = function setTokenScopes(tokenScopes) {
+    this.tokenScopes = tokenScopes;
+  };
+
+  return CognitoTokenScopes;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (CognitoTokenScopes);
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/*
+ * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * the License. A copy of the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var BrowserStorageCache_1 = __webpack_require__(553);
+exports.BrowserStorageCache = BrowserStorageCache_1.default;
+var InMemoryCache_1 = __webpack_require__(161);
+exports.InMemoryCache = InMemoryCache_1.default;
+exports.default = BrowserStorageCache_1.default;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/*
+ * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * the License. A copy of the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__(554));
+var CacheList_1 = __webpack_require__(555);
+exports.CacheList = CacheList_1.default;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = process && "development" !== 'production' ? // eslint-disable-next-line no-shadow
+function instanceOf(value, constructor) {
+  if (value instanceof constructor) {
+    return true;
+  }
+  if (value) {
+    var valueClass = value.constructor;
+    var className = constructor.name;
+    if (valueClass && valueClass.name === className) {
+      throw new Error('Cannot use ' + className + ' "' + value + '" from another module or realm.\n\nEnsure that there is only one instance of "graphql" in the node_modules\ndirectory. If different versions of "graphql" are the dependencies of other\nrelied on modules, use "resolutions" to ensure only one version is installed.\n\nhttps://yarnpkg.com/en/docs/selective-version-resolutions\n\nDuplicate "graphql" modules cannot be used at the same time since different\nversions may have different capabilities and behavior. The data from one\nversion used in the function from another could produce confusing and\nspurious results.');
+    }
+  }
+  return false;
+} : // eslint-disable-next-line no-shadow
+function instanceOf(value, constructor) {
+  return value instanceof constructor;
+}; /**
+    * Copyright (c) 2015-present, Facebook, Inc.
+    *
+    * This source code is licensed under the MIT license found in the
+    * LICENSE file in the root directory of this source tree.
+    *
+    *  strict
+    */
+
+/**
+ * A replacement for instanceof which includes an error warning when multi-realm
+ * constructors are detected.
+ */
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
+                                                                                                                                                                                                                                                                               * Copyright (c) 2015-present, Facebook, Inc.
+                                                                                                                                                                                                                                                                               *
+                                                                                                                                                                                                                                                                               * This source code is licensed under the MIT license found in the
+                                                                                                                                                                                                                                                                               * LICENSE file in the root directory of this source tree.
+                                                                                                                                                                                                                                                                               *
+                                                                                                                                                                                                                                                                               *  strict
+                                                                                                                                                                                                                                                                               */
+
+exports.astFromValue = astFromValue;
+
+var _iterall = __webpack_require__(41);
+
+var _isNullish = __webpack_require__(60);
+
+var _isNullish2 = _interopRequireDefault(_isNullish);
+
+var _isInvalid = __webpack_require__(17);
+
+var _isInvalid2 = _interopRequireDefault(_isInvalid);
+
+var _objectValues = __webpack_require__(24);
+
+var _objectValues2 = _interopRequireDefault(_objectValues);
+
+var _kinds = __webpack_require__(4);
+
+var _definition = __webpack_require__(3);
+
+var _scalars = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Produces a GraphQL Value AST given a JavaScript value.
+ *
+ * A GraphQL type must be provided, which will be used to interpret different
+ * JavaScript values.
+ *
+ * | JSON Value    | GraphQL Value        |
+ * | ------------- | -------------------- |
+ * | Object        | Input Object         |
+ * | Array         | List                 |
+ * | Boolean       | Boolean              |
+ * | String        | String / Enum Value  |
+ * | Number        | Int / Float          |
+ * | Mixed         | Enum Value           |
+ * | null          | NullValue            |
+ *
+ */
+function astFromValue(value, type) {
+  if ((0, _definition.isNonNullType)(type)) {
+    var astValue = astFromValue(value, type.ofType);
+    if (astValue && astValue.kind === _kinds.Kind.NULL) {
+      return null;
+    }
+    return astValue;
+  }
+
+  // only explicit null, not undefined, NaN
+  if (value === null) {
+    return { kind: _kinds.Kind.NULL };
+  }
+
+  // undefined, NaN
+  if ((0, _isInvalid2.default)(value)) {
+    return null;
+  }
+
+  // Convert JavaScript array to GraphQL list. If the GraphQLType is a list, but
+  // the value is not an array, convert the value using the list's item type.
+  if ((0, _definition.isListType)(type)) {
+    var itemType = type.ofType;
+    if ((0, _iterall.isCollection)(value)) {
+      var valuesNodes = [];
+      (0, _iterall.forEach)(value, function (item) {
+        var itemNode = astFromValue(item, itemType);
+        if (itemNode) {
+          valuesNodes.push(itemNode);
+        }
+      });
+      return { kind: _kinds.Kind.LIST, values: valuesNodes };
+    }
+    return astFromValue(value, itemType);
+  }
+
+  // Populate the fields of the input object by creating ASTs from each value
+  // in the JavaScript object according to the fields in the input type.
+  if ((0, _definition.isInputObjectType)(type)) {
+    if (value === null || (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object') {
+      return null;
+    }
+    var fields = (0, _objectValues2.default)(type.getFields());
+    var fieldNodes = [];
+    fields.forEach(function (field) {
+      var fieldValue = astFromValue(value[field.name], field.type);
+      if (fieldValue) {
+        fieldNodes.push({
+          kind: _kinds.Kind.OBJECT_FIELD,
+          name: { kind: _kinds.Kind.NAME, value: field.name },
+          value: fieldValue
+        });
+      }
+    });
+    return { kind: _kinds.Kind.OBJECT, fields: fieldNodes };
+  }
+
+  if ((0, _definition.isScalarType)(type) || (0, _definition.isEnumType)(type)) {
+    // Since value is an internally represented value, it must be serialized
+    // to an externally represented value before converting into an AST.
+    var serialized = type.serialize(value);
+    if ((0, _isNullish2.default)(serialized)) {
+      return null;
+    }
+
+    // Others serialize based on their corresponding JavaScript scalar types.
+    if (typeof serialized === 'boolean') {
+      return { kind: _kinds.Kind.BOOLEAN, value: serialized };
+    }
+
+    // JavaScript numbers can be Int or Float values.
+    if (typeof serialized === 'number') {
+      var stringNum = String(serialized);
+      return integerStringRegExp.test(stringNum) ? { kind: _kinds.Kind.INT, value: stringNum } : { kind: _kinds.Kind.FLOAT, value: stringNum };
+    }
+
+    if (typeof serialized === 'string') {
+      // Enum types use Enum literals.
+      if ((0, _definition.isEnumType)(type)) {
+        return { kind: _kinds.Kind.ENUM, value: serialized };
+      }
+
+      // ID types can use Int literals.
+      if (type === _scalars.GraphQLID && integerStringRegExp.test(serialized)) {
+        return { kind: _kinds.Kind.INT, value: serialized };
+      }
+
+      return {
+        kind: _kinds.Kind.STRING,
+        value: serialized
+      };
+    }
+
+    throw new TypeError('Cannot convert value to AST: ' + String(serialized));
+  }
+
+  /* istanbul ignore next */
+  throw new Error('Unknown type: ' + type + '.');
+}
+
+/**
+ * IntValue:
+ *   - NegativeSign? 0
+ *   - NegativeSign? NonZeroDigit ( Digit+ )?
+ */
+var integerStringRegExp = /^-?(0|[1-9][0-9]*)$/;
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getLocation = getLocation;
+
+
+/**
+ * Takes a Source and a UTF-8 character offset, and returns the corresponding
+ * line and column as a SourceLocation.
+ */
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+function getLocation(source, position) {
+  var lineRegexp = /\r\n|[\n\r]/g;
+  var line = 1;
+  var column = position + 1;
+  var match = void 0;
+  while ((match = lineRegexp.exec(source.body)) && match.index < position) {
+    line += 1;
+    column = position + 1 - (match.index + match[0].length);
+  }
+  return { line: line, column: column };
+}
+
+/**
+ * Represents a location in a Source.
+ */
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TokenKind = undefined;
+exports.createLexer = createLexer;
+exports.getTokenDesc = getTokenDesc;
+
+var _error = __webpack_require__(2);
+
+var _blockStringValue = __webpack_require__(170);
+
+var _blockStringValue2 = _interopRequireDefault(_blockStringValue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Given a Source object, this returns a Lexer for that source.
+ * A Lexer is a stateful stream generator in that every time
+ * it is advanced, it returns the next token in the Source. Assuming the
+ * source lexes, the final Token emitted by the lexer will be of kind
+ * EOF, after which the lexer will repeatedly return the same EOF token
+ * whenever called.
+ */
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+function createLexer(source, options) {
+  var startOfFileToken = new Tok(TokenKind.SOF, 0, 0, 0, 0, null);
+  var lexer = {
+    source: source,
+    options: options,
+    lastToken: startOfFileToken,
+    token: startOfFileToken,
+    line: 1,
+    lineStart: 0,
+    advance: advanceLexer,
+    lookahead: lookahead
+  };
+  return lexer;
+}
+
+function advanceLexer() {
+  this.lastToken = this.token;
+  var token = this.token = this.lookahead();
+  return token;
+}
+
+function lookahead() {
+  var token = this.token;
+  if (token.kind !== TokenKind.EOF) {
+    do {
+      // Note: next is only mutable during parsing, so we cast to allow this.
+      token = token.next || (token.next = readToken(this, token));
+    } while (token.kind === TokenKind.COMMENT);
+  }
+  return token;
+}
+
+/**
+ * The return type of createLexer.
+ */
+
+
+/**
+ * An exported enum describing the different kinds of tokens that the
+ * lexer emits.
+ */
+var TokenKind = exports.TokenKind = Object.freeze({
+  SOF: '<SOF>',
+  EOF: '<EOF>',
+  BANG: '!',
+  DOLLAR: '$',
+  AMP: '&',
+  PAREN_L: '(',
+  PAREN_R: ')',
+  SPREAD: '...',
+  COLON: ':',
+  EQUALS: '=',
+  AT: '@',
+  BRACKET_L: '[',
+  BRACKET_R: ']',
+  BRACE_L: '{',
+  PIPE: '|',
+  BRACE_R: '}',
+  NAME: 'Name',
+  INT: 'Int',
+  FLOAT: 'Float',
+  STRING: 'String',
+  BLOCK_STRING: 'BlockString',
+  COMMENT: 'Comment'
+});
+
+/**
+ * The enum type representing the token kinds values.
+ */
+
+
+/**
+ * A helper function to describe a token as a string for debugging
+ */
+function getTokenDesc(token) {
+  var value = token.value;
+  return value ? token.kind + ' "' + value + '"' : token.kind;
+}
+
+var charCodeAt = String.prototype.charCodeAt;
+var slice = String.prototype.slice;
+
+/**
+ * Helper function for constructing the Token object.
+ */
+function Tok(kind, start, end, line, column, prev, value) {
+  this.kind = kind;
+  this.start = start;
+  this.end = end;
+  this.line = line;
+  this.column = column;
+  this.value = value;
+  this.prev = prev;
+  this.next = null;
+}
+
+// Print a simplified form when appearing in JSON/util.inspect.
+Tok.prototype.toJSON = Tok.prototype.inspect = function toJSON() {
+  return {
+    kind: this.kind,
+    value: this.value,
+    line: this.line,
+    column: this.column
+  };
+};
+
+function printCharCode(code) {
+  return (
+    // NaN/undefined represents access beyond the end of the file.
+    isNaN(code) ? TokenKind.EOF : // Trust JSON for ASCII.
+    code < 0x007f ? JSON.stringify(String.fromCharCode(code)) : // Otherwise print the escaped form.
+    '"\\u' + ('00' + code.toString(16).toUpperCase()).slice(-4) + '"'
+  );
+}
+
+/**
+ * Gets the next token from the source starting at the given position.
+ *
+ * This skips over whitespace and comments until it finds the next lexable
+ * token, then lexes punctuators immediately or calls the appropriate helper
+ * function for more complicated tokens.
+ */
+function readToken(lexer, prev) {
+  var source = lexer.source;
+  var body = source.body;
+  var bodyLength = body.length;
+
+  var pos = positionAfterWhitespace(body, prev.end, lexer);
+  var line = lexer.line;
+  var col = 1 + pos - lexer.lineStart;
+
+  if (pos >= bodyLength) {
+    return new Tok(TokenKind.EOF, bodyLength, bodyLength, line, col, prev);
+  }
+
+  var code = charCodeAt.call(body, pos);
+
+  // SourceCharacter
+  if (code < 0x0020 && code !== 0x0009 && code !== 0x000a && code !== 0x000d) {
+    throw (0, _error.syntaxError)(source, pos, 'Cannot contain the invalid character ' + printCharCode(code) + '.');
+  }
+
+  switch (code) {
+    // !
+    case 33:
+      return new Tok(TokenKind.BANG, pos, pos + 1, line, col, prev);
+    // #
+    case 35:
+      return readComment(source, pos, line, col, prev);
+    // $
+    case 36:
+      return new Tok(TokenKind.DOLLAR, pos, pos + 1, line, col, prev);
+    // &
+    case 38:
+      return new Tok(TokenKind.AMP, pos, pos + 1, line, col, prev);
+    // (
+    case 40:
+      return new Tok(TokenKind.PAREN_L, pos, pos + 1, line, col, prev);
+    // )
+    case 41:
+      return new Tok(TokenKind.PAREN_R, pos, pos + 1, line, col, prev);
+    // .
+    case 46:
+      if (charCodeAt.call(body, pos + 1) === 46 && charCodeAt.call(body, pos + 2) === 46) {
+        return new Tok(TokenKind.SPREAD, pos, pos + 3, line, col, prev);
+      }
+      break;
+    // :
+    case 58:
+      return new Tok(TokenKind.COLON, pos, pos + 1, line, col, prev);
+    // =
+    case 61:
+      return new Tok(TokenKind.EQUALS, pos, pos + 1, line, col, prev);
+    // @
+    case 64:
+      return new Tok(TokenKind.AT, pos, pos + 1, line, col, prev);
+    // [
+    case 91:
+      return new Tok(TokenKind.BRACKET_L, pos, pos + 1, line, col, prev);
+    // ]
+    case 93:
+      return new Tok(TokenKind.BRACKET_R, pos, pos + 1, line, col, prev);
+    // {
+    case 123:
+      return new Tok(TokenKind.BRACE_L, pos, pos + 1, line, col, prev);
+    // |
+    case 124:
+      return new Tok(TokenKind.PIPE, pos, pos + 1, line, col, prev);
+    // }
+    case 125:
+      return new Tok(TokenKind.BRACE_R, pos, pos + 1, line, col, prev);
+    // A-Z _ a-z
+    case 65:
+    case 66:
+    case 67:
+    case 68:
+    case 69:
+    case 70:
+    case 71:
+    case 72:
+    case 73:
+    case 74:
+    case 75:
+    case 76:
+    case 77:
+    case 78:
+    case 79:
+    case 80:
+    case 81:
+    case 82:
+    case 83:
+    case 84:
+    case 85:
+    case 86:
+    case 87:
+    case 88:
+    case 89:
+    case 90:
+    case 95:
+    case 97:
+    case 98:
+    case 99:
+    case 100:
+    case 101:
+    case 102:
+    case 103:
+    case 104:
+    case 105:
+    case 106:
+    case 107:
+    case 108:
+    case 109:
+    case 110:
+    case 111:
+    case 112:
+    case 113:
+    case 114:
+    case 115:
+    case 116:
+    case 117:
+    case 118:
+    case 119:
+    case 120:
+    case 121:
+    case 122:
+      return readName(source, pos, line, col, prev);
+    // - 0-9
+    case 45:
+    case 48:
+    case 49:
+    case 50:
+    case 51:
+    case 52:
+    case 53:
+    case 54:
+    case 55:
+    case 56:
+    case 57:
+      return readNumber(source, pos, code, line, col, prev);
+    // "
+    case 34:
+      if (charCodeAt.call(body, pos + 1) === 34 && charCodeAt.call(body, pos + 2) === 34) {
+        return readBlockString(source, pos, line, col, prev);
+      }
+      return readString(source, pos, line, col, prev);
+  }
+
+  throw (0, _error.syntaxError)(source, pos, unexpectedCharacterMessage(code));
+}
+
+/**
+ * Report a message that an unexpected character was encountered.
+ */
+function unexpectedCharacterMessage(code) {
+  if (code === 39) {
+    // '
+    return "Unexpected single quote character ('), did you mean to use " + 'a double quote (")?';
+  }
+
+  return 'Cannot parse the unexpected character ' + printCharCode(code) + '.';
+}
+
+/**
+ * Reads from body starting at startPosition until it finds a non-whitespace
+ * or commented character, then returns the position of that character for
+ * lexing.
+ */
+function positionAfterWhitespace(body, startPosition, lexer) {
+  var bodyLength = body.length;
+  var position = startPosition;
+  while (position < bodyLength) {
+    var code = charCodeAt.call(body, position);
+    // tab | space | comma | BOM
+    if (code === 9 || code === 32 || code === 44 || code === 0xfeff) {
+      ++position;
+    } else if (code === 10) {
+      // new line
+      ++position;
+      ++lexer.line;
+      lexer.lineStart = position;
+    } else if (code === 13) {
+      // carriage return
+      if (charCodeAt.call(body, position + 1) === 10) {
+        position += 2;
+      } else {
+        ++position;
+      }
+      ++lexer.line;
+      lexer.lineStart = position;
+    } else {
+      break;
+    }
+  }
+  return position;
+}
+
+/**
+ * Reads a comment token from the source file.
+ *
+ * #[\u0009\u0020-\uFFFF]*
+ */
+function readComment(source, start, line, col, prev) {
+  var body = source.body;
+  var code = void 0;
+  var position = start;
+
+  do {
+    code = charCodeAt.call(body, ++position);
+  } while (code !== null && (
+  // SourceCharacter but not LineTerminator
+  code > 0x001f || code === 0x0009));
+
+  return new Tok(TokenKind.COMMENT, start, position, line, col, prev, slice.call(body, start + 1, position));
+}
+
+/**
+ * Reads a number token from the source file, either a float
+ * or an int depending on whether a decimal point appears.
+ *
+ * Int:   -?(0|[1-9][0-9]*)
+ * Float: -?(0|[1-9][0-9]*)(\.[0-9]+)?((E|e)(+|-)?[0-9]+)?
+ */
+function readNumber(source, start, firstCode, line, col, prev) {
+  var body = source.body;
+  var code = firstCode;
+  var position = start;
+  var isFloat = false;
+
+  if (code === 45) {
+    // -
+    code = charCodeAt.call(body, ++position);
+  }
+
+  if (code === 48) {
+    // 0
+    code = charCodeAt.call(body, ++position);
+    if (code >= 48 && code <= 57) {
+      throw (0, _error.syntaxError)(source, position, 'Invalid number, unexpected digit after 0: ' + printCharCode(code) + '.');
+    }
+  } else {
+    position = readDigits(source, position, code);
+    code = charCodeAt.call(body, position);
+  }
+
+  if (code === 46) {
+    // .
+    isFloat = true;
+
+    code = charCodeAt.call(body, ++position);
+    position = readDigits(source, position, code);
+    code = charCodeAt.call(body, position);
+  }
+
+  if (code === 69 || code === 101) {
+    // E e
+    isFloat = true;
+
+    code = charCodeAt.call(body, ++position);
+    if (code === 43 || code === 45) {
+      // + -
+      code = charCodeAt.call(body, ++position);
+    }
+    position = readDigits(source, position, code);
+  }
+
+  return new Tok(isFloat ? TokenKind.FLOAT : TokenKind.INT, start, position, line, col, prev, slice.call(body, start, position));
+}
+
+/**
+ * Returns the new position in the source after reading digits.
+ */
+function readDigits(source, start, firstCode) {
+  var body = source.body;
+  var position = start;
+  var code = firstCode;
+  if (code >= 48 && code <= 57) {
+    // 0 - 9
+    do {
+      code = charCodeAt.call(body, ++position);
+    } while (code >= 48 && code <= 57); // 0 - 9
+    return position;
+  }
+  throw (0, _error.syntaxError)(source, position, 'Invalid number, expected digit but got: ' + printCharCode(code) + '.');
+}
+
+/**
+ * Reads a string token from the source file.
+ *
+ * "([^"\\\u000A\u000D]|(\\(u[0-9a-fA-F]{4}|["\\/bfnrt])))*"
+ */
+function readString(source, start, line, col, prev) {
+  var body = source.body;
+  var position = start + 1;
+  var chunkStart = position;
+  var code = 0;
+  var value = '';
+
+  while (position < body.length && (code = charCodeAt.call(body, position)) !== null &&
+  // not LineTerminator
+  code !== 0x000a && code !== 0x000d) {
+    // Closing Quote (")
+    if (code === 34) {
+      value += slice.call(body, chunkStart, position);
+      return new Tok(TokenKind.STRING, start, position + 1, line, col, prev, value);
+    }
+
+    // SourceCharacter
+    if (code < 0x0020 && code !== 0x0009) {
+      throw (0, _error.syntaxError)(source, position, 'Invalid character within String: ' + printCharCode(code) + '.');
+    }
+
+    ++position;
+    if (code === 92) {
+      // \
+      value += slice.call(body, chunkStart, position - 1);
+      code = charCodeAt.call(body, position);
+      switch (code) {
+        case 34:
+          value += '"';
+          break;
+        case 47:
+          value += '/';
+          break;
+        case 92:
+          value += '\\';
+          break;
+        case 98:
+          value += '\b';
+          break;
+        case 102:
+          value += '\f';
+          break;
+        case 110:
+          value += '\n';
+          break;
+        case 114:
+          value += '\r';
+          break;
+        case 116:
+          value += '\t';
+          break;
+        case 117:
+          // u
+          var charCode = uniCharCode(charCodeAt.call(body, position + 1), charCodeAt.call(body, position + 2), charCodeAt.call(body, position + 3), charCodeAt.call(body, position + 4));
+          if (charCode < 0) {
+            throw (0, _error.syntaxError)(source, position, 'Invalid character escape sequence: ' + ('\\u' + body.slice(position + 1, position + 5) + '.'));
+          }
+          value += String.fromCharCode(charCode);
+          position += 4;
+          break;
+        default:
+          throw (0, _error.syntaxError)(source, position, 'Invalid character escape sequence: \\' + String.fromCharCode(code) + '.');
+      }
+      ++position;
+      chunkStart = position;
+    }
+  }
+
+  throw (0, _error.syntaxError)(source, position, 'Unterminated string.');
+}
+
+/**
+ * Reads a block string token from the source file.
+ *
+ * """("?"?(\\"""|\\(?!=""")|[^"\\]))*"""
+ */
+function readBlockString(source, start, line, col, prev) {
+  var body = source.body;
+  var position = start + 3;
+  var chunkStart = position;
+  var code = 0;
+  var rawValue = '';
+
+  while (position < body.length && (code = charCodeAt.call(body, position)) !== null) {
+    // Closing Triple-Quote (""")
+    if (code === 34 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34) {
+      rawValue += slice.call(body, chunkStart, position);
+      return new Tok(TokenKind.BLOCK_STRING, start, position + 3, line, col, prev, (0, _blockStringValue2.default)(rawValue));
+    }
+
+    // SourceCharacter
+    if (code < 0x0020 && code !== 0x0009 && code !== 0x000a && code !== 0x000d) {
+      throw (0, _error.syntaxError)(source, position, 'Invalid character within String: ' + printCharCode(code) + '.');
+    }
+
+    // Escape Triple-Quote (\""")
+    if (code === 92 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34 && charCodeAt.call(body, position + 3) === 34) {
+      rawValue += slice.call(body, chunkStart, position) + '"""';
+      position += 4;
+      chunkStart = position;
+    } else {
+      ++position;
+    }
+  }
+
+  throw (0, _error.syntaxError)(source, position, 'Unterminated string.');
+}
+
+/**
+ * Converts four hexidecimal chars to the integer that the
+ * string represents. For example, uniCharCode('0','0','0','f')
+ * will return 15, and uniCharCode('0','0','f','f') returns 255.
+ *
+ * Returns a negative number on error, if a char was invalid.
+ *
+ * This is implemented by noting that char2hex() returns -1 on error,
+ * which means the result of ORing the char2hex() will also be negative.
+ */
+function uniCharCode(a, b, c, d) {
+  return char2hex(a) << 12 | char2hex(b) << 8 | char2hex(c) << 4 | char2hex(d);
+}
+
+/**
+ * Converts a hex character to its integer value.
+ * '0' becomes 0, '9' becomes 9
+ * 'A' becomes 10, 'F' becomes 15
+ * 'a' becomes 10, 'f' becomes 15
+ *
+ * Returns -1 on error.
+ */
+function char2hex(a) {
+  return a >= 48 && a <= 57 ? a - 48 // 0-9
+  : a >= 65 && a <= 70 ? a - 55 // A-F
+  : a >= 97 && a <= 102 ? a - 87 // a-f
+  : -1;
+}
+
+/**
+ * Reads an alphanumeric + underscore name from the source.
+ *
+ * [_A-Za-z][_0-9A-Za-z]*
+ */
+function readName(source, start, line, col, prev) {
+  var body = source.body;
+  var bodyLength = body.length;
+  var position = start + 1;
+  var code = 0;
+  while (position !== bodyLength && (code = charCodeAt.call(body, position)) !== null && (code === 95 || // _
+  code >= 48 && code <= 57 || // 0-9
+  code >= 65 && code <= 90 || // A-Z
+  code >= 97 && code <= 122) // a-z
+  ) {
+    ++position;
+  }
+  return new Tok(TokenKind.NAME, start, position, line, col, prev, slice.call(body, start, position));
+}
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = quotedOrList;
+
+var _orList = __webpack_require__(92);
+
+var _orList2 = _interopRequireDefault(_orList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Given [ A, B, C ] return '"A", "B", or "C"'.
+ */
+function quotedOrList(items) {
+  return (0, _orList2.default)(items.map(function (item) {
+    return '"' + item + '"';
+  }));
+} /**
+   * Copyright (c) 2015-present, Facebook, Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   *
+   *  strict
+   */
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = orList;
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+var MAX_LENGTH = 5;
+
+/**
+ * Given [ A, B, C ] return 'A, B, or C'.
+ */
+function orList(items) {
+  var selected = items.slice(0, MAX_LENGTH);
+  return selected.reduce(function (list, quoted, index) {
+    return list + (selected.length > 2 ? ', ' : ' ') + (index === selected.length - 1 ? 'or ' : '') + quoted;
+  });
+}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.badValueMessage = badValueMessage;
+exports.requiredFieldMessage = requiredFieldMessage;
+exports.unknownFieldMessage = unknownFieldMessage;
+exports.ValuesOfCorrectType = ValuesOfCorrectType;
+
+var _error = __webpack_require__(2);
+
+var _printer = __webpack_require__(21);
+
+var _definition = __webpack_require__(3);
+
+var _isInvalid = __webpack_require__(17);
+
+var _isInvalid2 = _interopRequireDefault(_isInvalid);
+
+var _keyMap = __webpack_require__(26);
+
+var _keyMap2 = _interopRequireDefault(_keyMap);
+
+var _orList = __webpack_require__(92);
+
+var _orList2 = _interopRequireDefault(_orList);
+
+var _suggestionList = __webpack_require__(43);
+
+var _suggestionList2 = _interopRequireDefault(_suggestionList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+function badValueMessage(typeName, valueName, message) {
+  return 'Expected type ' + typeName + ', found ' + valueName + (message ? '; ' + message : '.');
+}
+
+function requiredFieldMessage(typeName, fieldName, fieldTypeName) {
+  return 'Field ' + typeName + '.' + fieldName + ' of required type ' + (fieldTypeName + ' was not provided.');
+}
+
+function unknownFieldMessage(typeName, fieldName, message) {
+  return 'Field "' + fieldName + '" is not defined by type ' + typeName + (message ? '; ' + message : '.');
+}
+
+/**
+ * Value literals of correct type
+ *
+ * A GraphQL document is only valid if all value literals are of the type
+ * expected at their position.
+ */
+function ValuesOfCorrectType(context) {
+  return {
+    NullValue: function NullValue(node) {
+      var type = context.getInputType();
+      if ((0, _definition.isNonNullType)(type)) {
+        context.reportError(new _error.GraphQLError(badValueMessage(String(type), (0, _printer.print)(node)), node));
+      }
+    },
+    ListValue: function ListValue(node) {
+      // Note: TypeInfo will traverse into a list's item type, so look to the
+      // parent input type to check if it is a list.
+      var type = (0, _definition.getNullableType)(context.getParentInputType());
+      if (!(0, _definition.isListType)(type)) {
+        isValidScalar(context, node);
+        return false; // Don't traverse further.
+      }
+    },
+    ObjectValue: function ObjectValue(node) {
+      var type = (0, _definition.getNamedType)(context.getInputType());
+      if (!(0, _definition.isInputObjectType)(type)) {
+        isValidScalar(context, node);
+        return false; // Don't traverse further.
+      }
+      // Ensure every required field exists.
+      var inputFields = type.getFields();
+      var fieldNodeMap = (0, _keyMap2.default)(node.fields, function (field) {
+        return field.name.value;
+      });
+      Object.keys(inputFields).forEach(function (fieldName) {
+        var fieldType = inputFields[fieldName].type;
+        var fieldNode = fieldNodeMap[fieldName];
+        if (!fieldNode && (0, _definition.isNonNullType)(fieldType)) {
+          context.reportError(new _error.GraphQLError(requiredFieldMessage(type.name, fieldName, String(fieldType)), node));
+        }
+      });
+    },
+    ObjectField: function ObjectField(node) {
+      var parentType = (0, _definition.getNamedType)(context.getParentInputType());
+      var fieldType = context.getInputType();
+      if (!fieldType && (0, _definition.isInputObjectType)(parentType)) {
+        var suggestions = (0, _suggestionList2.default)(node.name.value, Object.keys(parentType.getFields()));
+        var didYouMean = suggestions.length !== 0 ? 'Did you mean ' + (0, _orList2.default)(suggestions) + '?' : undefined;
+        context.reportError(new _error.GraphQLError(unknownFieldMessage(parentType.name, node.name.value, didYouMean), node));
+      }
+    },
+    EnumValue: function EnumValue(node) {
+      var type = (0, _definition.getNamedType)(context.getInputType());
+      if (!(0, _definition.isEnumType)(type)) {
+        isValidScalar(context, node);
+      } else if (!type.getValue(node.value)) {
+        context.reportError(new _error.GraphQLError(badValueMessage(type.name, (0, _printer.print)(node), enumTypeSuggestion(type, node)), node));
+      }
+    },
+
+    IntValue: function IntValue(node) {
+      return isValidScalar(context, node);
+    },
+    FloatValue: function FloatValue(node) {
+      return isValidScalar(context, node);
+    },
+    StringValue: function StringValue(node) {
+      return isValidScalar(context, node);
+    },
+    BooleanValue: function BooleanValue(node) {
+      return isValidScalar(context, node);
+    }
+  };
+}
+
+/**
+ * Any value literal may be a valid representation of a Scalar, depending on
+ * that scalar type.
+ */
+function isValidScalar(context, node) {
+  // Report any error at the full type expected by the location.
+  var locationType = context.getInputType();
+  if (!locationType) {
+    return;
+  }
+
+  var type = (0, _definition.getNamedType)(locationType);
+
+  if (!(0, _definition.isScalarType)(type)) {
+    context.reportError(new _error.GraphQLError(badValueMessage(String(locationType), (0, _printer.print)(node), enumTypeSuggestion(type, node)), node));
+    return;
+  }
+
+  // Scalars determine if a literal value is valid via parseLiteral() which
+  // may throw or return an invalid value to indicate failure.
+  try {
+    var parseResult = type.parseLiteral(node, undefined /* variables */);
+    if ((0, _isInvalid2.default)(parseResult)) {
+      context.reportError(new _error.GraphQLError(badValueMessage(String(locationType), (0, _printer.print)(node)), node));
+    }
+  } catch (error) {
+    // Ensure a reference to the original error is maintained.
+    context.reportError(new _error.GraphQLError(badValueMessage(String(locationType), (0, _printer.print)(node), error.message), node, undefined, undefined, undefined, error));
+  }
+}
+
+function enumTypeSuggestion(type, node) {
+  if ((0, _definition.isEnumType)(type)) {
+    var suggestions = (0, _suggestionList2.default)((0, _printer.print)(node), type.getValues().map(function (value) {
+      return value.name;
+    }));
+    if (suggestions.length !== 0) {
+      return 'Did you mean the enum value ' + (0, _orList2.default)(suggestions) + '?';
+    }
+  }
+}
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _error = __webpack_require__(2);
+
+var _visitor = __webpack_require__(29);
+
+var _kinds = __webpack_require__(4);
+
+var _schema = __webpack_require__(7);
+
+var _TypeInfo = __webpack_require__(42);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
+                                                                                                                                                           * Copyright (c) 2015-present, Facebook, Inc.
+                                                                                                                                                           *
+                                                                                                                                                           * This source code is licensed under the MIT license found in the
+                                                                                                                                                           * LICENSE file in the root directory of this source tree.
+                                                                                                                                                           *
+                                                                                                                                                           *  strict
+                                                                                                                                                           */
+
+/**
+ * An instance of this class is passed as the "this" context to all validators,
+ * allowing access to commonly useful contextual information from within a
+ * validation rule.
+ */
+var ValidationContext = function () {
+  function ValidationContext(schema, ast, typeInfo) {
+    _classCallCheck(this, ValidationContext);
+
+    this._schema = schema;
+    this._ast = ast;
+    this._typeInfo = typeInfo;
+    this._errors = [];
+    this._fragmentSpreads = new Map();
+    this._recursivelyReferencedFragments = new Map();
+    this._variableUsages = new Map();
+    this._recursiveVariableUsages = new Map();
+  }
+
+  ValidationContext.prototype.reportError = function reportError(error) {
+    this._errors.push(error);
+  };
+
+  ValidationContext.prototype.getErrors = function getErrors() {
+    return this._errors;
+  };
+
+  ValidationContext.prototype.getSchema = function getSchema() {
+    return this._schema;
+  };
+
+  ValidationContext.prototype.getDocument = function getDocument() {
+    return this._ast;
+  };
+
+  ValidationContext.prototype.getFragment = function getFragment(name) {
+    var fragments = this._fragments;
+    if (!fragments) {
+      this._fragments = fragments = this.getDocument().definitions.reduce(function (frags, statement) {
+        if (statement.kind === _kinds.Kind.FRAGMENT_DEFINITION) {
+          frags[statement.name.value] = statement;
+        }
+        return frags;
+      }, Object.create(null));
+    }
+    return fragments[name];
+  };
+
+  ValidationContext.prototype.getFragmentSpreads = function getFragmentSpreads(node) {
+    var spreads = this._fragmentSpreads.get(node);
+    if (!spreads) {
+      spreads = [];
+      var setsToVisit = [node];
+      while (setsToVisit.length !== 0) {
+        var set = setsToVisit.pop();
+        for (var i = 0; i < set.selections.length; i++) {
+          var selection = set.selections[i];
+          if (selection.kind === _kinds.Kind.FRAGMENT_SPREAD) {
+            spreads.push(selection);
+          } else if (selection.selectionSet) {
+            setsToVisit.push(selection.selectionSet);
+          }
+        }
+      }
+      this._fragmentSpreads.set(node, spreads);
+    }
+    return spreads;
+  };
+
+  ValidationContext.prototype.getRecursivelyReferencedFragments = function getRecursivelyReferencedFragments(operation) {
+    var fragments = this._recursivelyReferencedFragments.get(operation);
+    if (!fragments) {
+      fragments = [];
+      var collectedNames = Object.create(null);
+      var nodesToVisit = [operation.selectionSet];
+      while (nodesToVisit.length !== 0) {
+        var _node = nodesToVisit.pop();
+        var spreads = this.getFragmentSpreads(_node);
+        for (var i = 0; i < spreads.length; i++) {
+          var fragName = spreads[i].name.value;
+          if (collectedNames[fragName] !== true) {
+            collectedNames[fragName] = true;
+            var fragment = this.getFragment(fragName);
+            if (fragment) {
+              fragments.push(fragment);
+              nodesToVisit.push(fragment.selectionSet);
+            }
+          }
+        }
+      }
+      this._recursivelyReferencedFragments.set(operation, fragments);
+    }
+    return fragments;
+  };
+
+  ValidationContext.prototype.getVariableUsages = function getVariableUsages(node) {
+    var usages = this._variableUsages.get(node);
+    if (!usages) {
+      var newUsages = [];
+      var typeInfo = new _TypeInfo.TypeInfo(this._schema);
+      (0, _visitor.visit)(node, (0, _visitor.visitWithTypeInfo)(typeInfo, {
+        VariableDefinition: function VariableDefinition() {
+          return false;
+        },
+        Variable: function Variable(variable) {
+          newUsages.push({ node: variable, type: typeInfo.getInputType() });
+        }
+      }));
+      usages = newUsages;
+      this._variableUsages.set(node, usages);
+    }
+    return usages;
+  };
+
+  ValidationContext.prototype.getRecursiveVariableUsages = function getRecursiveVariableUsages(operation) {
+    var usages = this._recursiveVariableUsages.get(operation);
+    if (!usages) {
+      usages = this.getVariableUsages(operation);
+      var fragments = this.getRecursivelyReferencedFragments(operation);
+      for (var i = 0; i < fragments.length; i++) {
+        Array.prototype.push.apply(usages, this.getVariableUsages(fragments[i]));
+      }
+      this._recursiveVariableUsages.set(operation, usages);
+    }
+    return usages;
+  };
+
+  ValidationContext.prototype.getType = function getType() {
+    return this._typeInfo.getType();
+  };
+
+  ValidationContext.prototype.getParentType = function getParentType() {
+    return this._typeInfo.getParentType();
+  };
+
+  ValidationContext.prototype.getInputType = function getInputType() {
+    return this._typeInfo.getInputType();
+  };
+
+  ValidationContext.prototype.getParentInputType = function getParentInputType() {
+    return this._typeInfo.getParentInputType();
+  };
+
+  ValidationContext.prototype.getFieldDef = function getFieldDef() {
+    return this._typeInfo.getFieldDef();
+  };
+
+  ValidationContext.prototype.getDirective = function getDirective() {
+    return this._typeInfo.getDirective();
+  };
+
+  ValidationContext.prototype.getArgument = function getArgument() {
+    return this._typeInfo.getArgument();
+  };
+
+  return ValidationContext;
+}();
+
+exports.default = ValidationContext;
+
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getVariableValues = getVariableValues;
+exports.getArgumentValues = getArgumentValues;
+exports.getDirectiveValues = getDirectiveValues;
+
+var _error = __webpack_require__(2);
+
+var _find = __webpack_require__(34);
+
+var _find2 = _interopRequireDefault(_find);
+
+var _isInvalid = __webpack_require__(17);
+
+var _isInvalid2 = _interopRequireDefault(_isInvalid);
+
+var _keyMap = __webpack_require__(26);
+
+var _keyMap2 = _interopRequireDefault(_keyMap);
+
+var _coerceValue = __webpack_require__(96);
+
+var _typeFromAST = __webpack_require__(22);
+
+var _valueFromAST = __webpack_require__(63);
+
+var _kinds = __webpack_require__(4);
+
+var _printer = __webpack_require__(21);
+
+var _definition = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Prepares an object map of variableValues of the correct type based on the
+ * provided variable definitions and arbitrary input. If the input cannot be
+ * parsed to match the variable definitions, a GraphQLError will be thrown.
+ *
+ * Note: The returned value is a plain Object with a prototype, since it is
+ * exposed to user code. Care should be taken to not pull values from the
+ * Object prototype.
+ */
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *  strict
+ */
+
+function getVariableValues(schema, varDefNodes, inputs) {
+  var errors = [];
+  var coercedValues = {};
+  for (var i = 0; i < varDefNodes.length; i++) {
+    var varDefNode = varDefNodes[i];
+    var varName = varDefNode.variable.name.value;
+    var varType = (0, _typeFromAST.typeFromAST)(schema, varDefNode.type);
+    if (!(0, _definition.isInputType)(varType)) {
+      errors.push(new _error.GraphQLError('Variable "$' + varName + '" expected value of type ' + ('"' + (0, _printer.print)(varDefNode.type) + '" which cannot be used as an input type.'), [varDefNode.type]));
+    } else {
+      var value = inputs[varName];
+      if ((0, _isInvalid2.default)(value)) {
+        if ((0, _definition.isNonNullType)(varType)) {
+          errors.push(new _error.GraphQLError('Variable "$' + varName + '" of required type ' + ('"' + String(varType) + '" was not provided.'), [varDefNode]));
+        } else if (varDefNode.defaultValue) {
+          coercedValues[varName] = (0, _valueFromAST.valueFromAST)(varDefNode.defaultValue, varType);
+        }
+      } else {
+        var _coerced = (0, _coerceValue.coerceValue)(value, varType, varDefNode);
+        var coercionErrors = _coerced.errors;
+        if (coercionErrors) {
+          (function () {
+            var messagePrelude = 'Variable "$' + varName + '" got invalid value ' + JSON.stringify(value) + '; ';
+            coercionErrors.forEach(function (error) {
+              error.message = messagePrelude + error.message;
+            });
+            errors.push.apply(errors, coercionErrors);
+          })();
+        } else {
+          coercedValues[varName] = _coerced.value;
+        }
+      }
+    }
+  }
+  return errors.length === 0 ? { errors: undefined, coerced: coercedValues } : { errors: errors, coerced: undefined };
+}
+
+/**
+ * Prepares an object map of argument values given a list of argument
+ * definitions and list of argument AST nodes.
+ *
+ * Note: The returned value is a plain Object with a prototype, since it is
+ * exposed to user code. Care should be taken to not pull values from the
+ * Object prototype.
+ */
+function getArgumentValues(def, node, variableValues) {
+  var coercedValues = {};
+  var argDefs = def.args;
+  var argNodes = node.arguments;
+  if (!argDefs || !argNodes) {
+    return coercedValues;
+  }
+  var argNodeMap = (0, _keyMap2.default)(argNodes, function (arg) {
+    return arg.name.value;
+  });
+  for (var i = 0; i < argDefs.length; i++) {
+    var argDef = argDefs[i];
+    var name = argDef.name;
+    var argType = argDef.type;
+    var argumentNode = argNodeMap[name];
+    var defaultValue = argDef.defaultValue;
+    if (!argumentNode) {
+      if (!(0, _isInvalid2.default)(defaultValue)) {
+        coercedValues[name] = defaultValue;
+      } else if ((0, _definition.isNonNullType)(argType)) {
+        throw new _error.GraphQLError('Argument "' + name + '" of required type ' + ('"' + String(argType) + '" was not provided.'), [node]);
+      }
+    } else if (argumentNode.value.kind === _kinds.Kind.VARIABLE) {
+      var variableName = argumentNode.value.name.value;
+      if (variableValues && Object.prototype.hasOwnProperty.call(variableValues, variableName) && !(0, _isInvalid2.default)(variableValues[variableName])) {
+        // Note: this does not check that this variable value is correct.
+        // This assumes that this query has been validated and the variable
+        // usage here is of the correct type.
+        coercedValues[name] = variableValues[variableName];
+      } else if (!(0, _isInvalid2.default)(defaultValue)) {
+        coercedValues[name] = defaultValue;
+      } else if ((0, _definition.isNonNullType)(argType)) {
+        throw new _error.GraphQLError('Argument "' + name + '" of required type "' + String(argType) + '" was ' + ('provided the variable "$' + variableName + '" which was not provided ') + 'a runtime value.', [argumentNode.value]);
+      }
+    } else {
+      var valueNode = argumentNode.value;
+      var coercedValue = (0, _valueFromAST.valueFromAST)(valueNode, argType, variableValues);
+      if ((0, _isInvalid2.default)(coercedValue)) {
+        // Note: ValuesOfCorrectType validation should catch this before
+        // execution. This is a runtime check to ensure execution does not
+        // continue with an invalid argument value.
+        throw new _error.GraphQLError('Argument "' + name + '" has invalid value ' + (0, _printer.print)(valueNode) + '.', [argumentNode.value]);
+      }
+      coercedValues[name] = coercedValue;
+    }
+  }
+  return coercedValues;
+}
+
+/**
+ * Prepares an object map of argument values given a directive definition
+ * and a AST node which may contain directives. Optionally also accepts a map
+ * of variable values.
+ *
+ * If the directive does not exist on the node, returns undefined.
+ *
+ * Note: The returned value is a plain Object with a prototype, since it is
+ * exposed to user code. Care should be taken to not pull values from the
+ * Object prototype.
+ */
+function getDirectiveValues(directiveDef, node, variableValues) {
+  var directiveNode = node.directives && (0, _find2.default)(node.directives, function (directive) {
+    return directive.name.value === directiveDef.name;
+  });
+
+  if (directiveNode) {
+    return getArgumentValues(directiveDef, directiveNode, variableValues);
+  }
+}
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
+                                                                                                                                                                                                                                                                               * Copyright (c) 2015-present, Facebook, Inc.
+                                                                                                                                                                                                                                                                               *
+                                                                                                                                                                                                                                                                               * This source code is licensed under the MIT license found in the
+                                                                                                                                                                                                                                                                               * LICENSE file in the root directory of this source tree.
+                                                                                                                                                                                                                                                                               *
+                                                                                                                                                                                                                                                                               *  strict
+                                                                                                                                                                                                                                                                               */
+
+exports.coerceValue = coerceValue;
+
+var _iterall = __webpack_require__(41);
+
+var _isInvalid = __webpack_require__(17);
+
+var _isInvalid2 = _interopRequireDefault(_isInvalid);
+
+var _isNullish = __webpack_require__(60);
+
+var _isNullish2 = _interopRequireDefault(_isNullish);
+
+var _orList = __webpack_require__(92);
+
+var _orList2 = _interopRequireDefault(_orList);
+
+var _suggestionList = __webpack_require__(43);
+
+var _suggestionList2 = _interopRequireDefault(_suggestionList);
+
+var _error = __webpack_require__(2);
+
+var _definition = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Coerces a JavaScript value given a GraphQL Type.
+ *
+ * Returns either a value which is valid for the provided type or a list of
+ * encountered coercion errors.
+ *
+ */
+function coerceValue(value, type, blameNode, path) {
+  // A value must be provided if the type is non-null.
+  if ((0, _definition.isNonNullType)(type)) {
+    if ((0, _isNullish2.default)(value)) {
+      return ofErrors([coercionError('Expected non-nullable type ' + String(type) + ' not to be null', blameNode, path)]);
+    }
+    return coerceValue(value, type.ofType, blameNode, path);
+  }
+
+  if ((0, _isNullish2.default)(value)) {
+    // Explicitly return the value null.
+    return ofValue(null);
+  }
+
+  if ((0, _definition.isScalarType)(type)) {
+    // Scalars determine if a value is valid via parseValue(), which can
+    // throw to indicate failure. If it throws, maintain a reference to
+    // the original error.
+    try {
+      var parseResult = type.parseValue(value);
+      if ((0, _isInvalid2.default)(parseResult)) {
+        return ofErrors([coercionError('Expected type ' + type.name, blameNode, path)]);
+      }
+      return ofValue(parseResult);
+    } catch (error) {
+      return ofErrors([coercionError('Expected type ' + type.name, blameNode, path, error.message, error)]);
+    }
+  }
+
+  if ((0, _definition.isEnumType)(type)) {
+    if (typeof value === 'string') {
+      var enumValue = type.getValue(value);
+      if (enumValue) {
+        return ofValue(enumValue.value);
+      }
+    }
+    var suggestions = (0, _suggestionList2.default)(String(value), type.getValues().map(function (enumValue) {
+      return enumValue.name;
+    }));
+    var didYouMean = suggestions.length !== 0 ? 'did you mean ' + (0, _orList2.default)(suggestions) + '?' : undefined;
+    return ofErrors([coercionError('Expected type ' + type.name, blameNode, path, didYouMean)]);
+  }
+
+  if ((0, _definition.isListType)(type)) {
+    var itemType = type.ofType;
+    if ((0, _iterall.isCollection)(value)) {
+      var _errors = void 0;
+      var coercedValue = [];
+      (0, _iterall.forEach)(value, function (itemValue, index) {
+        var coercedItem = coerceValue(itemValue, itemType, blameNode, atPath(path, index));
+        if (coercedItem.errors) {
+          _errors = add(_errors, coercedItem.errors);
+        } else if (!_errors) {
+          coercedValue.push(coercedItem.value);
+        }
+      });
+      return _errors ? ofErrors(_errors) : ofValue(coercedValue);
+    }
+    // Lists accept a non-list value as a list of one.
+    var coercedItem = coerceValue(value, itemType, blameNode);
+    return coercedItem.errors ? coercedItem : ofValue([coercedItem.value]);
+  }
+
+  if ((0, _definition.isInputObjectType)(type)) {
+    if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object') {
+      return ofErrors([coercionError('Expected type ' + type.name + ' to be an object', blameNode, path)]);
+    }
+    var _errors2 = void 0;
+    var _coercedValue = {};
+    var fields = type.getFields();
+
+    // Ensure every defined field is valid.
+    for (var fieldName in fields) {
+      if (hasOwnProperty.call(fields, fieldName)) {
+        var field = fields[fieldName];
+        var fieldValue = value[fieldName];
+        if ((0, _isInvalid2.default)(fieldValue)) {
+          if (!(0, _isInvalid2.default)(field.defaultValue)) {
+            _coercedValue[fieldName] = field.defaultValue;
+          } else if ((0, _definition.isNonNullType)(field.type)) {
+            _errors2 = add(_errors2, coercionError('Field ' + printPath(atPath(path, fieldName)) + ' of required ' + ('type ' + String(field.type) + ' was not provided'), blameNode));
+          }
+        } else {
+          var coercedField = coerceValue(fieldValue, field.type, blameNode, atPath(path, fieldName));
+          if (coercedField.errors) {
+            _errors2 = add(_errors2, coercedField.errors);
+          } else if (!_errors2) {
+            _coercedValue[fieldName] = coercedField.value;
+          }
+        }
+      }
+    }
+
+    // Ensure every provided field is defined.
+    for (var _fieldName in value) {
+      if (hasOwnProperty.call(value, _fieldName)) {
+        if (!fields[_fieldName]) {
+          var _suggestions = (0, _suggestionList2.default)(_fieldName, Object.keys(fields));
+          var _didYouMean = _suggestions.length !== 0 ? 'did you mean ' + (0, _orList2.default)(_suggestions) + '?' : undefined;
+          _errors2 = add(_errors2, coercionError('Field "' + _fieldName + '" is not defined by type ' + type.name, blameNode, path, _didYouMean));
+        }
+      }
+    }
+
+    return _errors2 ? ofErrors(_errors2) : ofValue(_coercedValue);
+  }
+
+  /* istanbul ignore next */
+  throw new Error('Unexpected type: ' + type + '.');
+}
+
+function ofValue(value) {
+  return { errors: undefined, value: value };
+}
+
+function ofErrors(errors) {
+  return { errors: errors, value: undefined };
+}
+
+function add(errors, moreErrors) {
+  return (errors || []).concat(moreErrors);
+}
+
+function atPath(prev, key) {
+  return { prev: prev, key: key };
+}
+
+function coercionError(message, blameNode, path, subMessage, originalError) {
+  var pathStr = printPath(path);
+  // Return a GraphQLError instance
+  return new _error.GraphQLError(message + (pathStr ? ' at ' + pathStr : '') + (subMessage ? '; ' + subMessage : '.'), blameNode, undefined, undefined, undefined, originalError);
+}
+
+// Build a string describing the path into the value where the error was found
+function printPath(path) {
+  var pathStr = '';
+  var currentPath = path;
+  while (currentPath) {
+    pathStr = (typeof currentPath.key === 'string' ? '.' + currentPath.key : '[' + String(currentPath.key) + ']') + pathStr;
+    currentPath = currentPath.prev;
+  }
+  return pathStr ? 'value' + pathStr : '';
+}
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(591).Observable;
+
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+/*
+ * Copyright 2017-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
+ * the License. A copy of the License is located at
+ *
+ *     http://aws.amazon.com/apache2.0/
+ *
+ * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+ * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+ * and limitations under the License.
+ */
+var paho_mqtt_1 = __webpack_require__(597);
+var uuid_1 = __webpack_require__(162);
+var Observable = __webpack_require__(97);
+global.Paho = global.Paho || { MQTT: { Client: paho_mqtt_1.Client, Message: paho_mqtt_1.Message } };
+var PubSubProvider_1 = __webpack_require__(202);
+var Logger_1 = __webpack_require__(16);
+var logger = new Logger_1.ConsoleLogger('MqttOverWSProvider');
+var ClientsQueue = /** @class */ (function () {
+    function ClientsQueue() {
+        this.promises = new Map();
+    }
+    ClientsQueue.prototype.get = function (clientId, clientFactory) {
+        return __awaiter(this, void 0, void 0, function () {
+            var promise;
+            return __generator(this, function (_a) {
+                promise = this.promises.get(clientId);
+                if (promise) {
+                    return [2 /*return*/, promise];
+                }
+                promise = clientFactory(clientId);
+                this.promises.set(clientId, promise);
+                return [2 /*return*/, promise];
+            });
+        });
+    };
+    ClientsQueue.prototype.remove = function (clientId) {
+        this.promises.delete(clientId);
+    };
+    return ClientsQueue;
+}());
+var MqttOverWSProvider = /** @class */ (function (_super) {
+    __extends(MqttOverWSProvider, _super);
+    function MqttOverWSProvider(options) {
+        if (options === void 0) { options = {}; }
+        var _this = _super.call(this, __assign({}, options, { clientId: options.clientId || uuid_1.v4() })) || this;
+        _this.clientsQueue = new ClientsQueue();
+        _this._topicObservers = new Map();
+        return _this;
+    }
+    Object.defineProperty(MqttOverWSProvider.prototype, "clientId", {
+        get: function () { return this.options.clientId; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MqttOverWSProvider.prototype, "endpoint", {
+        get: function () { return this.options.aws_pubsub_endpoint; },
+        enumerable: true,
+        configurable: true
+    });
+    MqttOverWSProvider.prototype.getProviderName = function () { return 'MqttOverWSProvider'; };
+    MqttOverWSProvider.prototype.newClient = function (_a) {
+        var url = _a.url, clientId = _a.clientId;
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var client;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        logger.debug('Creating new MQTT client', clientId);
+                        client = new paho_mqtt_1.Client(url, clientId);
+                        // client.trace = (...args) => logger.debug(clientId, ...args);
+                        client.onMessageArrived = function (_a) {
+                            var topic = _a.destinationName, msg = _a.payloadString;
+                            _this._onMessage(topic, msg);
+                        };
+                        client.onConnectionLost = logger.info.bind(logger);
+                        return [4 /*yield*/, new Promise(function (resolve, reject) {
+                                client.connect({
+                                    useSSL: true,
+                                    mqttVersion: 3,
+                                    onSuccess: function () { return resolve(client); },
+                                    onFailure: reject,
+                                });
+                            })];
+                    case 1:
+                        _b.sent();
+                        return [2 /*return*/, client];
+                }
+            });
+        });
+    };
+    MqttOverWSProvider.prototype.connect = function (clientId, options) {
+        if (options === void 0) { options = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.clientsQueue.get(clientId, function (clientId) { return _this.newClient(__assign({}, options, { clientId: clientId })); })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    MqttOverWSProvider.prototype.disconnect = function (clientId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var client;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.clientsQueue.get(clientId, function () { return null; })];
+                    case 1:
+                        client = _a.sent();
+                        if (client) {
+                            client.disconnect();
+                            this.clientsQueue.remove(clientId);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MqttOverWSProvider.prototype.publish = function (topics, msg) {
+        return __awaiter(this, void 0, void 0, function () {
+            var targetTopics, message, url, client;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        targetTopics = [].concat(topics);
+                        message = JSON.stringify(msg);
+                        return [4 /*yield*/, this.endpoint];
+                    case 1:
+                        url = _a.sent();
+                        return [4 /*yield*/, this.connect(this.clientId, { url: url })];
+                    case 2:
+                        client = _a.sent();
+                        logger.debug('Publishing to topic(s)', targetTopics.join(','), message);
+                        targetTopics.forEach(function (topic) { return client.send(topic, message); });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    MqttOverWSProvider.prototype._onMessage = function (topic, msg) {
+        try {
+            var observersForTopic = this._topicObservers.get(topic) || new Set();
+            var parsedMessage_1 = JSON.parse(msg);
+            observersForTopic.forEach(function (observer) { return observer.next(parsedMessage_1); });
+        }
+        catch (error) {
+            logger.warn('Error handling message', error, msg);
+        }
+    };
+    MqttOverWSProvider.prototype.subscribe = function (topics, options) {
+        var _this = this;
+        if (options === void 0) { options = {}; }
+        var targetTopics = [].concat(topics);
+        logger.debug('Subscribing to topic(s)', targetTopics.join(','));
+        return new Observable(function (observer) {
+            targetTopics.forEach(function (topic) {
+                var observersForTopic = _this._topicObservers.get(topic);
+                if (!observersForTopic) {
+                    observersForTopic = new Set();
+                    _this._topicObservers.set(topic, observersForTopic);
+                }
+                observersForTopic.add(observer);
+            });
+            var client;
+            var _a = options.clientId, clientId = _a === void 0 ? _this.clientId : _a;
+            (function () { return __awaiter(_this, void 0, void 0, function () {
+                var _a, url, _b;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            _a = options.url;
+                            if (!(_a === void 0)) return [3 /*break*/, 2];
+                            return [4 /*yield*/, this.endpoint];
+                        case 1:
+                            _b = _c.sent();
+                            return [3 /*break*/, 3];
+                        case 2:
+                            _b = _a;
+                            _c.label = 3;
+                        case 3:
+                            url = _b;
+                            return [4 /*yield*/, this.connect(clientId, { url: url })];
+                        case 4:
+                            client = _c.sent();
+                            targetTopics.forEach(function (topic) { client.subscribe(topic); });
+                            return [2 /*return*/];
+                    }
+                });
+            }); })();
+            return function () {
+                logger.debug('Unsubscribing from topic(s)', targetTopics.join(','));
+                if (client) {
+                    targetTopics.forEach(function (topic) {
+                        client.unsubscribe(topic);
+                        var observersForTopic = _this._topicObservers.get(topic) ||
+                            new Set();
+                        observersForTopic.forEach(function (observer) { return observer.complete(); });
+                        observersForTopic.clear();
+                    });
+                    _this.disconnect(clientId);
+                }
+                return null;
+            };
+        });
+    };
+    return MqttOverWSProvider;
+}(PubSubProvider_1.AbstractPubSubProvider));
+exports.MqttOverWSProvider = MqttOverWSProvider;
+//# sourceMappingURL=MqttOverWSProvider.js.map
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(11);
+var normalizeHeaderName = __webpack_require__(603);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(205);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(205);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
+
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
+  }
+};
+
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(window, this._id);
+};
+
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
+};
+
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
+};
+
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
+  }
+};
+
+// setimmediate attaches itself to the global object
+__webpack_require__(336);
+// On some exotic environments, it's not clear which object `setimmeidate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+
+/***/ }),
+/* 101 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30610,4777 +35381,6 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var util = __webpack_require__(6);
-var JsonBuilder = __webpack_require__(66);
-var JsonParser = __webpack_require__(67);
-
-function buildRequest(req) {
-  var httpRequest = req.httpRequest;
-  var api = req.service.api;
-  var target = api.targetPrefix + '.' + api.operations[req.operation].name;
-  var version = api.jsonVersion || '1.0';
-  var input = api.operations[req.operation].input;
-  var builder = new JsonBuilder();
-
-  if (version === 1) version = '1.0';
-  httpRequest.body = builder.build(req.params || {}, input);
-  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
-  httpRequest.headers['X-Amz-Target'] = target;
-}
-
-function extractError(resp) {
-  var error = {};
-  var httpResponse = resp.httpResponse;
-
-  error.code = httpResponse.headers['x-amzn-errortype'] || 'UnknownError';
-  if (typeof error.code === 'string') {
-    error.code = error.code.split(':')[0];
-  }
-
-  if (httpResponse.body.length > 0) {
-    try {
-      var e = JSON.parse(httpResponse.body.toString());
-      if (e.__type || e.code) {
-        error.code = (e.__type || e.code).split('#').pop();
-      }
-      if (error.code === 'RequestEntityTooLarge') {
-        error.message = 'Request body must be less than 1 MB';
-      } else {
-        error.message = (e.message || e.Message || null);
-      }
-    } catch (e) {
-      error.statusCode = httpResponse.statusCode;
-      error.message = httpResponse.statusMessage;
-    }
-  } else {
-    error.statusCode = httpResponse.statusCode;
-    error.message = httpResponse.statusCode.toString();
-  }
-
-  resp.error = util.error(new Error(), error);
-}
-
-function extractData(resp) {
-  var body = resp.httpResponse.body.toString() || '{}';
-  if (resp.request.service.config.convertResponseTypes === false) {
-    resp.data = JSON.parse(body);
-  } else {
-    var operation = resp.request.service.api.operations[resp.request.operation];
-    var shape = operation.output || {};
-    var parser = new JsonParser();
-    resp.data = parser.parse(body, shape);
-  }
-}
-
-module.exports = {
-  buildRequest: buildRequest,
-  extractError: extractError,
-  extractData: extractData
-};
-
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var util = __webpack_require__(6);
-
-function JsonBuilder() { }
-
-JsonBuilder.prototype.build = function(value, shape) {
-  return JSON.stringify(translate(value, shape));
-};
-
-function translate(value, shape) {
-  if (!shape || value === undefined || value === null) return undefined;
-
-  switch (shape.type) {
-    case 'structure': return translateStructure(value, shape);
-    case 'map': return translateMap(value, shape);
-    case 'list': return translateList(value, shape);
-    default: return translateScalar(value, shape);
-  }
-}
-
-function translateStructure(structure, shape) {
-  var struct = {};
-  util.each(structure, function(name, value) {
-    var memberShape = shape.members[name];
-    if (memberShape) {
-      if (memberShape.location !== 'body') return;
-      var locationName = memberShape.isLocationName ? memberShape.name : name;
-      var result = translate(value, memberShape);
-      if (result !== undefined) struct[locationName] = result;
-    }
-  });
-  return struct;
-}
-
-function translateList(list, shape) {
-  var out = [];
-  util.arrayEach(list, function(value) {
-    var result = translate(value, shape.member);
-    if (result !== undefined) out.push(result);
-  });
-  return out;
-}
-
-function translateMap(map, shape) {
-  var out = {};
-  util.each(map, function(key, value) {
-    var result = translate(value, shape.value);
-    if (result !== undefined) out[key] = result;
-  });
-  return out;
-}
-
-function translateScalar(value, shape) {
-  return shape.toWireFormat(value);
-}
-
-module.exports = JsonBuilder;
-
-
-/***/ }),
-/* 67 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var util = __webpack_require__(6);
-
-function JsonParser() { }
-
-JsonParser.prototype.parse = function(value, shape) {
-  return translate(JSON.parse(value), shape);
-};
-
-function translate(value, shape) {
-  if (!shape || value === undefined) return undefined;
-
-  switch (shape.type) {
-    case 'structure': return translateStructure(value, shape);
-    case 'map': return translateMap(value, shape);
-    case 'list': return translateList(value, shape);
-    default: return translateScalar(value, shape);
-  }
-}
-
-function translateStructure(structure, shape) {
-  if (structure == null) return undefined;
-
-  var struct = {};
-  var shapeMembers = shape.members;
-  util.each(shapeMembers, function(name, memberShape) {
-    var locationName = memberShape.isLocationName ? memberShape.name : name;
-    if (Object.prototype.hasOwnProperty.call(structure, locationName)) {
-      var value = structure[locationName];
-      var result = translate(value, memberShape);
-      if (result !== undefined) struct[name] = result;
-    }
-  });
-  return struct;
-}
-
-function translateList(list, shape) {
-  if (list == null) return undefined;
-
-  var out = [];
-  util.arrayEach(list, function(value) {
-    var result = translate(value, shape.member);
-    if (result === undefined) out.push(null);
-    else out.push(result);
-  });
-  return out;
-}
-
-function translateMap(map, shape) {
-  if (map == null) return undefined;
-
-  var out = {};
-  util.each(map, function(key, value) {
-    var result = translate(value, shape.value);
-    if (result === undefined) out[key] = null;
-    else out[key] = result;
-  });
-  return out;
-}
-
-function translateScalar(value, shape) {
-  return shape.toType(value);
-}
-
-module.exports = JsonParser;
-
-
-/***/ }),
-/* 68 */
-/***/ (function(module, exports) {
-
-/**
- * This method returns the first argument it receives.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Util
- * @param {*} value Any value.
- * @returns {*} Returns `value`.
- * @example
- *
- * var object = { 'a': 1 };
- *
- * console.log(_.identity(object) === object);
- * // => true
- */
-function identity(value) {
-  return value;
-}
-
-module.exports = identity;
-
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports) {
-
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
-
-/**
- * Checks if `value` is a valid array-like length.
- *
- * **Note:** This method is loosely based on
- * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
- * @example
- *
- * _.isLength(3);
- * // => true
- *
- * _.isLength(Number.MIN_VALUE);
- * // => false
- *
- * _.isLength(Infinity);
- * // => false
- *
- * _.isLength('3');
- * // => false
- */
-function isLength(value) {
-  return typeof value == 'number' &&
-    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-module.exports = isLength;
-
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports) {
-
-/** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER = 9007199254740991;
-
-/** Used to detect unsigned integer values. */
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-
-/**
- * Checks if `value` is a valid array-like index.
- *
- * @private
- * @param {*} value The value to check.
- * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
- */
-function isIndex(value, length) {
-  var type = typeof value;
-  length = length == null ? MAX_SAFE_INTEGER : length;
-
-  return !!length &&
-    (type == 'number' ||
-      (type != 'symbol' && reIsUint.test(value))) &&
-        (value > -1 && value % 1 == 0 && value < length);
-}
-
-module.exports = isIndex;
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports) {
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Checks if `value` is likely a prototype object.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
- */
-function isPrototype(value) {
-  var Ctor = value && value.constructor,
-      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
-
-  return value === proto;
-}
-
-module.exports = isPrototype;
-
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsArguments = __webpack_require__(378),
-    isObjectLike = __webpack_require__(40);
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Built-in value references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/**
- * Checks if `value` is likely an `arguments` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- *  else `false`.
- * @example
- *
- * _.isArguments(function() { return arguments; }());
- * // => true
- *
- * _.isArguments([1, 2, 3]);
- * // => false
- */
-var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
-  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
-    !propertyIsEnumerable.call(value, 'callee');
-};
-
-module.exports = isArguments;
-
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(20),
-    stubFalse = __webpack_require__(379);
-
-/** Detect free variable `exports`. */
-var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module`. */
-var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
-
-/** Detect the popular CommonJS extension `module.exports`. */
-var moduleExports = freeModule && freeModule.exports === freeExports;
-
-/** Built-in value references. */
-var Buffer = moduleExports ? root.Buffer : undefined;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
-
-/**
- * Checks if `value` is a buffer.
- *
- * @static
- * @memberOf _
- * @since 4.3.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
- * @example
- *
- * _.isBuffer(new Buffer(2));
- * // => true
- *
- * _.isBuffer(new Uint8Array(2));
- * // => false
- */
-var isBuffer = nativeIsBuffer || stubFalse;
-
-module.exports = isBuffer;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)(module)))
-
-/***/ }),
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseIsTypedArray = __webpack_require__(380),
-    baseUnary = __webpack_require__(381),
-    nodeUtil = __webpack_require__(382);
-
-/* Node.js helper references. */
-var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
-
-/**
- * Checks if `value` is classified as a typed array.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a typed array, else `false`.
- * @example
- *
- * _.isTypedArray(new Uint8Array);
- * // => true
- *
- * _.isTypedArray([]);
- * // => false
- */
-var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
-
-module.exports = isTypedArray;
-
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getNative = __webpack_require__(28),
-    root = __webpack_require__(20);
-
-/* Built-in method references that are verified to be native. */
-var Map = getNative(root, 'Map');
-
-module.exports = Map;
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var mapCacheClear = __webpack_require__(415),
-    mapCacheDelete = __webpack_require__(422),
-    mapCacheGet = __webpack_require__(424),
-    mapCacheHas = __webpack_require__(425),
-    mapCacheSet = __webpack_require__(426);
-
-/**
- * Creates a map cache object to store key-value pairs.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function MapCache(entries) {
-  var index = -1,
-      length = entries == null ? 0 : entries.length;
-
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-
-// Add methods to `MapCache`.
-MapCache.prototype.clear = mapCacheClear;
-MapCache.prototype['delete'] = mapCacheDelete;
-MapCache.prototype.get = mapCacheGet;
-MapCache.prototype.has = mapCacheHas;
-MapCache.prototype.set = mapCacheSet;
-
-module.exports = MapCache;
-
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isArray = __webpack_require__(14),
-    isSymbol = __webpack_require__(78);
-
-/** Used to match property names within property paths. */
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
-    reIsPlainProp = /^\w*$/;
-
-/**
- * Checks if `value` is a property name and not a property path.
- *
- * @private
- * @param {*} value The value to check.
- * @param {Object} [object] The object to query keys on.
- * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
- */
-function isKey(value, object) {
-  if (isArray(value)) {
-    return false;
-  }
-  var type = typeof value;
-  if (type == 'number' || type == 'symbol' || type == 'boolean' ||
-      value == null || isSymbol(value)) {
-    return true;
-  }
-  return reIsPlainProp.test(value) || !reIsDeepProp.test(value) ||
-    (object != null && value in Object(object));
-}
-
-module.exports = isKey;
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetTag = __webpack_require__(37),
-    isObjectLike = __webpack_require__(40);
-
-/** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-  return typeof value == 'symbol' ||
-    (isObjectLike(value) && baseGetTag(value) == symbolTag);
-}
-
-module.exports = isSymbol;
-
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function(exports) {
-  "use strict";
-
-  function isArray(obj) {
-    if (obj !== null) {
-      return Object.prototype.toString.call(obj) === "[object Array]";
-    } else {
-      return false;
-    }
-  }
-
-  function isObject(obj) {
-    if (obj !== null) {
-      return Object.prototype.toString.call(obj) === "[object Object]";
-    } else {
-      return false;
-    }
-  }
-
-  function strictDeepEqual(first, second) {
-    // Check the scalar case first.
-    if (first === second) {
-      return true;
-    }
-
-    // Check if they are the same type.
-    var firstType = Object.prototype.toString.call(first);
-    if (firstType !== Object.prototype.toString.call(second)) {
-      return false;
-    }
-    // We know that first and second have the same type so we can just check the
-    // first type from now on.
-    if (isArray(first) === true) {
-      // Short circuit if they're not the same length;
-      if (first.length !== second.length) {
-        return false;
-      }
-      for (var i = 0; i < first.length; i++) {
-        if (strictDeepEqual(first[i], second[i]) === false) {
-          return false;
-        }
-      }
-      return true;
-    }
-    if (isObject(first) === true) {
-      // An object is equal if it has the same key/value pairs.
-      var keysSeen = {};
-      for (var key in first) {
-        if (hasOwnProperty.call(first, key)) {
-          if (strictDeepEqual(first[key], second[key]) === false) {
-            return false;
-          }
-          keysSeen[key] = true;
-        }
-      }
-      // Now check that there aren't any keys in second that weren't
-      // in first.
-      for (var key2 in second) {
-        if (hasOwnProperty.call(second, key2)) {
-          if (keysSeen[key2] !== true) {
-            return false;
-          }
-        }
-      }
-      return true;
-    }
-    return false;
-  }
-
-  function isFalse(obj) {
-    // From the spec:
-    // A false value corresponds to the following values:
-    // Empty list
-    // Empty object
-    // Empty string
-    // False boolean
-    // null value
-
-    // First check the scalar values.
-    if (obj === "" || obj === false || obj === null) {
-        return true;
-    } else if (isArray(obj) && obj.length === 0) {
-        // Check for an empty array.
-        return true;
-    } else if (isObject(obj)) {
-        // Check for an empty object.
-        for (var key in obj) {
-            // If there are any keys, then
-            // the object is not empty so the object
-            // is not false.
-            if (obj.hasOwnProperty(key)) {
-              return false;
-            }
-        }
-        return true;
-    } else {
-        return false;
-    }
-  }
-
-  function objValues(obj) {
-    var keys = Object.keys(obj);
-    var values = [];
-    for (var i = 0; i < keys.length; i++) {
-      values.push(obj[keys[i]]);
-    }
-    return values;
-  }
-
-  function merge(a, b) {
-      var merged = {};
-      for (var key in a) {
-          merged[key] = a[key];
-      }
-      for (var key2 in b) {
-          merged[key2] = b[key2];
-      }
-      return merged;
-  }
-
-  var trimLeft;
-  if (typeof String.prototype.trimLeft === "function") {
-    trimLeft = function(str) {
-      return str.trimLeft();
-    };
-  } else {
-    trimLeft = function(str) {
-      return str.match(/^\s*(.*)/)[1];
-    };
-  }
-
-  // Type constants used to define functions.
-  var TYPE_NUMBER = 0;
-  var TYPE_ANY = 1;
-  var TYPE_STRING = 2;
-  var TYPE_ARRAY = 3;
-  var TYPE_OBJECT = 4;
-  var TYPE_BOOLEAN = 5;
-  var TYPE_EXPREF = 6;
-  var TYPE_NULL = 7;
-  var TYPE_ARRAY_NUMBER = 8;
-  var TYPE_ARRAY_STRING = 9;
-
-  var TOK_EOF = "EOF";
-  var TOK_UNQUOTEDIDENTIFIER = "UnquotedIdentifier";
-  var TOK_QUOTEDIDENTIFIER = "QuotedIdentifier";
-  var TOK_RBRACKET = "Rbracket";
-  var TOK_RPAREN = "Rparen";
-  var TOK_COMMA = "Comma";
-  var TOK_COLON = "Colon";
-  var TOK_RBRACE = "Rbrace";
-  var TOK_NUMBER = "Number";
-  var TOK_CURRENT = "Current";
-  var TOK_EXPREF = "Expref";
-  var TOK_PIPE = "Pipe";
-  var TOK_OR = "Or";
-  var TOK_AND = "And";
-  var TOK_EQ = "EQ";
-  var TOK_GT = "GT";
-  var TOK_LT = "LT";
-  var TOK_GTE = "GTE";
-  var TOK_LTE = "LTE";
-  var TOK_NE = "NE";
-  var TOK_FLATTEN = "Flatten";
-  var TOK_STAR = "Star";
-  var TOK_FILTER = "Filter";
-  var TOK_DOT = "Dot";
-  var TOK_NOT = "Not";
-  var TOK_LBRACE = "Lbrace";
-  var TOK_LBRACKET = "Lbracket";
-  var TOK_LPAREN= "Lparen";
-  var TOK_LITERAL= "Literal";
-
-  // The "&", "[", "<", ">" tokens
-  // are not in basicToken because
-  // there are two token variants
-  // ("&&", "[?", "<=", ">=").  This is specially handled
-  // below.
-
-  var basicTokens = {
-    ".": TOK_DOT,
-    "*": TOK_STAR,
-    ",": TOK_COMMA,
-    ":": TOK_COLON,
-    "{": TOK_LBRACE,
-    "}": TOK_RBRACE,
-    "]": TOK_RBRACKET,
-    "(": TOK_LPAREN,
-    ")": TOK_RPAREN,
-    "@": TOK_CURRENT
-  };
-
-  var operatorStartToken = {
-      "<": true,
-      ">": true,
-      "=": true,
-      "!": true
-  };
-
-  var skipChars = {
-      " ": true,
-      "\t": true,
-      "\n": true
-  };
-
-
-  function isAlpha(ch) {
-      return (ch >= "a" && ch <= "z") ||
-             (ch >= "A" && ch <= "Z") ||
-             ch === "_";
-  }
-
-  function isNum(ch) {
-      return (ch >= "0" && ch <= "9") ||
-             ch === "-";
-  }
-  function isAlphaNum(ch) {
-      return (ch >= "a" && ch <= "z") ||
-             (ch >= "A" && ch <= "Z") ||
-             (ch >= "0" && ch <= "9") ||
-             ch === "_";
-  }
-
-  function Lexer() {
-  }
-  Lexer.prototype = {
-      tokenize: function(stream) {
-          var tokens = [];
-          this._current = 0;
-          var start;
-          var identifier;
-          var token;
-          while (this._current < stream.length) {
-              if (isAlpha(stream[this._current])) {
-                  start = this._current;
-                  identifier = this._consumeUnquotedIdentifier(stream);
-                  tokens.push({type: TOK_UNQUOTEDIDENTIFIER,
-                               value: identifier,
-                               start: start});
-              } else if (basicTokens[stream[this._current]] !== undefined) {
-                  tokens.push({type: basicTokens[stream[this._current]],
-                              value: stream[this._current],
-                              start: this._current});
-                  this._current++;
-              } else if (isNum(stream[this._current])) {
-                  token = this._consumeNumber(stream);
-                  tokens.push(token);
-              } else if (stream[this._current] === "[") {
-                  // No need to increment this._current.  This happens
-                  // in _consumeLBracket
-                  token = this._consumeLBracket(stream);
-                  tokens.push(token);
-              } else if (stream[this._current] === "\"") {
-                  start = this._current;
-                  identifier = this._consumeQuotedIdentifier(stream);
-                  tokens.push({type: TOK_QUOTEDIDENTIFIER,
-                               value: identifier,
-                               start: start});
-              } else if (stream[this._current] === "'") {
-                  start = this._current;
-                  identifier = this._consumeRawStringLiteral(stream);
-                  tokens.push({type: TOK_LITERAL,
-                               value: identifier,
-                               start: start});
-              } else if (stream[this._current] === "`") {
-                  start = this._current;
-                  var literal = this._consumeLiteral(stream);
-                  tokens.push({type: TOK_LITERAL,
-                               value: literal,
-                               start: start});
-              } else if (operatorStartToken[stream[this._current]] !== undefined) {
-                  tokens.push(this._consumeOperator(stream));
-              } else if (skipChars[stream[this._current]] !== undefined) {
-                  // Ignore whitespace.
-                  this._current++;
-              } else if (stream[this._current] === "&") {
-                  start = this._current;
-                  this._current++;
-                  if (stream[this._current] === "&") {
-                      this._current++;
-                      tokens.push({type: TOK_AND, value: "&&", start: start});
-                  } else {
-                      tokens.push({type: TOK_EXPREF, value: "&", start: start});
-                  }
-              } else if (stream[this._current] === "|") {
-                  start = this._current;
-                  this._current++;
-                  if (stream[this._current] === "|") {
-                      this._current++;
-                      tokens.push({type: TOK_OR, value: "||", start: start});
-                  } else {
-                      tokens.push({type: TOK_PIPE, value: "|", start: start});
-                  }
-              } else {
-                  var error = new Error("Unknown character:" + stream[this._current]);
-                  error.name = "LexerError";
-                  throw error;
-              }
-          }
-          return tokens;
-      },
-
-      _consumeUnquotedIdentifier: function(stream) {
-          var start = this._current;
-          this._current++;
-          while (this._current < stream.length && isAlphaNum(stream[this._current])) {
-              this._current++;
-          }
-          return stream.slice(start, this._current);
-      },
-
-      _consumeQuotedIdentifier: function(stream) {
-          var start = this._current;
-          this._current++;
-          var maxLength = stream.length;
-          while (stream[this._current] !== "\"" && this._current < maxLength) {
-              // You can escape a double quote and you can escape an escape.
-              var current = this._current;
-              if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
-                                               stream[current + 1] === "\"")) {
-                  current += 2;
-              } else {
-                  current++;
-              }
-              this._current = current;
-          }
-          this._current++;
-          return JSON.parse(stream.slice(start, this._current));
-      },
-
-      _consumeRawStringLiteral: function(stream) {
-          var start = this._current;
-          this._current++;
-          var maxLength = stream.length;
-          while (stream[this._current] !== "'" && this._current < maxLength) {
-              // You can escape a single quote and you can escape an escape.
-              var current = this._current;
-              if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
-                                               stream[current + 1] === "'")) {
-                  current += 2;
-              } else {
-                  current++;
-              }
-              this._current = current;
-          }
-          this._current++;
-          var literal = stream.slice(start + 1, this._current - 1);
-          return literal.replace("\\'", "'");
-      },
-
-      _consumeNumber: function(stream) {
-          var start = this._current;
-          this._current++;
-          var maxLength = stream.length;
-          while (isNum(stream[this._current]) && this._current < maxLength) {
-              this._current++;
-          }
-          var value = parseInt(stream.slice(start, this._current));
-          return {type: TOK_NUMBER, value: value, start: start};
-      },
-
-      _consumeLBracket: function(stream) {
-          var start = this._current;
-          this._current++;
-          if (stream[this._current] === "?") {
-              this._current++;
-              return {type: TOK_FILTER, value: "[?", start: start};
-          } else if (stream[this._current] === "]") {
-              this._current++;
-              return {type: TOK_FLATTEN, value: "[]", start: start};
-          } else {
-              return {type: TOK_LBRACKET, value: "[", start: start};
-          }
-      },
-
-      _consumeOperator: function(stream) {
-          var start = this._current;
-          var startingChar = stream[start];
-          this._current++;
-          if (startingChar === "!") {
-              if (stream[this._current] === "=") {
-                  this._current++;
-                  return {type: TOK_NE, value: "!=", start: start};
-              } else {
-                return {type: TOK_NOT, value: "!", start: start};
-              }
-          } else if (startingChar === "<") {
-              if (stream[this._current] === "=") {
-                  this._current++;
-                  return {type: TOK_LTE, value: "<=", start: start};
-              } else {
-                  return {type: TOK_LT, value: "<", start: start};
-              }
-          } else if (startingChar === ">") {
-              if (stream[this._current] === "=") {
-                  this._current++;
-                  return {type: TOK_GTE, value: ">=", start: start};
-              } else {
-                  return {type: TOK_GT, value: ">", start: start};
-              }
-          } else if (startingChar === "=") {
-              if (stream[this._current] === "=") {
-                  this._current++;
-                  return {type: TOK_EQ, value: "==", start: start};
-              }
-          }
-      },
-
-      _consumeLiteral: function(stream) {
-          this._current++;
-          var start = this._current;
-          var maxLength = stream.length;
-          var literal;
-          while(stream[this._current] !== "`" && this._current < maxLength) {
-              // You can escape a literal char or you can escape the escape.
-              var current = this._current;
-              if (stream[current] === "\\" && (stream[current + 1] === "\\" ||
-                                               stream[current + 1] === "`")) {
-                  current += 2;
-              } else {
-                  current++;
-              }
-              this._current = current;
-          }
-          var literalString = trimLeft(stream.slice(start, this._current));
-          literalString = literalString.replace("\\`", "`");
-          if (this._looksLikeJSON(literalString)) {
-              literal = JSON.parse(literalString);
-          } else {
-              // Try to JSON parse it as "<literal>"
-              literal = JSON.parse("\"" + literalString + "\"");
-          }
-          // +1 gets us to the ending "`", +1 to move on to the next char.
-          this._current++;
-          return literal;
-      },
-
-      _looksLikeJSON: function(literalString) {
-          var startingChars = "[{\"";
-          var jsonLiterals = ["true", "false", "null"];
-          var numberLooking = "-0123456789";
-
-          if (literalString === "") {
-              return false;
-          } else if (startingChars.indexOf(literalString[0]) >= 0) {
-              return true;
-          } else if (jsonLiterals.indexOf(literalString) >= 0) {
-              return true;
-          } else if (numberLooking.indexOf(literalString[0]) >= 0) {
-              try {
-                  JSON.parse(literalString);
-                  return true;
-              } catch (ex) {
-                  return false;
-              }
-          } else {
-              return false;
-          }
-      }
-  };
-
-      var bindingPower = {};
-      bindingPower[TOK_EOF] = 0;
-      bindingPower[TOK_UNQUOTEDIDENTIFIER] = 0;
-      bindingPower[TOK_QUOTEDIDENTIFIER] = 0;
-      bindingPower[TOK_RBRACKET] = 0;
-      bindingPower[TOK_RPAREN] = 0;
-      bindingPower[TOK_COMMA] = 0;
-      bindingPower[TOK_RBRACE] = 0;
-      bindingPower[TOK_NUMBER] = 0;
-      bindingPower[TOK_CURRENT] = 0;
-      bindingPower[TOK_EXPREF] = 0;
-      bindingPower[TOK_PIPE] = 1;
-      bindingPower[TOK_OR] = 2;
-      bindingPower[TOK_AND] = 3;
-      bindingPower[TOK_EQ] = 5;
-      bindingPower[TOK_GT] = 5;
-      bindingPower[TOK_LT] = 5;
-      bindingPower[TOK_GTE] = 5;
-      bindingPower[TOK_LTE] = 5;
-      bindingPower[TOK_NE] = 5;
-      bindingPower[TOK_FLATTEN] = 9;
-      bindingPower[TOK_STAR] = 20;
-      bindingPower[TOK_FILTER] = 21;
-      bindingPower[TOK_DOT] = 40;
-      bindingPower[TOK_NOT] = 45;
-      bindingPower[TOK_LBRACE] = 50;
-      bindingPower[TOK_LBRACKET] = 55;
-      bindingPower[TOK_LPAREN] = 60;
-
-  function Parser() {
-  }
-
-  Parser.prototype = {
-      parse: function(expression) {
-          this._loadTokens(expression);
-          this.index = 0;
-          var ast = this.expression(0);
-          if (this._lookahead(0) !== TOK_EOF) {
-              var t = this._lookaheadToken(0);
-              var error = new Error(
-                  "Unexpected token type: " + t.type + ", value: " + t.value);
-              error.name = "ParserError";
-              throw error;
-          }
-          return ast;
-      },
-
-      _loadTokens: function(expression) {
-          var lexer = new Lexer();
-          var tokens = lexer.tokenize(expression);
-          tokens.push({type: TOK_EOF, value: "", start: expression.length});
-          this.tokens = tokens;
-      },
-
-      expression: function(rbp) {
-          var leftToken = this._lookaheadToken(0);
-          this._advance();
-          var left = this.nud(leftToken);
-          var currentToken = this._lookahead(0);
-          while (rbp < bindingPower[currentToken]) {
-              this._advance();
-              left = this.led(currentToken, left);
-              currentToken = this._lookahead(0);
-          }
-          return left;
-      },
-
-      _lookahead: function(number) {
-          return this.tokens[this.index + number].type;
-      },
-
-      _lookaheadToken: function(number) {
-          return this.tokens[this.index + number];
-      },
-
-      _advance: function() {
-          this.index++;
-      },
-
-      nud: function(token) {
-        var left;
-        var right;
-        var expression;
-        switch (token.type) {
-          case TOK_LITERAL:
-            return {type: "Literal", value: token.value};
-          case TOK_UNQUOTEDIDENTIFIER:
-            return {type: "Field", name: token.value};
-          case TOK_QUOTEDIDENTIFIER:
-            var node = {type: "Field", name: token.value};
-            if (this._lookahead(0) === TOK_LPAREN) {
-                throw new Error("Quoted identifier not allowed for function names.");
-            } else {
-                return node;
-            }
-            break;
-          case TOK_NOT:
-            right = this.expression(bindingPower.Not);
-            return {type: "NotExpression", children: [right]};
-          case TOK_STAR:
-            left = {type: "Identity"};
-            right = null;
-            if (this._lookahead(0) === TOK_RBRACKET) {
-                // This can happen in a multiselect,
-                // [a, b, *]
-                right = {type: "Identity"};
-            } else {
-                right = this._parseProjectionRHS(bindingPower.Star);
-            }
-            return {type: "ValueProjection", children: [left, right]};
-          case TOK_FILTER:
-            return this.led(token.type, {type: "Identity"});
-          case TOK_LBRACE:
-            return this._parseMultiselectHash();
-          case TOK_FLATTEN:
-            left = {type: TOK_FLATTEN, children: [{type: "Identity"}]};
-            right = this._parseProjectionRHS(bindingPower.Flatten);
-            return {type: "Projection", children: [left, right]};
-          case TOK_LBRACKET:
-            if (this._lookahead(0) === TOK_NUMBER || this._lookahead(0) === TOK_COLON) {
-                right = this._parseIndexExpression();
-                return this._projectIfSlice({type: "Identity"}, right);
-            } else if (this._lookahead(0) === TOK_STAR &&
-                       this._lookahead(1) === TOK_RBRACKET) {
-                this._advance();
-                this._advance();
-                right = this._parseProjectionRHS(bindingPower.Star);
-                return {type: "Projection",
-                        children: [{type: "Identity"}, right]};
-            } else {
-                return this._parseMultiselectList();
-            }
-            break;
-          case TOK_CURRENT:
-            return {type: TOK_CURRENT};
-          case TOK_EXPREF:
-            expression = this.expression(bindingPower.Expref);
-            return {type: "ExpressionReference", children: [expression]};
-          case TOK_LPAREN:
-            var args = [];
-            while (this._lookahead(0) !== TOK_RPAREN) {
-              if (this._lookahead(0) === TOK_CURRENT) {
-                expression = {type: TOK_CURRENT};
-                this._advance();
-              } else {
-                expression = this.expression(0);
-              }
-              args.push(expression);
-            }
-            this._match(TOK_RPAREN);
-            return args[0];
-          default:
-            this._errorToken(token);
-        }
-      },
-
-      led: function(tokenName, left) {
-        var right;
-        switch(tokenName) {
-          case TOK_DOT:
-            var rbp = bindingPower.Dot;
-            if (this._lookahead(0) !== TOK_STAR) {
-                right = this._parseDotRHS(rbp);
-                return {type: "Subexpression", children: [left, right]};
-            } else {
-                // Creating a projection.
-                this._advance();
-                right = this._parseProjectionRHS(rbp);
-                return {type: "ValueProjection", children: [left, right]};
-            }
-            break;
-          case TOK_PIPE:
-            right = this.expression(bindingPower.Pipe);
-            return {type: TOK_PIPE, children: [left, right]};
-          case TOK_OR:
-            right = this.expression(bindingPower.Or);
-            return {type: "OrExpression", children: [left, right]};
-          case TOK_AND:
-            right = this.expression(bindingPower.And);
-            return {type: "AndExpression", children: [left, right]};
-          case TOK_LPAREN:
-            var name = left.name;
-            var args = [];
-            var expression, node;
-            while (this._lookahead(0) !== TOK_RPAREN) {
-              if (this._lookahead(0) === TOK_CURRENT) {
-                expression = {type: TOK_CURRENT};
-                this._advance();
-              } else {
-                expression = this.expression(0);
-              }
-              if (this._lookahead(0) === TOK_COMMA) {
-                this._match(TOK_COMMA);
-              }
-              args.push(expression);
-            }
-            this._match(TOK_RPAREN);
-            node = {type: "Function", name: name, children: args};
-            return node;
-          case TOK_FILTER:
-            var condition = this.expression(0);
-            this._match(TOK_RBRACKET);
-            if (this._lookahead(0) === TOK_FLATTEN) {
-              right = {type: "Identity"};
-            } else {
-              right = this._parseProjectionRHS(bindingPower.Filter);
-            }
-            return {type: "FilterProjection", children: [left, right, condition]};
-          case TOK_FLATTEN:
-            var leftNode = {type: TOK_FLATTEN, children: [left]};
-            var rightNode = this._parseProjectionRHS(bindingPower.Flatten);
-            return {type: "Projection", children: [leftNode, rightNode]};
-          case TOK_EQ:
-          case TOK_NE:
-          case TOK_GT:
-          case TOK_GTE:
-          case TOK_LT:
-          case TOK_LTE:
-            return this._parseComparator(left, tokenName);
-          case TOK_LBRACKET:
-            var token = this._lookaheadToken(0);
-            if (token.type === TOK_NUMBER || token.type === TOK_COLON) {
-                right = this._parseIndexExpression();
-                return this._projectIfSlice(left, right);
-            } else {
-                this._match(TOK_STAR);
-                this._match(TOK_RBRACKET);
-                right = this._parseProjectionRHS(bindingPower.Star);
-                return {type: "Projection", children: [left, right]};
-            }
-            break;
-          default:
-            this._errorToken(this._lookaheadToken(0));
-        }
-      },
-
-      _match: function(tokenType) {
-          if (this._lookahead(0) === tokenType) {
-              this._advance();
-          } else {
-              var t = this._lookaheadToken(0);
-              var error = new Error("Expected " + tokenType + ", got: " + t.type);
-              error.name = "ParserError";
-              throw error;
-          }
-      },
-
-      _errorToken: function(token) {
-          var error = new Error("Invalid token (" +
-                                token.type + "): \"" +
-                                token.value + "\"");
-          error.name = "ParserError";
-          throw error;
-      },
-
-
-      _parseIndexExpression: function() {
-          if (this._lookahead(0) === TOK_COLON || this._lookahead(1) === TOK_COLON) {
-              return this._parseSliceExpression();
-          } else {
-              var node = {
-                  type: "Index",
-                  value: this._lookaheadToken(0).value};
-              this._advance();
-              this._match(TOK_RBRACKET);
-              return node;
-          }
-      },
-
-      _projectIfSlice: function(left, right) {
-          var indexExpr = {type: "IndexExpression", children: [left, right]};
-          if (right.type === "Slice") {
-              return {
-                  type: "Projection",
-                  children: [indexExpr, this._parseProjectionRHS(bindingPower.Star)]
-              };
-          } else {
-              return indexExpr;
-          }
-      },
-
-      _parseSliceExpression: function() {
-          // [start:end:step] where each part is optional, as well as the last
-          // colon.
-          var parts = [null, null, null];
-          var index = 0;
-          var currentToken = this._lookahead(0);
-          while (currentToken !== TOK_RBRACKET && index < 3) {
-              if (currentToken === TOK_COLON) {
-                  index++;
-                  this._advance();
-              } else if (currentToken === TOK_NUMBER) {
-                  parts[index] = this._lookaheadToken(0).value;
-                  this._advance();
-              } else {
-                  var t = this._lookahead(0);
-                  var error = new Error("Syntax error, unexpected token: " +
-                                        t.value + "(" + t.type + ")");
-                  error.name = "Parsererror";
-                  throw error;
-              }
-              currentToken = this._lookahead(0);
-          }
-          this._match(TOK_RBRACKET);
-          return {
-              type: "Slice",
-              children: parts
-          };
-      },
-
-      _parseComparator: function(left, comparator) {
-        var right = this.expression(bindingPower[comparator]);
-        return {type: "Comparator", name: comparator, children: [left, right]};
-      },
-
-      _parseDotRHS: function(rbp) {
-          var lookahead = this._lookahead(0);
-          var exprTokens = [TOK_UNQUOTEDIDENTIFIER, TOK_QUOTEDIDENTIFIER, TOK_STAR];
-          if (exprTokens.indexOf(lookahead) >= 0) {
-              return this.expression(rbp);
-          } else if (lookahead === TOK_LBRACKET) {
-              this._match(TOK_LBRACKET);
-              return this._parseMultiselectList();
-          } else if (lookahead === TOK_LBRACE) {
-              this._match(TOK_LBRACE);
-              return this._parseMultiselectHash();
-          }
-      },
-
-      _parseProjectionRHS: function(rbp) {
-          var right;
-          if (bindingPower[this._lookahead(0)] < 10) {
-              right = {type: "Identity"};
-          } else if (this._lookahead(0) === TOK_LBRACKET) {
-              right = this.expression(rbp);
-          } else if (this._lookahead(0) === TOK_FILTER) {
-              right = this.expression(rbp);
-          } else if (this._lookahead(0) === TOK_DOT) {
-              this._match(TOK_DOT);
-              right = this._parseDotRHS(rbp);
-          } else {
-              var t = this._lookaheadToken(0);
-              var error = new Error("Sytanx error, unexpected token: " +
-                                    t.value + "(" + t.type + ")");
-              error.name = "ParserError";
-              throw error;
-          }
-          return right;
-      },
-
-      _parseMultiselectList: function() {
-          var expressions = [];
-          while (this._lookahead(0) !== TOK_RBRACKET) {
-              var expression = this.expression(0);
-              expressions.push(expression);
-              if (this._lookahead(0) === TOK_COMMA) {
-                  this._match(TOK_COMMA);
-                  if (this._lookahead(0) === TOK_RBRACKET) {
-                    throw new Error("Unexpected token Rbracket");
-                  }
-              }
-          }
-          this._match(TOK_RBRACKET);
-          return {type: "MultiSelectList", children: expressions};
-      },
-
-      _parseMultiselectHash: function() {
-        var pairs = [];
-        var identifierTypes = [TOK_UNQUOTEDIDENTIFIER, TOK_QUOTEDIDENTIFIER];
-        var keyToken, keyName, value, node;
-        for (;;) {
-          keyToken = this._lookaheadToken(0);
-          if (identifierTypes.indexOf(keyToken.type) < 0) {
-            throw new Error("Expecting an identifier token, got: " +
-                            keyToken.type);
-          }
-          keyName = keyToken.value;
-          this._advance();
-          this._match(TOK_COLON);
-          value = this.expression(0);
-          node = {type: "KeyValuePair", name: keyName, value: value};
-          pairs.push(node);
-          if (this._lookahead(0) === TOK_COMMA) {
-            this._match(TOK_COMMA);
-          } else if (this._lookahead(0) === TOK_RBRACE) {
-            this._match(TOK_RBRACE);
-            break;
-          }
-        }
-        return {type: "MultiSelectHash", children: pairs};
-      }
-  };
-
-
-  function TreeInterpreter(runtime) {
-    this.runtime = runtime;
-  }
-
-  TreeInterpreter.prototype = {
-      search: function(node, value) {
-          return this.visit(node, value);
-      },
-
-      visit: function(node, value) {
-          var matched, current, result, first, second, field, left, right, collected, i;
-          switch (node.type) {
-            case "Field":
-              if (value === null ) {
-                  return null;
-              } else if (isObject(value)) {
-                  field = value[node.name];
-                  if (field === undefined) {
-                      return null;
-                  } else {
-                      return field;
-                  }
-              } else {
-                return null;
-              }
-              break;
-            case "Subexpression":
-              result = this.visit(node.children[0], value);
-              for (i = 1; i < node.children.length; i++) {
-                  result = this.visit(node.children[1], result);
-                  if (result === null) {
-                      return null;
-                  }
-              }
-              return result;
-            case "IndexExpression":
-              left = this.visit(node.children[0], value);
-              right = this.visit(node.children[1], left);
-              return right;
-            case "Index":
-              if (!isArray(value)) {
-                return null;
-              }
-              var index = node.value;
-              if (index < 0) {
-                index = value.length + index;
-              }
-              result = value[index];
-              if (result === undefined) {
-                result = null;
-              }
-              return result;
-            case "Slice":
-              if (!isArray(value)) {
-                return null;
-              }
-              var sliceParams = node.children.slice(0);
-              var computed = this.computeSliceParams(value.length, sliceParams);
-              var start = computed[0];
-              var stop = computed[1];
-              var step = computed[2];
-              result = [];
-              if (step > 0) {
-                  for (i = start; i < stop; i += step) {
-                      result.push(value[i]);
-                  }
-              } else {
-                  for (i = start; i > stop; i += step) {
-                      result.push(value[i]);
-                  }
-              }
-              return result;
-            case "Projection":
-              // Evaluate left child.
-              var base = this.visit(node.children[0], value);
-              if (!isArray(base)) {
-                return null;
-              }
-              collected = [];
-              for (i = 0; i < base.length; i++) {
-                current = this.visit(node.children[1], base[i]);
-                if (current !== null) {
-                  collected.push(current);
-                }
-              }
-              return collected;
-            case "ValueProjection":
-              // Evaluate left child.
-              base = this.visit(node.children[0], value);
-              if (!isObject(base)) {
-                return null;
-              }
-              collected = [];
-              var values = objValues(base);
-              for (i = 0; i < values.length; i++) {
-                current = this.visit(node.children[1], values[i]);
-                if (current !== null) {
-                  collected.push(current);
-                }
-              }
-              return collected;
-            case "FilterProjection":
-              base = this.visit(node.children[0], value);
-              if (!isArray(base)) {
-                return null;
-              }
-              var filtered = [];
-              var finalResults = [];
-              for (i = 0; i < base.length; i++) {
-                matched = this.visit(node.children[2], base[i]);
-                if (!isFalse(matched)) {
-                  filtered.push(base[i]);
-                }
-              }
-              for (var j = 0; j < filtered.length; j++) {
-                current = this.visit(node.children[1], filtered[j]);
-                if (current !== null) {
-                  finalResults.push(current);
-                }
-              }
-              return finalResults;
-            case "Comparator":
-              first = this.visit(node.children[0], value);
-              second = this.visit(node.children[1], value);
-              switch(node.name) {
-                case TOK_EQ:
-                  result = strictDeepEqual(first, second);
-                  break;
-                case TOK_NE:
-                  result = !strictDeepEqual(first, second);
-                  break;
-                case TOK_GT:
-                  result = first > second;
-                  break;
-                case TOK_GTE:
-                  result = first >= second;
-                  break;
-                case TOK_LT:
-                  result = first < second;
-                  break;
-                case TOK_LTE:
-                  result = first <= second;
-                  break;
-                default:
-                  throw new Error("Unknown comparator: " + node.name);
-              }
-              return result;
-            case TOK_FLATTEN:
-              var original = this.visit(node.children[0], value);
-              if (!isArray(original)) {
-                return null;
-              }
-              var merged = [];
-              for (i = 0; i < original.length; i++) {
-                current = original[i];
-                if (isArray(current)) {
-                  merged.push.apply(merged, current);
-                } else {
-                  merged.push(current);
-                }
-              }
-              return merged;
-            case "Identity":
-              return value;
-            case "MultiSelectList":
-              if (value === null) {
-                return null;
-              }
-              collected = [];
-              for (i = 0; i < node.children.length; i++) {
-                  collected.push(this.visit(node.children[i], value));
-              }
-              return collected;
-            case "MultiSelectHash":
-              if (value === null) {
-                return null;
-              }
-              collected = {};
-              var child;
-              for (i = 0; i < node.children.length; i++) {
-                child = node.children[i];
-                collected[child.name] = this.visit(child.value, value);
-              }
-              return collected;
-            case "OrExpression":
-              matched = this.visit(node.children[0], value);
-              if (isFalse(matched)) {
-                  matched = this.visit(node.children[1], value);
-              }
-              return matched;
-            case "AndExpression":
-              first = this.visit(node.children[0], value);
-
-              if (isFalse(first) === true) {
-                return first;
-              }
-              return this.visit(node.children[1], value);
-            case "NotExpression":
-              first = this.visit(node.children[0], value);
-              return isFalse(first);
-            case "Literal":
-              return node.value;
-            case TOK_PIPE:
-              left = this.visit(node.children[0], value);
-              return this.visit(node.children[1], left);
-            case TOK_CURRENT:
-              return value;
-            case "Function":
-              var resolvedArgs = [];
-              for (i = 0; i < node.children.length; i++) {
-                  resolvedArgs.push(this.visit(node.children[i], value));
-              }
-              return this.runtime.callFunction(node.name, resolvedArgs);
-            case "ExpressionReference":
-              var refNode = node.children[0];
-              // Tag the node with a specific attribute so the type
-              // checker verify the type.
-              refNode.jmespathType = TOK_EXPREF;
-              return refNode;
-            default:
-              throw new Error("Unknown node type: " + node.type);
-          }
-      },
-
-      computeSliceParams: function(arrayLength, sliceParams) {
-        var start = sliceParams[0];
-        var stop = sliceParams[1];
-        var step = sliceParams[2];
-        var computed = [null, null, null];
-        if (step === null) {
-          step = 1;
-        } else if (step === 0) {
-          var error = new Error("Invalid slice, step cannot be 0");
-          error.name = "RuntimeError";
-          throw error;
-        }
-        var stepValueNegative = step < 0 ? true : false;
-
-        if (start === null) {
-            start = stepValueNegative ? arrayLength - 1 : 0;
-        } else {
-            start = this.capSliceRange(arrayLength, start, step);
-        }
-
-        if (stop === null) {
-            stop = stepValueNegative ? -1 : arrayLength;
-        } else {
-            stop = this.capSliceRange(arrayLength, stop, step);
-        }
-        computed[0] = start;
-        computed[1] = stop;
-        computed[2] = step;
-        return computed;
-      },
-
-      capSliceRange: function(arrayLength, actualValue, step) {
-          if (actualValue < 0) {
-              actualValue += arrayLength;
-              if (actualValue < 0) {
-                  actualValue = step < 0 ? -1 : 0;
-              }
-          } else if (actualValue >= arrayLength) {
-              actualValue = step < 0 ? arrayLength - 1 : arrayLength;
-          }
-          return actualValue;
-      }
-
-  };
-
-  function Runtime(interpreter) {
-    this._interpreter = interpreter;
-    this.functionTable = {
-        // name: [function, <signature>]
-        // The <signature> can be:
-        //
-        // {
-        //   args: [[type1, type2], [type1, type2]],
-        //   variadic: true|false
-        // }
-        //
-        // Each arg in the arg list is a list of valid types
-        // (if the function is overloaded and supports multiple
-        // types.  If the type is "any" then no type checking
-        // occurs on the argument.  Variadic is optional
-        // and if not provided is assumed to be false.
-        abs: {_func: this._functionAbs, _signature: [{types: [TYPE_NUMBER]}]},
-        avg: {_func: this._functionAvg, _signature: [{types: [TYPE_ARRAY_NUMBER]}]},
-        ceil: {_func: this._functionCeil, _signature: [{types: [TYPE_NUMBER]}]},
-        contains: {
-            _func: this._functionContains,
-            _signature: [{types: [TYPE_STRING, TYPE_ARRAY]},
-                        {types: [TYPE_ANY]}]},
-        "ends_with": {
-            _func: this._functionEndsWith,
-            _signature: [{types: [TYPE_STRING]}, {types: [TYPE_STRING]}]},
-        floor: {_func: this._functionFloor, _signature: [{types: [TYPE_NUMBER]}]},
-        length: {
-            _func: this._functionLength,
-            _signature: [{types: [TYPE_STRING, TYPE_ARRAY, TYPE_OBJECT]}]},
-        map: {
-            _func: this._functionMap,
-            _signature: [{types: [TYPE_EXPREF]}, {types: [TYPE_ARRAY]}]},
-        max: {
-            _func: this._functionMax,
-            _signature: [{types: [TYPE_ARRAY_NUMBER, TYPE_ARRAY_STRING]}]},
-        "merge": {
-            _func: this._functionMerge,
-            _signature: [{types: [TYPE_OBJECT], variadic: true}]
-        },
-        "max_by": {
-          _func: this._functionMaxBy,
-          _signature: [{types: [TYPE_ARRAY]}, {types: [TYPE_EXPREF]}]
-        },
-        sum: {_func: this._functionSum, _signature: [{types: [TYPE_ARRAY_NUMBER]}]},
-        "starts_with": {
-            _func: this._functionStartsWith,
-            _signature: [{types: [TYPE_STRING]}, {types: [TYPE_STRING]}]},
-        min: {
-            _func: this._functionMin,
-            _signature: [{types: [TYPE_ARRAY_NUMBER, TYPE_ARRAY_STRING]}]},
-        "min_by": {
-          _func: this._functionMinBy,
-          _signature: [{types: [TYPE_ARRAY]}, {types: [TYPE_EXPREF]}]
-        },
-        type: {_func: this._functionType, _signature: [{types: [TYPE_ANY]}]},
-        keys: {_func: this._functionKeys, _signature: [{types: [TYPE_OBJECT]}]},
-        values: {_func: this._functionValues, _signature: [{types: [TYPE_OBJECT]}]},
-        sort: {_func: this._functionSort, _signature: [{types: [TYPE_ARRAY_STRING, TYPE_ARRAY_NUMBER]}]},
-        "sort_by": {
-          _func: this._functionSortBy,
-          _signature: [{types: [TYPE_ARRAY]}, {types: [TYPE_EXPREF]}]
-        },
-        join: {
-            _func: this._functionJoin,
-            _signature: [
-                {types: [TYPE_STRING]},
-                {types: [TYPE_ARRAY_STRING]}
-            ]
-        },
-        reverse: {
-            _func: this._functionReverse,
-            _signature: [{types: [TYPE_STRING, TYPE_ARRAY]}]},
-        "to_array": {_func: this._functionToArray, _signature: [{types: [TYPE_ANY]}]},
-        "to_string": {_func: this._functionToString, _signature: [{types: [TYPE_ANY]}]},
-        "to_number": {_func: this._functionToNumber, _signature: [{types: [TYPE_ANY]}]},
-        "not_null": {
-            _func: this._functionNotNull,
-            _signature: [{types: [TYPE_ANY], variadic: true}]
-        }
-    };
-  }
-
-  Runtime.prototype = {
-    callFunction: function(name, resolvedArgs) {
-      var functionEntry = this.functionTable[name];
-      if (functionEntry === undefined) {
-          throw new Error("Unknown function: " + name + "()");
-      }
-      this._validateArgs(name, resolvedArgs, functionEntry._signature);
-      return functionEntry._func.call(this, resolvedArgs);
-    },
-
-    _validateArgs: function(name, args, signature) {
-        // Validating the args requires validating
-        // the correct arity and the correct type of each arg.
-        // If the last argument is declared as variadic, then we need
-        // a minimum number of args to be required.  Otherwise it has to
-        // be an exact amount.
-        var pluralized;
-        if (signature[signature.length - 1].variadic) {
-            if (args.length < signature.length) {
-                pluralized = signature.length === 1 ? " argument" : " arguments";
-                throw new Error("ArgumentError: " + name + "() " +
-                                "takes at least" + signature.length + pluralized +
-                                " but received " + args.length);
-            }
-        } else if (args.length !== signature.length) {
-            pluralized = signature.length === 1 ? " argument" : " arguments";
-            throw new Error("ArgumentError: " + name + "() " +
-                            "takes " + signature.length + pluralized +
-                            " but received " + args.length);
-        }
-        var currentSpec;
-        var actualType;
-        var typeMatched;
-        for (var i = 0; i < signature.length; i++) {
-            typeMatched = false;
-            currentSpec = signature[i].types;
-            actualType = this._getTypeName(args[i]);
-            for (var j = 0; j < currentSpec.length; j++) {
-                if (this._typeMatches(actualType, currentSpec[j], args[i])) {
-                    typeMatched = true;
-                    break;
-                }
-            }
-            if (!typeMatched) {
-                throw new Error("TypeError: " + name + "() " +
-                                "expected argument " + (i + 1) +
-                                " to be type " + currentSpec +
-                                " but received type " + actualType +
-                                " instead.");
-            }
-        }
-    },
-
-    _typeMatches: function(actual, expected, argValue) {
-        if (expected === TYPE_ANY) {
-            return true;
-        }
-        if (expected === TYPE_ARRAY_STRING ||
-            expected === TYPE_ARRAY_NUMBER ||
-            expected === TYPE_ARRAY) {
-            // The expected type can either just be array,
-            // or it can require a specific subtype (array of numbers).
-            //
-            // The simplest case is if "array" with no subtype is specified.
-            if (expected === TYPE_ARRAY) {
-                return actual === TYPE_ARRAY;
-            } else if (actual === TYPE_ARRAY) {
-                // Otherwise we need to check subtypes.
-                // I think this has potential to be improved.
-                var subtype;
-                if (expected === TYPE_ARRAY_NUMBER) {
-                  subtype = TYPE_NUMBER;
-                } else if (expected === TYPE_ARRAY_STRING) {
-                  subtype = TYPE_STRING;
-                }
-                for (var i = 0; i < argValue.length; i++) {
-                    if (!this._typeMatches(
-                            this._getTypeName(argValue[i]), subtype,
-                                             argValue[i])) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        } else {
-            return actual === expected;
-        }
-    },
-    _getTypeName: function(obj) {
-        switch (Object.prototype.toString.call(obj)) {
-            case "[object String]":
-              return TYPE_STRING;
-            case "[object Number]":
-              return TYPE_NUMBER;
-            case "[object Array]":
-              return TYPE_ARRAY;
-            case "[object Boolean]":
-              return TYPE_BOOLEAN;
-            case "[object Null]":
-              return TYPE_NULL;
-            case "[object Object]":
-              // Check if it's an expref.  If it has, it's been
-              // tagged with a jmespathType attr of 'Expref';
-              if (obj.jmespathType === TOK_EXPREF) {
-                return TYPE_EXPREF;
-              } else {
-                return TYPE_OBJECT;
-              }
-        }
-    },
-
-    _functionStartsWith: function(resolvedArgs) {
-        return resolvedArgs[0].lastIndexOf(resolvedArgs[1]) === 0;
-    },
-
-    _functionEndsWith: function(resolvedArgs) {
-        var searchStr = resolvedArgs[0];
-        var suffix = resolvedArgs[1];
-        return searchStr.indexOf(suffix, searchStr.length - suffix.length) !== -1;
-    },
-
-    _functionReverse: function(resolvedArgs) {
-        var typeName = this._getTypeName(resolvedArgs[0]);
-        if (typeName === TYPE_STRING) {
-          var originalStr = resolvedArgs[0];
-          var reversedStr = "";
-          for (var i = originalStr.length - 1; i >= 0; i--) {
-              reversedStr += originalStr[i];
-          }
-          return reversedStr;
-        } else {
-          var reversedArray = resolvedArgs[0].slice(0);
-          reversedArray.reverse();
-          return reversedArray;
-        }
-    },
-
-    _functionAbs: function(resolvedArgs) {
-      return Math.abs(resolvedArgs[0]);
-    },
-
-    _functionCeil: function(resolvedArgs) {
-        return Math.ceil(resolvedArgs[0]);
-    },
-
-    _functionAvg: function(resolvedArgs) {
-        var sum = 0;
-        var inputArray = resolvedArgs[0];
-        for (var i = 0; i < inputArray.length; i++) {
-            sum += inputArray[i];
-        }
-        return sum / inputArray.length;
-    },
-
-    _functionContains: function(resolvedArgs) {
-        return resolvedArgs[0].indexOf(resolvedArgs[1]) >= 0;
-    },
-
-    _functionFloor: function(resolvedArgs) {
-        return Math.floor(resolvedArgs[0]);
-    },
-
-    _functionLength: function(resolvedArgs) {
-       if (!isObject(resolvedArgs[0])) {
-         return resolvedArgs[0].length;
-       } else {
-         // As far as I can tell, there's no way to get the length
-         // of an object without O(n) iteration through the object.
-         return Object.keys(resolvedArgs[0]).length;
-       }
-    },
-
-    _functionMap: function(resolvedArgs) {
-      var mapped = [];
-      var interpreter = this._interpreter;
-      var exprefNode = resolvedArgs[0];
-      var elements = resolvedArgs[1];
-      for (var i = 0; i < elements.length; i++) {
-          mapped.push(interpreter.visit(exprefNode, elements[i]));
-      }
-      return mapped;
-    },
-
-    _functionMerge: function(resolvedArgs) {
-      var merged = {};
-      for (var i = 0; i < resolvedArgs.length; i++) {
-        var current = resolvedArgs[i];
-        for (var key in current) {
-          merged[key] = current[key];
-        }
-      }
-      return merged;
-    },
-
-    _functionMax: function(resolvedArgs) {
-      if (resolvedArgs[0].length > 0) {
-        var typeName = this._getTypeName(resolvedArgs[0][0]);
-        if (typeName === TYPE_NUMBER) {
-          return Math.max.apply(Math, resolvedArgs[0]);
-        } else {
-          var elements = resolvedArgs[0];
-          var maxElement = elements[0];
-          for (var i = 1; i < elements.length; i++) {
-              if (maxElement.localeCompare(elements[i]) < 0) {
-                  maxElement = elements[i];
-              }
-          }
-          return maxElement;
-        }
-      } else {
-          return null;
-      }
-    },
-
-    _functionMin: function(resolvedArgs) {
-      if (resolvedArgs[0].length > 0) {
-        var typeName = this._getTypeName(resolvedArgs[0][0]);
-        if (typeName === TYPE_NUMBER) {
-          return Math.min.apply(Math, resolvedArgs[0]);
-        } else {
-          var elements = resolvedArgs[0];
-          var minElement = elements[0];
-          for (var i = 1; i < elements.length; i++) {
-              if (elements[i].localeCompare(minElement) < 0) {
-                  minElement = elements[i];
-              }
-          }
-          return minElement;
-        }
-      } else {
-        return null;
-      }
-    },
-
-    _functionSum: function(resolvedArgs) {
-      var sum = 0;
-      var listToSum = resolvedArgs[0];
-      for (var i = 0; i < listToSum.length; i++) {
-        sum += listToSum[i];
-      }
-      return sum;
-    },
-
-    _functionType: function(resolvedArgs) {
-        switch (this._getTypeName(resolvedArgs[0])) {
-          case TYPE_NUMBER:
-            return "number";
-          case TYPE_STRING:
-            return "string";
-          case TYPE_ARRAY:
-            return "array";
-          case TYPE_OBJECT:
-            return "object";
-          case TYPE_BOOLEAN:
-            return "boolean";
-          case TYPE_EXPREF:
-            return "expref";
-          case TYPE_NULL:
-            return "null";
-        }
-    },
-
-    _functionKeys: function(resolvedArgs) {
-        return Object.keys(resolvedArgs[0]);
-    },
-
-    _functionValues: function(resolvedArgs) {
-        var obj = resolvedArgs[0];
-        var keys = Object.keys(obj);
-        var values = [];
-        for (var i = 0; i < keys.length; i++) {
-            values.push(obj[keys[i]]);
-        }
-        return values;
-    },
-
-    _functionJoin: function(resolvedArgs) {
-        var joinChar = resolvedArgs[0];
-        var listJoin = resolvedArgs[1];
-        return listJoin.join(joinChar);
-    },
-
-    _functionToArray: function(resolvedArgs) {
-        if (this._getTypeName(resolvedArgs[0]) === TYPE_ARRAY) {
-            return resolvedArgs[0];
-        } else {
-            return [resolvedArgs[0]];
-        }
-    },
-
-    _functionToString: function(resolvedArgs) {
-        if (this._getTypeName(resolvedArgs[0]) === TYPE_STRING) {
-            return resolvedArgs[0];
-        } else {
-            return JSON.stringify(resolvedArgs[0]);
-        }
-    },
-
-    _functionToNumber: function(resolvedArgs) {
-        var typeName = this._getTypeName(resolvedArgs[0]);
-        var convertedValue;
-        if (typeName === TYPE_NUMBER) {
-            return resolvedArgs[0];
-        } else if (typeName === TYPE_STRING) {
-            convertedValue = +resolvedArgs[0];
-            if (!isNaN(convertedValue)) {
-                return convertedValue;
-            }
-        }
-        return null;
-    },
-
-    _functionNotNull: function(resolvedArgs) {
-        for (var i = 0; i < resolvedArgs.length; i++) {
-            if (this._getTypeName(resolvedArgs[i]) !== TYPE_NULL) {
-                return resolvedArgs[i];
-            }
-        }
-        return null;
-    },
-
-    _functionSort: function(resolvedArgs) {
-        var sortedArray = resolvedArgs[0].slice(0);
-        sortedArray.sort();
-        return sortedArray;
-    },
-
-    _functionSortBy: function(resolvedArgs) {
-        var sortedArray = resolvedArgs[0].slice(0);
-        if (sortedArray.length === 0) {
-            return sortedArray;
-        }
-        var interpreter = this._interpreter;
-        var exprefNode = resolvedArgs[1];
-        var requiredType = this._getTypeName(
-            interpreter.visit(exprefNode, sortedArray[0]));
-        if ([TYPE_NUMBER, TYPE_STRING].indexOf(requiredType) < 0) {
-            throw new Error("TypeError");
-        }
-        var that = this;
-        // In order to get a stable sort out of an unstable
-        // sort algorithm, we decorate/sort/undecorate (DSU)
-        // by creating a new list of [index, element] pairs.
-        // In the cmp function, if the evaluated elements are
-        // equal, then the index will be used as the tiebreaker.
-        // After the decorated list has been sorted, it will be
-        // undecorated to extract the original elements.
-        var decorated = [];
-        for (var i = 0; i < sortedArray.length; i++) {
-          decorated.push([i, sortedArray[i]]);
-        }
-        decorated.sort(function(a, b) {
-          var exprA = interpreter.visit(exprefNode, a[1]);
-          var exprB = interpreter.visit(exprefNode, b[1]);
-          if (that._getTypeName(exprA) !== requiredType) {
-              throw new Error(
-                  "TypeError: expected " + requiredType + ", received " +
-                  that._getTypeName(exprA));
-          } else if (that._getTypeName(exprB) !== requiredType) {
-              throw new Error(
-                  "TypeError: expected " + requiredType + ", received " +
-                  that._getTypeName(exprB));
-          }
-          if (exprA > exprB) {
-            return 1;
-          } else if (exprA < exprB) {
-            return -1;
-          } else {
-            // If they're equal compare the items by their
-            // order to maintain relative order of equal keys
-            // (i.e. to get a stable sort).
-            return a[0] - b[0];
-          }
-        });
-        // Undecorate: extract out the original list elements.
-        for (var j = 0; j < decorated.length; j++) {
-          sortedArray[j] = decorated[j][1];
-        }
-        return sortedArray;
-    },
-
-    _functionMaxBy: function(resolvedArgs) {
-      var exprefNode = resolvedArgs[1];
-      var resolvedArray = resolvedArgs[0];
-      var keyFunction = this.createKeyFunction(exprefNode, [TYPE_NUMBER, TYPE_STRING]);
-      var maxNumber = -Infinity;
-      var maxRecord;
-      var current;
-      for (var i = 0; i < resolvedArray.length; i++) {
-        current = keyFunction(resolvedArray[i]);
-        if (current > maxNumber) {
-          maxNumber = current;
-          maxRecord = resolvedArray[i];
-        }
-      }
-      return maxRecord;
-    },
-
-    _functionMinBy: function(resolvedArgs) {
-      var exprefNode = resolvedArgs[1];
-      var resolvedArray = resolvedArgs[0];
-      var keyFunction = this.createKeyFunction(exprefNode, [TYPE_NUMBER, TYPE_STRING]);
-      var minNumber = Infinity;
-      var minRecord;
-      var current;
-      for (var i = 0; i < resolvedArray.length; i++) {
-        current = keyFunction(resolvedArray[i]);
-        if (current < minNumber) {
-          minNumber = current;
-          minRecord = resolvedArray[i];
-        }
-      }
-      return minRecord;
-    },
-
-    createKeyFunction: function(exprefNode, allowedTypes) {
-      var that = this;
-      var interpreter = this._interpreter;
-      var keyFunc = function(x) {
-        var current = interpreter.visit(exprefNode, x);
-        if (allowedTypes.indexOf(that._getTypeName(current)) < 0) {
-          var msg = "TypeError: expected one of " + allowedTypes +
-                    ", received " + that._getTypeName(current);
-          throw new Error(msg);
-        }
-        return current;
-      };
-      return keyFunc;
-    }
-
-  };
-
-  function compile(stream) {
-    var parser = new Parser();
-    var ast = parser.parse(stream);
-    return ast;
-  }
-
-  function tokenize(stream) {
-      var lexer = new Lexer();
-      return lexer.tokenize(stream);
-  }
-
-  function search(data, expression) {
-      var parser = new Parser();
-      // This needs to be improved.  Both the interpreter and runtime depend on
-      // each other.  The runtime needs the interpreter to support exprefs.
-      // There's likely a clean way to avoid the cyclic dependency.
-      var runtime = new Runtime();
-      var interpreter = new TreeInterpreter(runtime);
-      runtime._interpreter = interpreter;
-      var node = parser.parse(expression);
-      return interpreter.search(node, data);
-  }
-
-  exports.tokenize = tokenize;
-  exports.compile = compile;
-  exports.search = search;
-  exports.strictDeepEqual = strictDeepEqual;
-})( false ? this.jmespath = {} : exports);
-
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(15).Buffer;
-var intSize = 4;
-var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
-var chrsz = 8;
-
-function toArray(buf, bigEndian) {
-  if ((buf.length % intSize) !== 0) {
-    var len = buf.length + (intSize - (buf.length % intSize));
-    buf = Buffer.concat([buf, zeroBuffer], len);
-  }
-
-  var arr = [];
-  var fn = bigEndian ? buf.readInt32BE : buf.readInt32LE;
-  for (var i = 0; i < buf.length; i += intSize) {
-    arr.push(fn.call(buf, i));
-  }
-  return arr;
-}
-
-function toBuffer(arr, size, bigEndian) {
-  var buf = new Buffer(size);
-  var fn = bigEndian ? buf.writeInt32BE : buf.writeInt32LE;
-  for (var i = 0; i < arr.length; i++) {
-    fn.call(buf, arr[i], i * 4, true);
-  }
-  return buf;
-}
-
-function hash(buf, fn, hashSize, bigEndian) {
-  if (!Buffer.isBuffer(buf)) buf = new Buffer(buf);
-  var arr = fn(toArray(buf, bigEndian), buf.length * chrsz);
-  return toBuffer(arr, hashSize, bigEndian);
-}
-
-module.exports = { hash: hash };
-
-
-/***/ }),
-/* 82 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*!
- * Amazon Cognito Auth SDK for JavaScript
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *         http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file.
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
- * OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions
- * and limitations under the License.
- */
-
-/** @class */
-var CognitoAccessToken = function () {
-  /**
-   * Constructs a new CognitoAccessToken object
-   * @param {string=} AccessToken The JWT access token.
-   */
-  function CognitoAccessToken(AccessToken) {
-    _classCallCheck(this, CognitoAccessToken);
-
-    // Assign object
-    this.jwtToken = AccessToken || '';
-    this.payload = this.decodePayload();
-  }
-
-  /**
-   * @returns {string} the record's token.
-   */
-
-
-  CognitoAccessToken.prototype.getJwtToken = function getJwtToken() {
-    return this.jwtToken;
-  };
-
-  /**
-   * Sets new value for access token.
-   * @param {string=} accessToken The JWT access token.
-   * @returns {void}
-   */
-
-
-  CognitoAccessToken.prototype.setJwtToken = function setJwtToken(accessToken) {
-    this.jwtToken = accessToken;
-  };
-
-  /**
-   * @returns {int} the token's expiration (exp member).
-   */
-
-
-  CognitoAccessToken.prototype.getExpiration = function getExpiration() {
-    if (this.jwtToken === null) {
-      return undefined;
-    }
-    var jwtPayload = this.jwtToken.split('.')[1];
-    return JSON.parse(atob(jwtPayload)).exp;
-  };
-
-  /**
-   * @returns {string} the username from payload.
-   */
-
-
-  CognitoAccessToken.prototype.getUsername = function getUsername() {
-    if (this.jwtToken === null) {
-      return undefined;
-    }
-    var jwtPayload = this.jwtToken.split('.')[1];
-    return JSON.parse(atob(jwtPayload)).username;
-  };
-
-  /**
-   * @returns {object} the token's payload.
-   */
-
-
-  CognitoAccessToken.prototype.decodePayload = function decodePayload() {
-    var jwtPayload = this.jwtToken.split('.')[1];
-    try {
-      return JSON.parse(atob(jwtPayload));
-    } catch (err) {
-      return {};
-    }
-  };
-
-  return CognitoAccessToken;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (CognitoAccessToken);
-
-/***/ }),
-/* 83 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*!
- * Amazon Cognito Auth SDK for JavaScript
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *         http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file.
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
- * OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions
- * and limitations under the License.
- */
-
-/** @class */
-var CognitoIdToken = function () {
-  /**
-   * Constructs a new CognitoIdToken object
-   * @param {string=} IdToken The JWT Id token
-   */
-  function CognitoIdToken(IdToken) {
-    _classCallCheck(this, CognitoIdToken);
-
-    // Assign object
-    this.jwtToken = IdToken || '';
-    this.payload = this.decodePayload();
-  }
-
-  /**
-   * @returns {string} the record's token.
-   */
-
-
-  CognitoIdToken.prototype.getJwtToken = function getJwtToken() {
-    return this.jwtToken;
-  };
-
-  /**
-   * Sets new value for id token.
-   * @param {string=} idToken The JWT Id token
-   * @returns {void}
-   */
-
-
-  CognitoIdToken.prototype.setJwtToken = function setJwtToken(idToken) {
-    this.jwtToken = idToken;
-  };
-
-  /**
-   * @returns {int} the token's expiration (exp member).
-   */
-
-
-  CognitoIdToken.prototype.getExpiration = function getExpiration() {
-    if (this.jwtToken === null) {
-      return undefined;
-    }
-    var jwtPayload = this.jwtToken.split('.')[1];
-    return JSON.parse(atob(jwtPayload)).exp;
-  };
-
-  /**
-   * @returns {object} the token's payload.
-   */
-
-
-  CognitoIdToken.prototype.decodePayload = function decodePayload() {
-    var jwtPayload = this.jwtToken.split('.')[1];
-    try {
-      return JSON.parse(atob(jwtPayload));
-    } catch (err) {
-      return {};
-    }
-  };
-
-  return CognitoIdToken;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (CognitoIdToken);
-
-/***/ }),
-/* 84 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*!
- * Amazon Cognito Auth SDK for JavaScript
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *         http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file.
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
- * OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions
- * and limitations under the License.
- */
-
-/** @class */
-var CognitoRefreshToken = function () {
-  /**
-   * Constructs a new CognitoRefreshToken object
-   * @param {string=} RefreshToken The JWT refresh token.
-   */
-  function CognitoRefreshToken(RefreshToken) {
-    _classCallCheck(this, CognitoRefreshToken);
-
-    // Assign object
-    this.refreshToken = RefreshToken || '';
-  }
-
-  /**
-   * @returns {string} the record's token.
-   */
-
-
-  CognitoRefreshToken.prototype.getToken = function getToken() {
-    return this.refreshToken;
-  };
-
-  /**
-   * Sets new value for refresh token.
-   * @param {string=} refreshToken The JWT refresh token.
-   * @returns {void}
-   */
-
-
-  CognitoRefreshToken.prototype.setToken = function setToken(refreshToken) {
-    this.refreshToken = refreshToken;
-  };
-
-  return CognitoRefreshToken;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (CognitoRefreshToken);
-
-/***/ }),
-/* 85 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*!
- * Amazon Cognito Auth SDK for JavaScript
- * Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *         http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file.
- * This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
- * OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions
- * and limitations under the License.
- */
-
-/** @class */
-var CognitoTokenScopes = function () {
-  /**
-   * Constructs a new CognitoTokenScopes object
-   * @param {array=} TokenScopesArray The token scopes
-   */
-  function CognitoTokenScopes(TokenScopesArray) {
-    _classCallCheck(this, CognitoTokenScopes);
-
-    // Assign object
-    this.tokenScopes = TokenScopesArray || [];
-  }
-
-  /**
-   * @returns {Array} the token scopes.
-   */
-
-
-  CognitoTokenScopes.prototype.getScopes = function getScopes() {
-    return this.tokenScopes;
-  };
-
-  /**
-   * Sets new value for token scopes.
-   * @param {array=} tokenScopes The token scopes
-   * @returns {void}
-   */
-
-
-  CognitoTokenScopes.prototype.setTokenScopes = function setTokenScopes(tokenScopes) {
-    this.tokenScopes = tokenScopes;
-  };
-
-  return CognitoTokenScopes;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (CognitoTokenScopes);
-
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/*
- * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-var BrowserStorageCache_1 = __webpack_require__(553);
-exports.BrowserStorageCache = BrowserStorageCache_1.default;
-var InMemoryCache_1 = __webpack_require__(161);
-exports.InMemoryCache = InMemoryCache_1.default;
-exports.default = BrowserStorageCache_1.default;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/*
- * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(554));
-var CacheList_1 = __webpack_require__(555);
-exports.CacheList = CacheList_1.default;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = process && "development" !== 'production' ? // eslint-disable-next-line no-shadow
-function instanceOf(value, constructor) {
-  if (value instanceof constructor) {
-    return true;
-  }
-  if (value) {
-    var valueClass = value.constructor;
-    var className = constructor.name;
-    if (valueClass && valueClass.name === className) {
-      throw new Error('Cannot use ' + className + ' "' + value + '" from another module or realm.\n\nEnsure that there is only one instance of "graphql" in the node_modules\ndirectory. If different versions of "graphql" are the dependencies of other\nrelied on modules, use "resolutions" to ensure only one version is installed.\n\nhttps://yarnpkg.com/en/docs/selective-version-resolutions\n\nDuplicate "graphql" modules cannot be used at the same time since different\nversions may have different capabilities and behavior. The data from one\nversion used in the function from another could produce confusing and\nspurious results.');
-    }
-  }
-  return false;
-} : // eslint-disable-next-line no-shadow
-function instanceOf(value, constructor) {
-  return value instanceof constructor;
-}; /**
-    * Copyright (c) 2015-present, Facebook, Inc.
-    *
-    * This source code is licensed under the MIT license found in the
-    * LICENSE file in the root directory of this source tree.
-    *
-    *  strict
-    */
-
-/**
- * A replacement for instanceof which includes an error warning when multi-realm
- * constructors are detected.
- */
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                                               * Copyright (c) 2015-present, Facebook, Inc.
-                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                               * This source code is licensed under the MIT license found in the
-                                                                                                                                                                                                                                                                               * LICENSE file in the root directory of this source tree.
-                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                               *  strict
-                                                                                                                                                                                                                                                                               */
-
-exports.astFromValue = astFromValue;
-
-var _iterall = __webpack_require__(41);
-
-var _isNullish = __webpack_require__(59);
-
-var _isNullish2 = _interopRequireDefault(_isNullish);
-
-var _isInvalid = __webpack_require__(17);
-
-var _isInvalid2 = _interopRequireDefault(_isInvalid);
-
-var _objectValues = __webpack_require__(24);
-
-var _objectValues2 = _interopRequireDefault(_objectValues);
-
-var _kinds = __webpack_require__(4);
-
-var _definition = __webpack_require__(3);
-
-var _scalars = __webpack_require__(23);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Produces a GraphQL Value AST given a JavaScript value.
- *
- * A GraphQL type must be provided, which will be used to interpret different
- * JavaScript values.
- *
- * | JSON Value    | GraphQL Value        |
- * | ------------- | -------------------- |
- * | Object        | Input Object         |
- * | Array         | List                 |
- * | Boolean       | Boolean              |
- * | String        | String / Enum Value  |
- * | Number        | Int / Float          |
- * | Mixed         | Enum Value           |
- * | null          | NullValue            |
- *
- */
-function astFromValue(value, type) {
-  if ((0, _definition.isNonNullType)(type)) {
-    var astValue = astFromValue(value, type.ofType);
-    if (astValue && astValue.kind === _kinds.Kind.NULL) {
-      return null;
-    }
-    return astValue;
-  }
-
-  // only explicit null, not undefined, NaN
-  if (value === null) {
-    return { kind: _kinds.Kind.NULL };
-  }
-
-  // undefined, NaN
-  if ((0, _isInvalid2.default)(value)) {
-    return null;
-  }
-
-  // Convert JavaScript array to GraphQL list. If the GraphQLType is a list, but
-  // the value is not an array, convert the value using the list's item type.
-  if ((0, _definition.isListType)(type)) {
-    var itemType = type.ofType;
-    if ((0, _iterall.isCollection)(value)) {
-      var valuesNodes = [];
-      (0, _iterall.forEach)(value, function (item) {
-        var itemNode = astFromValue(item, itemType);
-        if (itemNode) {
-          valuesNodes.push(itemNode);
-        }
-      });
-      return { kind: _kinds.Kind.LIST, values: valuesNodes };
-    }
-    return astFromValue(value, itemType);
-  }
-
-  // Populate the fields of the input object by creating ASTs from each value
-  // in the JavaScript object according to the fields in the input type.
-  if ((0, _definition.isInputObjectType)(type)) {
-    if (value === null || (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object') {
-      return null;
-    }
-    var fields = (0, _objectValues2.default)(type.getFields());
-    var fieldNodes = [];
-    fields.forEach(function (field) {
-      var fieldValue = astFromValue(value[field.name], field.type);
-      if (fieldValue) {
-        fieldNodes.push({
-          kind: _kinds.Kind.OBJECT_FIELD,
-          name: { kind: _kinds.Kind.NAME, value: field.name },
-          value: fieldValue
-        });
-      }
-    });
-    return { kind: _kinds.Kind.OBJECT, fields: fieldNodes };
-  }
-
-  if ((0, _definition.isScalarType)(type) || (0, _definition.isEnumType)(type)) {
-    // Since value is an internally represented value, it must be serialized
-    // to an externally represented value before converting into an AST.
-    var serialized = type.serialize(value);
-    if ((0, _isNullish2.default)(serialized)) {
-      return null;
-    }
-
-    // Others serialize based on their corresponding JavaScript scalar types.
-    if (typeof serialized === 'boolean') {
-      return { kind: _kinds.Kind.BOOLEAN, value: serialized };
-    }
-
-    // JavaScript numbers can be Int or Float values.
-    if (typeof serialized === 'number') {
-      var stringNum = String(serialized);
-      return integerStringRegExp.test(stringNum) ? { kind: _kinds.Kind.INT, value: stringNum } : { kind: _kinds.Kind.FLOAT, value: stringNum };
-    }
-
-    if (typeof serialized === 'string') {
-      // Enum types use Enum literals.
-      if ((0, _definition.isEnumType)(type)) {
-        return { kind: _kinds.Kind.ENUM, value: serialized };
-      }
-
-      // ID types can use Int literals.
-      if (type === _scalars.GraphQLID && integerStringRegExp.test(serialized)) {
-        return { kind: _kinds.Kind.INT, value: serialized };
-      }
-
-      return {
-        kind: _kinds.Kind.STRING,
-        value: serialized
-      };
-    }
-
-    throw new TypeError('Cannot convert value to AST: ' + String(serialized));
-  }
-
-  /* istanbul ignore next */
-  throw new Error('Unknown type: ' + type + '.');
-}
-
-/**
- * IntValue:
- *   - NegativeSign? 0
- *   - NegativeSign? NonZeroDigit ( Digit+ )?
- */
-var integerStringRegExp = /^-?(0|[1-9][0-9]*)$/;
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getLocation = getLocation;
-
-
-/**
- * Takes a Source and a UTF-8 character offset, and returns the corresponding
- * line and column as a SourceLocation.
- */
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-function getLocation(source, position) {
-  var lineRegexp = /\r\n|[\n\r]/g;
-  var line = 1;
-  var column = position + 1;
-  var match = void 0;
-  while ((match = lineRegexp.exec(source.body)) && match.index < position) {
-    line += 1;
-    column = position + 1 - (match.index + match[0].length);
-  }
-  return { line: line, column: column };
-}
-
-/**
- * Represents a location in a Source.
- */
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.TokenKind = undefined;
-exports.createLexer = createLexer;
-exports.getTokenDesc = getTokenDesc;
-
-var _error = __webpack_require__(2);
-
-var _blockStringValue = __webpack_require__(170);
-
-var _blockStringValue2 = _interopRequireDefault(_blockStringValue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Given a Source object, this returns a Lexer for that source.
- * A Lexer is a stateful stream generator in that every time
- * it is advanced, it returns the next token in the Source. Assuming the
- * source lexes, the final Token emitted by the lexer will be of kind
- * EOF, after which the lexer will repeatedly return the same EOF token
- * whenever called.
- */
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-function createLexer(source, options) {
-  var startOfFileToken = new Tok(TokenKind.SOF, 0, 0, 0, 0, null);
-  var lexer = {
-    source: source,
-    options: options,
-    lastToken: startOfFileToken,
-    token: startOfFileToken,
-    line: 1,
-    lineStart: 0,
-    advance: advanceLexer,
-    lookahead: lookahead
-  };
-  return lexer;
-}
-
-function advanceLexer() {
-  this.lastToken = this.token;
-  var token = this.token = this.lookahead();
-  return token;
-}
-
-function lookahead() {
-  var token = this.token;
-  if (token.kind !== TokenKind.EOF) {
-    do {
-      // Note: next is only mutable during parsing, so we cast to allow this.
-      token = token.next || (token.next = readToken(this, token));
-    } while (token.kind === TokenKind.COMMENT);
-  }
-  return token;
-}
-
-/**
- * The return type of createLexer.
- */
-
-
-/**
- * An exported enum describing the different kinds of tokens that the
- * lexer emits.
- */
-var TokenKind = exports.TokenKind = Object.freeze({
-  SOF: '<SOF>',
-  EOF: '<EOF>',
-  BANG: '!',
-  DOLLAR: '$',
-  AMP: '&',
-  PAREN_L: '(',
-  PAREN_R: ')',
-  SPREAD: '...',
-  COLON: ':',
-  EQUALS: '=',
-  AT: '@',
-  BRACKET_L: '[',
-  BRACKET_R: ']',
-  BRACE_L: '{',
-  PIPE: '|',
-  BRACE_R: '}',
-  NAME: 'Name',
-  INT: 'Int',
-  FLOAT: 'Float',
-  STRING: 'String',
-  BLOCK_STRING: 'BlockString',
-  COMMENT: 'Comment'
-});
-
-/**
- * The enum type representing the token kinds values.
- */
-
-
-/**
- * A helper function to describe a token as a string for debugging
- */
-function getTokenDesc(token) {
-  var value = token.value;
-  return value ? token.kind + ' "' + value + '"' : token.kind;
-}
-
-var charCodeAt = String.prototype.charCodeAt;
-var slice = String.prototype.slice;
-
-/**
- * Helper function for constructing the Token object.
- */
-function Tok(kind, start, end, line, column, prev, value) {
-  this.kind = kind;
-  this.start = start;
-  this.end = end;
-  this.line = line;
-  this.column = column;
-  this.value = value;
-  this.prev = prev;
-  this.next = null;
-}
-
-// Print a simplified form when appearing in JSON/util.inspect.
-Tok.prototype.toJSON = Tok.prototype.inspect = function toJSON() {
-  return {
-    kind: this.kind,
-    value: this.value,
-    line: this.line,
-    column: this.column
-  };
-};
-
-function printCharCode(code) {
-  return (
-    // NaN/undefined represents access beyond the end of the file.
-    isNaN(code) ? TokenKind.EOF : // Trust JSON for ASCII.
-    code < 0x007f ? JSON.stringify(String.fromCharCode(code)) : // Otherwise print the escaped form.
-    '"\\u' + ('00' + code.toString(16).toUpperCase()).slice(-4) + '"'
-  );
-}
-
-/**
- * Gets the next token from the source starting at the given position.
- *
- * This skips over whitespace and comments until it finds the next lexable
- * token, then lexes punctuators immediately or calls the appropriate helper
- * function for more complicated tokens.
- */
-function readToken(lexer, prev) {
-  var source = lexer.source;
-  var body = source.body;
-  var bodyLength = body.length;
-
-  var pos = positionAfterWhitespace(body, prev.end, lexer);
-  var line = lexer.line;
-  var col = 1 + pos - lexer.lineStart;
-
-  if (pos >= bodyLength) {
-    return new Tok(TokenKind.EOF, bodyLength, bodyLength, line, col, prev);
-  }
-
-  var code = charCodeAt.call(body, pos);
-
-  // SourceCharacter
-  if (code < 0x0020 && code !== 0x0009 && code !== 0x000a && code !== 0x000d) {
-    throw (0, _error.syntaxError)(source, pos, 'Cannot contain the invalid character ' + printCharCode(code) + '.');
-  }
-
-  switch (code) {
-    // !
-    case 33:
-      return new Tok(TokenKind.BANG, pos, pos + 1, line, col, prev);
-    // #
-    case 35:
-      return readComment(source, pos, line, col, prev);
-    // $
-    case 36:
-      return new Tok(TokenKind.DOLLAR, pos, pos + 1, line, col, prev);
-    // &
-    case 38:
-      return new Tok(TokenKind.AMP, pos, pos + 1, line, col, prev);
-    // (
-    case 40:
-      return new Tok(TokenKind.PAREN_L, pos, pos + 1, line, col, prev);
-    // )
-    case 41:
-      return new Tok(TokenKind.PAREN_R, pos, pos + 1, line, col, prev);
-    // .
-    case 46:
-      if (charCodeAt.call(body, pos + 1) === 46 && charCodeAt.call(body, pos + 2) === 46) {
-        return new Tok(TokenKind.SPREAD, pos, pos + 3, line, col, prev);
-      }
-      break;
-    // :
-    case 58:
-      return new Tok(TokenKind.COLON, pos, pos + 1, line, col, prev);
-    // =
-    case 61:
-      return new Tok(TokenKind.EQUALS, pos, pos + 1, line, col, prev);
-    // @
-    case 64:
-      return new Tok(TokenKind.AT, pos, pos + 1, line, col, prev);
-    // [
-    case 91:
-      return new Tok(TokenKind.BRACKET_L, pos, pos + 1, line, col, prev);
-    // ]
-    case 93:
-      return new Tok(TokenKind.BRACKET_R, pos, pos + 1, line, col, prev);
-    // {
-    case 123:
-      return new Tok(TokenKind.BRACE_L, pos, pos + 1, line, col, prev);
-    // |
-    case 124:
-      return new Tok(TokenKind.PIPE, pos, pos + 1, line, col, prev);
-    // }
-    case 125:
-      return new Tok(TokenKind.BRACE_R, pos, pos + 1, line, col, prev);
-    // A-Z _ a-z
-    case 65:
-    case 66:
-    case 67:
-    case 68:
-    case 69:
-    case 70:
-    case 71:
-    case 72:
-    case 73:
-    case 74:
-    case 75:
-    case 76:
-    case 77:
-    case 78:
-    case 79:
-    case 80:
-    case 81:
-    case 82:
-    case 83:
-    case 84:
-    case 85:
-    case 86:
-    case 87:
-    case 88:
-    case 89:
-    case 90:
-    case 95:
-    case 97:
-    case 98:
-    case 99:
-    case 100:
-    case 101:
-    case 102:
-    case 103:
-    case 104:
-    case 105:
-    case 106:
-    case 107:
-    case 108:
-    case 109:
-    case 110:
-    case 111:
-    case 112:
-    case 113:
-    case 114:
-    case 115:
-    case 116:
-    case 117:
-    case 118:
-    case 119:
-    case 120:
-    case 121:
-    case 122:
-      return readName(source, pos, line, col, prev);
-    // - 0-9
-    case 45:
-    case 48:
-    case 49:
-    case 50:
-    case 51:
-    case 52:
-    case 53:
-    case 54:
-    case 55:
-    case 56:
-    case 57:
-      return readNumber(source, pos, code, line, col, prev);
-    // "
-    case 34:
-      if (charCodeAt.call(body, pos + 1) === 34 && charCodeAt.call(body, pos + 2) === 34) {
-        return readBlockString(source, pos, line, col, prev);
-      }
-      return readString(source, pos, line, col, prev);
-  }
-
-  throw (0, _error.syntaxError)(source, pos, unexpectedCharacterMessage(code));
-}
-
-/**
- * Report a message that an unexpected character was encountered.
- */
-function unexpectedCharacterMessage(code) {
-  if (code === 39) {
-    // '
-    return "Unexpected single quote character ('), did you mean to use " + 'a double quote (")?';
-  }
-
-  return 'Cannot parse the unexpected character ' + printCharCode(code) + '.';
-}
-
-/**
- * Reads from body starting at startPosition until it finds a non-whitespace
- * or commented character, then returns the position of that character for
- * lexing.
- */
-function positionAfterWhitespace(body, startPosition, lexer) {
-  var bodyLength = body.length;
-  var position = startPosition;
-  while (position < bodyLength) {
-    var code = charCodeAt.call(body, position);
-    // tab | space | comma | BOM
-    if (code === 9 || code === 32 || code === 44 || code === 0xfeff) {
-      ++position;
-    } else if (code === 10) {
-      // new line
-      ++position;
-      ++lexer.line;
-      lexer.lineStart = position;
-    } else if (code === 13) {
-      // carriage return
-      if (charCodeAt.call(body, position + 1) === 10) {
-        position += 2;
-      } else {
-        ++position;
-      }
-      ++lexer.line;
-      lexer.lineStart = position;
-    } else {
-      break;
-    }
-  }
-  return position;
-}
-
-/**
- * Reads a comment token from the source file.
- *
- * #[\u0009\u0020-\uFFFF]*
- */
-function readComment(source, start, line, col, prev) {
-  var body = source.body;
-  var code = void 0;
-  var position = start;
-
-  do {
-    code = charCodeAt.call(body, ++position);
-  } while (code !== null && (
-  // SourceCharacter but not LineTerminator
-  code > 0x001f || code === 0x0009));
-
-  return new Tok(TokenKind.COMMENT, start, position, line, col, prev, slice.call(body, start + 1, position));
-}
-
-/**
- * Reads a number token from the source file, either a float
- * or an int depending on whether a decimal point appears.
- *
- * Int:   -?(0|[1-9][0-9]*)
- * Float: -?(0|[1-9][0-9]*)(\.[0-9]+)?((E|e)(+|-)?[0-9]+)?
- */
-function readNumber(source, start, firstCode, line, col, prev) {
-  var body = source.body;
-  var code = firstCode;
-  var position = start;
-  var isFloat = false;
-
-  if (code === 45) {
-    // -
-    code = charCodeAt.call(body, ++position);
-  }
-
-  if (code === 48) {
-    // 0
-    code = charCodeAt.call(body, ++position);
-    if (code >= 48 && code <= 57) {
-      throw (0, _error.syntaxError)(source, position, 'Invalid number, unexpected digit after 0: ' + printCharCode(code) + '.');
-    }
-  } else {
-    position = readDigits(source, position, code);
-    code = charCodeAt.call(body, position);
-  }
-
-  if (code === 46) {
-    // .
-    isFloat = true;
-
-    code = charCodeAt.call(body, ++position);
-    position = readDigits(source, position, code);
-    code = charCodeAt.call(body, position);
-  }
-
-  if (code === 69 || code === 101) {
-    // E e
-    isFloat = true;
-
-    code = charCodeAt.call(body, ++position);
-    if (code === 43 || code === 45) {
-      // + -
-      code = charCodeAt.call(body, ++position);
-    }
-    position = readDigits(source, position, code);
-  }
-
-  return new Tok(isFloat ? TokenKind.FLOAT : TokenKind.INT, start, position, line, col, prev, slice.call(body, start, position));
-}
-
-/**
- * Returns the new position in the source after reading digits.
- */
-function readDigits(source, start, firstCode) {
-  var body = source.body;
-  var position = start;
-  var code = firstCode;
-  if (code >= 48 && code <= 57) {
-    // 0 - 9
-    do {
-      code = charCodeAt.call(body, ++position);
-    } while (code >= 48 && code <= 57); // 0 - 9
-    return position;
-  }
-  throw (0, _error.syntaxError)(source, position, 'Invalid number, expected digit but got: ' + printCharCode(code) + '.');
-}
-
-/**
- * Reads a string token from the source file.
- *
- * "([^"\\\u000A\u000D]|(\\(u[0-9a-fA-F]{4}|["\\/bfnrt])))*"
- */
-function readString(source, start, line, col, prev) {
-  var body = source.body;
-  var position = start + 1;
-  var chunkStart = position;
-  var code = 0;
-  var value = '';
-
-  while (position < body.length && (code = charCodeAt.call(body, position)) !== null &&
-  // not LineTerminator
-  code !== 0x000a && code !== 0x000d) {
-    // Closing Quote (")
-    if (code === 34) {
-      value += slice.call(body, chunkStart, position);
-      return new Tok(TokenKind.STRING, start, position + 1, line, col, prev, value);
-    }
-
-    // SourceCharacter
-    if (code < 0x0020 && code !== 0x0009) {
-      throw (0, _error.syntaxError)(source, position, 'Invalid character within String: ' + printCharCode(code) + '.');
-    }
-
-    ++position;
-    if (code === 92) {
-      // \
-      value += slice.call(body, chunkStart, position - 1);
-      code = charCodeAt.call(body, position);
-      switch (code) {
-        case 34:
-          value += '"';
-          break;
-        case 47:
-          value += '/';
-          break;
-        case 92:
-          value += '\\';
-          break;
-        case 98:
-          value += '\b';
-          break;
-        case 102:
-          value += '\f';
-          break;
-        case 110:
-          value += '\n';
-          break;
-        case 114:
-          value += '\r';
-          break;
-        case 116:
-          value += '\t';
-          break;
-        case 117:
-          // u
-          var charCode = uniCharCode(charCodeAt.call(body, position + 1), charCodeAt.call(body, position + 2), charCodeAt.call(body, position + 3), charCodeAt.call(body, position + 4));
-          if (charCode < 0) {
-            throw (0, _error.syntaxError)(source, position, 'Invalid character escape sequence: ' + ('\\u' + body.slice(position + 1, position + 5) + '.'));
-          }
-          value += String.fromCharCode(charCode);
-          position += 4;
-          break;
-        default:
-          throw (0, _error.syntaxError)(source, position, 'Invalid character escape sequence: \\' + String.fromCharCode(code) + '.');
-      }
-      ++position;
-      chunkStart = position;
-    }
-  }
-
-  throw (0, _error.syntaxError)(source, position, 'Unterminated string.');
-}
-
-/**
- * Reads a block string token from the source file.
- *
- * """("?"?(\\"""|\\(?!=""")|[^"\\]))*"""
- */
-function readBlockString(source, start, line, col, prev) {
-  var body = source.body;
-  var position = start + 3;
-  var chunkStart = position;
-  var code = 0;
-  var rawValue = '';
-
-  while (position < body.length && (code = charCodeAt.call(body, position)) !== null) {
-    // Closing Triple-Quote (""")
-    if (code === 34 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34) {
-      rawValue += slice.call(body, chunkStart, position);
-      return new Tok(TokenKind.BLOCK_STRING, start, position + 3, line, col, prev, (0, _blockStringValue2.default)(rawValue));
-    }
-
-    // SourceCharacter
-    if (code < 0x0020 && code !== 0x0009 && code !== 0x000a && code !== 0x000d) {
-      throw (0, _error.syntaxError)(source, position, 'Invalid character within String: ' + printCharCode(code) + '.');
-    }
-
-    // Escape Triple-Quote (\""")
-    if (code === 92 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34 && charCodeAt.call(body, position + 3) === 34) {
-      rawValue += slice.call(body, chunkStart, position) + '"""';
-      position += 4;
-      chunkStart = position;
-    } else {
-      ++position;
-    }
-  }
-
-  throw (0, _error.syntaxError)(source, position, 'Unterminated string.');
-}
-
-/**
- * Converts four hexidecimal chars to the integer that the
- * string represents. For example, uniCharCode('0','0','0','f')
- * will return 15, and uniCharCode('0','0','f','f') returns 255.
- *
- * Returns a negative number on error, if a char was invalid.
- *
- * This is implemented by noting that char2hex() returns -1 on error,
- * which means the result of ORing the char2hex() will also be negative.
- */
-function uniCharCode(a, b, c, d) {
-  return char2hex(a) << 12 | char2hex(b) << 8 | char2hex(c) << 4 | char2hex(d);
-}
-
-/**
- * Converts a hex character to its integer value.
- * '0' becomes 0, '9' becomes 9
- * 'A' becomes 10, 'F' becomes 15
- * 'a' becomes 10, 'f' becomes 15
- *
- * Returns -1 on error.
- */
-function char2hex(a) {
-  return a >= 48 && a <= 57 ? a - 48 // 0-9
-  : a >= 65 && a <= 70 ? a - 55 // A-F
-  : a >= 97 && a <= 102 ? a - 87 // a-f
-  : -1;
-}
-
-/**
- * Reads an alphanumeric + underscore name from the source.
- *
- * [_A-Za-z][_0-9A-Za-z]*
- */
-function readName(source, start, line, col, prev) {
-  var body = source.body;
-  var bodyLength = body.length;
-  var position = start + 1;
-  var code = 0;
-  while (position !== bodyLength && (code = charCodeAt.call(body, position)) !== null && (code === 95 || // _
-  code >= 48 && code <= 57 || // 0-9
-  code >= 65 && code <= 90 || // A-Z
-  code >= 97 && code <= 122) // a-z
-  ) {
-    ++position;
-  }
-  return new Tok(TokenKind.NAME, start, position, line, col, prev, slice.call(body, start, position));
-}
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = quotedOrList;
-
-var _orList = __webpack_require__(93);
-
-var _orList2 = _interopRequireDefault(_orList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Given [ A, B, C ] return '"A", "B", or "C"'.
- */
-function quotedOrList(items) {
-  return (0, _orList2.default)(items.map(function (item) {
-    return '"' + item + '"';
-  }));
-} /**
-   * Copyright (c) 2015-present, Facebook, Inc.
-   *
-   * This source code is licensed under the MIT license found in the
-   * LICENSE file in the root directory of this source tree.
-   *
-   *  strict
-   */
-
-/***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = orList;
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-var MAX_LENGTH = 5;
-
-/**
- * Given [ A, B, C ] return 'A, B, or C'.
- */
-function orList(items) {
-  var selected = items.slice(0, MAX_LENGTH);
-  return selected.reduce(function (list, quoted, index) {
-    return list + (selected.length > 2 ? ', ' : ' ') + (index === selected.length - 1 ? 'or ' : '') + quoted;
-  });
-}
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.badValueMessage = badValueMessage;
-exports.requiredFieldMessage = requiredFieldMessage;
-exports.unknownFieldMessage = unknownFieldMessage;
-exports.ValuesOfCorrectType = ValuesOfCorrectType;
-
-var _error = __webpack_require__(2);
-
-var _printer = __webpack_require__(21);
-
-var _definition = __webpack_require__(3);
-
-var _isInvalid = __webpack_require__(17);
-
-var _isInvalid2 = _interopRequireDefault(_isInvalid);
-
-var _keyMap = __webpack_require__(26);
-
-var _keyMap2 = _interopRequireDefault(_keyMap);
-
-var _orList = __webpack_require__(93);
-
-var _orList2 = _interopRequireDefault(_orList);
-
-var _suggestionList = __webpack_require__(43);
-
-var _suggestionList2 = _interopRequireDefault(_suggestionList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-function badValueMessage(typeName, valueName, message) {
-  return 'Expected type ' + typeName + ', found ' + valueName + (message ? '; ' + message : '.');
-}
-
-function requiredFieldMessage(typeName, fieldName, fieldTypeName) {
-  return 'Field ' + typeName + '.' + fieldName + ' of required type ' + (fieldTypeName + ' was not provided.');
-}
-
-function unknownFieldMessage(typeName, fieldName, message) {
-  return 'Field "' + fieldName + '" is not defined by type ' + typeName + (message ? '; ' + message : '.');
-}
-
-/**
- * Value literals of correct type
- *
- * A GraphQL document is only valid if all value literals are of the type
- * expected at their position.
- */
-function ValuesOfCorrectType(context) {
-  return {
-    NullValue: function NullValue(node) {
-      var type = context.getInputType();
-      if ((0, _definition.isNonNullType)(type)) {
-        context.reportError(new _error.GraphQLError(badValueMessage(String(type), (0, _printer.print)(node)), node));
-      }
-    },
-    ListValue: function ListValue(node) {
-      // Note: TypeInfo will traverse into a list's item type, so look to the
-      // parent input type to check if it is a list.
-      var type = (0, _definition.getNullableType)(context.getParentInputType());
-      if (!(0, _definition.isListType)(type)) {
-        isValidScalar(context, node);
-        return false; // Don't traverse further.
-      }
-    },
-    ObjectValue: function ObjectValue(node) {
-      var type = (0, _definition.getNamedType)(context.getInputType());
-      if (!(0, _definition.isInputObjectType)(type)) {
-        isValidScalar(context, node);
-        return false; // Don't traverse further.
-      }
-      // Ensure every required field exists.
-      var inputFields = type.getFields();
-      var fieldNodeMap = (0, _keyMap2.default)(node.fields, function (field) {
-        return field.name.value;
-      });
-      Object.keys(inputFields).forEach(function (fieldName) {
-        var fieldType = inputFields[fieldName].type;
-        var fieldNode = fieldNodeMap[fieldName];
-        if (!fieldNode && (0, _definition.isNonNullType)(fieldType)) {
-          context.reportError(new _error.GraphQLError(requiredFieldMessage(type.name, fieldName, String(fieldType)), node));
-        }
-      });
-    },
-    ObjectField: function ObjectField(node) {
-      var parentType = (0, _definition.getNamedType)(context.getParentInputType());
-      var fieldType = context.getInputType();
-      if (!fieldType && (0, _definition.isInputObjectType)(parentType)) {
-        var suggestions = (0, _suggestionList2.default)(node.name.value, Object.keys(parentType.getFields()));
-        var didYouMean = suggestions.length !== 0 ? 'Did you mean ' + (0, _orList2.default)(suggestions) + '?' : undefined;
-        context.reportError(new _error.GraphQLError(unknownFieldMessage(parentType.name, node.name.value, didYouMean), node));
-      }
-    },
-    EnumValue: function EnumValue(node) {
-      var type = (0, _definition.getNamedType)(context.getInputType());
-      if (!(0, _definition.isEnumType)(type)) {
-        isValidScalar(context, node);
-      } else if (!type.getValue(node.value)) {
-        context.reportError(new _error.GraphQLError(badValueMessage(type.name, (0, _printer.print)(node), enumTypeSuggestion(type, node)), node));
-      }
-    },
-
-    IntValue: function IntValue(node) {
-      return isValidScalar(context, node);
-    },
-    FloatValue: function FloatValue(node) {
-      return isValidScalar(context, node);
-    },
-    StringValue: function StringValue(node) {
-      return isValidScalar(context, node);
-    },
-    BooleanValue: function BooleanValue(node) {
-      return isValidScalar(context, node);
-    }
-  };
-}
-
-/**
- * Any value literal may be a valid representation of a Scalar, depending on
- * that scalar type.
- */
-function isValidScalar(context, node) {
-  // Report any error at the full type expected by the location.
-  var locationType = context.getInputType();
-  if (!locationType) {
-    return;
-  }
-
-  var type = (0, _definition.getNamedType)(locationType);
-
-  if (!(0, _definition.isScalarType)(type)) {
-    context.reportError(new _error.GraphQLError(badValueMessage(String(locationType), (0, _printer.print)(node), enumTypeSuggestion(type, node)), node));
-    return;
-  }
-
-  // Scalars determine if a literal value is valid via parseLiteral() which
-  // may throw or return an invalid value to indicate failure.
-  try {
-    var parseResult = type.parseLiteral(node, undefined /* variables */);
-    if ((0, _isInvalid2.default)(parseResult)) {
-      context.reportError(new _error.GraphQLError(badValueMessage(String(locationType), (0, _printer.print)(node)), node));
-    }
-  } catch (error) {
-    // Ensure a reference to the original error is maintained.
-    context.reportError(new _error.GraphQLError(badValueMessage(String(locationType), (0, _printer.print)(node), error.message), node, undefined, undefined, undefined, error));
-  }
-}
-
-function enumTypeSuggestion(type, node) {
-  if ((0, _definition.isEnumType)(type)) {
-    var suggestions = (0, _suggestionList2.default)((0, _printer.print)(node), type.getValues().map(function (value) {
-      return value.name;
-    }));
-    if (suggestions.length !== 0) {
-      return 'Did you mean the enum value ' + (0, _orList2.default)(suggestions) + '?';
-    }
-  }
-}
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _error = __webpack_require__(2);
-
-var _visitor = __webpack_require__(29);
-
-var _kinds = __webpack_require__(4);
-
-var _schema = __webpack_require__(7);
-
-var _TypeInfo = __webpack_require__(42);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
-                                                                                                                                                           * Copyright (c) 2015-present, Facebook, Inc.
-                                                                                                                                                           *
-                                                                                                                                                           * This source code is licensed under the MIT license found in the
-                                                                                                                                                           * LICENSE file in the root directory of this source tree.
-                                                                                                                                                           *
-                                                                                                                                                           *  strict
-                                                                                                                                                           */
-
-/**
- * An instance of this class is passed as the "this" context to all validators,
- * allowing access to commonly useful contextual information from within a
- * validation rule.
- */
-var ValidationContext = function () {
-  function ValidationContext(schema, ast, typeInfo) {
-    _classCallCheck(this, ValidationContext);
-
-    this._schema = schema;
-    this._ast = ast;
-    this._typeInfo = typeInfo;
-    this._errors = [];
-    this._fragmentSpreads = new Map();
-    this._recursivelyReferencedFragments = new Map();
-    this._variableUsages = new Map();
-    this._recursiveVariableUsages = new Map();
-  }
-
-  ValidationContext.prototype.reportError = function reportError(error) {
-    this._errors.push(error);
-  };
-
-  ValidationContext.prototype.getErrors = function getErrors() {
-    return this._errors;
-  };
-
-  ValidationContext.prototype.getSchema = function getSchema() {
-    return this._schema;
-  };
-
-  ValidationContext.prototype.getDocument = function getDocument() {
-    return this._ast;
-  };
-
-  ValidationContext.prototype.getFragment = function getFragment(name) {
-    var fragments = this._fragments;
-    if (!fragments) {
-      this._fragments = fragments = this.getDocument().definitions.reduce(function (frags, statement) {
-        if (statement.kind === _kinds.Kind.FRAGMENT_DEFINITION) {
-          frags[statement.name.value] = statement;
-        }
-        return frags;
-      }, Object.create(null));
-    }
-    return fragments[name];
-  };
-
-  ValidationContext.prototype.getFragmentSpreads = function getFragmentSpreads(node) {
-    var spreads = this._fragmentSpreads.get(node);
-    if (!spreads) {
-      spreads = [];
-      var setsToVisit = [node];
-      while (setsToVisit.length !== 0) {
-        var set = setsToVisit.pop();
-        for (var i = 0; i < set.selections.length; i++) {
-          var selection = set.selections[i];
-          if (selection.kind === _kinds.Kind.FRAGMENT_SPREAD) {
-            spreads.push(selection);
-          } else if (selection.selectionSet) {
-            setsToVisit.push(selection.selectionSet);
-          }
-        }
-      }
-      this._fragmentSpreads.set(node, spreads);
-    }
-    return spreads;
-  };
-
-  ValidationContext.prototype.getRecursivelyReferencedFragments = function getRecursivelyReferencedFragments(operation) {
-    var fragments = this._recursivelyReferencedFragments.get(operation);
-    if (!fragments) {
-      fragments = [];
-      var collectedNames = Object.create(null);
-      var nodesToVisit = [operation.selectionSet];
-      while (nodesToVisit.length !== 0) {
-        var _node = nodesToVisit.pop();
-        var spreads = this.getFragmentSpreads(_node);
-        for (var i = 0; i < spreads.length; i++) {
-          var fragName = spreads[i].name.value;
-          if (collectedNames[fragName] !== true) {
-            collectedNames[fragName] = true;
-            var fragment = this.getFragment(fragName);
-            if (fragment) {
-              fragments.push(fragment);
-              nodesToVisit.push(fragment.selectionSet);
-            }
-          }
-        }
-      }
-      this._recursivelyReferencedFragments.set(operation, fragments);
-    }
-    return fragments;
-  };
-
-  ValidationContext.prototype.getVariableUsages = function getVariableUsages(node) {
-    var usages = this._variableUsages.get(node);
-    if (!usages) {
-      var newUsages = [];
-      var typeInfo = new _TypeInfo.TypeInfo(this._schema);
-      (0, _visitor.visit)(node, (0, _visitor.visitWithTypeInfo)(typeInfo, {
-        VariableDefinition: function VariableDefinition() {
-          return false;
-        },
-        Variable: function Variable(variable) {
-          newUsages.push({ node: variable, type: typeInfo.getInputType() });
-        }
-      }));
-      usages = newUsages;
-      this._variableUsages.set(node, usages);
-    }
-    return usages;
-  };
-
-  ValidationContext.prototype.getRecursiveVariableUsages = function getRecursiveVariableUsages(operation) {
-    var usages = this._recursiveVariableUsages.get(operation);
-    if (!usages) {
-      usages = this.getVariableUsages(operation);
-      var fragments = this.getRecursivelyReferencedFragments(operation);
-      for (var i = 0; i < fragments.length; i++) {
-        Array.prototype.push.apply(usages, this.getVariableUsages(fragments[i]));
-      }
-      this._recursiveVariableUsages.set(operation, usages);
-    }
-    return usages;
-  };
-
-  ValidationContext.prototype.getType = function getType() {
-    return this._typeInfo.getType();
-  };
-
-  ValidationContext.prototype.getParentType = function getParentType() {
-    return this._typeInfo.getParentType();
-  };
-
-  ValidationContext.prototype.getInputType = function getInputType() {
-    return this._typeInfo.getInputType();
-  };
-
-  ValidationContext.prototype.getParentInputType = function getParentInputType() {
-    return this._typeInfo.getParentInputType();
-  };
-
-  ValidationContext.prototype.getFieldDef = function getFieldDef() {
-    return this._typeInfo.getFieldDef();
-  };
-
-  ValidationContext.prototype.getDirective = function getDirective() {
-    return this._typeInfo.getDirective();
-  };
-
-  ValidationContext.prototype.getArgument = function getArgument() {
-    return this._typeInfo.getArgument();
-  };
-
-  return ValidationContext;
-}();
-
-exports.default = ValidationContext;
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getVariableValues = getVariableValues;
-exports.getArgumentValues = getArgumentValues;
-exports.getDirectiveValues = getDirectiveValues;
-
-var _error = __webpack_require__(2);
-
-var _find = __webpack_require__(34);
-
-var _find2 = _interopRequireDefault(_find);
-
-var _isInvalid = __webpack_require__(17);
-
-var _isInvalid2 = _interopRequireDefault(_isInvalid);
-
-var _keyMap = __webpack_require__(26);
-
-var _keyMap2 = _interopRequireDefault(_keyMap);
-
-var _coerceValue = __webpack_require__(97);
-
-var _typeFromAST = __webpack_require__(22);
-
-var _valueFromAST = __webpack_require__(62);
-
-var _kinds = __webpack_require__(4);
-
-var _printer = __webpack_require__(21);
-
-var _definition = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Prepares an object map of variableValues of the correct type based on the
- * provided variable definitions and arbitrary input. If the input cannot be
- * parsed to match the variable definitions, a GraphQLError will be thrown.
- *
- * Note: The returned value is a plain Object with a prototype, since it is
- * exposed to user code. Care should be taken to not pull values from the
- * Object prototype.
- */
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *  strict
- */
-
-function getVariableValues(schema, varDefNodes, inputs) {
-  var errors = [];
-  var coercedValues = {};
-  for (var i = 0; i < varDefNodes.length; i++) {
-    var varDefNode = varDefNodes[i];
-    var varName = varDefNode.variable.name.value;
-    var varType = (0, _typeFromAST.typeFromAST)(schema, varDefNode.type);
-    if (!(0, _definition.isInputType)(varType)) {
-      errors.push(new _error.GraphQLError('Variable "$' + varName + '" expected value of type ' + ('"' + (0, _printer.print)(varDefNode.type) + '" which cannot be used as an input type.'), [varDefNode.type]));
-    } else {
-      var value = inputs[varName];
-      if ((0, _isInvalid2.default)(value)) {
-        if ((0, _definition.isNonNullType)(varType)) {
-          errors.push(new _error.GraphQLError('Variable "$' + varName + '" of required type ' + ('"' + String(varType) + '" was not provided.'), [varDefNode]));
-        } else if (varDefNode.defaultValue) {
-          coercedValues[varName] = (0, _valueFromAST.valueFromAST)(varDefNode.defaultValue, varType);
-        }
-      } else {
-        var _coerced = (0, _coerceValue.coerceValue)(value, varType, varDefNode);
-        var coercionErrors = _coerced.errors;
-        if (coercionErrors) {
-          (function () {
-            var messagePrelude = 'Variable "$' + varName + '" got invalid value ' + JSON.stringify(value) + '; ';
-            coercionErrors.forEach(function (error) {
-              error.message = messagePrelude + error.message;
-            });
-            errors.push.apply(errors, coercionErrors);
-          })();
-        } else {
-          coercedValues[varName] = _coerced.value;
-        }
-      }
-    }
-  }
-  return errors.length === 0 ? { errors: undefined, coerced: coercedValues } : { errors: errors, coerced: undefined };
-}
-
-/**
- * Prepares an object map of argument values given a list of argument
- * definitions and list of argument AST nodes.
- *
- * Note: The returned value is a plain Object with a prototype, since it is
- * exposed to user code. Care should be taken to not pull values from the
- * Object prototype.
- */
-function getArgumentValues(def, node, variableValues) {
-  var coercedValues = {};
-  var argDefs = def.args;
-  var argNodes = node.arguments;
-  if (!argDefs || !argNodes) {
-    return coercedValues;
-  }
-  var argNodeMap = (0, _keyMap2.default)(argNodes, function (arg) {
-    return arg.name.value;
-  });
-  for (var i = 0; i < argDefs.length; i++) {
-    var argDef = argDefs[i];
-    var name = argDef.name;
-    var argType = argDef.type;
-    var argumentNode = argNodeMap[name];
-    var defaultValue = argDef.defaultValue;
-    if (!argumentNode) {
-      if (!(0, _isInvalid2.default)(defaultValue)) {
-        coercedValues[name] = defaultValue;
-      } else if ((0, _definition.isNonNullType)(argType)) {
-        throw new _error.GraphQLError('Argument "' + name + '" of required type ' + ('"' + String(argType) + '" was not provided.'), [node]);
-      }
-    } else if (argumentNode.value.kind === _kinds.Kind.VARIABLE) {
-      var variableName = argumentNode.value.name.value;
-      if (variableValues && Object.prototype.hasOwnProperty.call(variableValues, variableName) && !(0, _isInvalid2.default)(variableValues[variableName])) {
-        // Note: this does not check that this variable value is correct.
-        // This assumes that this query has been validated and the variable
-        // usage here is of the correct type.
-        coercedValues[name] = variableValues[variableName];
-      } else if (!(0, _isInvalid2.default)(defaultValue)) {
-        coercedValues[name] = defaultValue;
-      } else if ((0, _definition.isNonNullType)(argType)) {
-        throw new _error.GraphQLError('Argument "' + name + '" of required type "' + String(argType) + '" was ' + ('provided the variable "$' + variableName + '" which was not provided ') + 'a runtime value.', [argumentNode.value]);
-      }
-    } else {
-      var valueNode = argumentNode.value;
-      var coercedValue = (0, _valueFromAST.valueFromAST)(valueNode, argType, variableValues);
-      if ((0, _isInvalid2.default)(coercedValue)) {
-        // Note: ValuesOfCorrectType validation should catch this before
-        // execution. This is a runtime check to ensure execution does not
-        // continue with an invalid argument value.
-        throw new _error.GraphQLError('Argument "' + name + '" has invalid value ' + (0, _printer.print)(valueNode) + '.', [argumentNode.value]);
-      }
-      coercedValues[name] = coercedValue;
-    }
-  }
-  return coercedValues;
-}
-
-/**
- * Prepares an object map of argument values given a directive definition
- * and a AST node which may contain directives. Optionally also accepts a map
- * of variable values.
- *
- * If the directive does not exist on the node, returns undefined.
- *
- * Note: The returned value is a plain Object with a prototype, since it is
- * exposed to user code. Care should be taken to not pull values from the
- * Object prototype.
- */
-function getDirectiveValues(directiveDef, node, variableValues) {
-  var directiveNode = node.directives && (0, _find2.default)(node.directives, function (directive) {
-    return directive.name.value === directiveDef.name;
-  });
-
-  if (directiveNode) {
-    return getArgumentValues(directiveDef, directiveNode, variableValues);
-  }
-}
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                                               * Copyright (c) 2015-present, Facebook, Inc.
-                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                               * This source code is licensed under the MIT license found in the
-                                                                                                                                                                                                                                                                               * LICENSE file in the root directory of this source tree.
-                                                                                                                                                                                                                                                                               *
-                                                                                                                                                                                                                                                                               *  strict
-                                                                                                                                                                                                                                                                               */
-
-exports.coerceValue = coerceValue;
-
-var _iterall = __webpack_require__(41);
-
-var _isInvalid = __webpack_require__(17);
-
-var _isInvalid2 = _interopRequireDefault(_isInvalid);
-
-var _isNullish = __webpack_require__(59);
-
-var _isNullish2 = _interopRequireDefault(_isNullish);
-
-var _orList = __webpack_require__(93);
-
-var _orList2 = _interopRequireDefault(_orList);
-
-var _suggestionList = __webpack_require__(43);
-
-var _suggestionList2 = _interopRequireDefault(_suggestionList);
-
-var _error = __webpack_require__(2);
-
-var _definition = __webpack_require__(3);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Coerces a JavaScript value given a GraphQL Type.
- *
- * Returns either a value which is valid for the provided type or a list of
- * encountered coercion errors.
- *
- */
-function coerceValue(value, type, blameNode, path) {
-  // A value must be provided if the type is non-null.
-  if ((0, _definition.isNonNullType)(type)) {
-    if ((0, _isNullish2.default)(value)) {
-      return ofErrors([coercionError('Expected non-nullable type ' + String(type) + ' not to be null', blameNode, path)]);
-    }
-    return coerceValue(value, type.ofType, blameNode, path);
-  }
-
-  if ((0, _isNullish2.default)(value)) {
-    // Explicitly return the value null.
-    return ofValue(null);
-  }
-
-  if ((0, _definition.isScalarType)(type)) {
-    // Scalars determine if a value is valid via parseValue(), which can
-    // throw to indicate failure. If it throws, maintain a reference to
-    // the original error.
-    try {
-      var parseResult = type.parseValue(value);
-      if ((0, _isInvalid2.default)(parseResult)) {
-        return ofErrors([coercionError('Expected type ' + type.name, blameNode, path)]);
-      }
-      return ofValue(parseResult);
-    } catch (error) {
-      return ofErrors([coercionError('Expected type ' + type.name, blameNode, path, error.message, error)]);
-    }
-  }
-
-  if ((0, _definition.isEnumType)(type)) {
-    if (typeof value === 'string') {
-      var enumValue = type.getValue(value);
-      if (enumValue) {
-        return ofValue(enumValue.value);
-      }
-    }
-    var suggestions = (0, _suggestionList2.default)(String(value), type.getValues().map(function (enumValue) {
-      return enumValue.name;
-    }));
-    var didYouMean = suggestions.length !== 0 ? 'did you mean ' + (0, _orList2.default)(suggestions) + '?' : undefined;
-    return ofErrors([coercionError('Expected type ' + type.name, blameNode, path, didYouMean)]);
-  }
-
-  if ((0, _definition.isListType)(type)) {
-    var itemType = type.ofType;
-    if ((0, _iterall.isCollection)(value)) {
-      var _errors = void 0;
-      var coercedValue = [];
-      (0, _iterall.forEach)(value, function (itemValue, index) {
-        var coercedItem = coerceValue(itemValue, itemType, blameNode, atPath(path, index));
-        if (coercedItem.errors) {
-          _errors = add(_errors, coercedItem.errors);
-        } else if (!_errors) {
-          coercedValue.push(coercedItem.value);
-        }
-      });
-      return _errors ? ofErrors(_errors) : ofValue(coercedValue);
-    }
-    // Lists accept a non-list value as a list of one.
-    var coercedItem = coerceValue(value, itemType, blameNode);
-    return coercedItem.errors ? coercedItem : ofValue([coercedItem.value]);
-  }
-
-  if ((0, _definition.isInputObjectType)(type)) {
-    if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object') {
-      return ofErrors([coercionError('Expected type ' + type.name + ' to be an object', blameNode, path)]);
-    }
-    var _errors2 = void 0;
-    var _coercedValue = {};
-    var fields = type.getFields();
-
-    // Ensure every defined field is valid.
-    for (var fieldName in fields) {
-      if (hasOwnProperty.call(fields, fieldName)) {
-        var field = fields[fieldName];
-        var fieldValue = value[fieldName];
-        if ((0, _isInvalid2.default)(fieldValue)) {
-          if (!(0, _isInvalid2.default)(field.defaultValue)) {
-            _coercedValue[fieldName] = field.defaultValue;
-          } else if ((0, _definition.isNonNullType)(field.type)) {
-            _errors2 = add(_errors2, coercionError('Field ' + printPath(atPath(path, fieldName)) + ' of required ' + ('type ' + String(field.type) + ' was not provided'), blameNode));
-          }
-        } else {
-          var coercedField = coerceValue(fieldValue, field.type, blameNode, atPath(path, fieldName));
-          if (coercedField.errors) {
-            _errors2 = add(_errors2, coercedField.errors);
-          } else if (!_errors2) {
-            _coercedValue[fieldName] = coercedField.value;
-          }
-        }
-      }
-    }
-
-    // Ensure every provided field is defined.
-    for (var _fieldName in value) {
-      if (hasOwnProperty.call(value, _fieldName)) {
-        if (!fields[_fieldName]) {
-          var _suggestions = (0, _suggestionList2.default)(_fieldName, Object.keys(fields));
-          var _didYouMean = _suggestions.length !== 0 ? 'did you mean ' + (0, _orList2.default)(_suggestions) + '?' : undefined;
-          _errors2 = add(_errors2, coercionError('Field "' + _fieldName + '" is not defined by type ' + type.name, blameNode, path, _didYouMean));
-        }
-      }
-    }
-
-    return _errors2 ? ofErrors(_errors2) : ofValue(_coercedValue);
-  }
-
-  /* istanbul ignore next */
-  throw new Error('Unexpected type: ' + type + '.');
-}
-
-function ofValue(value) {
-  return { errors: undefined, value: value };
-}
-
-function ofErrors(errors) {
-  return { errors: errors, value: undefined };
-}
-
-function add(errors, moreErrors) {
-  return (errors || []).concat(moreErrors);
-}
-
-function atPath(prev, key) {
-  return { prev: prev, key: key };
-}
-
-function coercionError(message, blameNode, path, subMessage, originalError) {
-  var pathStr = printPath(path);
-  // Return a GraphQLError instance
-  return new _error.GraphQLError(message + (pathStr ? ' at ' + pathStr : '') + (subMessage ? '; ' + subMessage : '.'), blameNode, undefined, undefined, undefined, originalError);
-}
-
-// Build a string describing the path into the value where the error was found
-function printPath(path) {
-  var pathStr = '';
-  var currentPath = path;
-  while (currentPath) {
-    pathStr = (typeof currentPath.key === 'string' ? '.' + currentPath.key : '[' + String(currentPath.key) + ']') + pathStr;
-    currentPath = currentPath.prev;
-  }
-  return pathStr ? 'value' + pathStr : '';
-}
-
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-/***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(591).Observable;
-
-
-/***/ }),
-/* 99 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-/*
- * Copyright 2017-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
-var paho_mqtt_1 = __webpack_require__(597);
-var uuid_1 = __webpack_require__(162);
-var Observable = __webpack_require__(98);
-global.Paho = global.Paho || { MQTT: { Client: paho_mqtt_1.Client, Message: paho_mqtt_1.Message } };
-var PubSubProvider_1 = __webpack_require__(202);
-var Logger_1 = __webpack_require__(16);
-var logger = new Logger_1.ConsoleLogger('MqttOverWSProvider');
-var ClientsQueue = /** @class */ (function () {
-    function ClientsQueue() {
-        this.promises = new Map();
-    }
-    ClientsQueue.prototype.get = function (clientId, clientFactory) {
-        return __awaiter(this, void 0, void 0, function () {
-            var promise;
-            return __generator(this, function (_a) {
-                promise = this.promises.get(clientId);
-                if (promise) {
-                    return [2 /*return*/, promise];
-                }
-                promise = clientFactory(clientId);
-                this.promises.set(clientId, promise);
-                return [2 /*return*/, promise];
-            });
-        });
-    };
-    ClientsQueue.prototype.remove = function (clientId) {
-        this.promises.delete(clientId);
-    };
-    return ClientsQueue;
-}());
-var MqttOverWSProvider = /** @class */ (function (_super) {
-    __extends(MqttOverWSProvider, _super);
-    function MqttOverWSProvider(options) {
-        if (options === void 0) { options = {}; }
-        var _this = _super.call(this, __assign({}, options, { clientId: options.clientId || uuid_1.v4() })) || this;
-        _this.clientsQueue = new ClientsQueue();
-        _this._topicObservers = new Map();
-        return _this;
-    }
-    Object.defineProperty(MqttOverWSProvider.prototype, "clientId", {
-        get: function () { return this.options.clientId; },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(MqttOverWSProvider.prototype, "endpoint", {
-        get: function () { return this.options.aws_pubsub_endpoint; },
-        enumerable: true,
-        configurable: true
-    });
-    MqttOverWSProvider.prototype.getProviderName = function () { return 'MqttOverWSProvider'; };
-    MqttOverWSProvider.prototype.newClient = function (_a) {
-        var url = _a.url, clientId = _a.clientId;
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var client;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        logger.debug('Creating new MQTT client', clientId);
-                        client = new paho_mqtt_1.Client(url, clientId);
-                        // client.trace = (...args) => logger.debug(clientId, ...args);
-                        client.onMessageArrived = function (_a) {
-                            var topic = _a.destinationName, msg = _a.payloadString;
-                            _this._onMessage(topic, msg);
-                        };
-                        client.onConnectionLost = logger.info.bind(logger);
-                        return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                client.connect({
-                                    useSSL: true,
-                                    mqttVersion: 3,
-                                    onSuccess: function () { return resolve(client); },
-                                    onFailure: reject,
-                                });
-                            })];
-                    case 1:
-                        _b.sent();
-                        return [2 /*return*/, client];
-                }
-            });
-        });
-    };
-    MqttOverWSProvider.prototype.connect = function (clientId, options) {
-        if (options === void 0) { options = {}; }
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.clientsQueue.get(clientId, function (clientId) { return _this.newClient(__assign({}, options, { clientId: clientId })); })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    MqttOverWSProvider.prototype.disconnect = function (clientId) {
-        return __awaiter(this, void 0, void 0, function () {
-            var client;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.clientsQueue.get(clientId, function () { return null; })];
-                    case 1:
-                        client = _a.sent();
-                        if (client) {
-                            client.disconnect();
-                            this.clientsQueue.remove(clientId);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MqttOverWSProvider.prototype.publish = function (topics, msg) {
-        return __awaiter(this, void 0, void 0, function () {
-            var targetTopics, message, url, client;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        targetTopics = [].concat(topics);
-                        message = JSON.stringify(msg);
-                        return [4 /*yield*/, this.endpoint];
-                    case 1:
-                        url = _a.sent();
-                        return [4 /*yield*/, this.connect(this.clientId, { url: url })];
-                    case 2:
-                        client = _a.sent();
-                        logger.debug('Publishing to topic(s)', targetTopics.join(','), message);
-                        targetTopics.forEach(function (topic) { return client.send(topic, message); });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    MqttOverWSProvider.prototype._onMessage = function (topic, msg) {
-        try {
-            var observersForTopic = this._topicObservers.get(topic) || new Set();
-            var parsedMessage_1 = JSON.parse(msg);
-            observersForTopic.forEach(function (observer) { return observer.next(parsedMessage_1); });
-        }
-        catch (error) {
-            logger.warn('Error handling message', error, msg);
-        }
-    };
-    MqttOverWSProvider.prototype.subscribe = function (topics, options) {
-        var _this = this;
-        if (options === void 0) { options = {}; }
-        var targetTopics = [].concat(topics);
-        logger.debug('Subscribing to topic(s)', targetTopics.join(','));
-        return new Observable(function (observer) {
-            targetTopics.forEach(function (topic) {
-                var observersForTopic = _this._topicObservers.get(topic);
-                if (!observersForTopic) {
-                    observersForTopic = new Set();
-                    _this._topicObservers.set(topic, observersForTopic);
-                }
-                observersForTopic.add(observer);
-            });
-            var client;
-            var _a = options.clientId, clientId = _a === void 0 ? _this.clientId : _a;
-            (function () { return __awaiter(_this, void 0, void 0, function () {
-                var _a, url, _b;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
-                        case 0:
-                            _a = options.url;
-                            if (!(_a === void 0)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, this.endpoint];
-                        case 1:
-                            _b = _c.sent();
-                            return [3 /*break*/, 3];
-                        case 2:
-                            _b = _a;
-                            _c.label = 3;
-                        case 3:
-                            url = _b;
-                            return [4 /*yield*/, this.connect(clientId, { url: url })];
-                        case 4:
-                            client = _c.sent();
-                            targetTopics.forEach(function (topic) { client.subscribe(topic); });
-                            return [2 /*return*/];
-                    }
-                });
-            }); })();
-            return function () {
-                logger.debug('Unsubscribing from topic(s)', targetTopics.join(','));
-                if (client) {
-                    targetTopics.forEach(function (topic) {
-                        client.unsubscribe(topic);
-                        var observersForTopic = _this._topicObservers.get(topic) ||
-                            new Set();
-                        observersForTopic.forEach(function (observer) { return observer.complete(); });
-                        observersForTopic.clear();
-                    });
-                    _this.disconnect(clientId);
-                }
-                return null;
-            };
-        });
-    };
-    return MqttOverWSProvider;
-}(PubSubProvider_1.AbstractPubSubProvider));
-exports.MqttOverWSProvider = MqttOverWSProvider;
-//# sourceMappingURL=MqttOverWSProvider.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
-
-/***/ }),
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(11);
-var normalizeHeaderName = __webpack_require__(603);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(205);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(205);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
-
-/***/ }),
-/* 101 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
-
-// DOM APIs, for completeness
-
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) {
-  if (timeout) {
-    timeout.close();
-  }
-};
-
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
-};
-
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// setimmediate attaches itself to the global object
-__webpack_require__(336);
-// On some exotic environments, it's not clear which object `setimmeidate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
-
-/***/ }),
 /* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35414,7 +35414,7 @@ exports.APIClass = API_1.APIClass;
 exports.graphqlOperation = API_1.graphqlOperation;
 var PubSub_1 = __webpack_require__(201);
 exports.PubSub = PubSub_1.default;
-var Cache_1 = __webpack_require__(86);
+var Cache_1 = __webpack_require__(85);
 exports.Cache = Cache_1.default;
 var Common_1 = __webpack_require__(5);
 exports.Logger = Common_1.ConsoleLogger;
@@ -35659,10 +35659,10 @@ module.exports = Collection;
 /***/ (function(module, exports, __webpack_require__) {
 
 var util = __webpack_require__(6);
-var Rest = __webpack_require__(44);
-var Json = __webpack_require__(65);
-var JsonBuilder = __webpack_require__(66);
-var JsonParser = __webpack_require__(67);
+var Rest = __webpack_require__(45);
+var Json = __webpack_require__(64);
+var JsonBuilder = __webpack_require__(65);
+var JsonParser = __webpack_require__(66);
 
 function populateBody(req) {
   var builder = new JsonBuilder();
@@ -35748,7 +35748,7 @@ module.exports = {
 
 var AWS = __webpack_require__(1);
 var util = __webpack_require__(6);
-var Rest = __webpack_require__(44);
+var Rest = __webpack_require__(45);
 
 function populateBody(req) {
   var input = req.service.api.operations[req.operation].input;
@@ -35849,7 +35849,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseAssignValue = __webpack_require__(109),
-    eq = __webpack_require__(47);
+    eq = __webpack_require__(48);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -36019,9 +36019,9 @@ module.exports = copyObject;
 /* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var eq = __webpack_require__(47),
+var eq = __webpack_require__(48),
     isArrayLike = __webpack_require__(38),
-    isIndex = __webpack_require__(70),
+    isIndex = __webpack_require__(69),
     isObject = __webpack_require__(13);
 
 /**
@@ -36055,7 +36055,7 @@ module.exports = isIterateeCall;
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isPrototype = __webpack_require__(71),
+var isPrototype = __webpack_require__(70),
     nativeKeys = __webpack_require__(383);
 
 /** Used for built-in method references. */
@@ -36163,7 +36163,7 @@ module.exports = baseKeys;
 /***/ (function(module, exports, __webpack_require__) {
 
 var DataView = __webpack_require__(390),
-    Map = __webpack_require__(75),
+    Map = __webpack_require__(74),
     Promise = __webpack_require__(391),
     Set = __webpack_require__(392),
     WeakMap = __webpack_require__(393),
@@ -36236,7 +36236,7 @@ module.exports = getTag;
 
   isObject = __webpack_require__(13);
 
-  isFunction = __webpack_require__(45);
+  isFunction = __webpack_require__(46);
 
   every = __webpack_require__(394);
 
@@ -36444,7 +36444,7 @@ module.exports = getTag;
 /* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ListCache = __webpack_require__(49),
+var ListCache = __webpack_require__(50),
     stackClear = __webpack_require__(410),
     stackDelete = __webpack_require__(411),
     stackGet = __webpack_require__(412),
@@ -36648,7 +36648,7 @@ module.exports = matchesStrictComparable;
 /***/ (function(module, exports, __webpack_require__) {
 
 var castPath = __webpack_require__(125),
-    toKey = __webpack_require__(53);
+    toKey = __webpack_require__(54);
 
 /**
  * The base implementation of `_.get` without support for default values.
@@ -36678,7 +36678,7 @@ module.exports = baseGet;
 /***/ (function(module, exports, __webpack_require__) {
 
 var isArray = __webpack_require__(14),
-    isKey = __webpack_require__(77),
+    isKey = __webpack_require__(76),
     stringToPath = __webpack_require__(447),
     toString = __webpack_require__(450);
 
@@ -42893,10 +42893,10 @@ var StorageHelper = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CognitoTokenScopes__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CognitoAccessToken__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CognitoIdToken__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CognitoRefreshToken__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CognitoTokenScopes__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CognitoAccessToken__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CognitoIdToken__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CognitoRefreshToken__ = __webpack_require__(83);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*!
@@ -43598,7 +43598,7 @@ exports.default = Signer;
  * and limitations under the License.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var Utils_1 = __webpack_require__(87);
+var Utils_1 = __webpack_require__(86);
 var Common_1 = __webpack_require__(5);
 var logger = new Common_1.ConsoleLogger('StorageCache');
 /**
@@ -43726,7 +43726,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Utils_1 = __webpack_require__(87);
+var Utils_1 = __webpack_require__(86);
 var StorageCache_1 = __webpack_require__(160);
 var Common_1 = __webpack_require__(5);
 var logger = new Common_1.ConsoleLogger('InMemoryCache');
@@ -44136,7 +44136,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.valueFromASTUntyped = valueFromASTUntyped;
 
-var _keyValMap = __webpack_require__(58);
+var _keyValMap = __webpack_require__(59);
 
 var _keyValMap2 = _interopRequireDefault(_keyValMap);
 
@@ -44213,7 +44213,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.printError = printError;
 
-var _location = __webpack_require__(90);
+var _location = __webpack_require__(89);
 
 /**
  * Prints a GraphQLError to a string, representing useful location information
@@ -44510,13 +44510,13 @@ var _visitor = __webpack_require__(29);
 
 var _schema = __webpack_require__(7);
 
-var _validate = __webpack_require__(57);
+var _validate = __webpack_require__(58);
 
 var _TypeInfo = __webpack_require__(42);
 
 var _specifiedRules = __webpack_require__(172);
 
-var _ValidationContext = __webpack_require__(95);
+var _ValidationContext = __webpack_require__(94);
 
 var _ValidationContext2 = _interopRequireDefault(_ValidationContext);
 
@@ -44624,7 +44624,7 @@ var _KnownArgumentNames = __webpack_require__(191);
 
 var _UniqueArgumentNames = __webpack_require__(192);
 
-var _ValuesOfCorrectType = __webpack_require__(94);
+var _ValuesOfCorrectType = __webpack_require__(93);
 
 var _ProvidedNonNullArguments = __webpack_require__(193);
 
@@ -44901,7 +44901,7 @@ var _suggestionList = __webpack_require__(43);
 
 var _suggestionList2 = _interopRequireDefault(_suggestionList);
 
-var _quotedOrList = __webpack_require__(92);
+var _quotedOrList = __webpack_require__(91);
 
 var _quotedOrList2 = _interopRequireDefault(_quotedOrList);
 
@@ -45152,7 +45152,7 @@ var _suggestionList = __webpack_require__(43);
 
 var _suggestionList2 = _interopRequireDefault(_suggestionList);
 
-var _quotedOrList = __webpack_require__(92);
+var _quotedOrList = __webpack_require__(91);
 
 var _quotedOrList2 = _interopRequireDefault(_quotedOrList);
 
@@ -45441,7 +45441,7 @@ exports.PossibleFragmentSpreads = PossibleFragmentSpreads;
 
 var _error = __webpack_require__(2);
 
-var _typeComparators = __webpack_require__(60);
+var _typeComparators = __webpack_require__(61);
 
 var _typeFromAST = __webpack_require__(22);
 
@@ -45964,7 +45964,7 @@ var _suggestionList = __webpack_require__(43);
 
 var _suggestionList2 = _interopRequireDefault(_suggestionList);
 
-var _quotedOrList = __webpack_require__(92);
+var _quotedOrList = __webpack_require__(91);
 
 var _quotedOrList2 = _interopRequireDefault(_quotedOrList);
 
@@ -46250,7 +46250,7 @@ var _error = __webpack_require__(2);
 
 var _definition = __webpack_require__(3);
 
-var _typeComparators = __webpack_require__(60);
+var _typeComparators = __webpack_require__(61);
 
 var _typeFromAST = __webpack_require__(22);
 
@@ -47027,21 +47027,21 @@ var _keyMap = __webpack_require__(26);
 
 var _keyMap2 = _interopRequireDefault(_keyMap);
 
-var _keyValMap = __webpack_require__(58);
+var _keyValMap = __webpack_require__(59);
 
 var _keyValMap2 = _interopRequireDefault(_keyValMap);
 
-var _valueFromAST = __webpack_require__(62);
+var _valueFromAST = __webpack_require__(63);
 
 var _blockStringValue = __webpack_require__(170);
 
 var _blockStringValue2 = _interopRequireDefault(_blockStringValue);
 
-var _lexer = __webpack_require__(91);
+var _lexer = __webpack_require__(90);
 
 var _parser = __webpack_require__(35);
 
-var _values = __webpack_require__(96);
+var _values = __webpack_require__(95);
 
 var _kinds = __webpack_require__(4);
 
@@ -47600,7 +47600,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-var MqttOverWSProvider_1 = __webpack_require__(99);
+var MqttOverWSProvider_1 = __webpack_require__(98);
 var Auth_1 = __webpack_require__(32);
 var Common_1 = __webpack_require__(5);
 var SERVICE_NAME = 'iotdevicegateway';
@@ -64309,7 +64309,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Analytics_1 = __webpack_require__(356);
 exports.AnalyticsClass = Analytics_1.default;
 var Common_1 = __webpack_require__(5);
-var Platform_1 = __webpack_require__(56);
+var Platform_1 = __webpack_require__(57);
 var logger = new Common_1.ConsoleLogger('Analytics');
 var startsessionRecorded = false;
 var _instance = null;
@@ -64932,7 +64932,7 @@ var assignValue = __webpack_require__(108),
     copyObject = __webpack_require__(113),
     createAssigner = __webpack_require__(368),
     isArrayLike = __webpack_require__(38),
-    isPrototype = __webpack_require__(71),
+    isPrototype = __webpack_require__(70),
     keys = __webpack_require__(39);
 
 /** Used for built-in method references. */
@@ -64992,7 +64992,7 @@ module.exports = assign;
 /* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(45),
+var isFunction = __webpack_require__(46),
     isMasked = __webpack_require__(365),
     isObject = __webpack_require__(13),
     toSource = __webpack_require__(112);
@@ -65045,7 +65045,7 @@ module.exports = baseIsNative;
 /* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(46);
+var Symbol = __webpack_require__(47);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -65225,7 +65225,7 @@ module.exports = createAssigner;
 /* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var identity = __webpack_require__(68),
+var identity = __webpack_require__(67),
     overRest = __webpack_require__(370),
     setToString = __webpack_require__(372);
 
@@ -65339,7 +65339,7 @@ module.exports = setToString;
 
 var constant = __webpack_require__(374),
     defineProperty = __webpack_require__(110),
-    identity = __webpack_require__(68);
+    identity = __webpack_require__(67);
 
 /**
  * The base implementation of `setToString` without support for hot loop shorting.
@@ -65441,11 +65441,11 @@ module.exports = shortOut;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseTimes = __webpack_require__(377),
-    isArguments = __webpack_require__(72),
+    isArguments = __webpack_require__(71),
     isArray = __webpack_require__(14),
-    isBuffer = __webpack_require__(73),
-    isIndex = __webpack_require__(70),
-    isTypedArray = __webpack_require__(74);
+    isBuffer = __webpack_require__(72),
+    isIndex = __webpack_require__(69),
+    isTypedArray = __webpack_require__(73);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -65570,7 +65570,7 @@ module.exports = stubFalse;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(37),
-    isLength = __webpack_require__(69),
+    isLength = __webpack_require__(68),
     isObjectLike = __webpack_require__(40);
 
 /** `Object#toString` result references. */
@@ -65678,7 +65678,7 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)(module)))
 
 /***/ }),
 /* 383 */
@@ -66029,12 +66029,12 @@ module.exports = baseCreate;
 
 var baseKeys = __webpack_require__(115),
     getTag = __webpack_require__(117),
-    isArguments = __webpack_require__(72),
+    isArguments = __webpack_require__(71),
     isArray = __webpack_require__(14),
     isArrayLike = __webpack_require__(38),
-    isBuffer = __webpack_require__(73),
-    isPrototype = __webpack_require__(71),
-    isTypedArray = __webpack_require__(74);
+    isBuffer = __webpack_require__(72),
+    isPrototype = __webpack_require__(70),
+    isTypedArray = __webpack_require__(73);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -66415,7 +66415,7 @@ module.exports = createBaseEach;
 
 var baseMatches = __webpack_require__(403),
     baseMatchesProperty = __webpack_require__(445),
-    identity = __webpack_require__(68),
+    identity = __webpack_require__(67),
     isArray = __webpack_require__(14),
     property = __webpack_require__(456);
 
@@ -66565,7 +66565,7 @@ module.exports = listCacheClear;
 /* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(50);
+var assocIndexOf = __webpack_require__(51);
 
 /** Used for built-in method references. */
 var arrayProto = Array.prototype;
@@ -66606,7 +66606,7 @@ module.exports = listCacheDelete;
 /* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(50);
+var assocIndexOf = __webpack_require__(51);
 
 /**
  * Gets the list cache value for `key`.
@@ -66631,7 +66631,7 @@ module.exports = listCacheGet;
 /* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(50);
+var assocIndexOf = __webpack_require__(51);
 
 /**
  * Checks if a list cache value for `key` exists.
@@ -66653,7 +66653,7 @@ module.exports = listCacheHas;
 /* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var assocIndexOf = __webpack_require__(50);
+var assocIndexOf = __webpack_require__(51);
 
 /**
  * Sets the list cache `key` to `value`.
@@ -66685,7 +66685,7 @@ module.exports = listCacheSet;
 /* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ListCache = __webpack_require__(49);
+var ListCache = __webpack_require__(50);
 
 /**
  * Removes all key-value entries from the stack.
@@ -66770,9 +66770,9 @@ module.exports = stackHas;
 /* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ListCache = __webpack_require__(49),
-    Map = __webpack_require__(75),
-    MapCache = __webpack_require__(76);
+var ListCache = __webpack_require__(50),
+    Map = __webpack_require__(74),
+    MapCache = __webpack_require__(75);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -66811,8 +66811,8 @@ module.exports = stackSet;
 /***/ (function(module, exports, __webpack_require__) {
 
 var Hash = __webpack_require__(416),
-    ListCache = __webpack_require__(49),
-    Map = __webpack_require__(75);
+    ListCache = __webpack_require__(50),
+    Map = __webpack_require__(74);
 
 /**
  * Removes all key-value entries from the map.
@@ -66875,7 +66875,7 @@ module.exports = Hash;
 /* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(51);
+var nativeCreate = __webpack_require__(52);
 
 /**
  * Removes all key-value entries from the hash.
@@ -66919,7 +66919,7 @@ module.exports = hashDelete;
 /* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(51);
+var nativeCreate = __webpack_require__(52);
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -66955,7 +66955,7 @@ module.exports = hashGet;
 /* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(51);
+var nativeCreate = __webpack_require__(52);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -66984,7 +66984,7 @@ module.exports = hashHas;
 /* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var nativeCreate = __webpack_require__(51);
+var nativeCreate = __webpack_require__(52);
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -67013,7 +67013,7 @@ module.exports = hashSet;
 /* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(52);
+var getMapData = __webpack_require__(53);
 
 /**
  * Removes `key` and its value from the map.
@@ -67058,7 +67058,7 @@ module.exports = isKeyable;
 /* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(52);
+var getMapData = __webpack_require__(53);
 
 /**
  * Gets the map value for `key`.
@@ -67080,7 +67080,7 @@ module.exports = mapCacheGet;
 /* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(52);
+var getMapData = __webpack_require__(53);
 
 /**
  * Checks if a map value for `key` exists.
@@ -67102,7 +67102,7 @@ module.exports = mapCacheHas;
 /* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getMapData = __webpack_require__(52);
+var getMapData = __webpack_require__(53);
 
 /**
  * Sets the map `key` to `value`.
@@ -67136,8 +67136,8 @@ var Stack = __webpack_require__(119),
     equalObjects = __webpack_require__(437),
     getTag = __webpack_require__(117),
     isArray = __webpack_require__(14),
-    isBuffer = __webpack_require__(73),
-    isTypedArray = __webpack_require__(74);
+    isBuffer = __webpack_require__(72),
+    isTypedArray = __webpack_require__(73);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -67219,7 +67219,7 @@ module.exports = baseIsEqualDeep;
 /* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MapCache = __webpack_require__(76),
+var MapCache = __webpack_require__(75),
     setCacheAdd = __webpack_require__(429),
     setCacheHas = __webpack_require__(430);
 
@@ -67345,9 +67345,9 @@ module.exports = cacheHas;
 /* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(46),
+var Symbol = __webpack_require__(47),
     Uint8Array = __webpack_require__(434),
-    eq = __webpack_require__(47),
+    eq = __webpack_require__(48),
     equalArrays = __webpack_require__(121),
     mapToArray = __webpack_require__(435),
     setToArray = __webpack_require__(436);
@@ -67821,10 +67821,10 @@ module.exports = getMatchData;
 var baseIsEqual = __webpack_require__(120),
     get = __webpack_require__(446),
     hasIn = __webpack_require__(453),
-    isKey = __webpack_require__(77),
+    isKey = __webpack_require__(76),
     isStrictComparable = __webpack_require__(122),
     matchesStrictComparable = __webpack_require__(123),
-    toKey = __webpack_require__(53);
+    toKey = __webpack_require__(54);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -67961,7 +67961,7 @@ module.exports = memoizeCapped;
 /* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MapCache = __webpack_require__(76);
+var MapCache = __webpack_require__(75);
 
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -68074,10 +68074,10 @@ module.exports = toString;
 /* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(46),
+var Symbol = __webpack_require__(47),
     arrayMap = __webpack_require__(452),
     isArray = __webpack_require__(14),
-    isSymbol = __webpack_require__(78);
+    isSymbol = __webpack_require__(77);
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -68204,11 +68204,11 @@ module.exports = baseHasIn;
 /***/ (function(module, exports, __webpack_require__) {
 
 var castPath = __webpack_require__(125),
-    isArguments = __webpack_require__(72),
+    isArguments = __webpack_require__(71),
     isArray = __webpack_require__(14),
-    isIndex = __webpack_require__(70),
-    isLength = __webpack_require__(69),
-    toKey = __webpack_require__(53);
+    isIndex = __webpack_require__(69),
+    isLength = __webpack_require__(68),
+    toKey = __webpack_require__(54);
 
 /**
  * Checks if `path` exists on `object`.
@@ -68250,8 +68250,8 @@ module.exports = hasPath;
 
 var baseProperty = __webpack_require__(457),
     basePropertyDeep = __webpack_require__(458),
-    isKey = __webpack_require__(77),
-    toKey = __webpack_require__(53);
+    isKey = __webpack_require__(76),
+    toKey = __webpack_require__(54);
 
 /**
  * Creates a function that returns the value at `path` of a given object.
@@ -70559,14 +70559,14 @@ AWS.EventListeners = {
   }),
 
   Json: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = __webpack_require__(65);
+    var svc = __webpack_require__(64);
     add('BUILD', 'build', svc.buildRequest);
     add('EXTRACT_DATA', 'extractData', svc.extractData);
     add('EXTRACT_ERROR', 'extractError', svc.extractError);
   }),
 
   Rest: new SequentialExecutor().addNamedListeners(function(add) {
-    var svc = __webpack_require__(44);
+    var svc = __webpack_require__(45);
     add('BUILD', 'build', svc.buildRequest);
     add('EXTRACT_DATA', 'extractData', svc.extractData);
     add('EXTRACT_ERROR', 'extractError', svc.extractError);
@@ -71236,7 +71236,7 @@ if (typeof Object.create === 'function') {
 var AcceptorStateMachine = __webpack_require__(476);
 var inherit = AWS.util.inherit;
 var domain = AWS.util.domain;
-var jmespath = __webpack_require__(79);
+var jmespath = __webpack_require__(78);
 
 /**
  * @api private
@@ -72094,7 +72094,7 @@ module.exports = AcceptorStateMachine;
 
 var AWS = __webpack_require__(1);
 var inherit = AWS.util.inherit;
-var jmespath = __webpack_require__(79);
+var jmespath = __webpack_require__(78);
 
 /**
  * This class encapsulates the response information
@@ -72316,7 +72316,7 @@ AWS.Response = inherit({
 
 var AWS = __webpack_require__(1);
 var inherit = AWS.util.inherit;
-var jmespath = __webpack_require__(79);
+var jmespath = __webpack_require__(78);
 
 /**
  * @api private
@@ -73614,7 +73614,7 @@ module.exports = exports = {
 /* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var hashUtils = __webpack_require__(54);
+var hashUtils = __webpack_require__(55);
 
 /**
  * @api private
@@ -73906,7 +73906,7 @@ module.exports = Array.isArray || function (arr) {
 /* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var hashUtils = __webpack_require__(54);
+var hashUtils = __webpack_require__(55);
 var Buffer = __webpack_require__(15).Buffer;
 
 var BLOCK_SIZE = 64;
@@ -74092,7 +74092,7 @@ function ii(a, b, c, d, x, s, t) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(15).Buffer;
-var hashUtils = __webpack_require__(54);
+var hashUtils = __webpack_require__(55);
 
 var BLOCK_SIZE = 64;
 
@@ -74261,7 +74261,7 @@ Sha1.prototype.processBlock = function processBlock() {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(15).Buffer;
-var hashUtils = __webpack_require__(54);
+var hashUtils = __webpack_require__(55);
 
 var BLOCK_SIZE = 64;
 
@@ -75035,7 +75035,7 @@ Sha256.prototype.hashBuffer = function () {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)(module), __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)(module), __webpack_require__(12)))
 
 /***/ }),
 /* 499 */
@@ -75248,7 +75248,7 @@ var objectKeys = Object.keys || function (obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(1);
-var STS = __webpack_require__(55);
+var STS = __webpack_require__(56);
 
 /**
  * Represents temporary credentials retrieved from {AWS.STS}. Without any
@@ -75439,7 +75439,7 @@ module.exports = {"pagination":{}}
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(1);
-var STS = __webpack_require__(55);
+var STS = __webpack_require__(56);
 
 /**
  * Represents credentials retrieved from STS Web Identity Federation support.
@@ -75556,7 +75556,7 @@ AWS.WebIdentityCredentials = AWS.util.inherit(AWS.Credentials, {
 
 var AWS = __webpack_require__(1);
 var CognitoIdentity = __webpack_require__(508);
-var STS = __webpack_require__(55);
+var STS = __webpack_require__(56);
 
 /**
  * Represents credentials retrieved from STS Web Identity Federation using
@@ -75996,7 +75996,7 @@ module.exports = {"pagination":{}}
 /***/ (function(module, exports, __webpack_require__) {
 
 var AWS = __webpack_require__(1);
-var STS = __webpack_require__(55);
+var STS = __webpack_require__(56);
 
 /**
  * Represents credentials retrieved from STS SAML support.
@@ -78709,7 +78709,7 @@ var AuthenticationDetails = function () {
  * See http://pajhome.org.uk/crypt/md5 for details.
  */
 
-var helpers = __webpack_require__(81);
+var helpers = __webpack_require__(80);
 
 /*
  * Calculate the SHA-1 of an array of big-endian words, and a bit length
@@ -78816,7 +78816,7 @@ module.exports = function sha1(buf) {
  *
  */
 
-var helpers = __webpack_require__(81);
+var helpers = __webpack_require__(80);
 
 var safe_add = function(x, y) {
   var lsw = (x & 0xFFFF) + (y & 0xFFFF);
@@ -78938,7 +78938,7 @@ module.exports = function sha256(buf) {
  * See http://pajhome.org.uk/crypt/md5 for more info.
  */
 
-var helpers = __webpack_require__(81);
+var helpers = __webpack_require__(80);
 
 /*
  * Perform a simple self-test to see if the VM is working
@@ -79745,13 +79745,13 @@ module.exports = {"version":"2.0","metadata":{"apiVersion":"2014-06-05","endpoin
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CognitoAccessToken__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CognitoAccessToken__ = __webpack_require__(81);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CognitoAccessToken", function() { return __WEBPACK_IMPORTED_MODULE_0__CognitoAccessToken__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CognitoIdToken__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CognitoIdToken__ = __webpack_require__(82);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CognitoIdToken", function() { return __WEBPACK_IMPORTED_MODULE_1__CognitoIdToken__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CognitoRefreshToken__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CognitoRefreshToken__ = __webpack_require__(83);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CognitoRefreshToken", function() { return __WEBPACK_IMPORTED_MODULE_2__CognitoRefreshToken__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CognitoTokenScopes__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CognitoTokenScopes__ = __webpack_require__(84);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CognitoTokenScopes", function() { return __WEBPACK_IMPORTED_MODULE_3__CognitoTokenScopes__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__CognitoAuth__ = __webpack_require__(538);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "CognitoAuth", function() { return __WEBPACK_IMPORTED_MODULE_4__CognitoAuth__["a"]; });
@@ -79792,10 +79792,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CognitoTokenScopes__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CognitoAccessToken__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CognitoIdToken__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CognitoRefreshToken__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CognitoTokenScopes__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CognitoAccessToken__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CognitoIdToken__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CognitoRefreshToken__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__CognitoAuthSession__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StorageHelper__ = __webpack_require__(157);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -81735,7 +81735,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * and limitations under the License.
  */
 var Common_1 = __webpack_require__(5);
-var Cache_1 = __webpack_require__(86);
+var Cache_1 = __webpack_require__(85);
 var uuid_1 = __webpack_require__(162);
 var logger = new Common_1.ConsoleLogger('AWSAnalyticsProvider');
 var NON_RETRYABLE_EXCEPTIONS = ['BadRequestException', 'SerializationException', 'ValidationException'];
@@ -82170,7 +82170,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Utils_1 = __webpack_require__(87);
+var Utils_1 = __webpack_require__(86);
 var StorageCache_1 = __webpack_require__(160);
 var Common_1 = __webpack_require__(5);
 var logger = new Common_1.ConsoleLogger('Cache');
@@ -83039,8 +83039,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Common_1 = __webpack_require__(5);
-var Platform_1 = __webpack_require__(56);
-var Cache_1 = __webpack_require__(86);
+var Platform_1 = __webpack_require__(57);
+var Cache_1 = __webpack_require__(85);
 var logger = new Common_1.ConsoleLogger('AuthClass');
 var CognitoIdentityCredentials = Common_1.AWS.CognitoIdentityCredentials, Credentials = Common_1.AWS.Credentials;
 var CognitoAuth = Common_1.CognitoHostedUI.CognitoAuth;
@@ -84962,7 +84962,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var graphql_1 = __webpack_require__(563);
 var printer_1 = __webpack_require__(21);
 var parser_1 = __webpack_require__(35);
-var Observable = __webpack_require__(98);
+var Observable = __webpack_require__(97);
 var PubSub_1 = __webpack_require__(201);
 var RestClient_1 = __webpack_require__(598);
 var Auth_1 = __webpack_require__(32);
@@ -85733,13 +85733,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.graphql = graphql;
 exports.graphqlSync = graphqlSync;
 
-var _validate = __webpack_require__(57);
+var _validate = __webpack_require__(58);
 
 var _parser = __webpack_require__(35);
 
 var _validate2 = __webpack_require__(171);
 
-var _execute = __webpack_require__(61);
+var _execute = __webpack_require__(62);
 
 /**
  * This is the primary entry point function for fulfilling GraphQL operations
@@ -86570,7 +86570,7 @@ Object.defineProperty(exports, 'TypeNameMetaFieldDef', {
   }
 });
 
-var _validate = __webpack_require__(57);
+var _validate = __webpack_require__(58);
 
 Object.defineProperty(exports, 'validateSchema', {
   enumerable: true,
@@ -86596,7 +86596,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _location = __webpack_require__(90);
+var _location = __webpack_require__(89);
 
 Object.defineProperty(exports, 'getLocation', {
   enumerable: true,
@@ -86614,7 +86614,7 @@ Object.defineProperty(exports, 'Kind', {
   }
 });
 
-var _lexer = __webpack_require__(91);
+var _lexer = __webpack_require__(90);
 
 Object.defineProperty(exports, 'createLexer', {
   enumerable: true,
@@ -86721,7 +86721,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _execute = __webpack_require__(61);
+var _execute = __webpack_require__(62);
 
 Object.defineProperty(exports, 'execute', {
   enumerable: true,
@@ -86742,7 +86742,7 @@ Object.defineProperty(exports, 'responsePathAsArray', {
   }
 });
 
-var _values = __webpack_require__(96);
+var _values = __webpack_require__(95);
 
 Object.defineProperty(exports, 'getDirectiveValues', {
   enumerable: true,
@@ -86796,7 +86796,7 @@ var _GraphQLError = __webpack_require__(25);
 
 var _locatedError = __webpack_require__(169);
 
-var _execute = __webpack_require__(61);
+var _execute = __webpack_require__(62);
 
 var _schema = __webpack_require__(7);
 
@@ -87270,7 +87270,7 @@ Object.defineProperty(exports, 'UniqueVariableNamesRule', {
   }
 });
 
-var _ValuesOfCorrectType = __webpack_require__(94);
+var _ValuesOfCorrectType = __webpack_require__(93);
 
 Object.defineProperty(exports, 'ValuesOfCorrectTypeRule', {
   enumerable: true,
@@ -87306,7 +87306,7 @@ Object.defineProperty(exports, 'VariablesInAllowedPositionRule', {
   }
 });
 
-var _ValidationContext = __webpack_require__(95);
+var _ValidationContext = __webpack_require__(94);
 
 var _ValidationContext2 = _interopRequireDefault(_ValidationContext);
 
@@ -87438,7 +87438,7 @@ Object.defineProperty(exports, 'typeFromAST', {
   }
 });
 
-var _valueFromAST = __webpack_require__(62);
+var _valueFromAST = __webpack_require__(63);
 
 Object.defineProperty(exports, 'valueFromAST', {
   enumerable: true,
@@ -87456,7 +87456,7 @@ Object.defineProperty(exports, 'valueFromASTUntyped', {
   }
 });
 
-var _astFromValue = __webpack_require__(89);
+var _astFromValue = __webpack_require__(88);
 
 Object.defineProperty(exports, 'astFromValue', {
   enumerable: true,
@@ -87474,7 +87474,7 @@ Object.defineProperty(exports, 'TypeInfo', {
   }
 });
 
-var _coerceValue = __webpack_require__(97);
+var _coerceValue = __webpack_require__(96);
 
 Object.defineProperty(exports, 'coerceValue', {
   enumerable: true,
@@ -87519,7 +87519,7 @@ Object.defineProperty(exports, 'separateOperations', {
   }
 });
 
-var _typeComparators = __webpack_require__(60);
+var _typeComparators = __webpack_require__(61);
 
 Object.defineProperty(exports, 'isEqualType', {
   enumerable: true,
@@ -87658,7 +87658,7 @@ var _introspectionQuery = __webpack_require__(199);
 
 var _schema = __webpack_require__(7);
 
-var _execute = __webpack_require__(61);
+var _execute = __webpack_require__(62);
 
 var _parser = __webpack_require__(35);
 
@@ -87707,11 +87707,11 @@ var _keyMap = __webpack_require__(26);
 
 var _keyMap2 = _interopRequireDefault(_keyMap);
 
-var _keyValMap = __webpack_require__(58);
+var _keyValMap = __webpack_require__(59);
 
 var _keyValMap2 = _interopRequireDefault(_keyValMap);
 
-var _valueFromAST = __webpack_require__(62);
+var _valueFromAST = __webpack_require__(63);
 
 var _parser = __webpack_require__(35);
 
@@ -88358,7 +88358,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.lexicographicSortSchema = lexicographicSortSchema;
 
-var _keyValMap = __webpack_require__(58);
+var _keyValMap = __webpack_require__(59);
 
 var _keyValMap2 = _interopRequireDefault(_keyValMap);
 
@@ -88599,7 +88599,7 @@ exports.printSchema = printSchema;
 exports.printIntrospectionSchema = printIntrospectionSchema;
 exports.printType = printType;
 
-var _isNullish = __webpack_require__(59);
+var _isNullish = __webpack_require__(60);
 
 var _isNullish2 = _interopRequireDefault(_isNullish);
 
@@ -88611,7 +88611,7 @@ var _objectValues = __webpack_require__(24);
 
 var _objectValues2 = _interopRequireDefault(_objectValues);
 
-var _astFromValue = __webpack_require__(89);
+var _astFromValue = __webpack_require__(88);
 
 var _printer = __webpack_require__(21);
 
@@ -88923,7 +88923,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.isValidJSValue = isValidJSValue;
 
-var _coerceValue = __webpack_require__(97);
+var _coerceValue = __webpack_require__(96);
 
 /**
  * Deprecated. Use coerceValue() directly for richer information.
@@ -88962,9 +88962,9 @@ var _visitor = __webpack_require__(29);
 
 var _schema = __webpack_require__(7);
 
-var _ValuesOfCorrectType = __webpack_require__(94);
+var _ValuesOfCorrectType = __webpack_require__(93);
 
-var _ValidationContext = __webpack_require__(95);
+var _ValidationContext = __webpack_require__(94);
 
 var _ValidationContext2 = _interopRequireDefault(_ValidationContext);
 
@@ -90561,7 +90561,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * and limitations under the License.
  */
 __webpack_require__(593);
-var Observable = __webpack_require__(98);
+var Observable = __webpack_require__(97);
 var Logger_1 = __webpack_require__(16);
 var Providers_1 = __webpack_require__(595);
 var logger = new Logger_1.ConsoleLogger('PubSub');
@@ -90725,7 +90725,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(202));
 __export(__webpack_require__(596));
 __export(__webpack_require__(203));
-__export(__webpack_require__(99));
+__export(__webpack_require__(98));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -90781,7 +90781,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Logger_1 = __webpack_require__(16);
-var MqttOverWSProvider_1 = __webpack_require__(99);
+var MqttOverWSProvider_1 = __webpack_require__(98);
 var logger = new Logger_1.ConsoleLogger('AWSAppSyncProvider');
 var AWSAppSyncProvider = /** @class */ (function (_super) {
     __extends(AWSAppSyncProvider, _super);
@@ -93315,7 +93315,7 @@ var Signer_1 = __webpack_require__(159);
 var Common_1 = __webpack_require__(5);
 var Auth_1 = __webpack_require__(32);
 var axios_1 = __webpack_require__(599);
-var Platform_1 = __webpack_require__(56);
+var Platform_1 = __webpack_require__(57);
 var logger = new Common_1.ConsoleLogger('RestClient');
 /**
 * HTTP Client for REST requests. Send and receive JSON data.
@@ -93547,7 +93547,7 @@ module.exports = __webpack_require__(600);
 var utils = __webpack_require__(11);
 var bind = __webpack_require__(204);
 var Axios = __webpack_require__(602);
-var defaults = __webpack_require__(100);
+var defaults = __webpack_require__(99);
 
 /**
  * Create an instance of Axios
@@ -93630,7 +93630,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(100);
+var defaults = __webpack_require__(99);
 var utils = __webpack_require__(11);
 var InterceptorManager = __webpack_require__(611);
 var dispatchRequest = __webpack_require__(612);
@@ -94171,7 +94171,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(11);
 var transformData = __webpack_require__(613);
 var isCancel = __webpack_require__(207);
-var defaults = __webpack_require__(100);
+var defaults = __webpack_require__(99);
 var isAbsoluteURL = __webpack_require__(614);
 var combineURLs = __webpack_require__(615);
 
@@ -94718,8 +94718,8 @@ webpackContext.id = 626;
 __webpack_require__(102);
 __webpack_require__(0);
 __webpack_require__(333);
-__webpack_require__(63);
-__webpack_require__(64);
+__webpack_require__(44);
+__webpack_require__(101);
 module.exports = __webpack_require__(209);
 
 

@@ -1,8 +1,7 @@
 import Vue from 'vue';
 window.eventHub = new Vue();
 
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
+
 
 import router from './router';
 import store from './store';

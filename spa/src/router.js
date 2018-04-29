@@ -1,3 +1,8 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+// Import components
 import Changes from './components/Changes';
 import Config from './components/Config';
 import Dashboard from './components/Dashboard';
@@ -19,8 +24,6 @@ const routes = [
     { path: '/', component: LandingPage },
     { path: '*', component: NotFound },
 ];
-
-import VueRouter from 'vue-router';
 
 export default new VueRouter({
     mode: 'history',
