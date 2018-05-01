@@ -35,9 +35,9 @@ export default {
           who: "djfurman"
         },
         {
-          title: "JIRA-54321: Database baseline for App",
+          title: "JIRA-12344: Database baseline for App",
           body: "Get baseline for App database from production database. Downtime is expected.",
-          link: "/changes/JIRA-54321",
+          link: "/changes/JIRA-12344",
           approval: true,
           when: moment().utc().subtract(1, 'day'),
           who: "djfurman"
