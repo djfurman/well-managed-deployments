@@ -335,10 +335,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -361,14 +357,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         body: "Get baseline for App database from production database. Downtime is expected.",
         link: "/changes/JIRA-12344",
         approval: true,
-        when: __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().subtract(1, 'day'),
+        when: __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().subtract(1, "day"),
         who: "djfurman"
       }, {
         title: "JIRA-123: Bring new Business App online",
         body: "Deploy new Business App online",
         link: "/changes/JIRA-123",
         approval: true,
-        when: __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().subtract(6, 'day'),
+        when: __WEBPACK_IMPORTED_MODULE_1_moment___default()().utc().subtract(6, "day"),
         who: "djfurman"
       }]
     };
@@ -590,16 +586,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "dashboard" } }, [
-    _vm._v(
-      "\n  This dashboard should be the user landing page and provide a direct interaction with necessary components for the user\n  "
-    ),
+    _vm._m(0),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "columns" },
       _vm._l(_vm.cards, function(card) {
         return _c(
           "div",
-          { key: card.id, staticClass: "column is-one-fourth" },
+          { key: card.id, staticClass: "column is-one-third" },
           [
             _c("card", {
               attrs: {
@@ -618,7 +613,20 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("p", [
+        _vm._v(
+          "This dashboard should be the user landing page and provide a direct interaction with necessary components for the user"
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

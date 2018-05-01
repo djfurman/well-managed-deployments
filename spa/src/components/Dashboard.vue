@@ -1,15 +1,11 @@
 <template>
   <div id="dashboard">
-    This dashboard should be the user landing page and provide a direct interaction with necessary components for the user
+    <div class="content">
+      <p>This dashboard should be the user landing page and provide a direct interaction with necessary components for the user</p>
+    </div>
     <div class="columns">
-      <div class="column is-one-fourth" v-for="card in cards" :key="card.id">
-        <card
-          :title="card.title"
-          :body="card.body"
-          :link="card.link"
-          :approval="card.approval"
-          :when="card.when"
-          :who="card.who"></card>
+      <div class="column is-one-third" v-for="card in cards" :key="card.id">
+        <card :title="card.title" :body="card.body" :link="card.link" :approval="card.approval" :when="card.when" :who="card.who"></card>
       </div>
     </div>
   </div>
@@ -17,7 +13,7 @@
 
 <script>
 import Card from "./Card";
-import moment from 'moment';
+import moment from "moment";
 export default {
   components: {
     Card
@@ -36,10 +32,13 @@ export default {
         },
         {
           title: "JIRA-12344: Database baseline for App",
-          body: "Get baseline for App database from production database. Downtime is expected.",
+          body:
+            "Get baseline for App database from production database. Downtime is expected.",
           link: "/changes/JIRA-12344",
           approval: true,
-          when: moment().utc().subtract(1, 'day'),
+          when: moment()
+            .utc()
+            .subtract(1, "day"),
           who: "djfurman"
         },
         {
@@ -47,7 +46,9 @@ export default {
           body: "Deploy new Business App online",
           link: "/changes/JIRA-123",
           approval: true,
-          when: moment().utc().subtract(6, 'day'),
+          when: moment()
+            .utc()
+            .subtract(6, "day"),
           who: "djfurman"
         }
       ]
