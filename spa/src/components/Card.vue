@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <header class="card-header">
+    <header class="card-header" @click="goTo()">
       <p class="card-header-title">{{ card_title }}</p>
     </header>
     <div class="card-content">
@@ -9,12 +9,12 @@
       </div>
       <br/>
       <div class="content">
-        <p>Requested By {{ made_by }}, {{ age }} ago</p>
+        <p>Requested By {{ made_by }}, <span @click="toggleAge">{{ age }}</span></p>
       </div>
     </div>
     <footer v-if="with_approvals" class="footer">
-      <button class="card-footer-item">Approve</button>
-      <button class="card-footer-item">Deny</button>
+        <button class="card-footer-item">Approve</button>
+        <button class="card-footer-item">Deny</button>
     </footer>
   </div>
 </template>
@@ -38,7 +38,10 @@ export default {
 
   computed: {
     age() {
-      return moment(this.made_at).fromNow();
+      if(this.human_time) {
+        return moment(this.made_at).fromNow();
+      }
+      return moment(this.made_at).toISOString();
     }
   },
 
@@ -49,8 +52,19 @@ export default {
       links_to: "",
       with_approvals: false,
       made_by: "",
-      made_at: moment()
+      made_at: moment(),
+      human_time: true
     };
+  },
+
+  methods: {
+    goTo() {
+      this.$router.push(this.links_to);
+    },
+
+    toggleAge() {
+      this.human_time = !this.human_time;
+    }
   },
 
   props: {
@@ -58,7 +72,7 @@ export default {
     body: String,
     link: String,
     approval: Boolean,
-    when: String,
+    when: moment,
     who: String
   }
 };
