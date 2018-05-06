@@ -1,5 +1,6 @@
 from orator import Model
 
-class User(Model):
+
+class Incident(Model):
 
     pass

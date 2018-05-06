@@ -1,5 +1,6 @@
 from orator import Model
 
-class User(Model):
+
+class Configuration(Model):
 
     pass
